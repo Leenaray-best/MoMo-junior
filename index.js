@@ -1,5 +1,10 @@
 require("dotenv").config();
 //var CronJob = require("cron").CronJob;
+
+///git add .
+///git commit -m "FixedSmallIssue"
+///git push origin master
+
 const {
   Client,
   GatewayIntentBits,
