@@ -55,7 +55,7 @@ module.exports = {
             .addFields(
               {
                 name: `Maitrise 5`,
-                value: `${ficheStore.Maitrise.Maitrise5}`,
+                value: `${boutique.Maitrise.Maitrise5}`,
                 inline: true,
               },
               {
