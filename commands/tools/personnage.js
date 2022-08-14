@@ -179,6 +179,12 @@ module.exports = {
           });
         }
       }
+    } else {
+      const ChannelNameId = client.channels.cache.get(channelMessage);
+      newMessage = `Tu n'es pas dans le bon salon\nTu dois faire cette commande dans le salon ${ChannelNameId}`;
+      await interaction.editReply({
+        content: newMessage,
+      });
     }
   },
 };
