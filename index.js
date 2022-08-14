@@ -211,7 +211,7 @@ var auth = require("./auth.json");
 // });
 
 client.on("messageCreate", async (message) => {
-  console.log("TA MERE LA PUTE");
+  // console.log("TA MERE LA PUTE");
   petitMessage = message.content.toLowerCase();
   // Ajouter des salons
   // if (
@@ -241,45 +241,45 @@ client.on("messageCreate", async (message) => {
   //   // }
   // }
   // Roll du niveau de maitrise
-  if (
-    message.channel.id == auth.Salon.JetDeDes &&
-    petitMessage == prefixMaitrise
-  ) {
-    if (
-      message.member.roles.cache.has(auth.RoleRP.Maitrise1) ||
-      message.member.roles.cache.has(auth.RoleRP.Maitrise2) ||
-      message.member.roles.cache.has(auth.RoleRP.Maitrise3)
-    ) {
-      message.reply("La commande se fait une seule fois");
-    } else if (message.member.roles.cache.has(auth.RoleRP.Bienvenue)) {
-      Niveau = Rand(3);
-      switch (Niveau) {
-        case 1:
-          message.member.roles.add(auth.RoleRP.Maitrise1);
-          message.member.roles.remove(auth.RoleRP.Bienvenue);
-          var gifMaitrise =
-            "https://tenor.com/view/avatar-the-last-airbender-aang-airbending-goofy-funny-gif-13514465";
-          break;
-        case 2:
-          message.member.roles.add(auth.RoleRP.Maitrise2);
-          message.member.roles.remove(auth.RoleRP.Bienvenue);
-          var gifMaitrise =
-            "https://cdn.discordapp.com/attachments/594824367733604361/797169637946687488/firebend___cooking.gif";
-          break;
-        case 3:
-          message.member.roles.add(auth.RoleRP.Maitrise3);
-          message.member.roles.remove(auth.RoleRP.Bienvenue);
-          var gifMaitrise =
-            "https://cdn.discordapp.com/attachments/594824367733604361/797169079411671071/Waterbend___trempli_attaque.gif";
-          break;
-        default:
-          break;
-      }
-      message.reply("Tu as une maitrise de niveau " + Niveau + " ! ");
-      client.channels.cache.get(auth.Salon.JetDeDes).send(gifMaitrise);
-      createFichePerso(message, Niveau);
-    }
-  }
+  // if (
+  //   message.channel.id == auth.Salon.JetDeDes &&
+  //   petitMessage == prefixMaitrise
+  // ) {
+  //   if (
+  //     message.member.roles.cache.has(auth.RoleRP.Maitrise1) ||
+  //     message.member.roles.cache.has(auth.RoleRP.Maitrise2) ||
+  //     message.member.roles.cache.has(auth.RoleRP.Maitrise3)
+  //   ) {
+  //     message.reply("La commande se fait une seule fois");
+  //   } else if (message.member.roles.cache.has(auth.RoleRP.Bienvenue)) {
+  //     Niveau = Rand(3);
+  //     switch (Niveau) {
+  //       case 1:
+  //         message.member.roles.add(auth.RoleRP.Maitrise1);
+  //         message.member.roles.remove(auth.RoleRP.Bienvenue);
+  //         var gifMaitrise =
+  //           "https://tenor.com/view/avatar-the-last-airbender-aang-airbending-goofy-funny-gif-13514465";
+  //         break;
+  //       case 2:
+  //         message.member.roles.add(auth.RoleRP.Maitrise2);
+  //         message.member.roles.remove(auth.RoleRP.Bienvenue);
+  //         var gifMaitrise =
+  //           "https://cdn.discordapp.com/attachments/594824367733604361/797169637946687488/firebend___cooking.gif";
+  //         break;
+  //       case 3:
+  //         message.member.roles.add(auth.RoleRP.Maitrise3);
+  //         message.member.roles.remove(auth.RoleRP.Bienvenue);
+  //         var gifMaitrise =
+  //           "https://cdn.discordapp.com/attachments/594824367733604361/797169079411671071/Waterbend___trempli_attaque.gif";
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  //     message.reply("Tu as une maitrise de niveau " + Niveau + " ! ");
+  //     client.channels.cache.get(auth.Salon.JetDeDes).send(gifMaitrise);
+  //     createFichePerso(message, Niveau);
+  //   }
+  // }
 });
 
 function Rand(valeur) {
