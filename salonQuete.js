@@ -6,6 +6,11 @@ const salonQuete = mongoose.Schema({
   Parchemin: [String],
   Frotter: [String],
   Lit: [String],
+  Pinte: [String],
+  Statue: [String],
+  Attente: [String],
+  Branche: [String],
+  Bain: [String],
 
   time: Date,
 });
