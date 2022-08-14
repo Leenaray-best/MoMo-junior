@@ -52,7 +52,7 @@ const FichePerso = require("./FichePerso.js");
 const BoutiqueMaitrise = require("./Boutique.js");
 const salonTemps = require("./salonMeteo.js");
 const Weather = require("./meteo");
-const salonQuete = require("./salonQuete.js");
+//const salonQuete = require("./salonQuete.js");
 const Bonus = require("./salonBonus.js");
 const ListeMetier = require("./job.js");
 const prefixMaitrise = "roll-maitrise";
@@ -66,7 +66,7 @@ client
     createJobList();
     createWeather();
     createSalonWeather();
-    createSalonQuest();
+    //createSalonQuest();
     createSalonBonus();
   })
   .catch((err) => console.log(err));
@@ -401,17 +401,17 @@ function createSalonWeather() {
     .catch((err) => console.log(err));
 }
 
-function createSalonQuest() {
-  const salonQuest = new salonQuete({
-    _id: "00002",
-    Pinte: ["1006593631832002642", "1008075876497362985", "", "", ""],
-    time: Date(),
-  });
-  salonQuest
-    .save()
-    .then((result) => console.log(result))
-    .catch((err) => console.log(err));
-}
+// function createSalonQuest() {
+//   const salonQuest = new salonQuete({
+//     _id: "00002",
+//     Pinte: ["1006593631832002642", "1008075876497362985", "", "", ""],
+//     time: Date(),
+//   });
+//   salonQuest
+//     .save()
+//     .then((result) => console.log(result))
+//     .catch((err) => console.log(err));
+// }
 
 function createSalonBonus() {
   const salonBonus = new Bonus({
