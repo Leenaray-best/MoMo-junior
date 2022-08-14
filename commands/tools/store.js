@@ -38,85 +38,85 @@ module.exports = {
             .addFields(
               {
                 name: `Maitrise 2`,
-                value: `${boutique.Maitrise2}`,
+                value: `${ficheStore.Maitrise2}`,
                 inline: true,
               },
               {
                 name: `Maitrise 3`,
-                value: `${boutique.Maitrise3}`,
+                value: `${ficheStore.Maitrise3}`,
                 inline: true,
               },
               {
                 name: `Maitrise 4`,
-                value: `${boutique.Maitrise4}`,
+                value: `${ficheStore.Maitrise4}`,
                 inline: true,
               }
             )
             .addFields(
               {
                 name: `Maitrise 5`,
-                value: `${boutique.Maitrise5}`,
+                value: `${ficheStore.Maitrise5}`,
                 inline: true,
               },
               {
                 name: `Maitrise 6`,
-                value: `${boutique.Maitrise6}`,
+                value: `${ficheStore.Maitrise6}`,
                 inline: true,
               },
               {
                 name: `Maitrise 7`,
-                value: `${boutique.Maitrise7}`,
+                value: `${ficheStore.Maitrise7}`,
                 inline: true,
               }
             )
             .addFields(
               {
                 name: `Maitrise 8`,
-                value: `${boutique.Maitrise8}`,
+                value: `${ficheStore.Maitrise8}`,
                 inline: true,
               },
               {
                 name: `Maitrise 9`,
-                value: `${boutique.Maitrise9}`,
+                value: `${ficheStore.Maitrise9}`,
                 inline: true,
               },
               {
                 name: `Maitrise 10`,
-                value: `${boutique.Maitrise10}`,
+                value: `${ficheStore.Maitrise10}`,
                 inline: true,
               }
             )
             .addFields(
               {
                 name: `Maitrise 11`,
-                value: `${boutique.Maitrise11}`,
+                value: `${ficheStore.Maitrise11}`,
                 inline: true,
               },
               {
                 name: `Maitrise 12`,
-                value: `${boutique.Maitrise12}`,
+                value: `${ficheStore.Maitrise12}`,
                 inline: true,
               },
               {
                 name: `Maitrise 13`,
-                value: `${boutique.Maitrise13}`,
+                value: `${ficheStore.Maitrise13}`,
                 inline: true,
               }
             )
             .addFields(
               {
                 name: `Maitrise 14`,
-                value: `${boutique.Maitrise14}`,
+                value: `${ficheStore.Maitrise14}`,
                 inline: true,
               },
               {
                 name: `Maitrise 15`,
-                value: `${boutique.Maitrise15}`,
+                value: `${ficheStore.Maitrise15}`,
                 inline: true,
               },
               {
                 name: `Maitrise 16`,
-                value: `${boutique.Maitrise16}`,
+                value: `${ficheStore.Maitrise16}`,
                 inline: true,
               }
             )
@@ -128,18 +128,18 @@ module.exports = {
               },
               {
                 name: `Maitrise 18`,
-                value: `${boutique.Maitrise18}`,
+                value: `${ficheStore.Maitrise18}`,
                 inline: true,
               },
               {
                 name: `Maitrise 19`,
-                value: `${boutique.Maitrise19}`,
+                value: `${ficheStore.Maitrise19}`,
                 inline: true,
               }
             )
             .addFields({
               name: `Maitrise 20`,
-              value: `${boutique.Maitrise20}`,
+              value: `${ficheStore.Maitrise20}`,
               inline: true,
             })
             .setThumbnail(
