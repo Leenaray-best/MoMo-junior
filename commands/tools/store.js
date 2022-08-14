@@ -31,115 +31,116 @@ module.exports = {
           let boutique = await ficheStore.findOne({
             _id: authId.idDatabase.storeId,
           });
-          console.log(boutique);
+          console.log(boutique.Maitrise);
+          console.log(ficheStore.Maitrise);
           const embed = new EmbedBuilder()
             .setTitle(`Boutique de niveaux de maitrise`)
             .setColor(0x18e1ee)
             .addFields(
               {
                 name: `Maitrise 2`,
-                value: `${ficheStore.Maitrise2}`,
+                value: `${ficheStore.Maitrise.Maitrise2}`,
                 inline: true,
               },
               {
                 name: `Maitrise 3`,
-                value: `${ficheStore.Maitrise3}`,
+                value: `${ficheStore.Maitrise.Maitrise3}`,
                 inline: true,
               },
               {
                 name: `Maitrise 4`,
-                value: `${ficheStore.Maitrise4}`,
+                value: `${ficheStore.Maitrise.Maitrise4}`,
                 inline: true,
               }
             )
             .addFields(
               {
                 name: `Maitrise 5`,
-                value: `${ficheStore.Maitrise5}`,
+                value: `${ficheStore.Maitrise.Maitrise5}`,
                 inline: true,
               },
               {
                 name: `Maitrise 6`,
-                value: `${ficheStore.Maitrise6}`,
+                value: `${ficheStore.Maitrise.Maitrise6}`,
                 inline: true,
               },
               {
                 name: `Maitrise 7`,
-                value: `${ficheStore.Maitrise7}`,
+                value: `${ficheStore.Maitrise.Maitrise7}`,
                 inline: true,
               }
             )
             .addFields(
               {
                 name: `Maitrise 8`,
-                value: `${ficheStore.Maitrise8}`,
+                value: `${ficheStore.Maitrise.Maitrise8}`,
                 inline: true,
               },
               {
                 name: `Maitrise 9`,
-                value: `${ficheStore.Maitrise9}`,
+                value: `${ficheStore.Maitrise.Maitrise9}`,
                 inline: true,
               },
               {
                 name: `Maitrise 10`,
-                value: `${ficheStore.Maitrise10}`,
+                value: `${ficheStore.Maitrise.Maitrise10}`,
                 inline: true,
               }
             )
             .addFields(
               {
                 name: `Maitrise 11`,
-                value: `${ficheStore.Maitrise11}`,
+                value: `${ficheStore.Maitrise.Maitrise11}`,
                 inline: true,
               },
               {
                 name: `Maitrise 12`,
-                value: `${ficheStore.Maitrise12}`,
+                value: `${ficheStore.Maitrise.Maitrise12}`,
                 inline: true,
               },
               {
                 name: `Maitrise 13`,
-                value: `${ficheStore.Maitrise13}`,
+                value: `${ficheStore.Maitrise.Maitrise13}`,
                 inline: true,
               }
             )
             .addFields(
               {
                 name: `Maitrise 14`,
-                value: `${ficheStore.Maitrise14}`,
+                value: `${ficheStore.Maitrise.Maitrise14}`,
                 inline: true,
               },
               {
                 name: `Maitrise 15`,
-                value: `${ficheStore.Maitrise15}`,
+                value: `${ficheStore.Maitrise.Maitrise15}`,
                 inline: true,
               },
               {
                 name: `Maitrise 16`,
-                value: `${ficheStore.Maitrise16}`,
+                value: `${ficheStore.Maitrise.Maitrise16}`,
                 inline: true,
               }
             )
             .addFields(
               {
                 name: `Maitrise 17`,
-                value: `${boutique.Maitrise17}`,
+                value: `${boutique.Maitrise.Maitrise17}`,
                 inline: true,
               },
               {
                 name: `Maitrise 18`,
-                value: `${ficheStore.Maitrise18}`,
+                value: `${ficheStore.Maitrise.Maitrise18}`,
                 inline: true,
               },
               {
                 name: `Maitrise 19`,
-                value: `${ficheStore.Maitrise19}`,
+                value: `${ficheStore.Maitrise.Maitrise19}`,
                 inline: true,
               }
             )
             .addFields({
               name: `Maitrise 20`,
-              value: `${ficheStore.Maitrise20}`,
+              value: `${ficheStore.Maitrise.Maitrise20}`,
               inline: true,
             })
             .setThumbnail(
