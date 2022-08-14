@@ -27,7 +27,8 @@ module.exports = {
       fetchReply: true,
     });
     // if (!interaction.isChatInputCommand()) return;
-
+    const user = interaction.user;
+    console.log(user);
     if (interaction.commandName === "personnage") {
       if (interaction.options.getString("categorie") === "carte") {
         var gifCarte =
