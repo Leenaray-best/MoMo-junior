@@ -52,7 +52,7 @@ const FichePerso = require("./FichePerso.js");
 const BoutiqueMaitrise = require("./Boutique.js");
 const salonTemps = require("./salonMeteo.js");
 const Weather = require("./meteo");
-//const salonQuete = require("./salonQuete.js");
+const salonQuete = require("./salonQuete.js");
 const Bonus = require("./salonBonus.js");
 const ListeMetier = require("./job.js");
 const prefixMaitrise = "roll-maitrise";
@@ -66,7 +66,7 @@ client
     createJobList();
     createWeather();
     createSalonWeather();
-    //createSalonQuest();
+    createSalonQuest();
     createSalonBonus();
   })
   .catch((err) => console.log(err));
@@ -401,17 +401,63 @@ function createSalonWeather() {
     .catch((err) => console.log(err));
 }
 
-// function createSalonQuest() {
-//   const salonQuest = new salonQuete({
-//     _id: "00002",
-//     Pinte: ["1006593631832002642", "1008075876497362985", "", "", ""],
-//     time: Date(),
-//   });
-//   salonQuest
-//     .save()
-//     .then((result) => console.log(result))
-//     .catch((err) => console.log(err));
-// }
+function createSalonQuest() {
+  const salonQuest = new salonQuete({
+    _id: "00002",
+    Barreau: ["852592485108678686"],
+    Bateau: [
+      "800685820629352448",
+      "799951811556802580",
+      "799951829453635586",
+      "800685473215021086",
+      "639045866950361091",
+      "842008055926227004",
+      "639045990497779732",
+      "801510289857052712",
+      "799951886995685377",
+      "799958020745855016",
+      "853309291909742632",
+      "853309291909742632",
+      "846750128832380938",
+    ],
+    Parchemin: [
+      "858980354026110976",
+      "800685254947110912",
+      "799956692619362324",
+      "800684022530441226",
+      "798859610122485791",
+      "800682251267997697",
+      "800679834275151894",
+    ],
+    Frotter: [
+      "799958182549913600",
+      "846488707741909012",
+      "859002036557316117",
+      "858979943941799936",
+      "800685204531838988",
+      "799956666191315014",
+      "800683968734560256",
+      "798859562332717076",
+    ],
+    Lit: [
+      "859001789453697044",
+      "800682007423746068",
+      "842228043887017994",
+      "639046073511575573",
+      "639046105312788491",
+      "799950975791529994",
+      "800678848348815371",
+      "800680015431204885",
+      "846488707741909012",
+      "859002036557316117",
+    ],
+    time: Date(),
+  });
+  salonQuest
+    .save()
+    .then((result) => console.log(result))
+    .catch((err) => console.log(err));
+}
 
 function createSalonBonus() {
   const salonBonus = new Bonus({
