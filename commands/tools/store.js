@@ -32,24 +32,23 @@ module.exports = {
             _id: authId.idDatabase.storeId,
           });
           console.log(boutique.Maitrise);
-          console.log(ficheStore.Maitrise);
           const embed = new EmbedBuilder()
             .setTitle(`Boutique de niveaux de maitrise`)
             .setColor(0x18e1ee)
             .addFields(
               {
                 name: `Maitrise 2`,
-                value: `${ficheStore.Maitrise.Maitrise2}`,
+                value: `${boutique.Maitrise.Maitrise2}`,
                 inline: true,
               },
               {
                 name: `Maitrise 3`,
-                value: `${ficheStore.Maitrise.Maitrise3}`,
+                value: `${boutique.Maitrise.Maitrise3}`,
                 inline: true,
               },
               {
                 name: `Maitrise 4`,
-                value: `${ficheStore.Maitrise.Maitrise4}`,
+                value: `${boutique.Maitrise.Maitrise4}`,
                 inline: true,
               }
             )
@@ -61,63 +60,63 @@ module.exports = {
               },
               {
                 name: `Maitrise 6`,
-                value: `${ficheStore.Maitrise.Maitrise6}`,
+                value: `${boutique.Maitrise.Maitrise6}`,
                 inline: true,
               },
               {
                 name: `Maitrise 7`,
-                value: `${ficheStore.Maitrise.Maitrise7}`,
+                value: `${boutique.Maitrise.Maitrise7}`,
                 inline: true,
               }
             )
             .addFields(
               {
                 name: `Maitrise 8`,
-                value: `${ficheStore.Maitrise.Maitrise8}`,
+                value: `${boutique.Maitrise.Maitrise8}`,
                 inline: true,
               },
               {
                 name: `Maitrise 9`,
-                value: `${ficheStore.Maitrise.Maitrise9}`,
+                value: `${boutique.Maitrise.Maitrise9}`,
                 inline: true,
               },
               {
                 name: `Maitrise 10`,
-                value: `${ficheStore.Maitrise.Maitrise10}`,
+                value: `${boutique.Maitrise.Maitrise10}`,
                 inline: true,
               }
             )
             .addFields(
               {
                 name: `Maitrise 11`,
-                value: `${ficheStore.Maitrise.Maitrise11}`,
+                value: `${boutique.Maitrise.Maitrise11}`,
                 inline: true,
               },
               {
                 name: `Maitrise 12`,
-                value: `${ficheStore.Maitrise.Maitrise12}`,
+                value: `${boutique.Maitrise.Maitrise12}`,
                 inline: true,
               },
               {
                 name: `Maitrise 13`,
-                value: `${ficheStore.Maitrise.Maitrise13}`,
+                value: `${boutique.Maitrise.Maitrise13}`,
                 inline: true,
               }
             )
             .addFields(
               {
                 name: `Maitrise 14`,
-                value: `${ficheStore.Maitrise.Maitrise14}`,
+                value: `${boutique.Maitrise.Maitrise14}`,
                 inline: true,
               },
               {
                 name: `Maitrise 15`,
-                value: `${ficheStore.Maitrise.Maitrise15}`,
+                value: `${boutique.Maitrise.Maitrise15}`,
                 inline: true,
               },
               {
                 name: `Maitrise 16`,
-                value: `${ficheStore.Maitrise.Maitrise16}`,
+                value: `${boutique.Maitrise.Maitrise16}`,
                 inline: true,
               }
             )
@@ -129,18 +128,18 @@ module.exports = {
               },
               {
                 name: `Maitrise 18`,
-                value: `${ficheStore.Maitrise.Maitrise18}`,
+                value: `${boutique.Maitrise.Maitrise18}`,
                 inline: true,
               },
               {
                 name: `Maitrise 19`,
-                value: `${ficheStore.Maitrise.Maitrise19}`,
+                value: `${boutique.Maitrise.Maitrise19}`,
                 inline: true,
               }
             )
             .addFields({
               name: `Maitrise 20`,
-              value: `${ficheStore.Maitrise.Maitrise20}`,
+              value: `${boutique.Maitrise.Maitrise20}`,
               inline: true,
             })
             .setThumbnail(
