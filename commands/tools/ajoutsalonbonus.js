@@ -26,10 +26,12 @@ module.exports = {
     });
     // if (!interaction.isChatInputCommand()) return;
     const user = interaction.user;
+    const channelMessage = interaction.channelId;
     if (
-      user.id == authId.staff.emi ||
-      user.id == authId.staff.leena ||
-      user.id == authId.staff.meri
+      (user.id == authId.staff.emi ||
+        user.id == authId.staff.leena ||
+        user.id == authId.staff.meri) &&
+      channelMessage == authId.Salon.SalonBotAdmin
     ) {
       if (interaction.commandName === "ajoutsalonbonus") {
         let guildBonus = await ficheBonus.findOne({
