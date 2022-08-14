@@ -62,9 +62,9 @@ client.handleCommands();
 client
   .login(token)
   .then(() => {
-    createBoutique();
-    createJobList();
-    createWeather();
+    // createBoutique();
+    // createJobList();
+    // createWeather();
     createSalonWeather();
     createSalonQuest();
     createSalonBonus();
