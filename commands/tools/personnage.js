@@ -180,7 +180,7 @@ module.exports = {
         }
       }
     } else {
-      const ChannelNameId = client.channels.cache.get(channelMessage);
+      const ChannelNameId = client.channels.cache.get(authId.Salon.JetDeDes);
       newMessage = `Tu n'es pas dans le bon salon\nTu dois faire cette commande dans le salon ${ChannelNameId}`;
       await interaction.editReply({
         content: newMessage,
