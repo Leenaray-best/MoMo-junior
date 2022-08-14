@@ -211,6 +211,7 @@ var auth = require("./auth.json");
 // });
 
 client.on("messageCreate", async (message) => {
+  console.log("TA MERE LA PUTE");
   petitMessage = message.content.toLowerCase();
   // Ajouter des salons
   // if (
