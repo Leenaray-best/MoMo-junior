@@ -51,9 +51,6 @@ module.exports = {
       channelMessage == authId.Salon.SalonBotAdmin
     ) {
       if (interaction.commandName === "gererxp") {
-        let guildBonus = await ficheBonus.findOne({
-          _id: authId.idDatabase.BonusId,
-        });
         // Add a channel to Earth bender
         if (interaction.options.getSubcommand("remove")) {
           const gamer = interaction.options.getUser("joueur");
@@ -66,7 +63,7 @@ module.exports = {
           console.log(guildPerso);
           const oldNiveauXP = guildPerso.NiveauXP;
           const newNiveauXP = oldNiveauXP - valueXP;
-          await ficheBonus.findOneAndUpdate(
+          await fichePerso.findOneAndUpdate(
             { _id: authId.idDatabase.BonusId },
             { NiveauXP: newNiveauXP }
           );
@@ -85,11 +82,11 @@ module.exports = {
           console.log(guildPerso);
           const oldNiveauXP = guildPerso.NiveauXP;
           const newNiveauXP = oldNiveauXP + valueXP;
-          await ficheBonus.findOneAndUpdate(
+          await fichePerso.findOneAndUpdate(
             { _id: authId.idDatabase.BonusId },
             { NiveauXP: newNiveauXP }
           );
-          newMessage = `${valueXP} XP a été atrtibué à ${guildPerso.Identite.Prenom} ${guildPerso.Identite.Nom}`;
+          newMessage = `${valueXP} XP a été attribué à ${guildPerso.Identite.Prenom} ${guildPerso.Identite.Nom}`;
           await interaction.editReply({
             content: newMessage,
           });
