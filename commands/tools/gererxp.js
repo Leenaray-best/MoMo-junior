@@ -68,6 +68,7 @@ module.exports = {
             { NiveauXP: newNiveauXP }
           );
           console.log(newGuildPerso);
+          console.log(oldNiveauXP, newNiveauXP);
           newMessage = `${valueXP} XP ont été retiré à ${newGuildPerso.Identite.Prenom} ${newGuildPerso.Identite.Nom}`;
           await interaction.editReply({
             content: newMessage,
@@ -83,6 +84,7 @@ module.exports = {
           console.log(guildPerso);
           const oldNiveauXP = guildPerso.NiveauXP;
           const newNiveauXP = oldNiveauXP + valueXP;
+          console.log(oldNiveauXP, newNiveauXP);
           let newGuildPerso = await fichePerso.findOneAndUpdate(
             { _id: authId.idDatabase.BonusId },
             { NiveauXP: newNiveauXP }
