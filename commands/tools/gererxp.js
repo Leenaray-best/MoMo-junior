@@ -64,7 +64,7 @@ module.exports = {
           const oldNiveauXP = guildPerso.NiveauXP;
           const newNiveauXP = oldNiveauXP - valueXP;
           let newGuildPerso = await fichePerso.findOneAndUpdate(
-            { _id: authId.idDatabase.BonusId },
+            { _id: idGamer },
             { NiveauXP: newNiveauXP }
           );
           console.log(newGuildPerso);
@@ -86,7 +86,7 @@ module.exports = {
           const newNiveauXP = oldNiveauXP + valueXP;
           console.log(oldNiveauXP, newNiveauXP);
           let newGuildPerso = await fichePerso.findOneAndUpdate(
-            { _id: authId.idDatabase.BonusId },
+            { _id: idGamer },
             { NiveauXP: newNiveauXP }
           );
           newMessage = `${valueXP} XP a été attribué à ${newGuildPerso.Identite.Prenom} ${newGuildPerso.Identite.Nom}`;
