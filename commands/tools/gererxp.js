@@ -52,39 +52,35 @@ module.exports = {
     ) {
       if (interaction.commandName === "gererxp") {
         // Add a channel to Earth bender
-        if (interaction.options.getSubcommand("remove")) {
+        if (interaction.options.getSubcommand() === "remove") {
+          console.log("On enleve de l'XP");
           const gamer = interaction.options.getUser("joueur");
           const valueXP = interaction.options.getNumber("xp");
-          console.log(gamer.id);
           const idGamer = gamer.id;
           let guildPerso = await fichePerso.findOne({
             _id: idGamer,
           });
-          console.log(guildPerso);
           const oldNiveauXP = guildPerso.NiveauXP;
           const newNiveauXP = oldNiveauXP - valueXP;
           let newGuildPerso = await fichePerso.findOneAndUpdate(
             { _id: idGamer },
             { NiveauXP: newNiveauXP }
           );
-          console.log(newGuildPerso);
           console.log(oldNiveauXP, newNiveauXP);
           newMessage = `${valueXP} XP ont été retiré à ${newGuildPerso.Identite.Prenom} ${newGuildPerso.Identite.Nom}`;
           await interaction.editReply({
             content: newMessage,
           });
-        } else if (interaction.options.getSubcommand("give")) {
+        } else if (interaction.options.getSubcommand() === "give") {
+          console.log("On donne de l'XP");
           const gamer = interaction.options.getUser("joueur");
           const valueXP = interaction.options.getNumber("xp");
-          console.log(gamer.id);
           const idGamer = gamer.id;
           let guildPerso = await fichePerso.findOne({
             _id: idGamer,
           });
-          console.log(guildPerso);
           const oldNiveauXP = guildPerso.NiveauXP;
           const newNiveauXP = oldNiveauXP + valueXP;
-          console.log(oldNiveauXP, newNiveauXP);
           let newGuildPerso = await fichePerso.findOneAndUpdate(
             { _id: idGamer },
             { NiveauXP: newNiveauXP }
