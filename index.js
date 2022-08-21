@@ -631,13 +631,14 @@ function createBonusMeteoRoll() {
 }
 
 function createBagPerso() {
-  const BagPersoFiche = new bagPerso({
+  const fichepersobag = new bagPerso({
     _id: "message.author.id",
     Competence: [Number],
     Sac: [String],
     time: Date(),
   });
-  BagPersoFiche.save()
+  fichepersobag
+    .save()
     .then((result) => console.log(result))
     .catch((err) => console.log(err));
 }
