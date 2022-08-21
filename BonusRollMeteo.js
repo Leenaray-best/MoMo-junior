@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const salonTemps = mongoose.Schema({
+const salonBonusMeteo = mongoose.Schema({
   _id: String,
   EauBonus1: [String],
   EauBonus2: [String],
