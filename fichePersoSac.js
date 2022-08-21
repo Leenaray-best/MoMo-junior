@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bagPerso = mongoose.Schema({
   _id: String,
-  Competence: [Number],
+  Competence: [{ type: Number }],
   Sac: [String],
   time: Date,
 });
