@@ -83,7 +83,7 @@ module.exports = {
           guildMeteo.PoleSud,
         ];
         // For Water Bender Bonus meteo involved
-        if (interaction.member.roles.cache.has(authId.RoleRp.Eau)) {
+        if (interaction.member.roles.cache.has(authId.RoleRP.Eau)) {
           var BonusSup = Number(0);
           var BonusCompetence = guildPerso.Competence.Survie;
           for (salonName in listSalonRp) {
@@ -128,7 +128,7 @@ module.exports = {
               var BonusSup = Number(-1);
             }
           }
-        } else if (interaction.member.roles.cache.has(authId.RoleRp.Feu)) {
+        } else if (interaction.member.roles.cache.has(authId.RoleRP.Feu)) {
           var BonusSup = Number(0);
           var BonusCompetence = guildPerso.Competence.Intelligence;
           while (BonusSup == Number(0)) {
@@ -151,13 +151,13 @@ module.exports = {
               var BonusSup = Number(-1);
             }
           }
-        } else if (interaction.member.roles.cache.has(authId.RoleRp.Air)) {
+        } else if (interaction.member.roles.cache.has(authId.RoleRP.Air)) {
           var BonusSup = Number(0);
           var BonusCompetence = guildPerso.Competence.Adresse;
-          if (interaction.member.roles.cache.has(authId.RoleRp.Chauve)) {
+          if (interaction.member.roles.cache.has(authId.RoleRP.Chauve)) {
             var BonusSup = Number(1);
           }
-        } else if (interaction.member.roles.cache.has(authId.RoleRp.Terre)) {
+        } else if (interaction.member.roles.cache.has(authId.RoleRP.Terre)) {
           var BonusSup = Number(0);
           var BonusCompetence = guildPerso.Competence.Constitution;
           for (i = 0; i < guildBonus.Terre.length; i++) {
