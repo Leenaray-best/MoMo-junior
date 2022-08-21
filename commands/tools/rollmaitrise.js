@@ -137,25 +137,23 @@ module.exports = {
         } else if (interaction.member.roles.cache.has(authId.RoleRP.Feu)) {
           var BonusSup = Number(0);
           var BonusCompetence = guildPerso.Competence.Intelligence;
-          while (BonusSup == Number(0)) {
-            for (salonName in listSalonRp) {
-              if (interaction.member.roles.cache.has(listSalonRp[salonName])) {
-                console.log(guildBonus);
-                tailleTableau = guildBonus.FeuBonus1.length;
-                for (i = 0; i < tailleTableau; i++) {
-                  if (catMeteo[salonName] == guildBonus.EauBonus1[i]) {
-                    var BonusSup = Number(1);
-                  }
+
+          for (salonName in listSalonRp) {
+            if (interaction.member.roles.cache.has(listSalonRp[salonName])) {
+              console.log(guildBonus);
+              tailleTableau = guildBonus.FeuBonus1.length;
+              for (i = 0; i < tailleTableau; i++) {
+                if (catMeteo[salonName] == guildBonus.FeuBonus1[i]) {
+                  var BonusSup = Number(1);
+                } else if (catMeteo[salonName] == guildBonus.EauBonus1[0]) {
+                  var BonusSup = Number(-2);
+                } else if (
+                  catMeteo[salonName] == guildBonus.EauBonus1[1] ||
+                  catMeteo[salonName] == guildBonus.EauBonus2[0]
+                ) {
+                  var BonusSup = Number(-1);
                 }
               }
-            }
-            if (catMeteo[salonName] == guildBonus.EauBonus1[0]) {
-              var BonusSup = Number(-2);
-            } else if (
-              catMeteo[salonName] == guildBonus.EauBonus1[1] ||
-              guildMeteo.Nuit == guildBonus.EauBonus2[0]
-            ) {
-              var BonusSup = Number(-1);
             }
           }
         } else if (interaction.member.roles.cache.has(authId.RoleRP.Air)) {
