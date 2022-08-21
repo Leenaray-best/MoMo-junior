@@ -61,7 +61,7 @@ const salonQuete = require("./salonQuete.js");
 const Bonus = require("./salonBonus.js");
 const ListeMetier = require("./job.js");
 const salonBonusMeteo = require("./BonusRollMeteo.js");
-const bagPerso = require("./fichePersoSac.js");
+
 const prefixMaitrise = "roll-maitrise";
 client.handleEvents();
 client.handleCommands();
@@ -624,28 +624,6 @@ function createBonusMeteoRoll() {
     time: Date(),
   });
   meteoSalonBonus
-    .save()
-    .then((result) => console.log(result))
-    .catch((err) => console.log(err));
-}
-
-function createBagPerso() {
-  const fichepersobag = new bagPerso({
-    _id: "message.author.id",
-    Competence: [
-      Number,
-      Number,
-      Number,
-      Number,
-      Number,
-      Number,
-      Number,
-      Number,
-    ],
-    Sac: [String],
-    time: Date(),
-  });
-  fichepersobag
     .save()
     .then((result) => console.log(result))
     .catch((err) => console.log(err));
