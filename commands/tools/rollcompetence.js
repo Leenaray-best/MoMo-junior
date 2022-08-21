@@ -142,33 +142,33 @@ module.exports = {
                   NumberUp = guildPersoBag.Competence[i];
                   console.log(NumberUp);
                 }
-                if (valRoll <= NumberUp) {
-                  client.channels.cache
-                    .get(authId.Salon.Jet)
-                    .send(
-                      "<@" +
-                        user.id +
-                        "> Ton roll est de " +
-                        valRoll +
-                        ", c'est une reussite" +
-                        +`\rTu peux repartir dans ${client.channels.cache.get(
-                          channelMessage
-                        )}`
-                    );
-                } else {
-                  client.channels.cache
-                    .get(authId.Salon.Jet)
-                    .send(
-                      "<@" +
-                        user.id +
-                        "> Ton roll est de " +
-                        valRoll +
-                        ", c'est un echec" +
-                        +`\rTu peux repartir dans ${client.channels.cache.get(
-                          channelMessage
-                        )}`
-                    );
-                }
+              }
+              if (valRoll <= NumberUp) {
+                client.channels.cache
+                  .get(authId.Salon.Jet)
+                  .send(
+                    "<@" +
+                      user.id +
+                      "> Ton roll est de " +
+                      valRoll +
+                      ", c'est une reussite" +
+                      `\rTu peux repartir dans ${client.channels.cache.get(
+                        channelMessage
+                      )}`
+                  );
+              } else {
+                client.channels.cache
+                  .get(authId.Salon.Jet)
+                  .send(
+                    "<@" +
+                      user.id +
+                      "> Ton roll est de " +
+                      valRoll +
+                      ", c'est un echec" +
+                      `\rTu peux repartir dans ${client.channels.cache.get(
+                        channelMessage
+                      )}`
+                  );
               }
             }
           }
