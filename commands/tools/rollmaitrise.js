@@ -54,9 +54,7 @@ module.exports = {
             );
           const ChannelNameIdJet = client.channels.cache.get(authId.Salon.Jet);
           newMessage = `Go dans ${ChannelNameIdJet} pour voir ton resultat`;
-          await interaction.editReply({
-            content: newMessage,
-          });
+          await interaction.reply({ newMessage });
           await wait(5000);
           await interaction.deleteReply();
         } else {
