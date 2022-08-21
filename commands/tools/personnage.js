@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const ficheMeteo = require("../../meteo");
 const ficheMeteotest = require("../../salonMeteo");
 const fichePerso = require("../../FichePerso");
+const ficheBagPerso = require("../../fichePersoSac");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -95,6 +96,9 @@ module.exports = {
           let fiche = await fichePerso.findOne({
             _id: IdPerso,
           });
+          let ficheSac = await ficheBagPerso.findOne({
+            _id: IdPerso,
+          });
           console.log(fiche.Identite.Nom);
           const listeQualite = fiche.Qualite;
           const listeFaiblesse = fiche.Faiblesse;
@@ -105,7 +109,7 @@ module.exports = {
             .setDescription(
               `Nom : ${fiche.Identite.Nom}\nPrenom : ${fiche.Identite.Prenom}\nAge: ${fiche.Identite.Age}\nSexe: ${fiche.Identite.Sexe}\nMetier : ${fiche.Identite.Metier}\nNiveau de Maitrise : ${fiche.NiveauDeMaitrise}\nNiveau XP : ${fiche.NiveauXP}\nPoint de Competence : ${fiche.GainCompetence}\nFaiblesse : ${listeFaiblesse[0]}, ${listeFaiblesse[1]}`
             )
-
+            .setThumbnail(user.avatarURL())
             .addFields(
               { name: `Qualite 1`, value: listeQualite[0], inline: true },
               { name: `Qualite 2`, value: listeQualite[1], inline: true },
@@ -161,8 +165,16 @@ module.exports = {
               name: `Lien Gdoc`,
               value: `${fiche.LienFichePerso}`,
               inline: true,
-            })
-            .setThumbnail(user.avatarURL());
+            });
+          for (i = 0; i < ficheSac.Sac.length; i++) {
+            const ItemBag = ficheSac.Sac[i];
+            embed.addFields({
+              name: "Sac:",
+              value: `${ItemBag},`,
+              inline: true,
+            });
+          }
+
           await interaction.editReply({
             embeds: [embed],
           });

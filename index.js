@@ -61,6 +61,7 @@ const salonQuete = require("./salonQuete.js");
 const Bonus = require("./salonBonus.js");
 const ListeMetier = require("./job.js");
 const salonBonusMeteo = require("./BonusRollMeteo.js");
+const bagPerso = require("./fichePersoSac.js");
 const prefixMaitrise = "roll-maitrise";
 client.handleEvents();
 client.handleCommands();
@@ -75,6 +76,7 @@ client
     createSalonQuest();
     createSalonBonus();
     createBonusMeteoRoll();
+    createBagPerso();
   })
   .catch((err) => console.log(err));
 var auth = require("./auth.json");
@@ -624,6 +626,18 @@ function createBonusMeteoRoll() {
   });
   meteoSalonBonus
     .save()
+    .then((result) => console.log(result))
+    .catch((err) => console.log(err));
+}
+
+function createBagPerso() {
+  const BagPersoFiche = new bagPerso({
+    _id: "message.author.id",
+    Competence: [Number],
+    Sac: [String],
+    time: Date(),
+  });
+  BagPersoFiche.save()
     .then((result) => console.log(result))
     .catch((err) => console.log(err));
 }
