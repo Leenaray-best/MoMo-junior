@@ -647,7 +647,7 @@ function createFicheBagPerso() {
 function createFicheObjetRP() {
   const ficheobject = new ficheObjetRP({
     _id: "00005",
-    Dague: [0, 0, 0, 0, 0, 0, 0, 0],
+    Dague: [1, 0, 0, 0, 0, 0, 0, 0],
     Armure: [0, 0, 0, 0, 0, 0, 0, 0],
     Potion: [0],
     time: Date(),

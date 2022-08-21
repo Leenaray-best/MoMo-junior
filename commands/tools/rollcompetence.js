@@ -136,7 +136,7 @@ module.exports = {
                   );
                   console.log(guildPersoBag.Competence);
                   console.log(newList);
-                  NumberUp = nexList[i];
+                  NumberUp = newList[i];
                 } else {
                   NumberUp = guildPersoBag.Competence[i];
                 }
