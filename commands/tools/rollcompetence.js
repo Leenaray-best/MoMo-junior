@@ -142,7 +142,7 @@ module.exports = {
                   interaction.options.getString("objet") === "aucun"
                 ) {
                   client.channels.cache
-                    .get(authiD.Salon.Jet)
+                    .get(authId.Salon.Jet)
                     .send(
                       "<@" +
                         message.author.id +
@@ -227,7 +227,7 @@ module.exports = {
                   interaction.options.getString("objet") === "aucun"
                 ) {
                   client.channels.cache
-                    .get(authiD.Salon.Jet)
+                    .get(authId.Salon.Jet)
                     .send(
                       "<@" +
                         message.author.id +
