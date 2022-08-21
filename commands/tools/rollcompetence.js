@@ -139,7 +139,7 @@ module.exports = {
                 }
                 if (valRoll <= NumberUp) {
                   client.channels.cache
-                    .get(auth.Salon.Jet)
+                    .get(authId.Salon.Jet)
                     .send(
                       "<@" +
                         user.id +
@@ -152,7 +152,7 @@ module.exports = {
                     );
                 } else {
                   client.channels.cache
-                    .get(auth.Salon.Jet)
+                    .get(authId.Salon.Jet)
                     .send(
                       "<@" +
                         user.id +
