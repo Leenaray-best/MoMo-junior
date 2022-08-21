@@ -138,7 +138,7 @@ module.exports = {
                   console.log(newList);
                   NumberUp = newList[i];
                   console.log(NumberUp);
-                } else {
+                } else if (interaction.options.getString("objet") === "aucun") {
                   NumberUp = guildPersoBag.Competence[i];
                   console.log(NumberUp);
                 }
