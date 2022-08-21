@@ -170,7 +170,7 @@ module.exports = {
         }
 
         const ChannelNameIdJet = client.channels.cache.get(authId.Salon.Jet);
-        newMessage = `Go dans ${ChannelNameIdJet} pour voir ton resultat`;
+        newMessage = `Va dans ${ChannelNameIdJet} pour voir ton resultat`;
         await interaction.editReply({
           content: newMessage,
         });
