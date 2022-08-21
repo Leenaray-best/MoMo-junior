@@ -9,6 +9,7 @@ const fichePerso = require("../../FichePerso");
 const ficheMeteo = require("../../meteo");
 const ficheMeteotest = require("../../salonMeteo");
 const ficheBag = require("../../fichePersoSac");
+const ficheObjetRP = require("../../ficheObjet");
 const wait = require("node:timers/promises").setTimeout;
 
 function Rand(valeur) {
@@ -73,7 +74,8 @@ module.exports = {
             .setRequired(true)
             .addChoices(
               { name: "Dague", value: "dague" },
-              { name: "Armure", value: "Armure" }
+              { name: "Armure", value: "armure" },
+              { name: "Aucun", value: "aucun" }
             )
         )
     ),
@@ -97,6 +99,9 @@ module.exports = {
         let guildPersoBag = await ficheBag.findOne({
           _id: user.id,
         });
+        let guildObjet = await ficheObjetRP.findOne({
+          _id: authId.idDatabase.FicheObject,
+        });
         if (interaction.options.getSubcommand() === "sansopposition") {
           listeCompetence = [
             "force",
@@ -108,13 +113,22 @@ module.exports = {
             "spiritualité",
             "discretion",
           ];
-          listeObject = ["Dague", "ArmureNiveau1"];
+          listeObject = ["dague", "armure"];
+          listeFicheObjet = [guildObjet.Dague, guildObjet.Armure];
           for (i = 0; i < listeCompetence.length; i++) {
             if (
               interaction.options.getString("competence") === listeCompetence[i]
             ) {
               for (j = 0; j < listeObject.length; j++) {
                 if (interaction.options.getString("objet") === listeObject[j]) {
+                  var newList = math.add(
+                    guildPersoBag.Competence + listeFicheObjet
+                  );
+                  console.log(guildPersoBag.Competence);
+                  console.log(newList);
+                  NumberUp = nexList[i];
+                } else {
+                  NumberUp = guildPersoBag.Competence[i];
                 }
               }
             }

@@ -52,6 +52,13 @@ module.exports = {
                   channelMessage
                 )} et trouver comment arranger cette situation`
             );
+          const ChannelNameIdJet = client.channels.cache.get(authId.Salon.Jet);
+          newMessage = `Go dans ${ChannelNameIdJet} pour voir ton resultat`;
+          await interaction.editReply({
+            content: newMessage,
+          });
+          await wait(5000);
+          await interaction.deleteReply();
         } else {
           let guildBonus = await ficheBonus.findOne({
             _id: authId.idDatabase.MeteoBonusId,
