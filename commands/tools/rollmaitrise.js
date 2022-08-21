@@ -291,6 +291,12 @@ module.exports = {
               );
           }
         }
+        const ChannelNameIdJet = client.channels.cache.get(authId.Salon.Jet);
+        newMessage = `Go dans ${ChannelNameId} pour voir ton resultat`;
+        await interaction.editReply({
+          content: newMessage,
+        });
+        await interaction.deleteReply();
       }
     }
   },
