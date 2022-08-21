@@ -169,7 +169,7 @@ module.exports = {
           var BonusSup = Number(0);
           var BonusCompetence = guildPerso.Competence.Constitution;
           for (i = 0; i < guildBonusSalonLieu.Terre.length; i++) {
-            if (channelMessage.id == guildBonusSalonLieu.Terre[i])
+            if (channelMessage == guildBonusSalonLieu.Terre[i])
               var BonusSup = Number(1);
           }
         }
@@ -190,7 +190,10 @@ module.exports = {
                   BonusSup +
                   " (bonus/malus Meteo/Carac/Lieu) = " +
                   ValRoll +
-                  "\rOuhla c'est un echec critique ! Tu dois t'infliger une blessure"
+                  "\rOuhla c'est un echec critique ! Tu dois t'infliger une blessure" +
+                  `\rTu peux repartir dans ${client.channels.cache.get(
+                    channelMessage
+                  )}`
               );
           } else if (ValRoll <= 12) {
             client.channels.cache
@@ -206,7 +209,10 @@ module.exports = {
                   BonusSup +
                   " (bonus/malus Meteo/Carac/Lieu) = " +
                   ValRoll +
-                  "\rTu n'as pas su utiliser ta maitrise correctement, c'est un echec sans dommage physique"
+                  "\rTu n'as pas su utiliser ta maitrise correctement, c'est un echec sans dommage physique" +
+                  `\rTu peux repartir dans ${client.channels.cache.get(
+                    channelMessage
+                  )}`
               );
           } else if (ValRoll <= 19) {
             client.channels.cache
@@ -222,7 +228,10 @@ module.exports = {
                   BonusSup +
                   " (bonus/malus Meteo/Carac/Lieu) = " +
                   ValRoll +
-                  "\rLa maitrise de ton element est correcte, tu reussis ton action sans briller"
+                  "\rLa maitrise de ton element est correcte, tu reussis ton action sans briller" +
+                  `\rTu peux repartir dans ${client.channels.cache.get(
+                    channelMessage
+                  )}`
               );
           } else if (ValRoll <= 24) {
             client.channels.cache
@@ -238,7 +247,10 @@ module.exports = {
                   BonusSup +
                   " (bonus/malus Meteo/Carac/Lieu) = " +
                   ValRoll +
-                  "\rLa maitrise de ton element est tres bonne, tu reussis ton action !"
+                  "\rLa maitrise de ton element est tres bonne, tu reussis ton action !" +
+                  `\rTu peux repartir dans ${client.channels.cache.get(
+                    channelMessage
+                  )}`
               );
           } else {
             client.channels.cache
@@ -254,7 +266,10 @@ module.exports = {
                   BonusSup +
                   " (bonus/malus Meteo/Carac/Lieu) = " +
                   ValRoll +
-                  "\rBravo c'est une reussite critique ! Ton action est juste parfait"
+                  "\rBravo c'est une reussite critique ! Ton action est juste parfait" +
+                  `\rTu peux repartir dans ${client.channels.cache.get(
+                    channelMessage
+                  )}`
               );
           }
         } else if (
@@ -281,7 +296,10 @@ module.exports = {
                   BonnusAttaqueMix +
                   " (bonus maitrise) = " +
                   ValRoll +
-                  " \rTu n'as pas su utiliser ta maitrise efficacement, meme si ton score est plus haut que ton adversaire, tu ne lui feras pas de degat"
+                  " \rTu n'as pas su utiliser ta maitrise efficacement, meme si ton score est plus haut que ton adversaire, tu ne lui feras pas de degat" +
+                  `\rTu peux repartir dans ${client.channels.cache.get(
+                    channelMessage
+                  )}`
               );
           } else {
             client.channels.cache
@@ -295,7 +313,10 @@ module.exports = {
                   BonnusAttaqueMix +
                   " (bonus maitrise) = " +
                   ValRoll +
-                  " \rL'utilisation de ta maitrise est une reussite, si ton score est plus haut que ton adversaire tu l'emportes"
+                  " \rL'utilisation de ta maitrise est une reussite, si ton score est plus haut que ton adversaire tu l'emportes" +
+                  `\rTu peux repartir dans ${client.channels.cache.get(
+                    channelMessage
+                  )}`
               );
           }
         }
