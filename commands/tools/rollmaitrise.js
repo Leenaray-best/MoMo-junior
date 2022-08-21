@@ -4,6 +4,7 @@ const fs = require("fs");
 var authId = JSON.parse(fs.readFileSync("./auth.json"));
 const mongoose = require("mongoose");
 const ficheBonus = require("../../BonusRollMeteo");
+const ficheSalonBonusLieu = require("../../salonBonus");
 const fichePerso = require("../../FichePerso");
 const ficheMeteo = require("../../meteo");
 const ficheMeteotest = require("../../salonMeteo");
@@ -43,6 +44,10 @@ module.exports = {
         let guildBonus = await ficheBonus.findOne({
           _id: authId.idDatabase.MeteoBonusId,
         });
+        let guildBonusSalonLieu = await ficheSalonBonusLieu.findOne({
+          _id: authId.idDatabase.BonusId,
+        });
+
         let guildPerso = await fichePerso.findOne({
           _id: user.id,
         });
@@ -161,8 +166,8 @@ module.exports = {
         } else if (interaction.member.roles.cache.has(authId.RoleRP.Terre)) {
           var BonusSup = Number(0);
           var BonusCompetence = guildPerso.Competence.Constitution;
-          for (i = 0; i < guildBonus.Terre.length; i++) {
-            if (channelMessage.id == guildBonus.Terre[i])
+          for (i = 0; i < guildBonusSalonLieu.Terre.length; i++) {
+            if (channelMessage.id == guildBonusSalonLieu.Terre[i])
               var BonusSup = Number(1);
           }
         }
