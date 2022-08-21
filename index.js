@@ -76,7 +76,6 @@ client
     createSalonQuest();
     createSalonBonus();
     createBonusMeteoRoll();
-    createBagPerso();
   })
   .catch((err) => console.log(err));
 var auth = require("./auth.json");
