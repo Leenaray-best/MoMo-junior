@@ -158,7 +158,10 @@ module.exports = {
                     interaction.options.getString("objet") === listeObject[j]
                   ) {
                     for (k = 0; k < guildPersoBag.Sac.length; k++) {
-                      if (listeObject[j] == guildPersoBag.Sac[k]) {
+                      if (
+                        interaction.options.getString("objet") ==
+                        guildPersoBag.Sac[k]
+                      ) {
                         console.log(`Il utilise une ${listeObject[j]}`);
                         console.log(guildPersoBag.Competence);
                         console.log(listeFicheObjet[j]);
@@ -260,7 +263,10 @@ module.exports = {
                     interaction.options.getString("objet") === listeObject[j]
                   ) {
                     for (k = 0; k < guildPersoBag.Sac.length; k++) {
-                      if (listeObject[j] == guildPersoBag.Sac[k]) {
+                      if (
+                        interaction.options.getString("objet") ==
+                        guildPersoBag.Sac[k]
+                      ) {
                         console.log(`Il utilise une ${listeObject[j]}`);
                         console.log(guildPersoBag.Competence);
                         console.log(listeFicheObjet[j]);
