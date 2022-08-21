@@ -1,0 +1,134 @@
+const { channel } = require("diagnostics_channel");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const fs = require("fs");
+var authId = JSON.parse(fs.readFileSync("./auth.json"));
+const mongoose = require("mongoose");
+const ficheBonus = require("../../BonusRollMeteo");
+const ficheSalonBonusLieu = require("../../salonBonus");
+const fichePerso = require("../../FichePerso");
+const ficheMeteo = require("../../meteo");
+const ficheMeteotest = require("../../salonMeteo");
+const ficheBag = require("../../fichePersoSac");
+const wait = require("node:timers/promises").setTimeout;
+
+function Rand(valeur) {
+  return Math.floor(Math.random() * valeur + 1);
+}
+
+module.exports = {
+  data: new SlashCommandBuilder()
+    .setName("rollcompetence")
+    .setDescription("Roll de competence")
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("sansopposition")
+        .setDescription("Roll competence SANS opposition")
+        .addStringOption((option) =>
+          option
+            .setName("competence")
+            .setRequired(true)
+            .setDescription("Choix")
+            .addChoices(
+              { name: "Force", value: "force" },
+              { name: "Constitution", value: "constitution" },
+              { name: "Charisme", value: "charisme" },
+              { name: "Intelligence", value: "intelligence" },
+              { name: "Survie", value: "survie" },
+              { name: "Adresse", value: "adresse" },
+              { name: "Spiritualité", value: "spiritualite" },
+              { name: "Discrétion", value: "discretion" }
+            )
+        )
+        .addStringOption((option) =>
+          option
+            .setName("objet")
+            .setDescription("Object to use")
+            .setRequired(true)
+        )
+    )
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("avecopposition")
+        .setDescription("Roll competence AVEC opposition")
+        .addStringOption((option) =>
+          option
+            .setName("competence")
+            .setRequired(true)
+            .setDescription("Choix")
+            .addChoices(
+              { name: "Force", value: "force" },
+              { name: "Constitution", value: "constitution" },
+              { name: "Charisme", value: "charisme" },
+              { name: "Intelligence", value: "intelligence" },
+              { name: "Survie", value: "survie" },
+              { name: "Adresse", value: "adresse" },
+              { name: "Spiritualité", value: "spiritualite" },
+              { name: "Discrétion", value: "discretion" }
+            )
+        )
+        .addStringOption((option) =>
+          option
+            .setName("objet")
+            .setDescription("Object to use")
+            .setRequired(true)
+            .addChoices(
+              { name: "Dague", value: "dague" },
+              { name: "Armure", value: "Armure" }
+            )
+        )
+    ),
+
+  async execute(interaction, client) {
+    const message = await interaction.deferReply({
+      fetchReply: true,
+    });
+    // if (!interaction.isChatInputCommand()) return;
+    const user = interaction.user;
+    const channelMessage = interaction.channelId;
+    if (
+      user.id == authId.staff.emi ||
+      user.id == authId.staff.leena ||
+      user.id == authId.staff.meri
+    ) {
+      if (interaction.commandName === "rollcompetence") {
+        let guildPerso = await fichePerso.findOne({
+          _id: user.id,
+        });
+        let guildPersoBag = await ficheBag.findOne({
+          _id: user.id,
+        });
+        if (interaction.options.getSubcommand() === "sansopposition") {
+          listeCompetence = [
+            "force",
+            "constitution",
+            "charisme",
+            "intelligence",
+            "survie",
+            "adresse",
+            "spiritualité",
+            "discretion",
+          ];
+          listeObject = ["Dague", "ArmureNiveau1"];
+          for (i = 0; i < listeCompetence.length; i++) {
+            if (
+              interaction.options.getString("competence") === listeCompetence[i]
+            ) {
+              for (j = 0; j < listeObject.length; j++) {
+                if (interaction.options.getString("objet") === listeObject[j]) {
+                }
+              }
+            }
+          }
+        }
+
+        const ChannelNameIdJet = client.channels.cache.get(authId.Salon.Jet);
+        newMessage = `Go dans ${ChannelNameIdJet} pour voir ton resultat`;
+        await interaction.editReply({
+          content: newMessage,
+        });
+        await wait(5000);
+        await interaction.deleteReply();
+      }
+    }
+  },
+};

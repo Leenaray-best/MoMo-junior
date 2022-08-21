@@ -62,6 +62,7 @@ const Bonus = require("./salonBonus.js");
 const ListeMetier = require("./job.js");
 const salonBonusMeteo = require("./BonusRollMeteo.js");
 const ficheSacPerso = require("./fichePersoSac.js");
+const ficheObjetRP = require("./ficheObjet.js");
 const prefixMaitrise = "roll-maitrise";
 client.handleEvents();
 client.handleCommands();
@@ -77,6 +78,7 @@ client
     createSalonBonus();
     createBonusMeteoRoll();
     createFicheBagPerso();
+    createFicheObjetRP();
   })
   .catch((err) => console.log(err));
 var auth = require("./auth.json");
@@ -640,6 +642,20 @@ function createFicheBagPerso() {
     time: Date(),
   });
   fichepersobags
+    .save()
+    .then((result) => console.log(result))
+    .catch((err) => console.log(err));
+}
+
+function createFicheObjetRP() {
+  const ficheobject = new ficheObjetRP({
+    _id: "00005",
+    Dague: [0, 0, 0, 0, 0, 0, 0, 0],
+    Armure: [0, 0, 0, 0, 0, 0, 0, 0],
+    Potion: [0],
+    time: Date(),
+  });
+  ficheobject
     .save()
     .then((result) => console.log(result))
     .catch((err) => console.log(err));
