@@ -102,19 +102,21 @@ module.exports = {
         let guildObjet = await ficheObjetRP.findOne({
           _id: authId.idDatabase.FicheObject,
         });
+        listeCompetence = [
+          "force",
+          "constitution",
+          "charisme",
+          "intelligence",
+          "survie",
+          "adresse",
+          "spiritualité",
+          "discretion",
+        ];
+        listeObject = ["dague", "armure"];
+        listeFicheObjet = [guildObjet.Dague, guildObjet.Armure];
         if (interaction.options.getSubcommand() === "sansopposition") {
-          listeCompetence = [
-            "force",
-            "constitution",
-            "charisme",
-            "intelligence",
-            "survie",
-            "adresse",
-            "spiritualité",
-            "discretion",
-          ];
-          listeObject = ["dague", "armure"];
-          listeFicheObjet = [guildObjet.Dague, guildObjet.Armure];
+          valRoll = Rand(20);
+          console.log(valRoll);
           for (i = 0; i < listeCompetence.length; i++) {
             if (
               interaction.options.getString("competence") === listeCompetence[i]
@@ -129,6 +131,33 @@ module.exports = {
                   NumberUp = nexList[i];
                 } else {
                   NumberUp = guildPersoBag.Competence[i];
+                }
+                if (valRoll <= NumberUp) {
+                  client.channels.cache
+                    .get(auth.Salon.Jet)
+                    .send(
+                      "<@" +
+                        user.id +
+                        "> Ton roll est de " +
+                        ValRoll +
+                        ", c'est une reussite" +
+                        +`\rTu peux repartir dans ${client.channels.cache.get(
+                          channelMessage
+                        )}`
+                    );
+                } else {
+                  client.channels.cache
+                    .get(auth.Salon.Jet)
+                    .send(
+                      "<@" +
+                        user.id +
+                        "> Ton roll est de " +
+                        ValRoll +
+                        ", c'est un echec" +
+                        +`\rTu peux repartir dans ${client.channels.cache.get(
+                          channelMessage
+                        )}`
+                    );
                 }
               }
             }

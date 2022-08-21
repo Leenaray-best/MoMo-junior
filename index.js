@@ -77,7 +77,6 @@ client
     createSalonQuest();
     createSalonBonus();
     createBonusMeteoRoll();
-    createFicheBagPerso();
     createFicheObjetRP();
   })
   .catch((err) => console.log(err));
