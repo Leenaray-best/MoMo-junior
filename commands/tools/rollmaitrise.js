@@ -73,7 +73,7 @@ module.exports = {
         let guildMeteotest = await ficheMeteotest.findOne({
           _id: authId.idDatabase.meteotestId,
         });
-        console.log(guildMeteotest.Salon);
+
         const catMeteo = [
           guildMeteo.PoleNord,
           guildMeteo.TempleAus,
@@ -164,6 +164,8 @@ module.exports = {
             var BonusSup = Number(1);
           }
         } else if (interaction.member.roles.cache.has(authId.RoleRP.Terre)) {
+          console.log(guildBonusSalonLieu);
+          console.log(channelMessage.id);
           var BonusSup = Number(0);
           var BonusCompetence = guildPerso.Competence.Constitution;
           for (i = 0; i < guildBonusSalonLieu.Terre.length; i++) {
