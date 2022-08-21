@@ -179,6 +179,7 @@ module.exports = {
                       NumberUp = newList[i];
                       console.log(NumberUp);
                     } else {
+                      console.log("Oh le tricheur");
                       client.channels.cache
                         .get(authId.Salon.Jet)
                         .send(
@@ -289,6 +290,7 @@ module.exports = {
                       NumberUp = newList[i];
                       console.log(NumberUp);
                     } else if (testSiTricheur == 1) {
+                      console.log("Oh le tricheur");
                       client.channels.cache
                         .get(authId.Salon.Jet)
                         .send(
@@ -305,6 +307,7 @@ module.exports = {
                   ) {
                     var testSiTricheur = 0;
                     var NumberUp = guildPersoBag.Competence[i];
+                    console.log("Il n'a aucun objet");
                     console.log(NumberUp);
                   }
                 }
