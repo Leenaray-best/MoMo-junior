@@ -141,6 +141,7 @@ module.exports = {
           for (salonName in listSalonRp) {
             if (interaction.member.roles.cache.has(listSalonRp[salonName])) {
               console.log(guildBonus);
+              console.log("Je suis feu");
               tailleTableau = guildBonus.FeuBonus1.length;
               for (i = 0; i < tailleTableau; i++) {
                 if (catMeteo[salonName] == guildBonus.FeuBonus1[i]) {
