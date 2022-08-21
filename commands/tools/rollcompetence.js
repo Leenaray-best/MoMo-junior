@@ -11,7 +11,7 @@ const ficheMeteotest = require("../../salonMeteo");
 const ficheBag = require("../../fichePersoSac");
 const ficheObjetRP = require("../../ficheObjet");
 const wait = require("node:timers/promises").setTimeout;
-const { add } = require("mathjs");
+const math = require("mathjs");
 function Rand(valeur) {
   return Math.floor(Math.random() * valeur + 1);
 }
