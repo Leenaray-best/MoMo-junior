@@ -45,6 +45,11 @@ module.exports = {
             .setName("objet")
             .setDescription("Object to use")
             .setRequired(true)
+            .addChoices(
+              { name: "Dague", value: "dague" },
+              { name: "Armure", value: "armure" },
+              { name: "Aucun", value: "aucun" }
+            )
         )
     )
     .addSubcommand((subcommand) =>
