@@ -126,45 +126,148 @@ module.exports = {
             if (
               interaction.options.getString("competence") === listeCompetence[i]
             ) {
-              for (j = 0; j < listeObject.length; j++) {
-                if (interaction.options.getString("objet") === listeObject[j]) {
-                  console.log(`Il utilise une ${listeObject[j]}`);
-                  console.log(guildPersoBag.Competence);
-                  console.log(listeFicheObjet[j]);
-                  var newList = math.add(
-                    guildPersoBag.Competence,
-                    listeFicheObjet[j]
-                  );
-                  console.log(newList);
-                  NumberUp = newList[i];
-                  console.log(NumberUp);
-                } else if (interaction.options.getString("objet") === "aucun") {
-                  NumberUp = guildPersoBag.Competence[i];
-                  console.log(NumberUp);
+              if (
+                (interaction.member.roles.cache.has(authId.RoleRP.SansForce) &&
+                  i == 0) ||
+                (interaction.member.roles.cache.has(
+                  authId.RoleRP.SansCharisme
+                ) &&
+                  i == 2) ||
+                (interaction.member.roles.cache.has(authId.RoleRP.Putois) &&
+                  i == 7)
+              ) {
+                if (
+                  interaction.options.getString("objet") === "dague" ||
+                  interaction.options.getString("objet") === "armure" ||
+                  interaction.options.getString("objet") === "aucun"
+                ) {
+                  client.channels.cache
+                    .get(authiD.Salon.Jet)
+                    .send(
+                      "<@" +
+                        message.author.id +
+                        ">Ton jet echoue. Il serait temps d'aller arranger cette situation !" +
+                        `\rTu peux repartir dans ${client.channels.cache.get(
+                          channelMessage
+                        )} pour trouver une solution`
+                    );
+                }
+              } else {
+                for (j = 0; j < listeObject.length; j++) {
+                  if (
+                    interaction.options.getString("objet") === listeObject[j]
+                  ) {
+                    console.log(`Il utilise une ${listeObject[j]}`);
+                    console.log(guildPersoBag.Competence);
+                    console.log(listeFicheObjet[j]);
+                    var newList = math.add(
+                      guildPersoBag.Competence,
+                      listeFicheObjet[j]
+                    );
+                    console.log(newList);
+                    NumberUp = newList[i];
+                    console.log(NumberUp);
+                  } else if (
+                    interaction.options.getString("objet") === "aucun"
+                  ) {
+                    NumberUp = guildPersoBag.Competence[i];
+                    console.log(NumberUp);
+                  }
+                }
+                if (valRoll <= NumberUp) {
+                  client.channels.cache
+                    .get(authId.Salon.Jet)
+                    .send(
+                      "<@" +
+                        user.id +
+                        `> Ton roll de ${listeCompetence[i]} est de ` +
+                        valRoll +
+                        ", c'est une reussite" +
+                        `\rTu peux repartir dans ${client.channels.cache.get(
+                          channelMessage
+                        )}`
+                    );
+                } else {
+                  client.channels.cache
+                    .get(authId.Salon.Jet)
+                    .send(
+                      "<@" +
+                        user.id +
+                        `> Ton roll de ${listeCompetence[i]} est de ` +
+                        valRoll +
+                        ", c'est un echec" +
+                        `\rTu peux repartir dans ${client.channels.cache.get(
+                          channelMessage
+                        )}`
+                    );
                 }
               }
-              if (valRoll <= NumberUp) {
-                client.channels.cache
-                  .get(authId.Salon.Jet)
-                  .send(
-                    "<@" +
-                      user.id +
-                      "> Ton roll est de " +
-                      valRoll +
-                      ", c'est une reussite" +
-                      `\rTu peux repartir dans ${client.channels.cache.get(
-                        channelMessage
-                      )}`
-                  );
+            }
+          }
+        } else if (interaction.options.getSubcommand() === "avecopposition") {
+          valRoll = Rand(20);
+          console.log(valRoll);
+          for (i = 0; i < listeCompetence.length; i++) {
+            if (
+              interaction.options.getString("competence") === listeCompetence[i]
+            ) {
+              if (
+                (interaction.member.roles.cache.has(authId.RoleRP.SansForce) &&
+                  i == 0) ||
+                (interaction.member.roles.cache.has(
+                  authId.RoleRP.SansCharisme
+                ) &&
+                  i == 2) ||
+                (interaction.member.roles.cache.has(authId.RoleRP.Putois) &&
+                  i == 7)
+              ) {
+                if (
+                  interaction.options.getString("objet") === "dague" ||
+                  interaction.options.getString("objet") === "armure" ||
+                  interaction.options.getString("objet") === "aucun"
+                ) {
+                  client.channels.cache
+                    .get(authiD.Salon.Jet)
+                    .send(
+                      "<@" +
+                        message.author.id +
+                        ">Ton jet echoue. Il serait temps d'aller arranger cette situation !" +
+                        `\rTu peux repartir dans ${client.channels.cache.get(
+                          channelMessage
+                        )} pour trouver une solution`
+                    );
+                }
               } else {
+                for (j = 0; j < listeObject.length; j++) {
+                  if (
+                    interaction.options.getString("objet") === listeObject[j]
+                  ) {
+                    console.log(`Il utilise une ${listeObject[j]}`);
+                    console.log(guildPersoBag.Competence);
+                    console.log(listeFicheObjet[j]);
+                    var newList = math.add(
+                      guildPersoBag.Competence,
+                      listeFicheObjet[j]
+                    );
+                    console.log(newList);
+                    NumberUp = newList[i];
+                    console.log(NumberUp);
+                  } else if (
+                    interaction.options.getString("objet") === "aucun"
+                  ) {
+                    NumberUp = guildPersoBag.Competence[i];
+                    console.log(NumberUp);
+                  }
+                }
+                var valTotal = valRoll + NumberUp;
                 client.channels.cache
                   .get(authId.Salon.Jet)
                   .send(
                     "<@" +
                       user.id +
-                      "> Ton roll est de " +
-                      valRoll +
-                      ", c'est un echec" +
+                      `> Ton roll de ${listeCompetence[i]} est de ` +
+                      valTotal +
+                      ", si ton roll est plus haut que celui de ton adversaire tu l'emporte !" +
                       `\rTu peux repartir dans ${client.channels.cache.get(
                         channelMessage
                       )}`
@@ -173,7 +276,6 @@ module.exports = {
             }
           }
         }
-
         const ChannelNameIdJet = client.channels.cache.get(authId.Salon.Jet);
         newMessage = `Va dans ${ChannelNameIdJet} pour voir ton resultat`;
         await interaction.editReply({
