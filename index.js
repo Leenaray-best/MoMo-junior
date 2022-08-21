@@ -634,11 +634,9 @@ function createBonusMeteoRoll() {
 
 function createFicheBagPerso() {
   const fichepersobags = new ficheSacPerso({
-    _id: "00004",
-    EauBonus1: ["🌧️", "🌨️"],
-    EauBonus2: ["🌫️"],
-    EauBonusNuit: ["🌕", "🌔", "🌖", "🌑", "🌒", "🌘"],
-    FeuBonus1: ["☀️"],
+    _id: message.author.id,
+    Competence: [0, 0, 0, 0, 0, 0, 0, 0],
+    Sac: [String],
     time: Date(),
   });
   fichepersobags
