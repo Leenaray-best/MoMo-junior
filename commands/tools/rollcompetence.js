@@ -147,7 +147,7 @@ module.exports = {
                       "<@" +
                         user.id +
                         "> Ton roll est de " +
-                        ValRoll +
+                        valRoll +
                         ", c'est une reussite" +
                         +`\rTu peux repartir dans ${client.channels.cache.get(
                           channelMessage
@@ -160,7 +160,7 @@ module.exports = {
                       "<@" +
                         user.id +
                         "> Ton roll est de " +
-                        ValRoll +
+                        valRoll +
                         ", c'est un echec" +
                         +`\rTu peux repartir dans ${client.channels.cache.get(
                           channelMessage
