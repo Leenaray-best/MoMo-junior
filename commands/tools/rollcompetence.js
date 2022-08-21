@@ -129,7 +129,8 @@ module.exports = {
               for (j = 0; j < listeObject.length; j++) {
                 if (interaction.options.getString("objet") === listeObject[j]) {
                   var newList = Math.add(
-                    guildPersoBag.Competence + listeFicheObjet
+                    guildPersoBag.Competence,
+                    listeFicheObjet
                   );
                   console.log(guildPersoBag.Competence);
                   console.log(newList);
