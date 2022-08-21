@@ -162,30 +162,33 @@ module.exports = {
                         interaction.options.getString("objet") ==
                         guildPersoBag.Sac[k]
                       ) {
-                        console.log(`Il utilise une ${listeObject[j]}`);
-                        console.log(guildPersoBag.Competence);
-                        console.log(listeFicheObjet[j]);
-                        var newList = math.add(
-                          guildPersoBag.Competence,
-                          listeFicheObjet[j]
-                        );
-                        console.log(newList);
-                        NumberUp = newList[i];
-                        console.log(NumberUp);
                         var testSiTricheur = 0;
                       } else {
                         var testSiTricheur = 1;
-                        client.channels.cache
-                          .get(authId.Salon.Jet)
-                          .send(
-                            "<@" +
-                              user.id +
-                              `> Tu n'as aucun objet à jouer, il te faut choisir l'option : Aucun` +
-                              `\rTu peux repartir dans ${client.channels.cache.get(
-                                channelMessage
-                              )} faire le bon jet`
-                          );
                       }
+                    }
+                    if (testSiTricheur == 0) {
+                      console.log(`Il utilise une ${listeObject[j]}`);
+                      console.log(guildPersoBag.Competence);
+                      console.log(listeFicheObjet[j]);
+                      var newList = math.add(
+                        guildPersoBag.Competence,
+                        listeFicheObjet[j]
+                      );
+                      console.log(newList);
+                      NumberUp = newList[i];
+                      console.log(NumberUp);
+                    } else {
+                      client.channels.cache
+                        .get(authId.Salon.Jet)
+                        .send(
+                          "<@" +
+                            user.id +
+                            `> Tu n'as aucun objet à jouer, il te faut choisir l'option : Aucun` +
+                            `\rTu peux repartir dans ${client.channels.cache.get(
+                              channelMessage
+                            )} faire le bon jet`
+                        );
                     }
                   } else if (
                     interaction.options.getString("objet") === "aucun"
@@ -267,31 +270,33 @@ module.exports = {
                         interaction.options.getString("objet") ===
                         guildPersoBag.Sac[k]
                       ) {
-                        console.log(`Il utilise une ${listeObject[j]}`);
-                        console.log(guildPersoBag.Competence);
-                        console.log(listeFicheObjet[j]);
-                        var newList = math.add(
-                          guildPersoBag.Competence,
-                          listeFicheObjet[j]
-                        );
-                        console.log(newList);
-                        NumberUp = newList[i];
-                        console.log(NumberUp);
                         var testSiTricheur = 0;
-                        break;
                       } else {
                         var testSiTricheur = 1;
-                        client.channels.cache
-                          .get(authId.Salon.Jet)
-                          .send(
-                            "<@" +
-                              user.id +
-                              `> Tu n'as aucun objet à jouer, il te faut choisir l'option : Aucun` +
-                              `\rTu peux repartir dans ${client.channels.cache.get(
-                                channelMessage
-                              )} faire le bon jet`
-                          );
                       }
+                    }
+                    if (testSiTricheur == 0) {
+                      console.log(`Il utilise une ${listeObject[j]}`);
+                      console.log(guildPersoBag.Competence);
+                      console.log(listeFicheObjet[j]);
+                      var newList = math.add(
+                        guildPersoBag.Competence,
+                        listeFicheObjet[j]
+                      );
+                      console.log(newList);
+                      NumberUp = newList[i];
+                      console.log(NumberUp);
+                    } else if (testSiTricheur == 1) {
+                      client.channels.cache
+                        .get(authId.Salon.Jet)
+                        .send(
+                          "<@" +
+                            user.id +
+                            `> Tu n'as aucun objet à jouer, il te faut choisir l'option : Aucun` +
+                            `\rTu peux repartir dans ${client.channels.cache.get(
+                              channelMessage
+                            )} faire le bon jet`
+                        );
                     }
                   } else if (
                     interaction.options.getString("objet") === "aucun"
