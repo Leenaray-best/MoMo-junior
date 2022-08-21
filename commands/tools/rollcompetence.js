@@ -264,7 +264,7 @@ module.exports = {
                   ) {
                     for (k = 0; k < guildPersoBag.Sac.length; k++) {
                       if (
-                        interaction.options.getString("objet") ==
+                        interaction.options.getString("objet") ===
                         guildPersoBag.Sac[k]
                       ) {
                         console.log(`Il utilise une ${listeObject[j]}`);
@@ -278,6 +278,7 @@ module.exports = {
                         NumberUp = newList[i];
                         console.log(NumberUp);
                         var testSiTricheur = 0;
+                        break;
                       } else {
                         var testSiTricheur = 1;
                         client.channels.cache
