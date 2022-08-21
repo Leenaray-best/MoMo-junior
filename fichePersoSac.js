@@ -6,4 +6,4 @@ const bagPerso = mongoose.Schema({
   time: Date,
 });
 
-module.exports = mongoose.model("fichepersobag", bagPerso);
+module.exports = mongoose.model("fichepersobags", bagPerso);
