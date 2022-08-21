@@ -164,12 +164,10 @@ module.exports = {
                         interaction.options.getString("objet") ===
                         guildPersoBag.Sac[k]
                       ) {
-                        var testSiTricheur = 0;
-                      } else {
-                        var testSiTricheur = 1;
+                        var testSiTricheur = true;
                       }
                     }
-                    if (testSiTricheur == 0) {
+                    if (testSiTricheur == true) {
                       console.log(`Il utilise une ${listeObject[j]}`);
                       console.log(guildPersoBag.Competence);
                       console.log(listeFicheObjet[j]);
@@ -197,12 +195,12 @@ module.exports = {
                     interaction.options.getString("objet") === "aucun"
                   ) {
                     var NumberUp = guildPersoBag.Competence[i];
-                    var testSiTricheur = 0;
+                    var testSiTricheur = true;
                     console.log("Il n'a aucun objet");
                     console.log(NumberUp);
                   }
                 }
-                if (valRoll <= NumberUp && testSiTricheur == 0) {
+                if (valRoll <= NumberUp && testSiTricheur == true) {
                   client.channels.cache
                     .get(authId.Salon.Jet)
                     .send(
@@ -215,7 +213,7 @@ module.exports = {
                           channelMessage
                         )}`
                     );
-                } else if (valRoll > NumberUp && testSiTricheur == 0) {
+                } else if (valRoll > NumberUp && testSiTricheur == true) {
                   client.channels.cache
                     .get(authId.Salon.Jet)
                     .send(
@@ -229,6 +227,7 @@ module.exports = {
                         )}`
                     );
                 }
+                var testSiTricheur = false;
               }
             }
           }
@@ -275,12 +274,10 @@ module.exports = {
                         interaction.options.getString("objet") ===
                         guildPersoBag.Sac[k]
                       ) {
-                        var testSiTricheur = 0;
-                      } else {
-                        var testSiTricheur = 1;
+                        var testSiTricheur = true;
                       }
                     }
-                    if (testSiTricheur == 0) {
+                    if (testSiTricheur == true) {
                       console.log(`Il utilise une ${listeObject[j]}`);
                       console.log(guildPersoBag.Competence);
                       console.log(listeFicheObjet[j]);
@@ -291,7 +288,7 @@ module.exports = {
                       console.log(newList);
                       NumberUp = newList[i];
                       console.log(NumberUp);
-                    } else if (testSiTricheur == 1) {
+                    } else {
                       console.log("Oh le tricheur");
                       client.channels.cache
                         .get(authId.Salon.Jet)
@@ -307,13 +304,13 @@ module.exports = {
                   } else if (
                     interaction.options.getString("objet") === "aucun"
                   ) {
-                    var testSiTricheur = 0;
+                    var testSiTricheur = true;
                     var NumberUp = guildPersoBag.Competence[i];
                     console.log("Il n'a aucun objet");
                     console.log(NumberUp);
                   }
                 }
-                if (testSiTricheur == 0) {
+                if (testSiTricheur == true) {
                   var valTotal = valRoll + NumberUp;
                   client.channels.cache
                     .get(authId.Salon.Jet)
@@ -328,6 +325,7 @@ module.exports = {
                         )}`
                     );
                 }
+                var testSiTricheur = false;
               }
             }
           }
