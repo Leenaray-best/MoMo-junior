@@ -60,6 +60,7 @@ const Weather = require("./meteo");
 const salonQuete = require("./salonQuete.js");
 const Bonus = require("./salonBonus.js");
 const ListeMetier = require("./job.js");
+const ListSalonBonusMeteo = require("./BonusRollMeteo.js");
 const prefixMaitrise = "roll-maitrise";
 client.handleEvents();
 client.handleCommands();
@@ -73,6 +74,7 @@ client
     createSalonWeather();
     createSalonQuest();
     createSalonBonus();
+    createBonusMeteoRoll();
   })
   .catch((err) => console.log(err));
 var auth = require("./auth.json");
@@ -607,6 +609,21 @@ function createFichePerso(message, Niveau) {
   });
 
   Identity.save()
+    .then((result) => console.log(result))
+    .catch((err) => console.log(err));
+}
+
+function createBonusMeteoRoll() {
+  const meteoSalonBonus = new salonBonusMeteo({
+    _id: "00004",
+    EauBonus1: ["🌧️", "🌨️"],
+    EauBonus2: ["🌫️"],
+    EauBonusNuit: ["🌕", "🌔", "🌖", "🌑", "🌒", "🌘"],
+    FeuBonus1: ["☀️"],
+    time: Date(),
+  });
+  meteoSalonBonus
+    .save()
     .then((result) => console.log(result))
     .catch((err) => console.log(err));
 }

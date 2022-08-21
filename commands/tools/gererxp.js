@@ -8,7 +8,7 @@ const fichePerso = require("../../FichePerso");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("gererxp")
-    .setDescription("Info pour le joueur")
+    .setDescription("Gérer l'XP du joueur par l'admin")
     .addSubcommand((subcommand) =>
       subcommand
         .setName("remove")
