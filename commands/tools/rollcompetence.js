@@ -145,7 +145,7 @@ module.exports = {
                     .get(authId.Salon.Jet)
                     .send(
                       "<@" +
-                        message.author.id +
+                        user.id +
                         ">Ton jet echoue. Il serait temps d'aller arranger cette situation !" +
                         `\rTu peux repartir dans ${client.channels.cache.get(
                           channelMessage
@@ -157,16 +157,33 @@ module.exports = {
                   if (
                     interaction.options.getString("objet") === listeObject[j]
                   ) {
-                    console.log(`Il utilise une ${listeObject[j]}`);
-                    console.log(guildPersoBag.Competence);
-                    console.log(listeFicheObjet[j]);
-                    var newList = math.add(
-                      guildPersoBag.Competence,
-                      listeFicheObjet[j]
-                    );
-                    console.log(newList);
-                    NumberUp = newList[i];
-                    console.log(NumberUp);
+                    for (k = 0; k < guildPersoBag.Sac.length; k++) {
+                      if (listeObject[j] == guildPersoBag.Sac[k]) {
+                        console.log(`Il utilise une ${listeObject[j]}`);
+                        console.log(guildPersoBag.Competence);
+                        console.log(listeFicheObjet[j]);
+                        var newList = math.add(
+                          guildPersoBag.Competence,
+                          listeFicheObjet[j]
+                        );
+                        console.log(newList);
+                        NumberUp = newList[i];
+                        console.log(NumberUp);
+                        var testSiTricheur = 0;
+                      } else {
+                        var testSiTricheur = 1;
+                        client.channels.cache
+                          .get(authId.Salon.Jet)
+                          .send(
+                            "<@" +
+                              user.id +
+                              `> Tu n'as aucun objet à jouer, il te faut choisir l'option : Aucun` +
+                              `\rTu peux repartir dans ${client.channels.cache.get(
+                                channelMessage
+                              )} faire le bon jet`
+                          );
+                      }
+                    }
                   } else if (
                     interaction.options.getString("objet") === "aucun"
                   ) {
@@ -174,7 +191,7 @@ module.exports = {
                     console.log(NumberUp);
                   }
                 }
-                if (valRoll <= NumberUp) {
+                if (valRoll <= NumberUp && testSiTricheur == 0) {
                   client.channels.cache
                     .get(authId.Salon.Jet)
                     .send(
@@ -187,7 +204,7 @@ module.exports = {
                           channelMessage
                         )}`
                     );
-                } else {
+                } else if (valRoll > NumberUp && testSiTricheur == 0) {
                   client.channels.cache
                     .get(authId.Salon.Jet)
                     .send(
@@ -230,7 +247,7 @@ module.exports = {
                     .get(authId.Salon.Jet)
                     .send(
                       "<@" +
-                        message.author.id +
+                        user.id +
                         ">Ton jet echoue. Il serait temps d'aller arranger cette situation !" +
                         `\rTu peux repartir dans ${client.channels.cache.get(
                           channelMessage
@@ -242,16 +259,33 @@ module.exports = {
                   if (
                     interaction.options.getString("objet") === listeObject[j]
                   ) {
-                    console.log(`Il utilise une ${listeObject[j]}`);
-                    console.log(guildPersoBag.Competence);
-                    console.log(listeFicheObjet[j]);
-                    var newList = math.add(
-                      guildPersoBag.Competence,
-                      listeFicheObjet[j]
-                    );
-                    console.log(newList);
-                    NumberUp = newList[i];
-                    console.log(NumberUp);
+                    for (k = 0; k < guildPersoBag.Sac.length; k++) {
+                      if (listeObject[j] == guildPersoBag.Sac[k]) {
+                        console.log(`Il utilise une ${listeObject[j]}`);
+                        console.log(guildPersoBag.Competence);
+                        console.log(listeFicheObjet[j]);
+                        var newList = math.add(
+                          guildPersoBag.Competence,
+                          listeFicheObjet[j]
+                        );
+                        console.log(newList);
+                        NumberUp = newList[i];
+                        console.log(NumberUp);
+                        var testSiTricheur = 0;
+                      } else {
+                        var testSiTricheur = 1;
+                        client.channels.cache
+                          .get(authId.Salon.Jet)
+                          .send(
+                            "<@" +
+                              user.id +
+                              `> Tu n'as aucun objet à jouer, il te faut choisir l'option : Aucun` +
+                              `\rTu peux repartir dans ${client.channels.cache.get(
+                                channelMessage
+                              )} faire le bon jet`
+                          );
+                      }
+                    }
                   } else if (
                     interaction.options.getString("objet") === "aucun"
                   ) {
@@ -259,19 +293,21 @@ module.exports = {
                     console.log(NumberUp);
                   }
                 }
-                var valTotal = valRoll + NumberUp;
-                client.channels.cache
-                  .get(authId.Salon.Jet)
-                  .send(
-                    "<@" +
-                      user.id +
-                      `> Ton roll de ${listeCompetence[i]} est de ` +
-                      valTotal +
-                      ", si ton roll est plus haut que celui de ton adversaire tu l'emporte !" +
-                      `\rTu peux repartir dans ${client.channels.cache.get(
-                        channelMessage
-                      )}`
-                  );
+                if (testSiTricheur == 0) {
+                  var valTotal = valRoll + NumberUp;
+                  client.channels.cache
+                    .get(authId.Salon.Jet)
+                    .send(
+                      "<@" +
+                        user.id +
+                        `> Ton roll de ${listeCompetence[i]} est de ` +
+                        valTotal +
+                        ", si ton roll est plus haut que celui de ton adversaire tu l'emporte !" +
+                        `\rTu peux repartir dans ${client.channels.cache.get(
+                          channelMessage
+                        )}`
+                    );
+                }
               }
             }
           }
