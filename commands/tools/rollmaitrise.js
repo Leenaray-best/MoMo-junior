@@ -7,6 +7,7 @@ const ficheBonus = require("../../BonusRollMeteo");
 const fichePerso = require("../../FichePerso");
 const ficheMeteo = require("../../meteo");
 const ficheMeteotest = require("../../salonMeteo");
+const wait = require("node:timers/promises").setTimeout;
 
 function Rand(valeur) {
   return Math.floor(Math.random() * valeur + 1);
@@ -296,6 +297,7 @@ module.exports = {
         await interaction.editReply({
           content: newMessage,
         });
+        await wait(5000);
         await interaction.deleteReply();
       }
     }
