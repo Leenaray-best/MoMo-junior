@@ -633,7 +633,16 @@ function createBonusMeteoRoll() {
 function createBagPerso() {
   const fichepersobag = new bagPerso({
     _id: "message.author.id",
-    Competence: [Number],
+    Competence: [
+      Number,
+      Number,
+      Number,
+      Number,
+      Number,
+      Number,
+      Number,
+      Number,
+    ],
     Sac: [String],
     time: Date(),
   });
