@@ -60,7 +60,7 @@ const Weather = require("./meteo");
 const salonQuete = require("./salonQuete.js");
 const Bonus = require("./salonBonus.js");
 const ListeMetier = require("./job.js");
-const ListSalonBonusMeteo = require("./BonusRollMeteo.js");
+const salonBonusMeteo = require("./BonusRollMeteo.js");
 const prefixMaitrise = "roll-maitrise";
 client.handleEvents();
 client.handleCommands();
