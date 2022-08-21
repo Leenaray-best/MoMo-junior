@@ -83,7 +83,7 @@ module.exports = {
           guildMeteo.PoleSud,
         ];
         // For Water Bender Bonus meteo involved
-        if (interaction.member.roles.cache.has(RoleRp.Eau)) {
+        if (interaction.member.roles.cache.has(authId.RoleRp.Eau)) {
           var BonusSup = Number(0);
           var BonusCompetence = guildPerso.Competence.Survie;
           for (salonName in listSalonRp) {
@@ -128,7 +128,7 @@ module.exports = {
               var BonusSup = Number(-1);
             }
           }
-        } else if (interaction.member.roles.cache.has(RoleRp.Feu)) {
+        } else if (interaction.member.roles.cache.has(authId.RoleRp.Feu)) {
           var BonusSup = Number(0);
           var BonusCompetence = guildPerso.Competence.Intelligence;
           while (BonusSup == Number(0)) {
@@ -151,13 +151,13 @@ module.exports = {
               var BonusSup = Number(-1);
             }
           }
-        } else if (interaction.member.roles.cache.has(RoleRp.Air)) {
+        } else if (interaction.member.roles.cache.has(authId.RoleRp.Air)) {
           var BonusSup = Number(0);
           var BonusCompetence = guildPerso.Competence.Adresse;
-          if (interaction.member.roles.cache.has(RoleRp.Chauve)) {
+          if (interaction.member.roles.cache.has(authId.RoleRp.Chauve)) {
             var BonusSup = Number(1);
           }
-        } else if (interaction.member.roles.cache.has(RoleRp.Terre)) {
+        } else if (interaction.member.roles.cache.has(authId.RoleRp.Terre)) {
           var BonusSup = Number(0);
           var BonusCompetence = guildPerso.Competence.Constitution;
           for (i = 0; i < guildBonus.Terre.length; i++) {
@@ -166,12 +166,11 @@ module.exports = {
           }
         }
         if (interaction.options.getString("categorie") == "sansopposition") {
-          const ChannelNameId = client.channels.cache.get(authId.Salon.Jet);
           var ValRoll =
             valRandom + Number(BonusNiveauMaitrise) + Number(BonusSup);
           if (ValRoll <= 1) {
             client.channels.cache
-              .get(auth.Salon.Jet)
+              .get(authId.Salon.Jet)
               .send(
                 "<@" +
                   user.id +
@@ -187,10 +186,10 @@ module.exports = {
               );
           } else if (ValRoll <= 12) {
             client.channels.cache
-              .get(auth.Salon.Jet)
+              .get(authId.Salon.Jet)
               .send(
                 "<@" +
-                  message.author.id +
+                  user.id +
                   "> Ton attaque est de " +
                   valRandom +
                   " (roll) + " +
@@ -203,10 +202,10 @@ module.exports = {
               );
           } else if (ValRoll <= 19) {
             client.channels.cache
-              .get(auth.Salon.Jet)
+              .get(authId.Salon.Jet)
               .send(
                 "<@" +
-                  message.author.id +
+                  user.id +
                   "> Ton attaque est de " +
                   valRandom +
                   " (roll) + " +
@@ -219,10 +218,10 @@ module.exports = {
               );
           } else if (ValRoll <= 24) {
             client.channels.cache
-              .get(auth.Salon.Jet)
+              .get(authId.Salon.Jet)
               .send(
                 "<@" +
-                  message.author.id +
+                  user.id +
                   "> Ton attaque est de " +
                   valRandom +
                   " (roll) + " +
@@ -235,10 +234,10 @@ module.exports = {
               );
           } else {
             client.channels.cache
-              .get(auth.Salon.Jet)
+              .get(authId.Salon.Jet)
               .send(
                 "<@" +
-                  message.author.id +
+                  user.id +
                   "> Ton attaque est de " +
                   valRandom +
                   " (roll) + " +
@@ -264,10 +263,10 @@ module.exports = {
             Number(BonusSup);
           if (ValRoll < 15) {
             client.channels.cache
-              .get(auth.Salon.Jet)
+              .get(authId.Salon.Jet)
               .send(
                 "<@" +
-                  message.author.id +
+                  user.id +
                   "> Ton attaque est de " +
                   valRandom +
                   " (roll) + " +
@@ -278,10 +277,10 @@ module.exports = {
               );
           } else {
             client.channels.cache
-              .get(auth.Salon.Jet)
+              .get(authId.Salon.Jet)
               .send(
                 "<@" +
-                  message.author.id +
+                  user.id +
                   "> Ton attaque est de " +
                   valRandom +
                   " (roll) + " +
