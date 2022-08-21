@@ -338,6 +338,11 @@ module.exports = {
         await wait(5000);
         await interaction.deleteReply();
       }
+    } else {
+      newMessage = `Tu n'as pas les autorisations pour faire ça`;
+      await interaction.editReply({
+        content: newMessage,
+      });
     }
   },
 };

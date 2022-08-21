@@ -357,6 +357,11 @@ module.exports = {
           await interaction.deleteReply();
         }
       }
+    } else {
+      newMessage = `Tu n'as pas les autorisations pour faire ça`;
+      await interaction.editReply({
+        content: newMessage,
+      });
     }
   },
 };
