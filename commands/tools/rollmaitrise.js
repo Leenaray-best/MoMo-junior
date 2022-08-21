@@ -140,6 +140,7 @@ module.exports = {
           while (BonusSup == Number(0)) {
             for (salonName in listSalonRp) {
               if (interaction.member.roles.cache.has(listSalonRp[salonName])) {
+                console.log(guildBonus);
                 tailleTableau = guildBonus.FeuBonus1.length;
                 for (i = 0; i < tailleTableau; i++) {
                   if (catMeteo[salonName] == guildBonus.EauBonus1[i]) {
