@@ -99,6 +99,7 @@ module.exports = {
           let ficheSac = await ficheBagPerso.findOne({
             _id: IdPerso,
           });
+          console.log(ficheSac);
           console.log(fiche.Identite.Nom);
           const listeQualite = fiche.Qualite;
           const listeFaiblesse = fiche.Faiblesse;
