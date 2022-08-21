@@ -128,17 +128,19 @@ module.exports = {
             ) {
               for (j = 0; j < listeObject.length; j++) {
                 if (interaction.options.getString("objet") === listeObject[j]) {
+                  console.log(`Il utilise une ${listeObject[j]}`);
                   console.log(guildPersoBag.Competence);
                   console.log(listeFicheObjet[j]);
                   var newList = math.add(
                     guildPersoBag.Competence,
                     listeFicheObjet[j]
                   );
-                  console.log(guildPersoBag.Competence);
                   console.log(newList);
                   NumberUp = newList[i];
+                  console.log(NumberUp);
                 } else {
                   NumberUp = guildPersoBag.Competence[i];
+                  console.log(NumberUp);
                 }
                 if (valRoll <= NumberUp) {
                   client.channels.cache
