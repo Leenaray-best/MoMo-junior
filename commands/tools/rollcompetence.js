@@ -11,7 +11,7 @@ const ficheMeteotest = require("../../salonMeteo");
 const ficheBag = require("../../fichePersoSac");
 const ficheObjetRP = require("../../ficheObjet");
 const wait = require("node:timers/promises").setTimeout;
-
+const { add } = require("mathjs");
 function Rand(valeur) {
   return Math.floor(Math.random() * valeur + 1);
 }
@@ -128,7 +128,7 @@ module.exports = {
             ) {
               for (j = 0; j < listeObject.length; j++) {
                 if (interaction.options.getString("objet") === listeObject[j]) {
-                  var newList = Math.add(
+                  var newList = math.add(
                     guildPersoBag.Competence,
                     listeFicheObjet
                   );
