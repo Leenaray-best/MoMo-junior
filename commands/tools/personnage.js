@@ -104,9 +104,9 @@ module.exports = {
           const listeQualite = fiche.Qualite;
           const listeFaiblesse = fiche.Faiblesse;
           console.log(listeQualite[0], listeFaiblesse[0]);
-          
+
           const ItemBag = ficheSac.Sac;
-            
+
           const embed = new EmbedBuilder()
             .setTitle(`Boutique de niveaux de maitrise`)
             .setColor(0x18e1ee)
@@ -174,9 +174,7 @@ module.exports = {
               name: `Sac`,
               value: `${ItemBag}`,
               inline: true,
-            })
-          
-          }
+            });
 
           await interaction.editReply({
             embeds: [embed],
