@@ -193,7 +193,9 @@ module.exports = {
                   } else if (
                     interaction.options.getString("objet") === "aucun"
                   ) {
-                    NumberUp = guildPersoBag.Competence[i];
+                    var NumberUp = guildPersoBag.Competence[i];
+                    var testSiTricheur = 0;
+                    console.log("Il n'a aucun objet");
                     console.log(NumberUp);
                   }
                 }
@@ -301,7 +303,8 @@ module.exports = {
                   } else if (
                     interaction.options.getString("objet") === "aucun"
                   ) {
-                    NumberUp = guildPersoBag.Competence[i];
+                    var testSiTricheur = 0;
+                    var NumberUp = guildPersoBag.Competence[i];
                     console.log(NumberUp);
                   }
                 }
