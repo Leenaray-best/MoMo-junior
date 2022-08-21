@@ -158,9 +158,10 @@ module.exports = {
                   if (
                     interaction.options.getString("objet") === listeObject[j]
                   ) {
+                    console.log(interaction.options.getString("objet"));
                     for (k = 0; k < guildPersoBag.Sac.length; k++) {
                       if (
-                        interaction.options.getString("objet") ==
+                        interaction.options.getString("objet") ===
                         guildPersoBag.Sac[k]
                       ) {
                         var testSiTricheur = 0;
