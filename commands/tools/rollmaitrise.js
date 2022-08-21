@@ -146,10 +146,10 @@ module.exports = {
               for (i = 0; i < tailleTableau; i++) {
                 if (catMeteo[salonName] == guildBonus.FeuBonus1[i]) {
                   var BonusSup = Number(1);
-                } else if (catMeteo[salonName] == guildBonus.EauBonus1[0]) {
+                } else if (catMeteo[salonName] == guildBonus.EauBonus1[1]) {
                   var BonusSup = Number(-2);
                 } else if (
-                  catMeteo[salonName] == guildBonus.EauBonus1[1] ||
+                  catMeteo[salonName] == guildBonus.EauBonus1[0] ||
                   catMeteo[salonName] == guildBonus.EauBonus2[0]
                 ) {
                   var BonusSup = Number(-1);
