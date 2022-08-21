@@ -104,6 +104,7 @@ module.exports = {
         let guildPersoBag = await ficheBag.findOne({
           _id: user.id,
         });
+        console.log(guildPersoBag);
         let guildObjet = await ficheObjetRP.findOne({
           _id: authId.idDatabase.FicheObject,
         });
