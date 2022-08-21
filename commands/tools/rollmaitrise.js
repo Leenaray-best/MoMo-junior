@@ -42,23 +42,30 @@ module.exports = {
     ) {
       if (interaction.commandName === "rollmaitrise") {
         if (interaction.member.roles.cache.has(authId.RoleRP.Escargot)) {
-          client.channels.cache
-            .get(authId.Salon.Jet)
-            .send(
-              "<@" +
-                user.id +
-                "> Ton jet échoue." +
-                `\rTu peux repartir dans ${client.channels.cache.get(
-                  channelMessage
-                )} et trouver comment arranger cette situation`
+          if (
+            interaction.options.getString("categorie") == "sansopposition" ||
+            interaction.options.getString("categorie") == "avecopposition"
+          ) {
+            client.channels.cache
+              .get(authId.Salon.Jet)
+              .send(
+                "<@" +
+                  user.id +
+                  "> Ton jet échoue." +
+                  `\rTu peux repartir dans ${client.channels.cache.get(
+                    channelMessage
+                  )} et trouver comment arranger cette situation`
+              );
+            const ChannelNameIdJet = client.channels.cache.get(
+              authId.Salon.Jet
             );
-          const ChannelNameIdJet = client.channels.cache.get(authId.Salon.Jet);
-          newMessage = `Go dans ${ChannelNameIdJet} pour voir ton resultat`;
-          await interaction.editReply({
-            content: newMessage,
-          });
-          await wait(5000);
-          await interaction.deleteReply();
+            newMessage = `Go dans ${ChannelNameIdJet} pour voir ton resultat`;
+            await interaction.editReply({
+              content: newMessage,
+            });
+            await wait(5000);
+            await interaction.deleteReply();
+          }
         } else {
           let guildBonus = await ficheBonus.findOne({
             _id: authId.idDatabase.MeteoBonusId,
