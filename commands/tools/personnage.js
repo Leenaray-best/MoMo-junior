@@ -105,7 +105,11 @@ module.exports = {
           const listeFaiblesse = fiche.Faiblesse;
           console.log(listeQualite[0], listeFaiblesse[0]);
 
-          const ItemBag = ficheSac.Sac;
+          if (ficheSac.Sac.length == 0) {
+            const ItemBag = "Empty";
+          } else {
+            const ItemBag = ficheSac.Sac;
+          }
 
           const embed = new EmbedBuilder()
             .setTitle(`Boutique de niveaux de maitrise`)
