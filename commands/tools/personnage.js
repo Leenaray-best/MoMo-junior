@@ -103,12 +103,12 @@ module.exports = {
           console.log(fiche.Identite.Nom);
           const listeQualite = fiche.Qualite;
           const listeFaiblesse = fiche.Faiblesse;
-          console.log(listeQualite[0], listeFaiblesse[0]);
+          console.log(ficheSac.Sac.length);
 
           if (ficheSac.Sac.length == 0) {
-            const ItemBag = "Empty";
+            var ItemBag = ["Empty"];
           } else {
-            const ItemBag = ficheSac.Sac;
+            var ItemBag = ficheSac.Sac;
           }
 
           const embed = new EmbedBuilder()
