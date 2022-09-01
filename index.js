@@ -663,14 +663,14 @@ function createFicheObjetRP() {
 function createFicheAnimaux() {
   const FicheAnimaux = new ficheAnimauxRP({
     _id: String,
-    Username: String,
-    Competence: [String],
-    Avantage: [String],
-    Inconvenient: [String],
-    Actions: [String],
-    Histoire: String,
-    PointDeVie: Number,
-    time: Date,
+    Username: "Nom",
+    Competence: [0, 0, 0, 0, 0, 0, 0, 0],
+    Avantage: ["Avantage"],
+    Inconvenient: ["Inconvenient"],
+    Actions: ["Action"],
+    Histoire: "Story",
+    PointDeVie: 0,
+    time: Date(),
   });
   FicheAnimaux.save()
     .then((result) => console.log(result))
