@@ -7,6 +7,7 @@ const ficheMeteotest = require("../../salonMeteo");
 const fichePerso = require("../../FichePerso");
 const ficheBagPerso = require("../../fichePersoSac");
 const ficheAnimauxRP = require("../../ficheAnimaux");
+const FicheQuete = require("../../salonQuete");
 function Rand(valeur) {
   return Math.floor(Math.random() * valeur + 1);
 }
@@ -99,6 +100,10 @@ module.exports = {
       fetchReply: true,
     });
     const channelMessage = interaction.channelId;
+    let guildQuete = await FicheQuete.findOne({
+      _id: authId.idDatabase.questId,
+    });
+    const tailleTableauCat = guildQuete.AllCategorie.length;
     for (i = 0; i < tailleTableauCat; i++) {
       if (
         (user.id == authId.staff.emi ||
