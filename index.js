@@ -662,7 +662,7 @@ function createFicheObjetRP() {
 
 function createFicheAnimaux() {
   const FicheAnimaux = new ficheAnimauxRP({
-    _id: String,
+    _id: "Animaux",
     Username: "Nom",
     Competence: [0, 0, 0, 0, 0, 0, 0, 0],
     Avantage: ["Avantage"],
