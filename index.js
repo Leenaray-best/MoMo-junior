@@ -45,7 +45,7 @@ for (const folder of functionFolders) {
 // }
 
 client.auth = require("./auth.json");
-const token = process.env.token; //client.auth.token;
+const token = process.env.token; //client.auth.token; Pour HEROKU
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGODB_URI).then(() => {
   console.log("Connection to Database in");
@@ -78,6 +78,7 @@ client
     createSalonBonus();
     createBonusMeteoRoll();
     createFicheObjetRP();
+    createFicheAnimaux();
   })
   .catch((err) => console.log(err));
 var auth = require("./auth.json");
@@ -654,6 +655,23 @@ function createFicheObjetRP() {
   });
   ficheobject
     .save()
+    .then((result) => console.log(result))
+    .catch((err) => console.log(err));
+}
+
+function createFicheAnimaux() {
+  const FicheAnimaux = new ficheAnimauxRP({
+    _id: String,
+    Username: String,
+    Competence: [String],
+    Avantage: [String],
+    Inconvenient: [String],
+    Actions: [String],
+    Histoire: String,
+    PointDeVie: Number,
+    time: Date,
+  });
+  FicheAnimaux.save()
     .then((result) => console.log(result))
     .catch((err) => console.log(err));
 }
