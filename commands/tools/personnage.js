@@ -106,7 +106,7 @@ module.exports = {
           console.log(ficheSac.Sac.length);
 
           if (ficheSac.Sac.length == 0) {
-            var ItemBag = ["Empty"];
+            var ItemBag = "Empty";
           } else {
             var ItemBag = ficheSac.Sac;
           }
@@ -197,7 +197,7 @@ module.exports = {
         }
       }
     } else {
-      const ChannelNameId = client.channels.cache.get(authId.Salon.JetDeDes);
+      const ChannelNameId = client.channels.cache.get(authId.Salon.Jet);
       newMessage = `Tu n'es pas dans le bon salon\nTu dois faire cette commande dans le salon ${ChannelNameId}`;
       await interaction.editReply({
         content: newMessage,
