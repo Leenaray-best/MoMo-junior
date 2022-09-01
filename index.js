@@ -79,7 +79,6 @@ client
     createSalonBonus();
     createBonusMeteoRoll();
     createFicheObjetRP();
-    createFicheAnimaux();
   })
   .catch((err) => console.log(err));
 var auth = require("./auth.json");
@@ -225,6 +224,14 @@ var auth = require("./auth.json");
 client.on("messageCreate", async (message) => {
   // console.log("TA MERE LA PUTE");
   petitMessage = message.content.toLowerCase();
+  getBase64FromUrl("https://avatar.fandom.com/fr/wiki/Oogi").then(console.log);
+  getBase64FromUrl("https://avatar.fandom.com/fr/wiki/Naga").then(console.log);
+  getBase64FromUrl("https://avatar.fandom.com/fr/wiki/Pabu").then(console.log);
+  getBase64FromUrl(
+    "https://images.wallpaperscraft.ru/image/single/kot_sova_art_129702_1350x2400.jpg"
+  ).then(console.log);
+  getBase64FromUrl("https://avatar.fandom.com/fr/wiki/Mula").then(console.log);
+
   // Ajouter des salons
   // if (
   //   message.channel.id == auth.Salon.JetDeDes &&
@@ -293,6 +300,19 @@ client.on("messageCreate", async (message) => {
   //   }
   // }
 });
+
+const getBase64FromUrl = async (url) => {
+  const data = await fetch(url);
+  const blob = await data.blob();
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(blob);
+    reader.onloadend = () => {
+      const base64data = reader.result;
+      resolve(base64data);
+    };
+  });
+};
 
 function Rand(valeur) {
   return Math.floor(Math.random() * valeur + 1);
@@ -670,6 +690,7 @@ function createFicheAnimaux() {
     Actions: ["Action"],
     Histoire: "Story",
     PointDeVie: 0,
+    Image: "Name",
     time: Date(),
   });
   FicheAnimaux.save()
