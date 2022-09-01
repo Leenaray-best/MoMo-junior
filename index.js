@@ -1,4 +1,5 @@
 require("dotenv").config();
+
 //var CronJob = require("cron").CronJob;
 
 ///git add .
@@ -63,7 +64,7 @@ const ListeMetier = require("./job.js");
 const salonBonusMeteo = require("./BonusRollMeteo.js");
 const ficheSacPerso = require("./fichePersoSac.js");
 const ficheObjetRP = require("./ficheObjet.js");
-const prefixMaitrise = "roll-maitrise";
+const testimage = "testimage";
 const ficheAnimauxRP = require("./ficheAnimaux.js");
 client.handleEvents();
 client.handleCommands();
@@ -224,13 +225,6 @@ var auth = require("./auth.json");
 client.on("messageCreate", async (message) => {
   // console.log("TA MERE LA PUTE");
   petitMessage = message.content.toLowerCase();
-  getBase64FromUrl("https://avatar.fandom.com/fr/wiki/Oogi").then(console.log);
-  getBase64FromUrl("https://avatar.fandom.com/fr/wiki/Naga").then(console.log);
-  getBase64FromUrl("https://avatar.fandom.com/fr/wiki/Pabu").then(console.log);
-  getBase64FromUrl(
-    "https://images.wallpaperscraft.ru/image/single/kot_sova_art_129702_1350x2400.jpg"
-  ).then(console.log);
-  getBase64FromUrl("https://avatar.fandom.com/fr/wiki/Mula").then(console.log);
 
   // Ajouter des salons
   // if (
