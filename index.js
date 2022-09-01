@@ -64,6 +64,7 @@ const salonBonusMeteo = require("./BonusRollMeteo.js");
 const ficheSacPerso = require("./fichePersoSac.js");
 const ficheObjetRP = require("./ficheObjet.js");
 const prefixMaitrise = "roll-maitrise";
+const ficheAnimauxRP = require("./ficheAnimaux.js");
 client.handleEvents();
 client.handleCommands();
 
