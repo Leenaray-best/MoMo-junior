@@ -6,8 +6,8 @@ const Animaux = mongoose.Schema({
   Competence: [String],
   Avantage: [String],
   Inconvenient: [String],
-  Actions:[String],
-  Histoire:String,
+  Actions: [String],
+  Histoire: String,
   PointDeVie: Number,
   time: Date,
 });
