@@ -9,7 +9,6 @@ const Animaux = mongoose.Schema({
   Actions: [String],
   Histoire: String,
   PointDeVie: Number,
-  Image: String,
   time: Date,
 });
 
