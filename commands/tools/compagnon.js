@@ -112,7 +112,8 @@ module.exports = {
         (user.id == authId.staff.emi ||
           user.id == authId.staff.leena ||
           user.id == authId.staff.meri) &&
-        interaction.channel.parent == guildQuete.AllCategorie[i]
+        interaction.channel.parent == guildQuete.AllCategorie[i] &&
+        interaction.member.roles.cache.has(authId.RoleRP.RolePlay)
       ) {
         valRand = Rand(20);
 
