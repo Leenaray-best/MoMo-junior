@@ -158,8 +158,18 @@ module.exports = {
             "",
           ],
         ];
+        ListIdRole = [
+          authId.RoleRP.BisonVolant,
+          authId.RoleRP.ChienOursPolaire,
+          authId.RoleRP.FuretDeFeu,
+          authId.RoleRP.ChatHibou,
+          authId.RoleRP.CerfPuma,
+        ];
         for (i = 0; i < ListAnimaux.length; i++) {
-          if (interaction.options.getSubcommand() === ListAnimaux[i]) {
+          if (
+            interaction.options.getSubcommand() === ListAnimaux[i] &&
+            interaction.member.roles.cache.has(ListIdRole[i])
+          ) {
             var NameGuild = ListAnimaux[i];
             let guildAnimal = await ficheAnimauxRP.findOne({
               _id: NameGuild,
