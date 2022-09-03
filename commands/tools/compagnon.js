@@ -180,7 +180,7 @@ module.exports = {
               ) {
                 console.log("Iteration choisi", i, j);
                 console.log("Numero de la competence", ListCompetence[i][j]);
-                console.log("Numero de la competence", ListAttaque[i][j]);
+                console.log("Numero de l'attaque", ListAttaque[i][j]);
                 var NumberCompetence =
                   guildAnimal.Competence[ListCompetence[i][j]];
                 var valRoll = Number(valRand) + Number(NumberCompetence);
@@ -282,17 +282,29 @@ module.exports = {
                 }
               }
             }
+            const ChannelNameIdJet = client.channels.cache.get(
+              authId.Salon.Jet
+            );
+            newMessage = `Va dans ${ChannelNameIdJet} pour voir ton resultat`;
+            await interaction.editReply({
+              content: newMessage,
+            });
+            await wait(5000);
+            await interaction.deleteReply();
+            break;
+          } else if (!interaction.member.roles.cache.has(ListIdRole[i])) {
+            const ChannelNameIdJet = client.channels.cache.get(
+              authId.Salon.Jet
+            );
+            newMessage = `Tu n'as pas le compagnon ${ListAnimaux[i]}. Fait la commande adéquate`;
+            await interaction.editReply({
+              content: newMessage,
+            });
+            await wait(5000);
+            await interaction.deleteReply();
+            break;
           }
         }
-
-        const ChannelNameIdJet = client.channels.cache.get(authId.Salon.Jet);
-        newMessage = `Va dans ${ChannelNameIdJet} pour voir ton resultat`;
-        await interaction.editReply({
-          content: newMessage,
-        });
-        await wait(5000);
-        await interaction.deleteReply();
-        break;
       } else {
         const ChannelNameId = client.channels.cache.get(authId.Salon.Jet);
         // newMessage = `Tu n'es pas dans le bon salon\nTu dois faire cette commande dans le salon ${ChannelNameId}`;
