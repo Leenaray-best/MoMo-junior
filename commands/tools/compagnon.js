@@ -305,6 +305,7 @@ module.exports = {
             break;
           }
         }
+        break;
       } else {
         const ChannelNameId = client.channels.cache.get(authId.Salon.Jet);
         // newMessage = `Tu n'es pas dans le bon salon\nTu dois faire cette commande dans le salon ${ChannelNameId}`;
