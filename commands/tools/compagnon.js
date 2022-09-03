@@ -166,143 +166,144 @@ module.exports = {
           authId.RoleRP.CerfPuma,
         ];
         for (i = 0; i < ListAnimaux.length; i++) {
-          if (
-            interaction.options.getSubcommand() === ListAnimaux[i] &&
-            interaction.member.roles.cache.has(ListIdRole[i])
-          ) {
-            var NameGuild = ListAnimaux[i];
-            let guildAnimal = await ficheAnimauxRP.findOne({
-              _id: NameGuild,
-            });
-            for (j = 0; j < ListAnimaux[i].length; j++) {
-              if (
-                interaction.options.getString("attaque") === ListAttaque[i][j]
-              ) {
-                console.log("Iteration choisi", i, j);
-                console.log("Numero de la competence", ListCompetence[i][j]);
-                console.log("Numero de l'attaque", ListAttaque[i][j]);
-                var NumberCompetence =
-                  guildAnimal.Competence[ListCompetence[i][j]];
-                var valRoll = Number(valRand) + Number(NumberCompetence);
-                console.log(valRand, NumberCompetence, valRoll);
-                if (interaction.options.getString("attaque") === "saisie") {
-                  if (valRoll <= 15) {
-                    var NewMessage = "C'est un echec";
-                  } else {
-                    var NewMessage =
-                      "Tu as réussi à attraper ce que tu voulais";
-                  }
-                  client.channels.cache
-                    .get(authId.Salon.Jet)
-                    .send(
-                      "<@" +
-                        user.id +
-                        `> Ton animal à obtenu à son roll de ${ListAttaque[i][j]}: ` +
-                        valRoll +
-                        `\r${NewMessage}` +
-                        `\rTu peux repartir dans ${client.channels.cache.get(
-                          channelMessage
-                        )}`
-                    );
-                } else if (
-                  interaction.options.getString("attaque") === "instinct"
+          if (interaction.options.getSubcommand() === ListAnimaux[i]) {
+            if (interaction.member.roles.cache.has(ListIdRole[i])) {
+              var NameGuild = ListAnimaux[i];
+              let guildAnimal = await ficheAnimauxRP.findOne({
+                _id: NameGuild,
+              });
+              for (j = 0; j < ListAnimaux[i].length; j++) {
+                if (
+                  interaction.options.getString("attaque") === ListAttaque[i][j]
                 ) {
-                  if (valRoll <= 20) {
-                    var NewMessage = "C'est un echec";
+                  console.log("Iteration choisi", i, j);
+                  console.log("Numero de la competence", ListCompetence[i][j]);
+                  console.log("Numero de l'attaque", ListAttaque[i][j]);
+                  var NumberCompetence =
+                    guildAnimal.Competence[ListCompetence[i][j]];
+                  var valRoll = Number(valRand) + Number(NumberCompetence);
+                  console.log(valRand, NumberCompetence, valRoll);
+                  if (interaction.options.getString("attaque") === "saisie") {
+                    if (valRoll <= 15) {
+                      var NewMessage = "C'est un echec";
+                    } else {
+                      var NewMessage =
+                        "Tu as réussi à attraper ce que tu voulais";
+                    }
+                    client.channels.cache
+                      .get(authId.Salon.Jet)
+                      .send(
+                        "<@" +
+                          user.id +
+                          `> Ton animal à obtenu à son roll de ${ListAttaque[i][j]}: ` +
+                          valRoll +
+                          `\r${NewMessage}` +
+                          `\rTu peux repartir dans ${client.channels.cache.get(
+                            channelMessage
+                          )}`
+                      );
+                  } else if (
+                    interaction.options.getString("attaque") === "instinct"
+                  ) {
+                    if (valRoll <= 20) {
+                      var NewMessage = "C'est un echec";
+                    } else {
+                      var NewMessage =
+                        " Ton chat-hibou peut guider son maître vers une piste de solution. Utilisable 3 fois en quête";
+                    }
+                    client.channels.cache
+                      .get(authId.Salon.Jet)
+                      .send(
+                        "<@" +
+                          user.id +
+                          `> Ton animal à obtenu à son roll de ${ListAttaque[i][j]}: ` +
+                          valRoll +
+                          `\r ${NewMessage}` +
+                          `\rTu peux repartir dans ${client.channels.cache.get(
+                            channelMessage
+                          )}`
+                      );
+                  } else if (
+                    interaction.options.getString("attaque") === "vol"
+                  ) {
+                    if (valRoll <= 16) {
+                      var NewMessage = "C'est un echec";
+                    } else {
+                      var NewMessage =
+                        "Tu as réussi à attraper ce que tu voulais";
+                    }
+                    client.channels.cache
+                      .get(authId.Salon.Jet)
+                      .send(
+                        "<@" +
+                          user.id +
+                          `> Ton animal à obtenu à son roll de ${ListAttaque[i][j]}: ` +
+                          valRoll +
+                          `\r ${NewMessage}` +
+                          `\rTu peux repartir dans ${client.channels.cache.get(
+                            channelMessage
+                          )}`
+                      );
+                  } else if (
+                    interaction.options.getString("attaque") === "spiritualite"
+                  ) {
+                    if (valRoll <= 16) {
+                      var NewMessage = "C'est un echec";
+                    } else {
+                      var NewMessage =
+                        "cerf-puma peut appeler à l’aide des esprits du monde spirituel pour semer le chaos : l’adversaire perd son tour d’action au profit du maître du cerf-puma. Utilisable 3 fois";
+                    }
+                    client.channels.cache
+                      .get(authId.Salon.Jet)
+                      .send(
+                        "<@" +
+                          user.id +
+                          `> Ton animal à obtenu à son roll de ${ListAttaque[i][j]}: ` +
+                          valRoll +
+                          `\r ${NewMessage}` +
+                          `\rTu peux repartir dans ${client.channels.cache.get(
+                            channelMessage
+                          )}`
+                      );
                   } else {
-                    var NewMessage =
-                      " Ton chat-hibou peut guider son maître vers une piste de solution. Utilisable 3 fois en quête";
+                    client.channels.cache
+                      .get(authId.Salon.Jet)
+                      .send(
+                        "<@" +
+                          user.id +
+                          `> Ton animal à obtenu à son roll de ${ListAttaque[i][j]}: ` +
+                          valRoll +
+                          `\r` +
+                          ListMessageReponse[i][j] +
+                          `\rTu peux repartir dans ${client.channels.cache.get(
+                            channelMessage
+                          )}`
+                      );
                   }
-                  client.channels.cache
-                    .get(authId.Salon.Jet)
-                    .send(
-                      "<@" +
-                        user.id +
-                        `> Ton animal à obtenu à son roll de ${ListAttaque[i][j]}: ` +
-                        valRoll +
-                        `\r ${NewMessage}` +
-                        `\rTu peux repartir dans ${client.channels.cache.get(
-                          channelMessage
-                        )}`
-                    );
-                } else if (interaction.options.getString("attaque") === "vol") {
-                  if (valRoll <= 16) {
-                    var NewMessage = "C'est un echec";
-                  } else {
-                    var NewMessage =
-                      "Tu as réussi à attraper ce que tu voulais";
-                  }
-                  client.channels.cache
-                    .get(authId.Salon.Jet)
-                    .send(
-                      "<@" +
-                        user.id +
-                        `> Ton animal à obtenu à son roll de ${ListAttaque[i][j]}: ` +
-                        valRoll +
-                        `\r ${NewMessage}` +
-                        `\rTu peux repartir dans ${client.channels.cache.get(
-                          channelMessage
-                        )}`
-                    );
-                } else if (
-                  interaction.options.getString("attaque") === "spiritualite"
-                ) {
-                  if (valRoll <= 16) {
-                    var NewMessage = "C'est un echec";
-                  } else {
-                    var NewMessage =
-                      "cerf-puma peut appeler à l’aide des esprits du monde spirituel pour semer le chaos : l’adversaire perd son tour d’action au profit du maître du cerf-puma. Utilisable 3 fois";
-                  }
-                  client.channels.cache
-                    .get(authId.Salon.Jet)
-                    .send(
-                      "<@" +
-                        user.id +
-                        `> Ton animal à obtenu à son roll de ${ListAttaque[i][j]}: ` +
-                        valRoll +
-                        `\r ${NewMessage}` +
-                        `\rTu peux repartir dans ${client.channels.cache.get(
-                          channelMessage
-                        )}`
-                    );
-                } else {
-                  client.channels.cache
-                    .get(authId.Salon.Jet)
-                    .send(
-                      "<@" +
-                        user.id +
-                        `> Ton animal à obtenu à son roll de ${ListAttaque[i][j]}: ` +
-                        valRoll +
-                        `\r` +
-                        ListMessageReponse[i][j] +
-                        `\rTu peux repartir dans ${client.channels.cache.get(
-                          channelMessage
-                        )}`
-                    );
                 }
               }
+              const ChannelNameIdJet = client.channels.cache.get(
+                authId.Salon.Jet
+              );
+              newMessage = `Va dans ${ChannelNameIdJet} pour voir ton resultat`;
+              await interaction.editReply({
+                content: newMessage,
+              });
+              await wait(5000);
+              await interaction.deleteReply();
+              break;
+            } else if (!interaction.member.roles.cache.has(ListIdRole[i])) {
+              const ChannelNameIdJet = client.channels.cache.get(
+                authId.Salon.Jet
+              );
+              newMessage = `Tu n'as pas le compagnon ${ListAnimaux[i]}. Fait la commande adéquate`;
+              await interaction.editReply({
+                content: newMessage,
+              });
+              await wait(5000);
+              await interaction.deleteReply();
+              break;
             }
-            const ChannelNameIdJet = client.channels.cache.get(
-              authId.Salon.Jet
-            );
-            newMessage = `Va dans ${ChannelNameIdJet} pour voir ton resultat`;
-            await interaction.editReply({
-              content: newMessage,
-            });
-            await wait(5000);
-            await interaction.deleteReply();
-            break;
-          } else if (!interaction.member.roles.cache.has(ListIdRole[i])) {
-            const ChannelNameIdJet = client.channels.cache.get(
-              authId.Salon.Jet
-            );
-            newMessage = `Tu n'as pas le compagnon ${ListAnimaux[i]}. Fait la commande adéquate`;
-            await interaction.editReply({
-              content: newMessage,
-            });
-            await wait(5000);
-            await interaction.deleteReply();
-            break;
           }
         }
         break;
