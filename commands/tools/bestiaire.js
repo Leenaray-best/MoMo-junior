@@ -49,8 +49,8 @@ module.exports = {
     if (
       (user.id == authId.staff.emi ||
         user.id == authId.staff.leena ||
-        user.id == authId.staff.meri ||
-        user.id == authId.RoleRP.RolePlay) &&
+        user.id == authId.staff.meri) /*||
+        user.id == authId.RoleRP.RolePlay*/ &&
       interaction.channelId == authId.Salon.JetDeDes
     ) {
       ListAnimaux = ["bison", "chien", "furet", "chat", "cerf"];
@@ -124,7 +124,7 @@ module.exports = {
     } else {
       const ChannelNameId = client.channels.cache.get(authId.Salon.Jet);
       // newMessage = `Tu n'es pas dans le bon salon\nTu dois faire cette commande dans le salon ${ChannelNameId}`;
-      var newMessage = `Tu n'as pas la permission de faire ça`;
+      var newMessage = `En preparation`;
       await interaction.editReply({
         content: newMessage,
       });
