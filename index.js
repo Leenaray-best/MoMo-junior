@@ -80,6 +80,7 @@ client
     createSalonBonus();
     createBonusMeteoRoll();
     createFicheObjetRP();
+    createFicheAnimaux();
   })
   .catch((err) => console.log(err));
 var auth = require("./auth.json");
