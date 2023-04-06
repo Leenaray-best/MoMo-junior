@@ -38,8 +38,6 @@ module.exports = {
     console.log(user.id);
     if (
       user.id == authId.staff.emi ||
-      user.id == authId.staff.leena ||
-      user.id == authId.staff.meri ||
       interaction.member.roles.cache.has(authId.RoleRP.RolePlay)
     ) {
       if (interaction.commandName === "rollmaitrise") {
