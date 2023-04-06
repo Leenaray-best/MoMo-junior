@@ -170,9 +170,7 @@ module.exports = {
               ) {
                 var BonusSup = Number(-1);
               }
-              console.log(
-                "Tu sors de la boucle des maites de l'eau et passe a la suite"
-              );
+              console.log("Tu sors de la boucle des maites de l'eau");
             }
           } else if (interaction.member.roles.cache.has(authId.RoleRP.Feu)) {
             var BonusSup = Number(0);
