@@ -153,7 +153,7 @@ module.exports = {
               message.createdAt.getHours() <= 3
             ) {
               console.log(
-                "Ton perso est bien dans un salon RP et il fait nuit"
+                "Ton perso est bien dans un salon RP et il fait nuit donc je passe par la "
               );
               if (guildMeteo.Nuit == guildBonus.EauBonusNui[0]) {
                 var BonusSup = Number(2);
