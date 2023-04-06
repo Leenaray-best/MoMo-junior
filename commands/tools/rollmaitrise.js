@@ -118,7 +118,7 @@ module.exports = {
           // For Water Bender Bonus meteo involved
           if (interaction.member.roles.cache.has(authId.RoleRP.Eau)) {
             console.log(BonusSup);
-            var BonusSup = Number(0);
+            var BonusSup = 0;
 
             var BonusCompetence = guildPerso.Competence.Survie;
             for (salonName in listSalonRp) {
