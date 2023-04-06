@@ -120,8 +120,10 @@ module.exports = {
             var BonusSup = 0;
             console.log(BonusSup);
             var BonusCompetence = guildPerso.Competence.Survie;
+            console.log(BonusCompetence);
             for (salonName in listSalonRp) {
               if (interaction.member.roles.cache.has(listSalonRp[salonName])) {
+                console.log("Ton perso est bien dans un salon RP");
                 tailleTableau = guildBonus.EauBonus1.length;
                 for (i = 0; i < tailleTableau; i++) {
                   if (catMeteo[salonName] == guildBonus.EauBonus1[i]) {
@@ -136,6 +138,7 @@ module.exports = {
                 if (
                   interaction.member.roles.cache.has(listSalonRp[salonName])
                 ) {
+                  console.log("Ton perso est bien dans un salon RP");
                   tailleTableau = guildBonus.EauBonus2.length;
                   for (i = 0; i < tailleTableau; i++) {
                     if (catMeteo[salonName] == guildBonus.EauBonus2[i]) {
@@ -149,6 +152,9 @@ module.exports = {
               message.createdAt.getHours() >= 16 ||
               message.createdAt.getHours() <= 3
             ) {
+              console.log(
+                "Ton perso est bien dans un salon RP et il fait nuit"
+              );
               if (guildMeteo.Nuit == guildBonus.EauBonusNui[0]) {
                 var BonusSup = Number(2);
               } else if (
