@@ -38,7 +38,8 @@ module.exports = {
     if (
       user.id == authId.staff.emi ||
       user.id == authId.staff.leena ||
-      user.id == authId.staff.meri
+      user.id == authId.staff.meri ||
+      user.id == authId.RoleRP.RolePlay
     ) {
       if (interaction.commandName === "rollmaitrise") {
         if (interaction.member.roles.cache.has(authId.RoleRP.Escargot)) {
