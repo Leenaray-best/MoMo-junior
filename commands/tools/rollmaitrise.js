@@ -43,6 +43,7 @@ module.exports = {
       interaction.member.roles.cache.has(authId.RoleRP.RolePlay)
     ) {
       if (interaction.commandName === "rollmaitrise") {
+        console.log(channelMessage);
         if (interaction.member.roles.cache.has(authId.RoleRP.Escargot)) {
           if (
             interaction.options.getString("categorie") == "sansopposition" ||
