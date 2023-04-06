@@ -35,11 +35,12 @@ module.exports = {
     // if (!interaction.isChatInputCommand()) return;
     const user = interaction.user;
     const channelMessage = interaction.channelId;
+    console.log(user.id);
     if (
       user.id == authId.staff.emi ||
       user.id == authId.staff.leena ||
       user.id == authId.staff.meri ||
-      user.id == authId.RoleRP.RolePlay
+      interaction.member.roles.cache.has(authId.RoleRP.RolePlay)
     ) {
       if (interaction.commandName === "rollmaitrise") {
         if (interaction.member.roles.cache.has(authId.RoleRP.Escargot)) {
