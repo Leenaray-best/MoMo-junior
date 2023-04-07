@@ -142,7 +142,7 @@ module.exports = {
                 }
               }
             }
-          } else if (interaction.options.getString(opposition) === "avec") {
+          } else if (interaction.options.getString("opposition") === "avec") {
             valRoll = Rand(20);
             console.log(valRoll);
             for (i = 0; i < listeCompetence.length; i++) {
