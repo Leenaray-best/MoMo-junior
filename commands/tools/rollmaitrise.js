@@ -371,9 +371,9 @@ module.exports = {
           client.channels.cache
             .get(channelMessage)
             .send(newMessage)
-            .then((msg) => setTimeout(() => msg.delete(), 5000));
+            .then((msg) => setTimeout(() => msg.delete(), 4000));
 
-          await interaction.editReply({});
+          //await interaction.editReply({});
           //  content: newMessage,
           //});
           await wait(5000);
