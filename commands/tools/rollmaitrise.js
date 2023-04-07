@@ -37,9 +37,8 @@ module.exports = {
     const channelMessage = interaction.channelId;
     console.log(user.id);
     if (
-      (user.id == authId.staff.emi ||
-        interaction.member.roles.cache.has(authId.RoleRP.RolePlay)) &&
-      interaction.channel.parent == guildQuete.AllCategorie[i]
+      user.id == authId.staff.emi ||
+      interaction.member.roles.cache.has(authId.RoleRP.RolePlay)
     ) {
       if (interaction.commandName === "rollmaitrise") {
         console.log(channelMessage);
