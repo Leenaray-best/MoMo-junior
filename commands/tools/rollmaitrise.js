@@ -373,11 +373,11 @@ module.exports = {
             .send(newMessage)
             .then((msg) => setTimeout(() => msg.delete(), 5000));
 
-          //await interaction.editReply({
+          await interaction.editReply({});
           //  content: newMessage,
           //});
-          //await wait(5000);
-          //await interaction.deleteReply();
+          await wait(5000);
+          await interaction.deleteReply();
         }
       } else {
         console.log("Pas dans le bon salon");
