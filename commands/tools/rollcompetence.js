@@ -201,11 +201,15 @@ module.exports = {
           }
           const ChannelNameIdJet = client.channels.cache.get(authId.Salon.Jet);
           newMessage = `Va dans ${ChannelNameIdJet} pour voir ton resultat`;
-          await interaction.editReply({
-            content: newMessage,
-          });
-          await wait(5000);
-          await interaction.deleteReply();
+          client.channels.cache
+            .get(channelMessage)
+            .send(newMessage)
+            .then((msg) => setTimeout(() => msg.delete(), 5000));
+          //await interaction.editReply({
+          //  content: newMessage,
+          //});
+          //await wait(5000);
+          //await interaction.deleteReply();
         }
       } else {
         console.log("PAS DANS LE BON SALON");
