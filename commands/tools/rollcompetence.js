@@ -63,8 +63,7 @@ module.exports = {
     for (i = 0; i < tailleTableauCat; i++) {
       if (
         (user.id == authId.staff.emi ||
-          user.id == authId.staff.leena ||
-          user.id == authId.staff.meri) &&
+          interaction.member.roles.cache.has(authId.RoleRP.RolePlay)) &&
         interaction.channel.parent == guildQuete.AllCategorie[i]
       ) {
         if (interaction.commandName === "rollcompetence") {
