@@ -200,7 +200,7 @@ module.exports = {
           await interaction.deleteReply();
         }
       } else {
-        newMessage = `Tu n'as pas les autorisations pour faire ça`;
+        newMessage = `Tu n'as pas les autorisations pour faire ça, ou tu n'es pas dans la bon salon. Cette commande se fait seulement dans un salon de Rp`;
         await interaction.editReply({
           content: newMessage,
         });

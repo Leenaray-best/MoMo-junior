@@ -175,7 +175,7 @@ module.exports = {
               ) {
                 var BonusSup = Number(-1);
               }
-              console.log("Tu sors de la boucle des maites de l'eau");
+              console.log("Tu sors de la boucle des maitres de l'eau");
             }
           } else if (interaction.member.roles.cache.has(authId.RoleRP.Feu)) {
             var BonusSup = Number(0);
@@ -375,7 +375,8 @@ module.exports = {
         }
       }
     } else {
-      newMessage = `Tu n'as pas les autorisations pour faire ça`;
+      console.log("Pas dans le bon salon");
+      newMessage = `Tu n'as pas les autorisations pour faire ça, ou tu n'es pas dans la bon salon. Cette commande se fait seulement dans un salon de Rp`;
       await interaction.editReply({
         content: newMessage,
       });
