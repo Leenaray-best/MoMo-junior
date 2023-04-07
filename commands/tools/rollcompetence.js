@@ -175,6 +175,10 @@ module.exports = {
                 } else {
                   var NumberUp = guildPerso.Competence[i];
                   var valTotal = valRoll + NumberUp;
+
+                  console.log(valTotal);
+                  console.log(valRoll);
+                  console.log(NumberUp);
                   client.channels.cache
                     .get(authId.Salon.Jet)
                     .send(
