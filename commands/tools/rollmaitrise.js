@@ -156,22 +156,22 @@ module.exports = {
                 "Ton perso est bien dans un salon RP et il fait nuit. "
               );
               console.log(guildMeteo.Nuit);
-              console.log(guildBonus.EauBonusNui[0]);
-              console.log(guildBonus.EauBonusNui[1]);
-              console.log(guildBonus.EauBonusNui[2]);
-              console.log(guildBonus.EauBonusNui[3]);
-              if (guildMeteo.Nuit == guildBonus.EauBonusNui[0]) {
+              console.log(guildBonus.EauBonusNuit[0]);
+              console.log(guildBonus.EauBonusNuit[1]);
+              console.log(guildBonus.EauBonusNuit[2]);
+              console.log(guildBonus.EauBonusNuit[3]);
+              if (guildMeteo.Nuit == guildBonus.EauBonusNuit[0]) {
                 var BonusSup = Number(2);
               } else if (
-                guildMeteo.Nuit == guildBonus.EauBonusNui[1] ||
-                guildMeteo.Nuit == guildBonus.EauBonusNui[2]
+                guildMeteo.Nuit == guildBonus.EauBonusNuit[1] ||
+                guildMeteo.Nuit == guildBonus.EauBonusNuit[2]
               ) {
                 var BonusSup = Number(1);
-              } else if (guildMeteo.Nuit == guildBonus.EauBonusNui[3]) {
+              } else if (guildMeteo.Nuit == guildBonus.EauBonusNuit[3]) {
                 var BonusSup = Number(-2);
               } else if (
-                guildMeteo.Nuit == guildBonus.EauBonusNui[1] ||
-                guildMeteo.Nuit == guildBonus.EauBonusNui[2]
+                guildMeteo.Nuit == guildBonus.EauBonusNuit[4] ||
+                guildMeteo.Nuit == guildBonus.EauBonusNuit[5]
               ) {
                 var BonusSup = Number(-1);
               }
