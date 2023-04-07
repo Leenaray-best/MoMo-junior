@@ -173,6 +173,7 @@ module.exports = {
                         )} pour trouver une solution`
                     );
                 } else {
+                  console.log(guildPerso.Competence[0]);
                   var NumberUp = guildPerso.Competence[i];
                   var valTotal = valRoll + NumberUp;
 
