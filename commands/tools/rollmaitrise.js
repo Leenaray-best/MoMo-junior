@@ -36,11 +36,12 @@ module.exports = {
     const user = interaction.user;
     const channelMessage = interaction.channelId;
     console.log(user.id);
-    if (
-      user.id == authId.staff.emi ||
-      interaction.member.roles.cache.has(authId.RoleRP.RolePlay)
-    ) {
-      if (interaction.commandName === "rollmaitrise") {
+
+    if (interaction.commandName === "rollmaitrise") {
+      if (
+        user.id == authId.staff.emi ||
+        interaction.member.roles.cache.has(authId.RoleRP.RolePlay)
+      ) {
         console.log(channelMessage);
         if (interaction.member.roles.cache.has(authId.RoleRP.Escargot)) {
           if (
@@ -208,7 +209,7 @@ module.exports = {
             }
           } else if (interaction.member.roles.cache.has(authId.RoleRP.Terre)) {
             console.log(guildBonusSalonLieu);
-            console.log(channelMessage.id);
+            console.log(channelMessage);
             var BonusSup = Number(0);
             var BonusCompetence = guildPerso.Competence.Constitution;
             for (i = 0; i < guildBonusSalonLieu.Terre.length; i++) {
@@ -373,13 +374,13 @@ module.exports = {
           await wait(5000);
           await interaction.deleteReply();
         }
+      } else {
+        console.log("Pas dans le bon salon");
+        newMessage = `Tu n'as pas les autorisations pour faire ça, ou tu n'es pas dans la bon salon. Cette commande se fait seulement dans un salon de Rp`;
+        await interaction.editReply({
+          content: newMessage,
+        });
       }
-    } else {
-      console.log("Pas dans le bon salon");
-      newMessage = `Tu n'as pas les autorisations pour faire ça, ou tu n'es pas dans la bon salon. Cette commande se fait seulement dans un salon de Rp`;
-      await interaction.editReply({
-        content: newMessage,
-      });
     }
   },
 };
