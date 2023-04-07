@@ -70,6 +70,9 @@ module.exports = {
           let guildPerso = await fichePerso.findOne({
             _id: user.id,
           });
+          let guildPersoBag = await ficheBag.findOne({
+            _id: user.id,
+          });
           listeCompetence = [
             "force",
             "constitution",
@@ -111,7 +114,7 @@ module.exports = {
                         )} pour trouver une solution`
                     );
                 } else {
-                  var NumberUp = guildPerso.Competence[i];
+                  var NumberUp = guildPersoBag.Competence[i];
                   if (valRoll <= NumberUp) {
                     client.channels.cache
                       .get(authId.Salon.Jet)
@@ -174,7 +177,7 @@ module.exports = {
                     );
                 } else {
                   console.log(guildPerso.Competence[0]);
-                  var NumberUp = guildPerso.Competence[i];
+                  var NumberUp = guildPersoBag.Competence[i];
                   var valTotal = valRoll + NumberUp;
 
                   console.log(valTotal);
