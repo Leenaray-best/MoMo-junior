@@ -119,8 +119,8 @@ module.exports = {
                   let ficheSac = await ficheBag.findOne({
                     _id: user.id,
                   });
-                  for (i = 0; i < ficheSac.Sac.length; i++) {
-                    if (ficheSac.Sac[i] == "Potion" && ficheSac.Tour[0] > 0) {
+                  for (j = 0; j < ficheSac.Sac.length; j++) {
+                    if (ficheSac.Sac[j] == "Potion" && ficheSac.Tour[0] > 0) {
                       BonusPotion = Number(ficheSac.ValeurBonus);
                       var valRoll = valRoll - BonusPotion;
                       if (valRoll < 0) {
@@ -137,7 +137,7 @@ module.exports = {
                       _id: user.id,
                     });
                     if (
-                      ficheSacNew.Sac[i] == "Potion" &&
+                      ficheSacNew.Sac[j] == "Potion" &&
                       ficheSacNew.Tour[0] == 0
                     ) {
                       await ficheBag.updateMany(
@@ -146,7 +146,7 @@ module.exports = {
                       );
                     }
                   }
-
+                  console.log(valRoll);
                   if (valRoll <= NumberUp) {
                     client.channels.cache
                       .get(authId.Salon.Jet)
@@ -217,8 +217,8 @@ module.exports = {
                   let ficheSac = await ficheBag.findOne({
                     _id: user.id,
                   });
-                  for (i = 0; i < ficheSac.Sac.length; i++) {
-                    if (ficheSac.Sac[i] == "Potion" && ficheSac.Tour[0] > 0) {
+                  for (j = 0; j < ficheSac.Sac.length; j++) {
+                    if (ficheSac.Sac[j] == "Potion" && ficheSac.Tour[0] > 0) {
                       BonusPotion = Number(ficheSac.ValeurBonus);
                       var valTotal = valTotal + BonusPotion;
                       TourOld = ficheSac.Tour[0];
@@ -232,7 +232,7 @@ module.exports = {
                       _id: user.id,
                     });
                     if (
-                      ficheSacNew.Sac[i] == "Potion" &&
+                      ficheSacNew.Sac[j] == "Potion" &&
                       ficheSacNew.Tour[0] == 0
                     ) {
                       await ficheBag.updateMany(
@@ -241,7 +241,7 @@ module.exports = {
                       );
                     }
                   }
-
+                  console.log(valTotal);
                   client.channels.cache
                     .get(authId.Salon.Jet)
                     .send(
