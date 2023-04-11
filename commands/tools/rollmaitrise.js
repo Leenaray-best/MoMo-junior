@@ -228,7 +228,7 @@ module.exports = {
               valRandom + Number(BonusNiveauMaitrise) + Number(BonusSup);
             console.log(ValRoll);
             for (i = 0; i < ficheSac.Sac.length; i++) {
-              if (ficheSac.Sac[i] == "Potion" && ficheSac.Tour[0] >= 0) {
+              if (ficheSac.Sac[i] == "Potion" && ficheSac.Tour[0] > 0) {
                 BonusPotion = Number(ficheSac.ValeurBonus);
                 var ValRoll = ValRoll + BonusPotion;
                 TourOld = ficheSac.Tour[0];
