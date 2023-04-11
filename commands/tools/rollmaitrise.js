@@ -239,10 +239,10 @@ module.exports = {
                   { Tour: TourNew }
                 );
               }
-              let ficheSac = await ficheBagPerso.findOne({
+              let ficheSacNew = await ficheBagPerso.findOne({
                 _id: user.id,
               });
-              if (ficheSac.Sac[i] == "Potion" && ficheSac.Tour[0] == 0) {
+              if (ficheSacNew.Sac[i] == "Potion" && ficheSacNew.Tour[0] == 0) {
                 console.log("Mon tour bonus est à 0");
                 await ficheBagPerso.updateMany(
                   { _id: user.id },
