@@ -8,6 +8,8 @@ const ficheSalonBonusLieu = require("../../salonBonus");
 const fichePerso = require("../../FichePerso");
 const ficheMeteo = require("../../meteo");
 const ficheMeteotest = require("../../salonMeteo");
+
+const ficheBagPerso = require("../../fichePersoSac");
 const wait = require("node:timers/promises").setTimeout;
 
 function Rand(valeur) {
@@ -78,6 +80,9 @@ module.exports = {
 
           let guildPerso = await fichePerso.findOne({
             _id: user.id,
+          });
+          let ficheSac = await ficheBagPerso.findOne({
+            _id: IdPerso,
           });
           var valRandom = Rand(20);
           var BonusNiveauMaitrise = Number(guildPerso.NiveauDeMaitrise);
@@ -222,6 +227,25 @@ module.exports = {
             var ValRoll =
               valRandom + Number(BonusNiveauMaitrise) + Number(BonusSup);
             console.log(ValRoll);
+            for (i = 0; i < ficheSac.Sac.length; i++) {
+              if (ficheSac.Sac[i] == "Potion" && ficheSac.Tour[0] >= 0) {
+                BonusPotion = ficheSac.ValeurBonus;
+                var ValRoll = ValRoll + BonusPotion;
+                TourOld = ficheSac.Tour[0];
+                TourNew = TourOld - 1;
+                await ficheSac.findOneAndUpdate(
+                  { _id: user.id },
+                  { Tour: TourNew }
+                );
+              }
+              if (ficheSac.Tour[0] == 0) {
+                await ficheSac.updateMany(
+                  { _id: user.id },
+                  { $pull: { Sac: { $in: ["Potion"] } } }
+                );
+              }
+            }
+            console.log(ValRoll);
             if (ValRoll <= 1) {
               client.channels.cache
                 .get(authId.Salon.Jet)
@@ -330,6 +354,26 @@ module.exports = {
               Number(BonusNiveauMaitrise) +
               Number(BonusCompetence) +
               Number(BonusSup);
+            console.log(BonnusAttaqueMix);
+            for (i = 0; i < ficheSac.Sac.length; i++) {
+              if (ficheSac.Sac[i] == "Potion" && ficheSac.Tour[0] >= 0) {
+                BonusPotion = ficheSac.ValeurBonus;
+                var BonnusAttaqueMix = BonnusAttaqueMix + BonusPotion;
+                TourOld = ficheSac.Tour[0];
+                TourNew = TourOld - 1;
+                await ficheSac.findOneAndUpdate(
+                  { _id: user.id },
+                  { Tour: TourNew }
+                );
+              }
+              if (ficheSac.Tour[0] == 0) {
+                await ficheSac.updateMany(
+                  { _id: user.id },
+                  { $pull: { Sac: { $in: ["Potion"] } } }
+                );
+              }
+            }
+            console.log(BonnusAttaqueMix);
             if (ValRoll < 15) {
               client.channels.cache
                 .get(authId.Salon.Jet)
@@ -367,12 +411,14 @@ module.exports = {
             }
           }
           const ChannelNameIdJet = client.channels.cache.get(authId.Salon.Jet);
-          newMessage = `Go dans ${ChannelNameIdJet} pour voir ton resultat`;
-          client.channels.cache
-            .get(channelMessage)
-            .send(newMessage)
-            .then((msg) => setTimeout(() => msg.delete(), 4000));
-
+          const newMessage = `Go dans ${ChannelNameIdJet} pour voir ton resultat`;
+          // client.channels.cache
+          //   .get(channelMessage)
+          //   .send(newMessage)
+          //  .then((msg) => setTimeout(() => msg.delete(), 4000));
+          await interaction.editReply({
+            content: newMessage,
+          });
           //await interaction.editReply({});
           //  content: newMessage,
           //});
@@ -381,6 +427,10 @@ module.exports = {
         }
       } else {
         console.log("Pas dans le bon salon");
+        const newMessage = `Tu n'as pas les autorisations pour faire ça, ou tu n'es pas dans la bon salon. Cette commande se fait seulement dans un salon de Rp`;
+        await interaction.editReply({
+          content: newMessage,
+        });
       }
     }
   },

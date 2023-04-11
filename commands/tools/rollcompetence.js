@@ -200,11 +200,14 @@ module.exports = {
             }
           }
           const ChannelNameIdJet = client.channels.cache.get(authId.Salon.Jet);
-          newMessage = `Va dans ${ChannelNameIdJet} pour voir ton resultat`;
-          client.channels.cache
-            .get(channelMessage)
-            .send(newMessage)
-            .then((msg) => setTimeout(() => msg.delete(), 4000));
+          const newMessage = `Va dans ${ChannelNameIdJet} pour voir ton resultat`;
+          //client.channels.cache
+          //  .get(channelMessage)
+          //  .send(newMessage)
+          //  .then((msg) => setTimeout(() => msg.delete(), 4000));
+          await interaction.editReply({
+            content: newMessage,
+          });
           //await interaction.editReply({});
           //  content: newMessage,
           //});
@@ -213,10 +216,10 @@ module.exports = {
         }
       } else {
         console.log("PAS DANS LE BON SALON");
-        //newMessage = `Tu n'as pas les autorisations pour faire ça, ou tu n'es pas dans la bon salon. Cette commande se fait seulement dans un salon de Rp`;
-        //await interaction.editReply({
-        //  content: newMessage,
-        //});
+        const newMessage = `Tu n'as pas les autorisations pour faire ça, ou tu n'es pas dans la bon salon. Cette commande se fait seulement dans un salon de Rp`;
+        await interaction.editReply({
+          content: newMessage,
+        });
       }
     }
   },
