@@ -239,6 +239,9 @@ module.exports = {
                   { Tour: TourNew }
                 );
               }
+              let ficheSac = await ficheBagPerso.findOne({
+                _id: user.id,
+              });
               if (ficheSac.Tour[0] == 0) {
                 console.log("Mon tour bonus est à 0");
                 await ficheBagPerso.updateMany(
@@ -358,7 +361,7 @@ module.exports = {
               Number(BonusSup);
             console.log(BonnusAttaqueMix);
             for (i = 0; i < ficheSac.Sac.length; i++) {
-              if (ficheSac.Sac[i] == "Potion" && ficheSac.Tour[0] >= 0) {
+              if (ficheSac.Sac[i] == "Potion" && ficheSac.Tour[0] > 0) {
                 BonusPotion = Number(ficheSac.ValeurBonus);
                 var BonnusAttaqueMix = BonnusAttaqueMix + BonusPotion;
                 TourOld = ficheSac.Tour[0];
@@ -368,6 +371,9 @@ module.exports = {
                   { Tour: TourNew }
                 );
               }
+              let ficheSac = await ficheBagPerso.findOne({
+                _id: user.id,
+              });
               if (ficheSac.Tour[0] == 0) {
                 await ficheBagPerso.updateMany(
                   { _id: user.id },
