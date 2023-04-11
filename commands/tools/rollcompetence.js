@@ -116,7 +116,7 @@ module.exports = {
                 } else {
                   var NumberUp = guildPersoBag.Competence[i];
 
-                  let ficheSac = await ficheBagPerso.findOne({
+                  let ficheSac = await ficheBag.findOne({
                     _id: user.id,
                   });
                   for (i = 0; i < ficheSac.Sac.length; i++) {
@@ -128,19 +128,19 @@ module.exports = {
                       }
                       TourOld = ficheSac.Tour[0];
                       TourNew = TourOld - 1;
-                      await ficheBagPerso.findOneAndUpdate(
+                      await ficheBag.findOneAndUpdate(
                         { _id: user.id },
                         { Tour: TourNew }
                       );
                     }
-                    let ficheSacNew = await ficheBagPerso.findOne({
+                    let ficheSacNew = await ficheBag.findOne({
                       _id: user.id,
                     });
                     if (
                       ficheSacNew.Sac[i] == "Potion" &&
                       ficheSacNew.Tour[0] == 0
                     ) {
-                      await ficheBagPerso.updateMany(
+                      await ficheBag.updateMany(
                         { _id: user.id },
                         { $pull: { Sac: { $in: ["Potion"] } } }
                       );
@@ -214,7 +214,7 @@ module.exports = {
                   console.log(valTotal);
                   console.log(valRoll);
                   console.log(NumberUp);
-                  let ficheSac = await ficheBagPerso.findOne({
+                  let ficheSac = await ficheBag.findOne({
                     _id: user.id,
                   });
                   for (i = 0; i < ficheSac.Sac.length; i++) {
@@ -223,19 +223,19 @@ module.exports = {
                       var valTotal = valTotal + BonusPotion;
                       TourOld = ficheSac.Tour[0];
                       TourNew = TourOld - 1;
-                      await ficheBagPerso.findOneAndUpdate(
+                      await ficheBag.findOneAndUpdate(
                         { _id: user.id },
                         { Tour: TourNew }
                       );
                     }
-                    let ficheSacNew = await ficheBagPerso.findOne({
+                    let ficheSacNew = await ficheBag.findOne({
                       _id: user.id,
                     });
                     if (
                       ficheSacNew.Sac[i] == "Potion" &&
                       ficheSacNew.Tour[0] == 0
                     ) {
-                      await ficheBagPerso.updateMany(
+                      await ficheBag.updateMany(
                         { _id: user.id },
                         { $pull: { Sac: { $in: ["Potion"] } } }
                       );

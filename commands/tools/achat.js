@@ -57,7 +57,10 @@ module.exports = {
               { _id: IdPerso },
               { Tour: 5, ValeurBonus: 5 }
             );
-            const newMessage = `Merci pour ton achat ! Tu viens d'être débité(e) de ${valuePotion} XP\n Il te reste ${fiche.NiveauXP} XP`;
+            let ficheNew = await fichePerso.findOne({
+              _id: IdPerso,
+            });
+            const newMessage = `Merci pour ton achat ! Tu viens d'être débité(e) de ${valuePotion} XP\n Il te reste ${ficheNew.NiveauXP} XP`;
             await interaction.editReply({
               content: newMessage,
             });
