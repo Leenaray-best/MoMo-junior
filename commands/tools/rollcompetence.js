@@ -49,9 +49,9 @@ module.exports = {
     ),
 
   async execute(interaction, client) {
-    const message = await interaction.deferReply({
-      fetchReply: true,
-    });
+    //const message = await interaction.deferReply({
+    //  fetchReply: true,
+    //});
     // if (!interaction.isChatInputCommand()) return;
     console.log(interaction);
     const user = interaction.user;
@@ -205,7 +205,7 @@ module.exports = {
           //  .get(channelMessage)
           //  .send(newMessage)
           //  .then((msg) => setTimeout(() => msg.delete(), 4000));
-          await interaction.deferReply({
+          await interaction.reply({
             content: newMessage,
           });
           //await interaction.editReply({});
