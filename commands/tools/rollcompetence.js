@@ -49,9 +49,9 @@ module.exports = {
     ),
 
   async execute(interaction, client) {
-    //const message = await interaction.deferReply({
-    //  fetchReply: true,
-    //});
+    const message = await interaction.deferReply({
+      fetchReply: true,
+    });
     // if (!interaction.isChatInputCommand()) return;
     console.log(interaction);
     const user = interaction.user;
@@ -211,8 +211,8 @@ module.exports = {
           //await interaction.editReply({});
           //  content: newMessage,
           //});
-          //await wait(5000);
-          //await interaction.deleteReply();
+          await wait(5000);
+          await interaction.deleteReply();
         }
       } else {
         console.log("Pas dans le bon salon");
