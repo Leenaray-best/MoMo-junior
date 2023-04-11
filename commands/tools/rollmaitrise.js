@@ -82,7 +82,7 @@ module.exports = {
             _id: user.id,
           });
           let ficheSac = await ficheBagPerso.findOne({
-            _id: IdPerso,
+            _id: user.id,
           });
           var valRandom = Rand(20);
           var BonusNiveauMaitrise = Number(guildPerso.NiveauDeMaitrise);
