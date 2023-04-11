@@ -45,12 +45,15 @@ module.exports = {
             });
           } else {
             NewXp = fiche.NiveauXP - valuePotion;
-            await fiche.findOneAndUpdate({ _id: IdPerso }, { NiveauXP: NewXp });
-            await ficheSac.findOneAndUpdate(
+            await fichePerso.findOneAndUpdate(
+              { _id: IdPerso },
+              { NiveauXP: NewXp }
+            );
+            await ficheBagPerso.findOneAndUpdate(
               { _id: IdPerso },
               { $push: { Sac: "Potion" } }
             );
-            await ficheSac.findOneAndUpdate(
+            await ficheBagPerso.findOneAndUpdate(
               { _id: IdPerso },
               { Tour: 5, ValeurBonus: 5 }
             );

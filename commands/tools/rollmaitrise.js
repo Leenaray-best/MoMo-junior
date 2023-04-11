@@ -233,13 +233,13 @@ module.exports = {
                 var ValRoll = ValRoll + BonusPotion;
                 TourOld = ficheSac.Tour[0];
                 TourNew = TourOld - 1;
-                await ficheSac.findOneAndUpdate(
+                await ficheBagPerso.findOneAndUpdate(
                   { _id: user.id },
                   { Tour: TourNew }
                 );
               }
               if (ficheSac.Tour[0] == 0) {
-                await ficheSac.updateMany(
+                await ficheBagPerso.updateMany(
                   { _id: user.id },
                   { $pull: { Sac: { $in: ["Potion"] } } }
                 );
@@ -361,13 +361,13 @@ module.exports = {
                 var BonnusAttaqueMix = BonnusAttaqueMix + BonusPotion;
                 TourOld = ficheSac.Tour[0];
                 TourNew = TourOld - 1;
-                await ficheSac.findOneAndUpdate(
+                await ficheBagPerso.findOneAndUpdate(
                   { _id: user.id },
                   { Tour: TourNew }
                 );
               }
               if (ficheSac.Tour[0] == 0) {
-                await ficheSac.updateMany(
+                await ficheBagPerso.updateMany(
                   { _id: user.id },
                   { $pull: { Sac: { $in: ["Potion"] } } }
                 );
