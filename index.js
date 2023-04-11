@@ -388,6 +388,7 @@ function createBoutique() {
     Arme: {
       Couteau: "1000 XP",
     },
+    Potion: ["Bonus +5 à tout vos jeux pendant 5 tours: 1000 XP"],
     time: Date(),
   });
   Boutique.save()

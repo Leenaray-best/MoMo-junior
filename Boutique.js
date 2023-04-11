@@ -25,6 +25,7 @@ const Store = mongoose.Schema({
   Arme: {
     Couteau: String,
   },
+  Potion: [String],
   time: Date,
 });
 
