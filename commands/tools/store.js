@@ -182,14 +182,25 @@ module.exports = {
           let boutique = await ficheStore.findOne({
             _id: authId.idDatabase.storeId,
           });
+          listPotion = boutique.Potion;
           console.log(boutique);
+          console.log(listPotion);
+          nomPotion = [`Thé Liang`];
           const embed = new EmbedBuilder()
             .setTitle(`Boutique de potion`)
-            .setDescription(`A venir, un peu de patiente`)
+            .setDescription(`Boost sur les jets`)
             .setColor(0x18e1ee)
             .setThumbnail(
               "https://static.wikia.nocookie.net/skies-of-arcadia/images/e/e4/Avatar_The_Last_Airbender_logo_%28alternate_version%29.png/revision/latest?cb=20180224144932"
             );
+          for (j = 0; j < nomPotion.length; j++) {
+            embed.addFields({
+              name: `${nomPotion[j]}`,
+              value: `${boutique.Potion[j]},`,
+              inline: true,
+            });
+          }
+
           await interaction.reply({
             embeds: [embed],
           });

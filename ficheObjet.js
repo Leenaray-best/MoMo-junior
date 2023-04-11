@@ -3,7 +3,7 @@ const ListObject = mongoose.Schema({
   _id: String,
   Dague: [Number],
   Armure: [Number],
-  Potion: [Number],
+  Potion: [String],
   time: Date,
 });
 

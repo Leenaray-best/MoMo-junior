@@ -666,7 +666,7 @@ function createFicheObjetRP() {
     _id: "00005",
     Dague: [1, 0, 0, 0, 0, 0, 0, 0],
     Armure: [0, 0, 0, 0, 0, 0, 0, 0],
-    Potion: [0],
+    Potion: ["String"],
     time: Date(),
   });
   ficheobject
