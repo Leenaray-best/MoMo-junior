@@ -174,11 +174,18 @@ module.exports = {
               value: `${fiche.LienFichePerso}`,
               inline: true,
             })
-            .addFields({
-              name: `Sac`,
-              value: `${ItemBag}`,
-              inline: true,
-            });
+            .addFields(
+              {
+                name: `Sac`,
+                value: `${ItemBag}`,
+                inline: true,
+              },
+              {
+                name: `Tour Bonus`,
+                value: `${ficheSac.Tour[0]}`,
+                inline: true,
+              }
+            );
 
           await interaction.editReply({
             embeds: [embed],
