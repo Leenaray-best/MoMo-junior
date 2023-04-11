@@ -182,7 +182,7 @@ module.exports = {
           let boutique = await ficheStore.findOne({
             _id: authId.idDatabase.storeId,
           });
-          console.log(boutique.Potion[0]);
+          console.log(boutique);
           nomPotion = [`Thé Liang`];
           const embed = new EmbedBuilder()
             .setTitle(`Boutique de potion`)
