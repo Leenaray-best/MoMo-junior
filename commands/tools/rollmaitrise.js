@@ -229,7 +229,7 @@ module.exports = {
             console.log(ValRoll);
             for (i = 0; i < ficheSac.Sac.length; i++) {
               if (ficheSac.Sac[i] == "Potion" && ficheSac.Tour[0] >= 0) {
-                BonusPotion = ficheSac.ValeurBonus;
+                BonusPotion = Number(ficheSac.ValeurBonus);
                 var ValRoll = ValRoll + BonusPotion;
                 TourOld = ficheSac.Tour[0];
                 TourNew = TourOld - 1;
@@ -357,7 +357,7 @@ module.exports = {
             console.log(BonnusAttaqueMix);
             for (i = 0; i < ficheSac.Sac.length; i++) {
               if (ficheSac.Sac[i] == "Potion" && ficheSac.Tour[0] >= 0) {
-                BonusPotion = ficheSac.ValeurBonus;
+                BonusPotion = Number(ficheSac.ValeurBonus);
                 var BonnusAttaqueMix = BonnusAttaqueMix + BonusPotion;
                 TourOld = ficheSac.Tour[0];
                 TourNew = TourOld - 1;
