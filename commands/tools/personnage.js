@@ -104,7 +104,6 @@ module.exports = {
           const listeQualite = fiche.Qualite;
           const listeFaiblesse = fiche.Faiblesse;
           console.log(ficheSac.Sac.length);
-
           if (ficheSac.Sac.length == 0) {
             var ItemBag = "Empty";
           } else {
