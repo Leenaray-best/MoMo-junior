@@ -229,6 +229,7 @@ module.exports = {
             console.log(ValRoll);
             for (i = 0; i < ficheSac.Sac.length; i++) {
               if (ficheSac.Sac[i] == "Potion" && ficheSac.Tour[0] > 0) {
+                console.log("Mon tour bonus est > 0");
                 BonusPotion = Number(ficheSac.ValeurBonus);
                 var ValRoll = ValRoll + BonusPotion;
                 TourOld = ficheSac.Tour[0];
@@ -239,6 +240,7 @@ module.exports = {
                 );
               }
               if (ficheSac.Tour[0] == 0) {
+                console.log("Mon tour bonus est à 0");
                 await ficheBagPerso.updateMany(
                   { _id: user.id },
                   { $pull: { Sac: { $in: ["Potion"] } } }
