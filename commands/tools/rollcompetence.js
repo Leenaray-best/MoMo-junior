@@ -205,7 +205,7 @@ module.exports = {
           //  .get(channelMessage)
           //  .send(newMessage)
           //  .then((msg) => setTimeout(() => msg.delete(), 4000));
-          await interaction.editReply({
+          await interaction.deferReply({
             content: newMessage,
           });
           //await interaction.editReply({});
