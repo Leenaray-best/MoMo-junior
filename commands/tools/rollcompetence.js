@@ -53,7 +53,7 @@ module.exports = {
       fetchReply: true,
     });
     // if (!interaction.isChatInputCommand()) return;
-    console.log(interaction);
+    //console.log(interaction);
     const user = interaction.user;
     const channelMessage = interaction.channelId;
     let guildQuete = await FicheQuete.findOne({
@@ -115,6 +115,38 @@ module.exports = {
                     );
                 } else {
                   var NumberUp = guildPersoBag.Competence[i];
+
+                  let ficheSac = await ficheBagPerso.findOne({
+                    _id: user.id,
+                  });
+                  for (i = 0; i < ficheSac.Sac.length; i++) {
+                    if (ficheSac.Sac[i] == "Potion" && ficheSac.Tour[0] > 0) {
+                      BonusPotion = Number(ficheSac.ValeurBonus);
+                      var valRoll = valRoll - BonusPotion;
+                      if (valRoll < 0) {
+                        var valRoll = 0;
+                      }
+                      TourOld = ficheSac.Tour[0];
+                      TourNew = TourOld - 1;
+                      await ficheBagPerso.findOneAndUpdate(
+                        { _id: user.id },
+                        { Tour: TourNew }
+                      );
+                    }
+                    let ficheSacNew = await ficheBagPerso.findOne({
+                      _id: user.id,
+                    });
+                    if (
+                      ficheSacNew.Sac[i] == "Potion" &&
+                      ficheSacNew.Tour[0] == 0
+                    ) {
+                      await ficheBagPerso.updateMany(
+                        { _id: user.id },
+                        { $pull: { Sac: { $in: ["Potion"] } } }
+                      );
+                    }
+                  }
+
                   if (valRoll <= NumberUp) {
                     client.channels.cache
                       .get(authId.Salon.Jet)
@@ -176,13 +208,40 @@ module.exports = {
                         )} pour trouver une solution`
                     );
                 } else {
-                  console.log(guildPerso.Competence[0]);
                   var NumberUp = guildPersoBag.Competence[i];
                   var valTotal = valRoll + NumberUp;
 
                   console.log(valTotal);
                   console.log(valRoll);
                   console.log(NumberUp);
+                  let ficheSac = await ficheBagPerso.findOne({
+                    _id: user.id,
+                  });
+                  for (i = 0; i < ficheSac.Sac.length; i++) {
+                    if (ficheSac.Sac[i] == "Potion" && ficheSac.Tour[0] > 0) {
+                      BonusPotion = Number(ficheSac.ValeurBonus);
+                      var valTotal = valTotal + BonusPotion;
+                      TourOld = ficheSac.Tour[0];
+                      TourNew = TourOld - 1;
+                      await ficheBagPerso.findOneAndUpdate(
+                        { _id: user.id },
+                        { Tour: TourNew }
+                      );
+                    }
+                    let ficheSacNew = await ficheBagPerso.findOne({
+                      _id: user.id,
+                    });
+                    if (
+                      ficheSacNew.Sac[i] == "Potion" &&
+                      ficheSacNew.Tour[0] == 0
+                    ) {
+                      await ficheBagPerso.updateMany(
+                        { _id: user.id },
+                        { $pull: { Sac: { $in: ["Potion"] } } }
+                      );
+                    }
+                  }
+
                   client.channels.cache
                     .get(authId.Salon.Jet)
                     .send(
@@ -201,13 +260,13 @@ module.exports = {
           }
           const ChannelNameIdJet = client.channels.cache.get(authId.Salon.Jet);
           const newMessage = `Va dans ${ChannelNameIdJet} pour voir ton resultat`;
-          client.channels.cache
-            .get(channelMessage)
-            .send(newMessage)
-            .then((msg) => setTimeout(() => msg.delete(), 5000));
-          //await interaction.editReply({
-          //  content: newMessage,
-          //});
+          // client.channels.cache
+          //  .get(channelMessage)
+          //  .send(newMessage)
+          //  .then((msg) => setTimeout(() => msg.delete(), 5000));
+          await interaction.editReply({
+            content: newMessage,
+          });
           //await interaction.editReply({});
           //  content: newMessage,
           //});
