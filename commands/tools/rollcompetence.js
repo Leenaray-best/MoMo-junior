@@ -49,9 +49,9 @@ module.exports = {
     ),
 
   async execute(interaction, client) {
-    const message = await interaction.deferReply({
-      fetchReply: true,
-    });
+    //const message = await interaction.deferReply({
+    //  fetchReply: true,
+    //});
     // if (!interaction.isChatInputCommand()) return;
     console.log(interaction);
     const user = interaction.user;
@@ -201,18 +201,18 @@ module.exports = {
           }
           const ChannelNameIdJet = client.channels.cache.get(authId.Salon.Jet);
           const newMessage = `Va dans ${ChannelNameIdJet} pour voir ton resultat`;
-          //client.channels.cache
-          //  .get(channelMessage)
-          //  .send(newMessage)
-          //  .then((msg) => setTimeout(() => msg.delete(), 4000));
-          await interaction.editReply({
-            content: newMessage,
-          });
+          client.channels.cache
+            .get(channelMessage)
+            .send(newMessage)
+            .then((msg) => setTimeout(() => msg.delete(), 5000));
+          //await interaction.editReply({
+          //  content: newMessage,
+          //});
           //await interaction.editReply({});
           //  content: newMessage,
           //});
-          await wait(5000);
-          await interaction.deleteReply();
+          //await wait(5000);
+          //await interaction.deleteReply();
         }
       } else {
         console.log("Pas dans le bon salon");
