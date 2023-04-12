@@ -158,7 +158,7 @@ module.exports = {
 
                       var valRoll = valRoll + MalusPoison;
 
-                      TourOld = ficheSac.Tour[0];
+                      TourOld = ficheSac.Tour[1];
                       TourNew = TourOld - 1;
                       await ficheBag.findOneAndUpdate(
                         { _id: user.id },
