@@ -11,16 +11,14 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("use")
     .setDescription("Info pour le joueur")
+    .addUserOption((option) =>
+      option.setName("target").setDescription("to show the targeted user's tag")
+    )
     .addStringOption((option) =>
       option
         .setName("categorie")
         .setRequired(true)
         .setDescription("Choix")
-        .addUserOption((option) =>
-          option
-            .setName("target")
-            .setDescription("to show the targeted user's tag")
-        )
         .addChoices(
           { name: "Potion", value: "potion" },
           { name: "Poison", value: "poison" }
