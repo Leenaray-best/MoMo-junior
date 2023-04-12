@@ -173,7 +173,7 @@ module.exports = {
 
                       client.channels.cache
                         .get(authId.Salon.Jet)
-                        .send(`Les effets de potion ont disparu`);
+                        .send(`Les effets du poison ont disparu`);
                     }
                   }
                   console.log("Après thé", valRoll);
