@@ -119,17 +119,17 @@ module.exports = {
                   let ficheSac = await ficheBag.findOne({
                     _id: user.id,
                   });
-                  console.log("Avant thé", ValRoll);
+                  console.log("Avant thé", valRoll);
                   if (
                     interaction.member.roles.cache.has(authId.RoleRP.TheLiang)
                   ) {
                     if (ficheSac.NbrePotion > 0 && ficheSac.Tour[0] > 0) {
                       console.log("Mon tour bonus est > 0");
                       BonusPotion = Number(ficheSac.ValeurBonus);
-                      if (ValRoll < 5) {
-                        ValRoll = 0;
+                      if (valRoll < 5) {
+                        valRoll = 0;
                       } else {
-                        var ValRoll = ValRoll - BonusPotion;
+                        var valRoll = valRoll - BonusPotion;
                       }
                       TourOld = ficheSac.Tour[0];
                       TourNew = TourOld - 1;
@@ -165,7 +165,7 @@ module.exports = {
                       }
                     }
                   }
-                  console.log("Après thé", ValRoll);
+                  console.log("Après thé", valRoll);
                   if (valRoll <= NumberUp) {
                     client.channels.cache
                       .get(authId.Salon.Jet)
