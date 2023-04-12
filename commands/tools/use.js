@@ -34,7 +34,7 @@ module.exports = {
     // if (!interaction.isChatInputCommand()) return;
     const user = interaction.user;
     IdPerso = user.id;
-    PersoAppliqueObjet = interaction.options.getUser("joueur");
+    PersoAppliqueObjet = interaction.options.getMember("joueur");
     IdPersoAppliqueObjet = PersoAppliqueObjet.id;
     const channelMessage = interaction.channelId;
     console.log(interaction.member);
