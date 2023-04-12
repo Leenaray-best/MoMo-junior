@@ -37,7 +37,7 @@ module.exports = {
     PersoAppliqueObjet = interaction.options.getUser("joueur");
     IdPersoAppliqueObjet = PersoAppliqueObjet.id;
     const channelMessage = interaction.channelId;
-    console.log(interaction.member);
+    //console.log(interaction.member);
     console.log(channelMessage);
     console.log(authId.Salon.SalonBotAdmin);
     if (channelMessage == authId.Salon.SalonBotAdmin) {
@@ -88,8 +88,8 @@ module.exports = {
               );
               await ficheBagPerso.updateMany(
                 { _id: IdPersoAppliqueObjet },
-                { Tour: 0 },
-                { $set: { "Tour.0": 5 } }
+                { Tour: "0" },
+                { $set: { "Tour.0": "5" } }
               );
               if (IdPersoAppliqueObjet == user.id) {
                 const newMessage = `Tu viens d'utiliser une potion. Tu as 5 tours de boost sur tous tes jets`;
@@ -98,12 +98,12 @@ module.exports = {
                 });
               } else {
                 const newMessage =
-                  `<@` +
+                  "<@" +
                   IdPersoAppliqueObjet +
-                  "!" +
-                  `<@` +
+                  "> !" +
+                  "<@" +
                   user.id +
-                  `vient de te donner une potion qui te booste.\n Tes 5 prochains jets sont augmentés de 5`;
+                  `> vient de te donner une potion qui te booste.\n Tes 5 prochains jets sont augmentés de 5`;
                 await interaction.editReply({
                   content: newMessage,
                 });
@@ -168,18 +168,20 @@ module.exports = {
               );
               if (IdPersoAppliqueObjet == user.id) {
                 const newMessage =
-                  `AIE AIE AIE <@` +
+                  `AIE AIE AIE` +
+                  "<@" +
                   user.id +
-                  `! Tu viens de t'appliquer un poison par erreur qui t'affaiblit.\n Tes 5 prochains jets sont réduits de 5`;
+                  `> ! Tu viens de t'appliquer un poison par erreur qui t'affaiblit.\n Tes 5 prochains jets sont réduits de 5`;
                 await interaction.editReply({
                   content: newMessage,
                 });
               } else {
                 const newMessage =
-                  `AIE AIE AIE <@` +
+                  `AIE AIE AIE` +
+                  "<@" +
                   IdPersoAppliqueObjet +
-                  "!" +
-                  `<@` +
+                  "> !" +
+                  "<@" +
                   user.id +
                   `vient de te donner un poison qui t'affaiblit.\n Tes 5 prochains jets sont affaiblis de 5`;
                 await interaction.editReply({
