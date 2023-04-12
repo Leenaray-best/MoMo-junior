@@ -10,9 +10,12 @@ const ficheBagPerso = require("../../fichePersoSac");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("use")
-    .setDescription("Info pour le joueur")
+    .setDescription("Utiliser une potion ou un poison")
     .addUserOption((option) =>
-      option.setName("target").setDescription("to show the targeted user's tag")
+      option
+        .setName("target")
+        .setRequired(true)
+        .setDescription("to show the targeted user's tag")
     )
     .addStringOption((option) =>
       option
