@@ -212,6 +212,11 @@ module.exports = {
             if (interaction.member.roles.cache.has(authId.RoleRP.Chauve)) {
               var BonusSup = Number(1);
             }
+            for (i = 0; i < ficheSac.Sac.length; i++) {
+              if (ficheSac.Sac[i] == "Baton") {
+                BonusSup = BonusSup + 1;
+              }
+            }
           } else if (interaction.member.roles.cache.has(authId.RoleRP.Terre)) {
             console.log(guildBonusSalonLieu);
             console.log(channelMessage);
