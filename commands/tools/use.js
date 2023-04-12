@@ -59,7 +59,7 @@ module.exports = {
                 { _id: IdPerso },
                 { Tour: 5, NbrePotion: nombrePotionNew }
               );
-              const newMessage = `Tu viens d'utiliser ta potion. Tu as 5 tours de boost sur tout tes jets`;
+              const newMessage = `Tu viens d'utiliser ta potion. Tu as 5 tours de boost sur tous tes jets`;
               await interaction.editReply({
                 content: newMessage,
               });

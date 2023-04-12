@@ -226,7 +226,7 @@ module.exports = {
             console.log("Tu fais du sans opposition");
             console.log("BonusSup avant The", BonusSup);
             if (interaction.member.roles.cache.has(authId.RoleRP.TheLiang)) {
-              if (ficheSac.NbrePotion > 0 && ficheSac.Tour[0] > 0) {
+              if (ficheSac.NbrePotion >= 0 && ficheSac.Tour[0] > 0) {
                 console.log("Mon tour bonus est > 0");
                 BonusPotion = Number(ficheSac.ValeurBonus);
                 var BonusSup = BonusSup + BonusPotion;
@@ -370,7 +370,7 @@ module.exports = {
               Number(BonusSup);
             console.log("Avant thé", BonnusAttaqueMix);
             if (interaction.member.roles.cache.has(authId.RoleRP.TheLiang)) {
-              if (ficheSac.NbrePotion > 0 && ficheSac.Tour[0] > 0) {
+              if (ficheSac.NbrePotion >= 0 && ficheSac.Tour[0] > 0) {
                 console.log("Mon tour bonus est > 0");
                 BonusPotion = Number(ficheSac.ValeurBonus);
                 var BonnusAttaqueMix = BonnusAttaqueMix + BonusPotion;

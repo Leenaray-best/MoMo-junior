@@ -54,6 +54,12 @@ module.exports = {
             await interaction.editReply({
               content: newMessage,
             });
+          } else if (ficheSac.Tour > 0) {
+            console.log("Il reste encore des tour");
+            const newMessage = `Attention tu as encore des tours de potion! Fini les avant d'en acheter une autre`;
+            await interaction.editReply({
+              content: newMessage,
+            });
           } else {
             var nombrePotionNew = nombrePotionOld + 1;
             NewXp = fiche.NiveauXP - valuePotion;

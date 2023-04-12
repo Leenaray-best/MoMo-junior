@@ -27,8 +27,8 @@ module.exports = {
         .setDescription("Object to use")
         .setRequired(true)
         .addChoices(
-          { name: "Avec", value: "avec" },
-          { name: "Sans", value: "sans" }
+          { name: "Sans", value: "sans" },
+          { name: "Avec", value: "avec" }
         )
     )
     .addStringOption((option) =>
@@ -123,7 +123,7 @@ module.exports = {
                   if (
                     interaction.member.roles.cache.has(authId.RoleRP.TheLiang)
                   ) {
-                    if (ficheSac.NbrePotion > 0 && ficheSac.Tour[0] > 0) {
+                    if (ficheSac.NbrePotion >= 0 && ficheSac.Tour[0] > 0) {
                       console.log("Mon tour bonus est > 0");
                       BonusPotion = Number(ficheSac.ValeurBonus);
                       if (valRoll < 5) {
@@ -237,7 +237,7 @@ module.exports = {
                   if (
                     interaction.member.roles.cache.has(authId.RoleRP.TheLiang)
                   ) {
-                    if (ficheSac.NbrePotion > 0 && ficheSac.Tour[0] > 0) {
+                    if (ficheSac.NbrePotion >= 0 && ficheSac.Tour[0] > 0) {
                       console.log("Mon tour bonus est > 0");
                       BonusPotion = Number(ficheSac.ValeurBonus);
                       var valRoll = valRoll + BonusPotion;
