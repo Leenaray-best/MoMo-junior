@@ -76,7 +76,7 @@ module.exports = {
                 await interaction.editReply({
                   content: newMessage,
                 });
-              } else if (ficheSac.NbrePotion == 5) {
+              } else if (ficheSac.NbrePotion + nombreAchatPotion > 5) {
                 console.log("je suis full de potion");
                 const newMessage = `Tu as atteint le max d'achat`;
                 await interaction.editReply({
