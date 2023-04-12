@@ -119,7 +119,13 @@ module.exports = {
             let ficheSacNew = await ficheBagPerso.findOne({
               _id: IdPersoAppliqueObjet,
             });
-            if (ficheSacNew.NbrePotion == 0 && ficheSacNew.Tour[0] > 0) {
+            let ficheSacUser = await ficheBagPerso.findOne({
+              _id: user.id,
+            });
+            if (
+              ficheSacUser.NbrePotion == 0 &&
+              (ficheSacNew.Tour[0] > 0 || ficheSacUser.Tour[0] > 0)
+            ) {
               const plusPotion = ficheSacNew.NbrePotion;
               await ficheBagPerso.updateMany(
                 { _id: user.id },
@@ -127,10 +133,26 @@ module.exports = {
                   $pull: { Sac: { $in: [`${plusPotion} Potion(s)`] } },
                 }
               );
-              const newMessage = `Ta potion s'est activée mais c'était la derniere de ton inventaire`;
-              await interaction.editReply({
-                content: newMessage,
-              });
+              if (IdPersoAppliqueObjet == user.id) {
+                const newMessage = `Ta potion s'est activée mais c'était la derniere de ton inventaire`;
+                await interaction.editReply({
+                  content: newMessage,
+                });
+              } else {
+                const newMessage =
+                  "<@" +
+                  IdPersoAppliqueObjet +
+                  "> !" +
+                  "<@" +
+                  user.id +
+                  `> vient de te donner une potion qui te booste.\n Tes 5 prochains jets sont augmentés de 5` +
+                  "<@" +
+                  user.id +
+                  `C'était ta derniere potion.`;
+                await interaction.editReply({
+                  content: newMessage,
+                });
+              }
             }
           }
         } else if (interaction.options.getString("categorie") === "poison") {
@@ -211,7 +233,13 @@ module.exports = {
             let ficheSacNew = await ficheBagPerso.findOne({
               _id: IdPersoAppliqueObjet,
             });
-            if (ficheSacNew.NbrePoison == 0 && ficheSacNew.Tour[1] > 0) {
+            let ficheSacUser = await ficheBagPerso.findOne({
+              _id: user.id,
+            });
+            if (
+              ficheSacUser.NbrePotion == 0 &&
+              (ficheSacNew.Tour[0] > 0 || ficheSacUser.Tour[0] > 0)
+            ) {
               const plusPoison = ficheSacNew.NbrePoison;
               await ficheBagPerso.updateMany(
                 { _id: user.id },
