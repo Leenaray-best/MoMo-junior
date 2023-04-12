@@ -118,7 +118,7 @@ module.exports = {
             let ficheSacNew = await ficheBagPerso.findOne({
               _id: IdPersoAppliqueObjet,
             });
-            if (ficheSacNew.NbrePotion == 0) {
+            if (ficheSacNew.NbrePotion == 0 && ficheSacNew.Tour[0] > 0) {
               const plusPotion = ficheSacNew.NbrePotion;
               await ficheBagPerso.updateMany(
                 { _id: user.id },
@@ -126,7 +126,7 @@ module.exports = {
                   $pull: { Sac: { $in: [`${plusPotion} Potion(s)`] } },
                 }
               );
-              const newMessage = `Tu n'as plus de potion dans ton inventaire`;
+              const newMessage = `Ta potion s'est activée mais c'était la derniere de ton inventaire`;
               await interaction.editReply({
                 content: newMessage,
               });
@@ -210,7 +210,7 @@ module.exports = {
             let ficheSacNew = await ficheBagPerso.findOne({
               _id: IdPersoAppliqueObjet,
             });
-            if (ficheSacNew.NbrePoison == 0) {
+            if (ficheSacNew.NbrePoison == 0 && ficheSacNew.Tour[1] > 0) {
               const plusPoison = ficheSacNew.NbrePoison;
               await ficheBagPerso.updateMany(
                 { _id: user.id },
@@ -218,7 +218,7 @@ module.exports = {
                   $pull: { Sac: { $in: [`${plusPoison} Poison(s)`] } },
                 }
               );
-              const newMessage = `Tu n'as plus de poison dans ton inventaire`;
+              const newMessage = `Ta potion s'est activée mais c'était la derniere de ton inventaire`;
               await interaction.editReply({
                 content: newMessage,
               });
