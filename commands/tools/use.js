@@ -86,11 +86,15 @@ module.exports = {
                 { _id: IdPersoAppliqueObjet },
                 { NbrePotion: nombrePotionNew }
               );
-              await ficheBagPerso.updateMany(
+              await ficheBagPerso.findOneAndUpdate(
                 { _id: IdPersoAppliqueObjet },
-                { Tour: "0" },
-                { $set: { "Tour.0": "5" } }
+                { Tour: 0 },
+                { $set: { "Tour.0": 5 } }
               );
+              let ficheSacNew = await ficheBagPerso.findOne({
+                _id: IdPersoAppliqueObjet,
+              });
+              console.log(ficheSacNew);
               if (IdPersoAppliqueObjet == user.id) {
                 const newMessage = `Tu viens d'utiliser une potion. Tu as 5 tours de boost sur tous tes jets`;
                 await interaction.editReply({
@@ -161,10 +165,10 @@ module.exports = {
                 { _id: IdPersoAppliqueObjet },
                 { NbrePoison: nombrePoisonNew }
               );
-              await ficheBagPerso.updateMany(
+              await ficheBagPerso.findOneAndUpdate(
                 { _id: IdPersoAppliqueObjet },
-                { Tour: "0" },
-                { $set: { "Tour.1": "5" } }
+                { Tour: 0 },
+                { $set: { "Tour.1": 5 } }
               );
               if (IdPersoAppliqueObjet == user.id) {
                 const newMessage =
