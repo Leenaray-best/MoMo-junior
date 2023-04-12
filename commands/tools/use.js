@@ -37,7 +37,8 @@ module.exports = {
     PersoAppliqueObjet = interaction.options.getUser("joueur");
     IdPersoAppliqueObjet = PersoAppliqueObjet.id;
     const channelMessage = interaction.channelId;
-    //console.log(interaction.member);
+    console.log(interaction.member);
+    console.log(PersoAppliqueObjet);
     console.log(channelMessage);
     console.log(authId.Salon.SalonBotAdmin);
     if (channelMessage == authId.Salon.SalonBotAdmin) {
