@@ -227,8 +227,8 @@ module.exports = {
             var ValRoll =
               valRandom + Number(BonusNiveauMaitrise) + Number(BonusSup);
             console.log(ValRoll);
-            for (i = 0; i < ficheSac.Sac.length; i++) {
-              if (ficheSac.Sac[i] == "Potion(s)" && ficheSac.Tour[0] > 0) {
+            if (interaction.member.roles.cache.has(authId.RoleRP.TheLiang)) {
+              if (ficheSac.NbrePotion > 0 && ficheSac.Tour[0] > 0) {
                 console.log("Mon tour bonus est > 0");
                 BonusPotion = Number(ficheSac.ValeurBonus);
                 var ValRoll = ValRoll + BonusPotion;
@@ -242,10 +242,7 @@ module.exports = {
               let ficheSacNew = await ficheBagPerso.findOne({
                 _id: user.id,
               });
-              if (
-                ficheSacNew.Sac[i] == "Potion(s)" &&
-                ficheSacNew.Tour[0] == 0
-              ) {
+              if (ficheSacNew.Tour[0] == 0) {
                 if (ficheSacNew.NbrePotion == 0) {
                   const nombrePotionOld = ficheSacNew.NbrePotion;
                   console.log("Mon tour bonus est à 0");
@@ -253,6 +250,11 @@ module.exports = {
                     { _id: user.id },
                     { $pull: { Sac: { $in: [`${nombrePotionOld} Potion`] } } }
                   );
+                  client.channels.cache
+                    .get(authId.Salon.Jet)
+                    .send(
+                      `Les effets de potion ont disparu et tu n'as plus de potion dans ton inventaire`
+                    );
                 } else {
                   client.channels.cache
                     .get(authId.Salon.Jet)
@@ -370,10 +372,11 @@ module.exports = {
               Number(BonusCompetence) +
               Number(BonusSup);
             console.log(BonnusAttaqueMix);
-            for (i = 0; i < ficheSac.Sac.length; i++) {
-              if (ficheSac.Sac[i] == "Potion" && ficheSac.Tour[0] > 0) {
+            if (interaction.member.roles.cache.has(authId.RoleRP.TheLiang)) {
+              if (ficheSac.NbrePotion > 0 && ficheSac.Tour[0] > 0) {
+                console.log("Mon tour bonus est > 0");
                 BonusPotion = Number(ficheSac.ValeurBonus);
-                var BonnusAttaqueMix = BonnusAttaqueMix + BonusPotion;
+                var ValRoll = ValRoll + BonusPotion;
                 TourOld = ficheSac.Tour[0];
                 TourNew = TourOld - 1;
                 await ficheBagPerso.findOneAndUpdate(
@@ -384,7 +387,7 @@ module.exports = {
               let ficheSacNew = await ficheBagPerso.findOne({
                 _id: user.id,
               });
-              if (ficheSacNew.Sac[i] == "Potion" && ficheSacNew.Tour[0] == 0) {
+              if (ficheSacNew.Tour[0] == 0) {
                 if (ficheSacNew.NbrePotion == 0) {
                   const nombrePotionOld = ficheSacNew.NbrePotion;
                   console.log("Mon tour bonus est à 0");
@@ -392,6 +395,11 @@ module.exports = {
                     { _id: user.id },
                     { $pull: { Sac: { $in: [`${nombrePotionOld} Potion`] } } }
                   );
+                  client.channels.cache
+                    .get(authId.Salon.Jet)
+                    .send(
+                      `Les effets de potion ont disparu et tu n'as plus de potion dans ton inventaire`
+                    );
                 } else {
                   client.channels.cache
                     .get(authId.Salon.Jet)
