@@ -404,11 +404,7 @@ module.exports = {
               }
             }
             console.log("Apres thé", BonnusAttaqueMix);
-            var ValRoll =
-              valRandom +
-              Number(BonusNiveauMaitrise) +
-              Number(BonusCompetence) +
-              Number(BonusSup);
+            var ValRoll = valRandom + BonnusAttaqueMix;
             if (ValRoll < 15) {
               client.channels.cache
                 .get(authId.Salon.Jet)

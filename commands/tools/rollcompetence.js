@@ -133,19 +133,19 @@ module.exports = {
                       }
                       TourOld = ficheSac.Tour[0];
                       TourNew = TourOld - 1;
-                      await ficheBagPerso.findOneAndUpdate(
+                      await ficheBag.findOneAndUpdate(
                         { _id: user.id },
                         { Tour: TourNew }
                       );
                     }
-                    let ficheSacNew = await ficheBagPerso.findOne({
+                    let ficheSacNew = await ficheBag.findOne({
                       _id: user.id,
                     });
                     if (ficheSacNew.Tour[0] == 0) {
                       if (ficheSacNew.NbrePotion == 0) {
                         const nombrePotionOld = ficheSacNew.NbrePotion;
                         console.log("Mon tour bonus est à 0");
-                        await ficheBagPerso.updateMany(
+                        await ficheBag.updateMany(
                           { _id: user.id },
                           {
                             $pull: {
@@ -230,7 +230,7 @@ module.exports = {
 
                   console.log("Avant thé", valRoll);
                   console.log(NumberUp);
-                  let ficheSac = await ficheBag.findOne({
+                  let ficheSac = await guildPersoBag.findOne({
                     _id: user.id,
                   });
                   if (
@@ -242,19 +242,19 @@ module.exports = {
                       var valRoll = valRoll + BonusPotion;
                       TourOld = ficheSac.Tour[0];
                       TourNew = TourOld - 1;
-                      await ficheBagPerso.findOneAndUpdate(
+                      await ficheBag.findOneAndUpdate(
                         { _id: user.id },
                         { Tour: TourNew }
                       );
                     }
-                    let ficheSacNew = await ficheBagPerso.findOne({
+                    let ficheSacNew = await ficheBag.findOne({
                       _id: user.id,
                     });
                     if (ficheSacNew.Tour[0] == 0) {
                       if (ficheSacNew.NbrePotion == 0) {
                         const nombrePotionOld = ficheSacNew.NbrePotion;
                         console.log("Mon tour bonus est à 0");
-                        await ficheBagPerso.updateMany(
+                        await ficheBag.updateMany(
                           { _id: user.id },
                           {
                             $pull: {
