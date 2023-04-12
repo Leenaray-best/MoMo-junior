@@ -9,7 +9,7 @@ const ficheBagPerso = require("../../fichePersoSac");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("achat")
+    .setName("use")
     .setDescription("Info pour le joueur")
     .addStringOption((option) =>
       option
