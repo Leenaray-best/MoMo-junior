@@ -56,10 +56,21 @@ module.exports = {
               { _id: IdPerso },
               { NiveauXP: NewXp }
             );
-            await ficheBagPerso.findOneAndUpdate(
-              { _id: IdPerso },
-              { $push: { Sac: `${nombrePotionNew} Potion` } }
-            );
+            if (nombrePotionOld == 0) {
+              await ficheBagPerso.findOneAndUpdate(
+                { _id: IdPerso },
+                { $push: { Sac: `${nombrePotionNew} Potion` } }
+              );
+            } else {
+              await ficheBagPerso.updateMany(
+                { _id: user.id },
+                { $pull: { Sac: { $in: [`${nombrePotionOld} Potion`] } } }
+              );
+              await ficheBagPerso.findOneAndUpdate(
+                { _id: IdPerso },
+                { $push: { Sac: `${nombrePotionNew} Potion` } }
+              );
+            }
             await ficheBagPerso.findOneAndUpdate(
               { _id: IdPerso },
               { Tour: 5, ValeurBonus: 5, NbrePotion: nombrePotionNew }
