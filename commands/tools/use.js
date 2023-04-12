@@ -45,7 +45,7 @@ module.exports = {
             });
           } else {
             if (nombrePotionOld > 0) {
-              interaction.message.member.roles.add(authId.RoleRP.TheLiang);
+              interaction.member.roles.add(authId.RoleRP.TheLiang);
               var nombrePotionNew = nombrePotionOld - 1;
               await ficheBagPerso.updateMany(
                 { _id: user.id },
