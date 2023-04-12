@@ -29,6 +29,7 @@ module.exports = {
     console.log(channelMessage);
     console.log(authId.Salon.SalonBotAdmin);
     if (channelMessage == authId.Salon.SalonBotAdmin) {
+      console.log("On est dans le bon salon");
       if (interaction.commandName === "achat") {
         if (interaction.options.getString("categorie") === "potion") {
           let fiche = await fichePerso.findOne({
@@ -40,11 +41,13 @@ module.exports = {
           const valuePotion = 1000;
           const nombrePotionOld = ficheSac.NbrePotion;
           if (fiche.NiveauXP < valuePotion) {
+            console.log("j'ai assez d'XP");
             const newMessage = `Désolé tu n'as pas les fond pour ton achat`;
             await interaction.editReply({
               content: newMessage,
             });
           } else if (ficheSac.NbrePotion == 5) {
+            console.log("je suis full de potion");
             const newMessage = `Tu as atteint le max d'achat`;
             await interaction.editReply({
               content: newMessage,
