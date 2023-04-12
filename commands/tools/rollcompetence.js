@@ -275,11 +275,9 @@ module.exports = {
                     if (ficheSac.Tour[1] > 0) {
                       console.log("Mon tour bonus est > 0");
                       MalusPoison = Number(ficheSac.ValeurBonus);
-                      if (valRoll < ficheSac.ValeurBonus) {
-                        var valRoll = 0;
-                      } else {
-                        var valRoll = valRoll - MalusPoison;
-                      }
+
+                      var valRoll = valRoll - MalusPoison;
+
                       TourOld = ficheSac.Tour[1];
                       TourNew = TourOld - 1;
                       await ficheBag.findOneAndUpdate(
