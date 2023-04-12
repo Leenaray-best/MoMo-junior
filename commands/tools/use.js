@@ -136,15 +136,15 @@ module.exports = {
               );
               if (IdPersoAppliqueObjet == user.id) {
                 const newMessage =
-                  `<@` +
+                  `AIE AIE AIE <@` +
                   user.id +
-                  `! Tu viens de t'appliquer un poison par erreur qui t'affaiblit.\n Tes 5 prochains jets sont affaiblis de 5`;
+                  `! Tu viens de t'appliquer un poison par erreur qui t'affaiblit.\n Tes 5 prochains jets sont réduits de 5`;
                 await interaction.editReply({
                   content: newMessage,
                 });
               } else {
                 const newMessage =
-                  `<@` +
+                  `AIE AIE AIE <@` +
                   IdPersoAppliqueObjet +
                   "!" +
                   `<@` +
