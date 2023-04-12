@@ -57,7 +57,7 @@ module.exports = {
               );
               await ficheBagPerso.findOneAndUpdate(
                 { _id: IdPerso },
-                { NbrePotion: nombrePotionNew }
+                { Tour: 5, NbrePotion: nombrePotionNew }
               );
               const newMessage = `Tu viens d'utiliser ta potion. Tu as 5 tours de boost sur tout tes jets`;
               await interaction.editReply({
