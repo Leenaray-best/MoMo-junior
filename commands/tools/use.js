@@ -115,6 +115,22 @@ module.exports = {
                 content: newMessage,
               });
             }
+            let ficheSacNew = await ficheBagPerso.findOne({
+              _id: IdPersoAppliqueObjet,
+            });
+            if (ficheSacNew.NbrePotion == 0) {
+              const plusPotion = ficheSacNew.NbrePotion;
+              await ficheBagPerso.updateMany(
+                { _id: user.id },
+                {
+                  $pull: { Sac: { $in: [`${plusPotion} Potion(s)`] } },
+                }
+              );
+              const newMessage = `Tu n'as plus de potion dans ton inventaire`;
+              await interaction.editReply({
+                content: newMessage,
+              });
+            }
           }
         } else if (interaction.options.getString("categorie") === "poison") {
           let fiche = await fichePerso.findOne({
@@ -187,6 +203,22 @@ module.exports = {
             } else {
               console.log("PAS DE POISON");
               const newMessage = `Tu n'as plus de poison. Il te faut d'abord aller en acheter`;
+              await interaction.editReply({
+                content: newMessage,
+              });
+            }
+            let ficheSacNew = await ficheBagPerso.findOne({
+              _id: IdPersoAppliqueObjet,
+            });
+            if (ficheSacNew.NbrePoison == 0) {
+              const plusPoison = ficheSacNew.NbrePoison;
+              await ficheBagPerso.updateMany(
+                { _id: user.id },
+                {
+                  $pull: { Sac: { $in: [`${plusPoison} Poison(s)`] } },
+                }
+              );
+              const newMessage = `Tu n'as plus de poison dans ton inventaire`;
               await interaction.editReply({
                 content: newMessage,
               });

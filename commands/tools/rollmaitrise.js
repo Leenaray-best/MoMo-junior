@@ -231,7 +231,7 @@ module.exports = {
             console.log("Tu fais du sans opposition");
             console.log("BonusSup avant The", BonusSup);
             if (interaction.member.roles.cache.has(authId.RoleRP.TheLiang)) {
-              if (ficheSac.NbrePotion >= 0 && ficheSac.Tour[0] > 0) {
+              if (ficheSac.Tour[0] > 0) {
                 console.log("Mon tour bonus est > 0");
                 BonusPotion = Number(ficheSac.ValeurBonus);
                 var BonusSup = BonusSup + BonusPotion;
@@ -239,7 +239,7 @@ module.exports = {
                 TourNew = TourOld - 1;
                 await ficheBagPerso.findOneAndUpdate(
                   { _id: user.id },
-                  { Tour: TourNew }
+                  { "Tour.0": TourNew }
                 );
               }
               let ficheSacNew = await ficheBagPerso.findOne({
@@ -247,28 +247,49 @@ module.exports = {
               });
               if (ficheSacNew.Tour[0] == 0) {
                 interaction.member.roles.remove(authId.RoleRP.TheLiang);
-                if (ficheSacNew.NbrePotion == 0) {
-                  const nombrePotionOld = ficheSacNew.NbrePotion;
-                  console.log("Mon tour bonus est à 0");
+
+                client.channels.cache
+                  .get(authId.Salon.Jet)
+                  .send(`Les effets de potion ont disparu`);
+              }
+            }
+            if (interaction.member.roles.cache.has(authId.RoleRP.Poison)) {
+              if (ficheSac.NbrePoison >= 0 && ficheSac.Tour[1] > 0) {
+                console.log("Mon tour malus est > 0");
+                MalusPoison = Number(ficheSac.ValeurBonus);
+                var BonusSup = BonusSup - MalusPoison;
+                TourOld = ficheSac.Tour[1];
+                TourNew = TourOld - 1;
+                await ficheBagPerso.findOneAndUpdate(
+                  { _id: user.id },
+                  { "Tour.1": TourNew }
+                );
+              }
+              let ficheSacNew = await ficheBagPerso.findOne({
+                _id: user.id,
+              });
+              if (ficheSacNew.Tour[1] == 0) {
+                interaction.member.roles.remove(authId.RoleRP.Poison);
+                if (ficheSacNew.NbrePoison == 0) {
+                  const nombrePoisonOld = ficheSacNew.NbrePoison;
+                  console.log("Mon tour bonus poison est à 0");
                   await ficheBagPerso.updateMany(
                     { _id: user.id },
                     {
-                      $pull: { Sac: { $in: [`${nombrePotionOld} Potion(s)`] } },
+                      $pull: { Sac: { $in: [`${nombrePoisonOld} Poison(s)`] } },
                     }
                   );
                   client.channels.cache
                     .get(authId.Salon.Jet)
-                    .send(
-                      `Les effets de potion ont disparu et tu n'as plus de potion dans ton inventaire`
-                    );
+                    .send(`Les effets du poison ont disparu`);
                 } else {
                   client.channels.cache
                     .get(authId.Salon.Jet)
-                    .send(`Les effets de potion ont disparu`);
+                    .send(`Les effets du poison ont disparu`);
                 }
               }
             }
-            console.log("BonusSup si The", BonusSup);
+            console.log("BonusSup si The/Poison", BonusSup);
             var ValRoll =
               valRandom + Number(BonusNiveauMaitrise) + Number(BonusSup);
             console.log(ValRoll);
@@ -385,7 +406,7 @@ module.exports = {
                 TourNew = TourOld - 1;
                 await ficheBagPerso.findOneAndUpdate(
                   { _id: user.id },
-                  { Tour: TourNew }
+                  { "Tour.0": TourNew }
                 );
               }
               let ficheSacNew = await ficheBagPerso.findOne({
@@ -412,6 +433,29 @@ module.exports = {
                     .get(authId.Salon.Jet)
                     .send(`Les effets de potion ont disparu`);
                 }
+              }
+            }
+            if (interaction.member.roles.cache.has(authId.RoleRP.Poison)) {
+              if (ficheSac.Tour[1] > 0) {
+                console.log("Mon tour bonus est > 0");
+                MalusPoison = Number(ficheSac.ValeurBonus);
+                var BonnusAttaqueMix = BonnusAttaqueMix - MalusPoison;
+                TourOld = ficheSac.Tour[1];
+                TourNew = TourOld - 1;
+                await ficheBagPerso.findOneAndUpdate(
+                  { _id: user.id },
+                  { "Tour.1": TourNew }
+                );
+              }
+              let ficheSacNew = await ficheBagPerso.findOne({
+                _id: user.id,
+              });
+              if (ficheSacNew.Tour[1] == 0) {
+                interaction.member.roles.remove(authId.RoleRP.Poison);
+
+                client.channels.cache
+                  .get(authId.Salon.Jet)
+                  .send(`Les effets de potion ont disparu`);
               }
             }
             console.log("Apres thé", BonnusAttaqueMix);
