@@ -224,14 +224,12 @@ module.exports = {
           }
           if (interaction.options.getString("categorie") == "sansopposition") {
             console.log("Tu fais du sans opposition");
-            var ValRoll =
-              valRandom + Number(BonusNiveauMaitrise) + Number(BonusSup);
-            console.log(ValRoll);
+            console.log("BonusSup avant The", BonusSup);
             if (interaction.member.roles.cache.has(authId.RoleRP.TheLiang)) {
               if (ficheSac.NbrePotion > 0 && ficheSac.Tour[0] > 0) {
                 console.log("Mon tour bonus est > 0");
                 BonusPotion = Number(ficheSac.ValeurBonus);
-                var ValRoll = ValRoll + BonusPotion;
+                var BonusSup = BonusSup + BonusPotion;
                 TourOld = ficheSac.Tour[0];
                 TourNew = TourOld - 1;
                 await ficheBagPerso.findOneAndUpdate(
@@ -262,6 +260,9 @@ module.exports = {
                 }
               }
             }
+            console.log("BonusSup si The", BonusSup);
+            var ValRoll =
+              valRandom + Number(BonusNiveauMaitrise) + Number(BonusSup);
             console.log(ValRoll);
             if (ValRoll <= 1) {
               client.channels.cache
@@ -294,7 +295,7 @@ module.exports = {
                     BonusNiveauMaitrise +
                     " (bonus/malus maitrise) + " +
                     BonusSup +
-                    " (bonus/malus Meteo/Carac/Lieu) = " +
+                    " (bonus/malus Meteo/Potion/Lieu) = " +
                     ValRoll +
                     "\rTu n'as pas su utiliser ta maitrise correctement, c'est un echec sans dommage physique" +
                     `\rTu peux repartir dans ${client.channels.cache.get(
@@ -313,7 +314,7 @@ module.exports = {
                     BonusNiveauMaitrise +
                     " (bonus/malus maitrise) + " +
                     BonusSup +
-                    " (bonus/malus Meteo/Carac/Lieu) = " +
+                    " (bonus/malus Meteo/Potion/Lieu) = " +
                     ValRoll +
                     "\rLa maitrise de ton element est correcte, tu reussis ton action sans briller" +
                     `\rTu peux repartir dans ${client.channels.cache.get(
@@ -332,7 +333,7 @@ module.exports = {
                     BonusNiveauMaitrise +
                     " (bonus/malus maitrise) + " +
                     BonusSup +
-                    " (bonus/malus Meteo/Carac/Lieu) = " +
+                    " (bonus/malus Meteo/Potion/Lieu) = " +
                     ValRoll +
                     "\rLa maitrise de ton element est tres bonne, tu reussis ton action !" +
                     `\rTu peux repartir dans ${client.channels.cache.get(
@@ -351,7 +352,7 @@ module.exports = {
                     BonusNiveauMaitrise +
                     " (bonus/malus maitrise) + " +
                     BonusSup +
-                    " (bonus/malus Meteo/Carac/Lieu) = " +
+                    " (bonus/malus Meteo/Potion/Lieu) = " +
                     ValRoll +
                     "\rBravo c'est une reussite critique ! Ton action est juste parfait" +
                     `\rTu peux repartir dans ${client.channels.cache.get(
@@ -362,21 +363,16 @@ module.exports = {
           } else if (
             interaction.options.getString("categorie") == "avecopposition"
           ) {
-            var ValRoll =
-              valRandom +
-              Number(BonusNiveauMaitrise) +
-              Number(BonusCompetence) +
-              Number(BonusSup);
             var BonnusAttaqueMix =
               Number(BonusNiveauMaitrise) +
               Number(BonusCompetence) +
               Number(BonusSup);
-            console.log(BonnusAttaqueMix);
+            console.log("Avant thé", BonnusAttaqueMix);
             if (interaction.member.roles.cache.has(authId.RoleRP.TheLiang)) {
               if (ficheSac.NbrePotion > 0 && ficheSac.Tour[0] > 0) {
                 console.log("Mon tour bonus est > 0");
                 BonusPotion = Number(ficheSac.ValeurBonus);
-                var ValRoll = ValRoll + BonusPotion;
+                var BonnusAttaqueMix = BonnusAttaqueMix + BonusPotion;
                 TourOld = ficheSac.Tour[0];
                 TourNew = TourOld - 1;
                 await ficheBagPerso.findOneAndUpdate(
@@ -407,7 +403,12 @@ module.exports = {
                 }
               }
             }
-            console.log(BonnusAttaqueMix);
+            console.log("Apres thé", BonnusAttaqueMix);
+            var ValRoll =
+              valRandom +
+              Number(BonusNiveauMaitrise) +
+              Number(BonusCompetence) +
+              Number(BonusSup);
             if (ValRoll < 15) {
               client.channels.cache
                 .get(authId.Salon.Jet)

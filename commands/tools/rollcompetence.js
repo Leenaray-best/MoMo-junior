@@ -119,13 +119,18 @@ module.exports = {
                   let ficheSac = await ficheBag.findOne({
                     _id: user.id,
                   });
+                  console.log("Avant thé", ValRoll);
                   if (
                     interaction.member.roles.cache.has(authId.RoleRP.TheLiang)
                   ) {
                     if (ficheSac.NbrePotion > 0 && ficheSac.Tour[0] > 0) {
                       console.log("Mon tour bonus est > 0");
                       BonusPotion = Number(ficheSac.ValeurBonus);
-                      var ValRoll = ValRoll + BonusPotion;
+                      if (ValRoll < 5) {
+                        ValRoll = 0;
+                      } else {
+                        var ValRoll = ValRoll - BonusPotion;
+                      }
                       TourOld = ficheSac.Tour[0];
                       TourNew = TourOld - 1;
                       await ficheBagPerso.findOneAndUpdate(
@@ -160,7 +165,7 @@ module.exports = {
                       }
                     }
                   }
-                  console.log(valRoll);
+                  console.log("Après thé", ValRoll);
                   if (valRoll <= NumberUp) {
                     client.channels.cache
                       .get(authId.Salon.Jet)
@@ -193,7 +198,6 @@ module.exports = {
             }
           } else if (interaction.options.getString("opposition") === "avec") {
             valRoll = Rand(20);
-            console.log(valRoll);
             for (i = 0; i < listeCompetence.length; i++) {
               if (
                 interaction.options.getString("competence") ===
@@ -223,10 +227,8 @@ module.exports = {
                     );
                 } else {
                   var NumberUp = guildPersoBag.Competence[i];
-                  var valTotal = valRoll + NumberUp;
 
-                  console.log(valTotal);
-                  console.log(valRoll);
+                  console.log("Avant thé", valRoll);
                   console.log(NumberUp);
                   let ficheSac = await ficheBag.findOne({
                     _id: user.id,
@@ -237,7 +239,7 @@ module.exports = {
                     if (ficheSac.NbrePotion > 0 && ficheSac.Tour[0] > 0) {
                       console.log("Mon tour bonus est > 0");
                       BonusPotion = Number(ficheSac.ValeurBonus);
-                      var ValRoll = ValRoll + BonusPotion;
+                      var valRoll = valRoll + BonusPotion;
                       TourOld = ficheSac.Tour[0];
                       TourNew = TourOld - 1;
                       await ficheBagPerso.findOneAndUpdate(
@@ -272,6 +274,8 @@ module.exports = {
                       }
                     }
                   }
+                  console.log("Apres the", valRoll);
+                  var valTotal = valRoll + NumberUp;
                   console.log(valTotal);
                   client.channels.cache
                     .get(authId.Salon.Jet)
