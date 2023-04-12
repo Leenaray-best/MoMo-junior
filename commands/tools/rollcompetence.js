@@ -150,7 +150,7 @@ module.exports = {
                           { _id: user.id },
                           {
                             $pull: {
-                              Sac: { $in: [`${nombrePotionOld} Potion`] },
+                              Sac: { $in: [`${nombrePotionOld} Potion(s)`] },
                             },
                           }
                         );
@@ -260,7 +260,7 @@ module.exports = {
                           { _id: user.id },
                           {
                             $pull: {
-                              Sac: { $in: [`${nombrePotionOld} Potion`] },
+                              Sac: { $in: [`${nombrePotionOld} Potion(s)`] },
                             },
                           }
                         );

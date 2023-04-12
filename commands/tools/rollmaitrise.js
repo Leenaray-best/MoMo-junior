@@ -247,7 +247,9 @@ module.exports = {
                   console.log("Mon tour bonus est à 0");
                   await ficheBagPerso.updateMany(
                     { _id: user.id },
-                    { $pull: { Sac: { $in: [`${nombrePotionOld} Potion`] } } }
+                    {
+                      $pull: { Sac: { $in: [`${nombrePotionOld} Potion(s)`] } },
+                    }
                   );
                   client.channels.cache
                     .get(authId.Salon.Jet)
@@ -391,7 +393,9 @@ module.exports = {
                   console.log("Mon tour bonus est à 0");
                   await ficheBagPerso.updateMany(
                     { _id: user.id },
-                    { $pull: { Sac: { $in: [`${nombrePotionOld} Potion`] } } }
+                    {
+                      $pull: { Sac: { $in: [`${nombrePotionOld} Potion(s)`] } },
+                    }
                   );
                   client.channels.cache
                     .get(authId.Salon.Jet)
