@@ -15,6 +15,7 @@ const salonQuete = mongoose.Schema({
   Escargot: [String],
   Pardon: [String],
   Putois: [String],
+  AchatRP: [String],
   time: Date,
 });
 
