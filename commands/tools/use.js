@@ -84,8 +84,12 @@ module.exports = {
                 { $push: { Sac: `${nombrePotionNew} Potion(s)` } }
               );
               await ficheBagPerso.findOneAndUpdate(
+                { _id: user.id },
+                { NbrePotion: nombrePotionNew }
+              );
+              await ficheBagPerso.findOneAndUpdate(
                 { _id: IdPersoAppliqueObjet },
-                { "Tour.0": 5, NbrePotion: nombrePotionNew }
+                { "Tour.0": 5 }
               );
 
               let ficheSacNew = await ficheBagPerso.findOne({
@@ -197,8 +201,12 @@ module.exports = {
                 { $push: { Sac: `${nombrePoisonNew} Poison(s)` } }
               );
               await ficheBagPerso.findOneAndUpdate(
+                { _id: user.id },
+                { NbrePoison: nombrePoisonNew }
+              );
+              await ficheBagPerso.findOneAndUpdate(
                 { _id: IdPersoAppliqueObjet },
-                { "Tour.1": 5, NbrePoison: nombrePoisonNew }
+                { "Tour.1": 5 }
               );
 
               if (IdPersoAppliqueObjet == user.id) {
