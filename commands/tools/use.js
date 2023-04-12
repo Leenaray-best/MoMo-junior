@@ -218,10 +218,31 @@ module.exports = {
                   $pull: { Sac: { $in: [`${plusPoison} Poison(s)`] } },
                 }
               );
-              const newMessage = `Ta potion s'est activée mais c'était la derniere de ton inventaire`;
-              await interaction.editReply({
-                content: newMessage,
-              });
+              if (IdPersoAppliqueObjet == user.id) {
+                const newMessage =
+                  `AIE AIE AIE` +
+                  "<@" +
+                  user.id +
+                  `> ! Tu viens de t'appliquer un poison par erreur qui t'affaiblit.\n Tes 5 prochains jets sont réduits de 5\n Tu n'as plus de poison dans ton inventaire.`;
+                await interaction.editReply({
+                  content: newMessage,
+                });
+              } else {
+                const newMessage =
+                  `AIE AIE AIE` +
+                  "<@" +
+                  IdPersoAppliqueObjet +
+                  "> !" +
+                  "<@" +
+                  user.id +
+                  `vient de te donner un poison qui t'affaiblit.\n Tes 5 prochains jets sont affaiblis de 5` +
+                  "<@" +
+                  user.id +
+                  `C'était ton dernier poison.`;
+                await interaction.editReply({
+                  content: newMessage,
+                });
+              }
             }
           }
         } else {
