@@ -84,13 +84,9 @@ module.exports = {
               );
               await ficheBagPerso.findOneAndUpdate(
                 { _id: IdPersoAppliqueObjet },
-                { NbrePotion: nombrePotionNew }
+                { "Tour.0": 5, NbrePotion: nombrePotionNew }
               );
-              await ficheBagPerso.findOneAndUpdate(
-                { _id: IdPersoAppliqueObjet },
-                { Tour: 0 },
-                { $set: { "Tour.0": 5 } }
-              );
+
               let ficheSacNew = await ficheBagPerso.findOne({
                 _id: IdPersoAppliqueObjet,
               });
@@ -163,13 +159,9 @@ module.exports = {
               );
               await ficheBagPerso.findOneAndUpdate(
                 { _id: IdPersoAppliqueObjet },
-                { NbrePoison: nombrePoisonNew }
+                { "Tour.1": 5, NbrePoison: nombrePoisonNew }
               );
-              await ficheBagPerso.findOneAndUpdate(
-                { _id: IdPersoAppliqueObjet },
-                { Tour: 0 },
-                { $set: { "Tour.1": 5 } }
-              );
+
               if (IdPersoAppliqueObjet == user.id) {
                 const newMessage =
                   `AIE AIE AIE` +
