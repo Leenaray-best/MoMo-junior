@@ -163,8 +163,8 @@ module.exports = {
               );
               await ficheBagPerso.updateMany(
                 { _id: IdPersoAppliqueObjet },
-                { Tour: 0 },
-                { $set: { "Tour.1": 5 } }
+                { Tour: "0" },
+                { $set: { "Tour.1": "5" } }
               );
               if (IdPersoAppliqueObjet == user.id) {
                 const newMessage =
