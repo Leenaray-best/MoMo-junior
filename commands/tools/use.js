@@ -152,7 +152,7 @@ module.exports = {
                   `> vient de te donner une potion qui te booste.\n Tes 5 prochains jets sont augmentés de 5` +
                   "<@" +
                   user.id +
-                  `C'était ta derniere potion.`;
+                  `> C'était ta derniere potion.`;
                 await interaction.editReply({
                   content: newMessage,
                 });
@@ -226,7 +226,7 @@ module.exports = {
                   "> !" +
                   "<@" +
                   user.id +
-                  `vient de te donner un poison qui t'affaiblit.\n Tes 5 prochains jets sont affaiblis de 5`;
+                  `> vient de te donner un poison qui t'affaiblit.\n Tes 5 prochains jets sont affaiblis de 5`;
                 await interaction.editReply({
                   content: newMessage,
                 });
@@ -272,10 +272,10 @@ module.exports = {
                   "> !" +
                   "<@" +
                   user.id +
-                  `vient de te donner un poison qui t'affaiblit.\n Tes 5 prochains jets sont affaiblis de 5` +
+                  `> vient de te donner un poison qui t'affaiblit.\n Tes 5 prochains jets sont affaiblis de 5` +
                   "<@" +
                   user.id +
-                  `C'était ton dernier poison.`;
+                  `> C'était ton dernier poison.`;
                 await interaction.editReply({
                   content: newMessage,
                 });
