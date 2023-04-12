@@ -80,7 +80,7 @@ module.exports = {
             "intelligence",
             "survie",
             "adresse",
-            "spiritualité",
+            "spiritualite",
             "discretion",
           ];
           if (interaction.options.getString("opposition") === "sans") {
@@ -142,6 +142,7 @@ module.exports = {
                       _id: user.id,
                     });
                     if (ficheSacNew.Tour[0] == 0) {
+                      interaction.member.roles.remove(authId.RoleRP.TheLiang);
                       if (ficheSacNew.NbrePotion == 0) {
                         const nombrePotionOld = ficheSacNew.NbrePotion;
                         console.log("Mon tour bonus est à 0");
@@ -251,6 +252,7 @@ module.exports = {
                       _id: user.id,
                     });
                     if (ficheSacNew.Tour[0] == 0) {
+                      interaction.member.roles.remove(authId.RoleRP.TheLiang);
                       if (ficheSacNew.NbrePotion == 0) {
                         const nombrePotionOld = ficheSacNew.NbrePotion;
                         console.log("Mon tour bonus est à 0");
