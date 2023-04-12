@@ -49,7 +49,7 @@ module.exports = {
               var nombrePotionNew = nombrePotionOld - 1;
               await ficheBagPerso.updateMany(
                 { _id: user.id },
-                { $pull: { Sac: { $in: [`${nombrePotionOld} Potion`] } } }
+                { $pull: { Sac: { $in: [`${nombrePotionOld} Potion(s)`] } } }
               );
               await ficheBagPerso.findOneAndUpdate(
                 { _id: IdPerso },
