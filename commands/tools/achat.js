@@ -28,9 +28,9 @@ module.exports = {
     const channelMessage = interaction.channelId;
     console.log("test du bon salon");
     console.log(channelMessage);
-    console.log(authId.Salon.SalonBotAdmin);
+    console.log(authId.Salon.JetDeDes);
 
-    if (channelMessage == authId.Salon.SalonBotAdmin) {
+    if (channelMessage == authId.Salon.JetDeDes) {
       console.log("On est dans le bon salon");
       if (interaction.commandName === "achat") {
         if (interaction.options.getString("categorie") === "potion") {
@@ -99,9 +99,7 @@ module.exports = {
         }
       }
     } else {
-      const ChannelNameId = client.channels.cache.get(
-        authId.Salon.SalonBotAdmin
-      );
+      const ChannelNameId = client.channels.cache.get(authId.Salon.JetDeDes);
       const newMessage = `Tu n'es pas dans le bon salon\nTu dois faire cette commande dans le salon ${ChannelNameId}`;
       await interaction.editReply({
         content: newMessage,
