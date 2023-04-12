@@ -72,7 +72,7 @@ module.exports = {
               if (IdPersoAppliqueObjet == user.id) {
                 interaction.member.roles.add(authId.RoleRP.TheLiang);
               } else {
-                PersoAppliqueObjet.roles.cache.add(authId.RoleRP.TheLiang);
+                PersoAppliqueObjet.roles.add(authId.RoleRP.TheLiang);
               }
               var nombrePotionNew = nombrePotionOld - 1;
               await ficheBagPerso.updateMany(
@@ -163,7 +163,7 @@ module.exports = {
               if (IdPersoAppliqueObjet == user.id) {
                 interaction.member.roles.add(authId.RoleRP.Poison);
               } else {
-                PersoAppliqueObjet.roles.cache.add(authId.RoleRP.Poison);
+                PersoAppliqueObjet.roles.add(authId.RoleRP.Poison);
               }
               var nombrePoisonNew = nombrePoisonOld - 1;
               await ficheBagPerso.updateMany(
