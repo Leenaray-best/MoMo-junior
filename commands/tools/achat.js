@@ -28,6 +28,7 @@ module.exports = {
     const channelMessage = interaction.channelId;
     console.log(channelMessage);
     console.log(authId.Salon.SalonBotAdmin);
+    console.log("test du bon salon");
     if (channelMessage == authId.Salon.SalonBotAdmin) {
       console.log("On est dans le bon salon");
       if (interaction.commandName === "achat") {
