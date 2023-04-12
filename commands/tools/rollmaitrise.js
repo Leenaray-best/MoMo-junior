@@ -213,7 +213,7 @@ module.exports = {
               var BonusSup = Number(1);
             }
             for (i = 0; i < ficheSac.Sac.length; i++) {
-              if (ficheSac.Sac[i] == "Baton") {
+              if (ficheSac.Sac[i] == "baton") {
                 BonusSup = BonusSup + 1;
               }
             }
