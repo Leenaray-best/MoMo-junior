@@ -38,13 +38,13 @@ module.exports = {
             _id: IdPerso,
           });
           const valuePotion = 1000;
-          const nombrePotionOld = ficheSac.NbrPotion;
+          const nombrePotionOld = ficheSac.NbrePotion;
           if (fiche.NiveauXP < valuePotion) {
             const newMessage = `Désolé tu n'as pas les fond pour ton achat`;
             await interaction.editReply({
               content: newMessage,
             });
-          } else if (ficheSac.NbrPotion == 5) {
+          } else if (ficheSac.NbrePotion == 5) {
             const newMessage = `Tu as atteint le max d'achat`;
             await interaction.editReply({
               content: newMessage,
@@ -62,7 +62,7 @@ module.exports = {
             );
             await ficheBagPerso.findOneAndUpdate(
               { _id: IdPerso },
-              { Tour: 5, ValeurBonus: 5, NbrPotion: nombrePotionNew }
+              { Tour: 5, ValeurBonus: 5, NbrePotion: nombrePotionNew }
             );
             let ficheNew = await fichePerso.findOne({
               _id: IdPerso,
