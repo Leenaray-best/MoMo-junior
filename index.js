@@ -656,6 +656,7 @@ function createFicheBagPerso() {
     Sac: [String],
     Tour: [0],
     ValeurBonus: [0],
+    NbrePotion: 0,
     time: Date(),
   });
   fichepersobags
