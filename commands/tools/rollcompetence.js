@@ -230,7 +230,7 @@ module.exports = {
 
                   console.log("Avant thé", valRoll);
                   console.log(NumberUp);
-                  let ficheSac = await guildPersoBag.findOne({
+                  let ficheSac = await ficheBag.findOne({
                     _id: user.id,
                   });
                   if (
