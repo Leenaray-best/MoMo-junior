@@ -27,8 +27,8 @@ module.exports = {
     IdPerso = user.id;
     const channelMessage = interaction.channelId;
     console.log(channelMessage);
-    console.log(authId.Salon.JetDeDes);
-    if (channelMessage == authId.Salon.JetDeDes) {
+    console.log(authId.Salon.SalonBotAdmin);
+    if (channelMessage == authId.Salon.SalonBotAdmin) {
       if (interaction.commandName === "use") {
         if (interaction.options.getString("categorie") === "potion") {
           let fiche = await fichePerso.findOne({
@@ -76,7 +76,9 @@ module.exports = {
         }
       }
     } else {
-      const ChannelNameId = client.channels.cache.get(authId.Salon.JetDeDes);
+      const ChannelNameId = client.channels.cache.get(
+        authId.Salon.SalonBotAdmin
+      );
       const newMessage = `Tu n'es pas dans le bon salon\nTu dois faire cette commande dans le salon ${ChannelNameId}`;
       await interaction.editReply({
         content: newMessage,
