@@ -16,7 +16,15 @@ module.exports = {
         .setName("categorie")
         .setRequired(true)
         .setDescription("Choix")
-        .addChoices({ name: "Potion", value: "potion" })
+        .addUserOption((option) =>
+          option
+            .setName("target")
+            .setDescription("to show the targeted user's tag")
+        )
+        .addChoices(
+          { name: "Potion", value: "potion" },
+          { name: "Poison", value: "poison" }
+        )
     ),
   async execute(interaction, client) {
     const message = await interaction.deferReply({

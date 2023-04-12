@@ -17,7 +17,10 @@ module.exports = {
         .setName("categorie")
         .setRequired(true)
         .setDescription("Choix")
-        .addChoices({ name: "Potion", value: "potion" })
+        .addChoices(
+          { name: "Potion", value: "potion" },
+          { name: "Poison", value: "poison" }
+        )
     )
     .addStringOption((option) =>
       option
@@ -82,7 +85,7 @@ module.exports = {
                 await interaction.editReply({
                   content: newMessage,
                 });
-              } else if (ficheSac.Tour > 0) {
+              } else if (ficheSac.Tour[0] > 0) {
                 console.log("Il reste encore des tour");
                 const newMessage = `Attention tu as encore des tours de potion! Fini les avant d'en acheter une autre`;
                 await interaction.editReply({
@@ -120,6 +123,71 @@ module.exports = {
                   _id: IdPerso,
                 });
                 const newMessage = `Merci pour ton achat ! Tu viens d'être débité(e) de ${valuePotion} XP\n Il te reste ${ficheNew.NiveauXP} XP`;
+                await interaction.editReply({
+                  content: newMessage,
+                });
+              }
+            }
+          }
+        } else {
+          console.log("On est pas bon");
+        }
+        if (interaction.options.getString("categorie") === "poison") {
+          for (i = 0; i < listNombre.length; i++) {
+            if (interaction.options.getString("nombre") === listNombre[i]) {
+              var nombreAchatPoison = Number(listNombre2[i]);
+              let fiche = await fichePerso.findOne({
+                _id: IdPerso,
+              });
+              let ficheSac = await ficheBagPerso.findOne({
+                _id: IdPerso,
+              });
+              const valuePoison = nombreAchatPoison * 1000;
+              const nombrePoisonOld = ficheSac.NbrePoison;
+              if (fiche.NiveauXP < valuePoison) {
+                console.log("j'ai assez d'XP");
+                const newMessage = `Désolé tu n'as pas les fond pour ton achat`;
+                await interaction.editReply({
+                  content: newMessage,
+                });
+              } else if (ficheSac.NbrePoison + nombreAchatPoison > 5) {
+                console.log("je suis full de poison");
+                const newMessage = `Tu as atteint le max d'achat`;
+                await interaction.editReply({
+                  content: newMessage,
+                });
+              } else {
+                var nombrePoisonNew = nombrePoisonOld + nombreAchatPoison;
+                NewXp = fiche.NiveauXP - valuePoison;
+                await fichePerso.findOneAndUpdate(
+                  { _id: IdPerso },
+                  { NiveauXP: NewXp }
+                );
+                if (nombrePoisonOld == 0) {
+                  await ficheBagPerso.findOneAndUpdate(
+                    { _id: IdPerso },
+                    { $push: { Sac: `${nombrePoisonNew} Poison(s)` } }
+                  );
+                } else {
+                  await ficheBagPerso.updateMany(
+                    { _id: user.id },
+                    {
+                      $pull: { Sac: { $in: [`${nombrePoisonOld} Poison(s)`] } },
+                    }
+                  );
+                  await ficheBagPerso.findOneAndUpdate(
+                    { _id: IdPerso },
+                    { $push: { Sac: `${nombrePoisonNew} Poison(s)` } }
+                  );
+                }
+                await ficheBagPerso.findOneAndUpdate(
+                  { _id: IdPerso },
+                  { ValeurBonus: 5, NbrePoison: nombrePoisonNew }
+                );
+                let ficheNew = await fichePerso.findOne({
+                  _id: IdPerso,
+                });
+                const newMessage = `Merci pour ton achat ! Tu viens d'être débité(e) de ${valuePoison} XP\n Il te reste ${ficheNew.NiveauXP} XP`;
                 await interaction.editReply({
                   content: newMessage,
                 });

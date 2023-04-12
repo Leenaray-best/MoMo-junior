@@ -655,9 +655,10 @@ function createFicheBagPerso() {
     _id: message.author.id,
     Competence: [0, 0, 0, 0, 0, 0, 0, 0],
     Sac: [String],
-    Tour: [0],
+    Tour: [0, 0],
     ValeurBonus: [0],
     NbrePotion: 0,
+    NbrePoison: 0,
     time: Date(),
   });
   fichepersobags

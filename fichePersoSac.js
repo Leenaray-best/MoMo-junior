@@ -3,9 +3,10 @@ const bagPerso = mongoose.Schema({
   _id: String,
   Competence: [Number],
   Sac: [String],
-  Tour: [Number],
+  Tour: [Number, Number],
   ValeurBonus: [Number],
   NbrePotion: Number,
+  NbrePoison: Number,
   time: Date,
 });
 
