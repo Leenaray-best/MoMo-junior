@@ -59,21 +59,21 @@ module.exports = {
             if (nombrePotionOld == 0) {
               await ficheBagPerso.findOneAndUpdate(
                 { _id: IdPerso },
-                { $push: { Sac: `${nombrePotionNew} Potion` } }
+                { $push: { Sac: `${nombrePotionNew} Potion(s)` } }
               );
             } else {
               await ficheBagPerso.updateMany(
                 { _id: user.id },
-                { $pull: { Sac: { $in: [`${nombrePotionOld} Potion`] } } }
+                { $pull: { Sac: { $in: [`${nombrePotionOld} Potion(s)`] } } }
               );
               await ficheBagPerso.findOneAndUpdate(
                 { _id: IdPerso },
-                { $push: { Sac: `${nombrePotionNew} Potion` } }
+                { $push: { Sac: `${nombrePotionNew} Potion(s)` } }
               );
             }
             await ficheBagPerso.findOneAndUpdate(
               { _id: IdPerso },
-              { Tour: 5, ValeurBonus: 5, NbrePotion: nombrePotionNew }
+              { ValeurBonus: 5, NbrePotion: nombrePotionNew }
             );
             let ficheNew = await fichePerso.findOne({
               _id: IdPerso,

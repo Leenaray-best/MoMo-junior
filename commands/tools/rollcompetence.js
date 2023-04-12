@@ -140,10 +140,22 @@ module.exports = {
                       ficheSacNew.Sac[j] == "Potion" &&
                       ficheSacNew.Tour[0] == 0
                     ) {
-                      await ficheBag.updateMany(
-                        { _id: user.id },
-                        { $pull: { Sac: { $in: ["Potion"] } } }
-                      );
+                      if (ficheSacNew.NbrePotion == 0) {
+                        const nombrePotionOld = ficheSacNew.NbrePotion;
+                        console.log("Mon tour bonus est à 0");
+                        await ficheBagPerso.updateMany(
+                          { _id: user.id },
+                          {
+                            $pull: {
+                              Sac: { $in: [`${nombrePotionOld} Potion`] },
+                            },
+                          }
+                        );
+                      } else {
+                        client.channels.cache
+                          .get(authId.Salon.Jet)
+                          .send(`Les effets de potion ont disparu`);
+                      }
                     }
                   }
                   console.log(valRoll);
@@ -235,10 +247,22 @@ module.exports = {
                       ficheSacNew.Sac[j] == "Potion" &&
                       ficheSacNew.Tour[0] == 0
                     ) {
-                      await ficheBag.updateMany(
-                        { _id: user.id },
-                        { $pull: { Sac: { $in: ["Potion"] } } }
-                      );
+                      if (ficheSacNew.NbrePotion == 0) {
+                        const nombrePotionOld = ficheSacNew.NbrePotion;
+                        console.log("Mon tour bonus est à 0");
+                        await ficheBagPerso.updateMany(
+                          { _id: user.id },
+                          {
+                            $pull: {
+                              Sac: { $in: [`${nombrePotionOld} Potion`] },
+                            },
+                          }
+                        );
+                      } else {
+                        client.channels.cache
+                          .get(authId.Salon.Jet)
+                          .send(`Les effets de potion ont disparu`);
+                      }
                     }
                   }
                   console.log(valTotal);

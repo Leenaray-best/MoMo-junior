@@ -228,7 +228,7 @@ module.exports = {
               valRandom + Number(BonusNiveauMaitrise) + Number(BonusSup);
             console.log(ValRoll);
             for (i = 0; i < ficheSac.Sac.length; i++) {
-              if (ficheSac.Sac[i] == "Potion" && ficheSac.Tour[0] > 0) {
+              if (ficheSac.Sac[i] == "Potion(s)" && ficheSac.Tour[0] > 0) {
                 console.log("Mon tour bonus est > 0");
                 BonusPotion = Number(ficheSac.ValeurBonus);
                 var ValRoll = ValRoll + BonusPotion;
@@ -242,12 +242,22 @@ module.exports = {
               let ficheSacNew = await ficheBagPerso.findOne({
                 _id: user.id,
               });
-              if (ficheSacNew.Sac[i] == "Potion" && ficheSacNew.Tour[0] == 0) {
-                console.log("Mon tour bonus est à 0");
-                await ficheBagPerso.updateMany(
-                  { _id: user.id },
-                  { $pull: { Sac: { $in: ["Potion"] } } }
-                );
+              if (
+                ficheSacNew.Sac[i] == "Potion(s)" &&
+                ficheSacNew.Tour[0] == 0
+              ) {
+                if (ficheSacNew.NbrePotion == 0) {
+                  const nombrePotionOld = ficheSacNew.NbrePotion;
+                  console.log("Mon tour bonus est à 0");
+                  await ficheBagPerso.updateMany(
+                    { _id: user.id },
+                    { $pull: { Sac: { $in: [`${nombrePotionOld} Potion`] } } }
+                  );
+                } else {
+                  client.channels.cache
+                    .get(authId.Salon.Jet)
+                    .send(`Les effets de potion ont disparu`);
+                }
               }
             }
             console.log(ValRoll);
@@ -375,10 +385,18 @@ module.exports = {
                 _id: user.id,
               });
               if (ficheSacNew.Sac[i] == "Potion" && ficheSacNew.Tour[0] == 0) {
-                await ficheBagPerso.updateMany(
-                  { _id: user.id },
-                  { $pull: { Sac: { $in: ["Potion"] } } }
-                );
+                if (ficheSacNew.NbrePotion == 0) {
+                  const nombrePotionOld = ficheSacNew.NbrePotion;
+                  console.log("Mon tour bonus est à 0");
+                  await ficheBagPerso.updateMany(
+                    { _id: user.id },
+                    { $pull: { Sac: { $in: [`${nombrePotionOld} Potion`] } } }
+                  );
+                } else {
+                  client.channels.cache
+                    .get(authId.Salon.Jet)
+                    .send(`Les effets de potion ont disparu`);
+                }
               }
             }
             console.log(BonnusAttaqueMix);
