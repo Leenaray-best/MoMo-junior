@@ -37,6 +37,7 @@ module.exports = {
     PersoAppliqueObjet = interaction.options.getUser("joueur");
     IdPersoAppliqueObjet = PersoAppliqueObjet.id;
     const channelMessage = interaction.channelId;
+    console.log(interaction.member);
     console.log(channelMessage);
     console.log(authId.Salon.SalonBotAdmin);
     if (channelMessage == authId.Salon.SalonBotAdmin) {
@@ -49,14 +50,29 @@ module.exports = {
             _id: IdPersoAppliqueObjet,
           });
           const nombrePotionOld = ficheSac.NbrePotion;
-          if (interaction.member.roles.cache.has(authId.RoleRP.TheLiang)) {
+          if (
+            IdPersoAppliqueObjet == user.id &&
+            interaction.member.roles.cache.has(authId.RoleRP.TheLiang)
+          ) {
             const newMessage = `Tu as déjà une potion en cours`;
+            await interaction.editReply({
+              content: newMessage,
+            });
+          } else if (
+            !(IdPersoAppliqueObjet == user.id) &&
+            PersoAppliqueObjet.roles.cache.has(authId.RoleRP.TheLiang)
+          ) {
+            const newMessage = `Ton camarade a déjà une potion en cours. Tu ne peux pas le booster plus`;
             await interaction.editReply({
               content: newMessage,
             });
           } else {
             if (nombrePotionOld > 0) {
-              interaction.member.roles.add(authId.RoleRP.TheLiang);
+              if (IdPersoAppliqueObjet == user.id) {
+                interaction.member.roles.add(authId.RoleRP.TheLiang);
+              } else {
+                PersoAppliqueObjet.roles.cache.add(authId.RoleRP.TheLiang);
+              }
               var nombrePotionNew = nombrePotionOld - 1;
               await ficheBagPerso.updateMany(
                 { _id: IdPersoAppliqueObjet },
@@ -107,32 +123,48 @@ module.exports = {
           let ficheSac = await ficheBagPerso.findOne({
             _id: IdPersoAppliqueObjet,
           });
-          const nombrePotionOld = ficheSac.NbrePotion;
-          if (interaction.member.roles.cache.has(authId.RoleRP.TheLiang)) {
-            const newMessage = `Tu as déjà une potion en cours`;
+          const nombrePoisonOld = ficheSac.NbrePoison;
+
+          if (
+            IdPersoAppliqueObjet == user.id &&
+            interaction.member.roles.cache.has(authId.RoleRP.Poison)
+          ) {
+            const newMessage = `Tu as déjà un poison en cours. Tu ne peux pas être plus empoisonner`;
+            await interaction.editReply({
+              content: newMessage,
+            });
+          } else if (
+            !(IdPersoAppliqueObjet == user.id) &&
+            PersoAppliqueObjet.roles.cache.has(authId.RoleRP.Poison)
+          ) {
+            const newMessage = `Ton adversaire a déjà un poison en cours. Tu ne peux pas être l'empoisonner de nouveau`;
             await interaction.editReply({
               content: newMessage,
             });
           } else {
-            if (nombrePotionOld > 0) {
-              interaction.member.roles.add(authId.RoleRP.TheLiang);
-              var nombrePotionNew = nombrePotionOld - 1;
+            if (nombrePoisonOld > 0) {
+              if (IdPersoAppliqueObjet == user.id) {
+                interaction.member.roles.add(authId.RoleRP.Poison);
+              } else {
+                PersoAppliqueObjet.roles.cache.add(authId.RoleRP.Poison);
+              }
+              var nombrePoisonNew = nombrePoisonOld - 1;
               await ficheBagPerso.updateMany(
                 { _id: IdPersoAppliqueObjet },
-                { $pull: { Sac: { $in: [`${nombrePotionOld} Potion(s)`] } } }
+                { $pull: { Sac: { $in: [`${nombrePoisonOld} Poison(s)`] } } }
               );
               await ficheBagPerso.findOneAndUpdate(
                 { _id: IdPersoAppliqueObjet },
-                { $push: { Sac: `${nombrePotionNew} Potion(s)` } }
+                { $push: { Sac: `${nombrePoisonNew} Poison(s)` } }
               );
               await ficheBagPerso.findOneAndUpdate(
                 { _id: IdPersoAppliqueObjet },
-                { NbrePotion: nombrePotionNew }
+                { NbrePoison: nombrePoisonNew }
               );
               await ficheBagPerso.updateMany(
                 { _id: IdPersoAppliqueObjet },
                 { Tour: 0 },
-                { $set: { "Tour.0": 5 } }
+                { $set: { "Tour.1": 5 } }
               );
               if (IdPersoAppliqueObjet == user.id) {
                 const newMessage =
@@ -155,8 +187,8 @@ module.exports = {
                 });
               }
             } else {
-              console.log("PAS DE POTION");
-              const newMessage = `Tu n'as pas de potion. Il te faut d'abord aller en acheter`;
+              console.log("PAS DE POISON");
+              const newMessage = `Tu n'as plus de poison. Il te faut d'abord aller en acheter`;
               await interaction.editReply({
                 content: newMessage,
               });
