@@ -48,7 +48,7 @@ module.exports = {
             _id: IdPersoAppliqueObjet,
           });
           let ficheSac = await ficheBagPerso.findOne({
-            _id: IdPersoAppliqueObjet,
+            _id: user.id,
           });
           const nombrePotionOld = ficheSac.NbrePotion;
           if (
@@ -76,11 +76,11 @@ module.exports = {
               }
               var nombrePotionNew = nombrePotionOld - 1;
               await ficheBagPerso.updateMany(
-                { _id: IdPersoAppliqueObjet },
+                { _id: user.id },
                 { $pull: { Sac: { $in: [`${nombrePotionOld} Potion(s)`] } } }
               );
               await ficheBagPerso.findOneAndUpdate(
-                { _id: IdPersoAppliqueObjet },
+                { _id: user.id },
                 { $push: { Sac: `${nombrePotionNew} Potion(s)` } }
               );
               await ficheBagPerso.findOneAndUpdate(
@@ -160,7 +160,7 @@ module.exports = {
             _id: IdPersoAppliqueObjet,
           });
           let ficheSac = await ficheBagPerso.findOne({
-            _id: IdPersoAppliqueObjet,
+            _id: user.id,
           });
           const nombrePoisonOld = ficheSac.NbrePoison;
 
@@ -189,11 +189,11 @@ module.exports = {
               }
               var nombrePoisonNew = nombrePoisonOld - 1;
               await ficheBagPerso.updateMany(
-                { _id: IdPersoAppliqueObjet },
+                { _id: user.id },
                 { $pull: { Sac: { $in: [`${nombrePoisonOld} Poison(s)`] } } }
               );
               await ficheBagPerso.findOneAndUpdate(
-                { _id: IdPersoAppliqueObjet },
+                { _id: user.id },
                 { $push: { Sac: `${nombrePoisonNew} Poison(s)` } }
               );
               await ficheBagPerso.findOneAndUpdate(
