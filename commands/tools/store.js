@@ -183,9 +183,9 @@ module.exports = {
             _id: authId.idDatabase.storeId,
           });
           console.log(boutique);
-          nomPotion = [`Thé Liang`];
+          nomPotion = [`Thé Liang`, `Poudre Dù`];
           const embed = new EmbedBuilder()
-            .setTitle(`Boutique de potion`)
+            .setTitle(`Boutique de potion/poison`)
             .setDescription(`Boost sur les jets`)
             .setColor(0x18e1ee)
             .setThumbnail(
