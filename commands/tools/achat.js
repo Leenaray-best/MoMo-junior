@@ -132,10 +132,23 @@ module.exports = {
                 //});
               } else if (ficheSac.NbrePotion + nombreAchatPotion > 5) {
                 console.log("je suis full de potion");
-                const newMessage = `Nous n'avons plus assez de potion en stock ! 5 Potions max à l'achat. Il en faut pour tout le monde !`;
+
+                const embed = new EmbedBuilder()
+                  .setTitle(`Chez Am & Zon`)
+                  .setDescription(
+                    `Nous n'avons plus assez de potion en stock ! 5 Potions max à l'achat. Il en faut pour tout le monde !`
+                  )
+                  .setColor(0x18e1ee)
+                  .setThumbnail(imageEmbed);
+
                 await interaction.editReply({
-                  content: newMessage,
+                  embeds: [embed],
                 });
+
+                //const newMessage = `Nous n'avons plus assez de potion en stock ! 5 Potions max à l'achat. Il en faut pour tout le monde !`;
+                //await interaction.editReply({
+                //  content: newMessage,
+                //});
               } else {
                 var nombrePotionNew = nombrePotionOld + nombreAchatPotion;
                 NewXp = fiche.NiveauXP - valuePotion;
@@ -167,10 +180,23 @@ module.exports = {
                 let ficheNew = await fichePerso.findOne({
                   _id: IdPerso,
                 });
-                const newMessage = `Merci pour ton achat de ${nombreAchatPotion} Potion(s) chez **L'Antiquaire** ! Tu viens d'être débité(e) de ${valuePotion} XP`;
+
+                const embed = new EmbedBuilder()
+                  .setTitle(`Chez Am & Zon`)
+                  .setDescription(
+                    `Merci pour ton achat de ${nombreAchatPotion} Potion(s) chez **Am & Zon** ! Tu viens d'être débité(e) de ${valuePotion} XP`
+                  )
+                  .setColor(0x18e1ee)
+                  .setThumbnail(imageEmbed);
+
                 await interaction.editReply({
-                  content: newMessage,
+                  embeds: [embed],
                 });
+
+                //const newMessage = `Merci pour ton achat de ${nombreAchatPotion} Potion(s) chez **L'Antiquaire** ! Tu viens d'être débité(e) de ${valuePotion} XP`;
+                //await interaction.editReply({
+                //  content: newMessage,
+                //});
               }
             }
           }
@@ -191,16 +217,42 @@ module.exports = {
               const nombrePoisonOld = ficheSac.NbrePoison;
               if (fiche.NiveauXP < valuePoison) {
                 console.log("j'ai assez d'XP");
-                const newMessage = `Désolé tu n'as pas les fond pour ton achat et **L'Antiquaire** ne fait pas crédit !!`;
+
+                const embed = new EmbedBuilder()
+                  .setTitle(`Chez Am & Zon`)
+                  .setDescription(
+                    `Désolé tu n'as pas les fond pour ton achat et **Am & Zon** ne fait pas crédit !!`
+                  )
+                  .setColor(0x18e1ee)
+                  .setThumbnail(imageEmbed);
+
                 await interaction.editReply({
-                  content: newMessage,
+                  embeds: [embed],
                 });
+
+                //const newMessage = `Désolé tu n'as pas les fond pour ton achat et **L'Antiquaire** ne fait pas crédit !!`;
+                //await interaction.editReply({
+                //  content: newMessage,
+                //});
               } else if (ficheSac.NbrePoison + nombreAchatPoison > 5) {
                 console.log("je suis full de poison");
-                const newMessage = `Nous n'avons plus assez de poison en stock ! 5 Potions max à l'achat. Il en faut pour tout le monde !`;
+
+                const embed = new EmbedBuilder()
+                  .setTitle(`Chez Am & Zon`)
+                  .setDescription(
+                    `Nous n'avons plus assez de poison en stock ! 5 Potions max à l'achat. Il en faut pour tout le monde !`
+                  )
+                  .setColor(0x18e1ee)
+                  .setThumbnail(imageEmbed);
+
                 await interaction.editReply({
-                  content: newMessage,
+                  embeds: [embed],
                 });
+
+                //const newMessage = `Nous n'avons plus assez de poison en stock ! 5 Potions max à l'achat. Il en faut pour tout le monde !`;
+                //await interaction.editReply({
+                //  content: newMessage,
+                //});
               } else {
                 var nombrePoisonNew = nombrePoisonOld + nombreAchatPoison;
                 NewXp = fiche.NiveauXP - valuePoison;
@@ -232,10 +284,23 @@ module.exports = {
                 let ficheNew = await fichePerso.findOne({
                   _id: IdPerso,
                 });
-                const newMessage = `Merci pour ton achat de ${nombreAchatPoison} Poisons(s) chez **L'Antiquaire** ! Tu viens d'être débité(e) de ${valuePotion} XP`;
+
+                const embed = new EmbedBuilder()
+                  .setTitle(`Chez Am & Zon`)
+                  .setDescription(
+                    `Merci pour ton achat de ${nombreAchatPoison} Poisons(s) chez **Am & Zon** ! Tu viens d'être débité(e) de ${valuePoison} XP`
+                  )
+                  .setColor(0x18e1ee)
+                  .setThumbnail(imageEmbed);
+
                 await interaction.editReply({
-                  content: newMessage,
+                  embeds: [embed],
                 });
+
+                //const newMessage = `Merci pour ton achat de ${nombreAchatPoison} Poisons(s) chez **L'Antiquaire** ! Tu viens d'être débité(e) de ${valuePotion} XP`;
+                //await interaction.editReply({
+                //  content: newMessage,
+                //});
               }
             }
           }
@@ -334,17 +399,42 @@ module.exports = {
           const valueEquipement = 5000;
           const tourEquipement = ficheSac.Tour[3];
           if (fiche.NiveauXP < valueEquipement) {
-            console.log("j'ai assez d'XP");
-            const newMessage = `Désolé tu n'as pas les fond pour ton achat et **Bric et Broc** ne fait pas crédit !!`;
+            const embed = new EmbedBuilder()
+              .setTitle(`Chez Am & Zon`)
+              .setDescription(
+                `Désolé tu n'as pas les fond pour ton achat et **Am & Zon** ne font pas crédit !!`
+              )
+              .setColor(0x18e1ee)
+              .setThumbnail(imageEmbed);
+
             await interaction.editReply({
-              content: newMessage,
+              embeds: [embed],
             });
+
+            console.log("j'ai assez d'XP");
+            //const newMessage = `Désolé tu n'as pas les fond pour ton achat et **Bric et Broc** ne fait pas crédit !!`;
+            //await interaction.editReply({
+            //  content: newMessage,
+            //});
           } else if (tourEquipement > 0 || ficheSac.Tour[2] > 0) {
             console.log("je suis full d'arme");
-            const newMessage = `Voyons voyons, ton équipement est encore fonctionnel. Il en faut pour tout le monde !`;
+
+            const embed = new EmbedBuilder()
+              .setTitle(`Chez Am & Zon`)
+              .setDescription(
+                `Voyons voyons, ton équipement est encore fonctionnel. Il en faut pour tout le monde !`
+              )
+              .setColor(0x18e1ee)
+              .setThumbnail(imageEmbed);
+
             await interaction.editReply({
-              content: newMessage,
+              embeds: [embed],
             });
+
+            //const newMessage = `Voyons voyons, ton équipement est encore fonctionnel. Il en faut pour tout le monde !`;
+            //await interaction.editReply({
+            //  content: newMessage,
+            //});
           } else {
             NewXp = fiche.NiveauXP - valueEquipement;
             await fichePerso.findOneAndUpdate(
@@ -360,10 +450,23 @@ module.exports = {
               { "Tour.3": 100 }
             );
             interaction.member.roles.add(authId.RoleRP.Dague);
-            const newMessage = `Merci pour l'achat de cette dague chez **Bric et Broc** ! Tu viens d'être débité(e) de ${valueEquipement} XP`;
+
+            const embed = new EmbedBuilder()
+              .setTitle(`Chez Am & Zon`)
+              .setDescription(
+                `Merci pour l'achat de cette dague chez **Am & Zon** ! Tu viens d'être débité(e) de ${valueEquipement} XP`
+              )
+              .setColor(0x18e1ee)
+              .setThumbnail(imageEmbed);
+
             await interaction.editReply({
-              content: newMessage,
+              embeds: [embed],
             });
+
+            //const newMessage = `Merci pour l'achat de cette dague chez **Bric et Broc** ! Tu viens d'être débité(e) de ${valueEquipement} XP`;
+            //await interaction.editReply({
+            //  content: newMessage,
+            //});
           }
         } else {
           console.log("On est pas bon");
@@ -379,16 +482,42 @@ module.exports = {
           const tourEquipement = ficheSac.Tour[4];
           if (fiche.NiveauXP < valueEquipement) {
             console.log("j'ai assez d'XP");
-            const newMessage = `Désolé tu n'as pas les fond pour ton achat et **Bric et Broc** ne fait pas crédit !!`;
+
+            const embed = new EmbedBuilder()
+              .setTitle(`Chez Am & Zon`)
+              .setDescription(
+                `Désolé tu n'as pas les fond pour ton achat et **Am & Zon** ne font pas crédit !!`
+              )
+              .setColor(0x18e1ee)
+              .setThumbnail(imageEmbed);
+
             await interaction.editReply({
-              content: newMessage,
+              embeds: [embed],
             });
+
+            //const newMessage = `Désolé tu n'as pas les fond pour ton achat et **Bric et Broc** ne fait pas crédit !!`;
+            //await interaction.editReply({
+            //  content: newMessage,
+            //});
           } else if (tourEquipement > 0) {
             console.log("je suis full d'arme");
-            const newMessage = `Voyons voyons, ton équipement est encore fonctionnel. Il en faut pour tout le monde !`;
+
+            const embed = new EmbedBuilder()
+              .setTitle(`Chez Am & Zon`)
+              .setDescription(
+                `Voyons voyons, ton équipement est encore fonctionnel. Il en faut pour tout le monde !`
+              )
+              .setColor(0x18e1ee)
+              .setThumbnail(imageEmbed);
+
             await interaction.editReply({
-              content: newMessage,
+              embeds: [embed],
             });
+
+            //const newMessage = `Voyons voyons, ton équipement est encore fonctionnel. Il en faut pour tout le monde !`;
+            //await interaction.editReply({
+            //  content: newMessage,
+            //});
           } else {
             NewXp = fiche.NiveauXP - valueEquipement;
             await fichePerso.findOneAndUpdate(
@@ -404,10 +533,23 @@ module.exports = {
               { "Tour.4": 100 }
             );
             interaction.member.roles.add(authId.RoleRP.Armure);
-            const newMessage = `Merci pour l'achat de cette armure chez **Bric et Broc** ! Tu viens d'être débité(e) de ${valueEquipement} XP`;
+
+            const embed = new EmbedBuilder()
+              .setTitle(`Chez Am & Zon`)
+              .setDescription(
+                `Merci pour l'achat de cette armure chez **Am & Zon** ! Tu viens d'être débité(e) de ${valueEquipement} XP`
+              )
+              .setColor(0x18e1ee)
+              .setThumbnail(imageEmbed);
+
             await interaction.editReply({
-              content: newMessage,
+              embeds: [embed],
             });
+
+            //const newMessage = `Merci pour l'achat de cette armure chez **Bric et Broc** ! Tu viens d'être débité(e) de ${valueEquipement} XP`;
+            //await interaction.editReply({
+            //  content: newMessage,
+            //});
           }
         } else {
           console.log("On est pas bon");
