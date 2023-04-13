@@ -197,15 +197,15 @@ module.exports = {
                       { "Tour.2": TourNew }
                     );
                   }
-                  let ficheSacNewNew = await ficheBag.findOne({
+                  let ficheSacEpee = await ficheBag.findOne({
                     _id: user.id,
                   });
                   if (
                     interaction.member.roles.cache.has(authId.RoleRP.Epee) &&
-                    ficheSacNewNew.Tour[2] == 0 &&
+                    ficheSacEpee.Tour[2] == 0 &&
                     interaction.options.getString("competence") === "force"
                   ) {
-                    await ficheBagPerso.updateMany(
+                    await ficheBag.updateMany(
                       { _id: user.id },
                       {
                         $pull: {
@@ -240,15 +240,15 @@ module.exports = {
                       { "Tour.3": TourNew }
                     );
                   }
-                  let ficheSacNew = await ficheBag.findOne({
+                  let ficheSacDague = await ficheBag.findOne({
                     _id: user.id,
                   });
                   if (
                     interaction.member.roles.cache.has(authId.RoleRP.Dague) &&
-                    ficheSacNew.Tour[3] == 0 &&
-                    interaction.options.getString("competence") === "force"
+                    ficheSacDague.Tour[3] == 0 &&
+                    interaction.options.getString("competence") === "dexterite"
                   ) {
-                    await ficheBagPerso.updateMany(
+                    await ficheBag.updateMany(
                       { _id: user.id },
                       {
                         $pull: {
@@ -271,11 +271,11 @@ module.exports = {
                       "constitution"
                   ) {
                     console.log("TU AS UNE ARMURE");
-                    const BonusDague = 3;
-                    if (valRoll < BonusDague) {
+                    const BonusArmure = 3;
+                    if (valRoll < BonusArmure) {
                       valRoll = 0;
                     } else {
-                      var valRoll = valRoll - BonusDague;
+                      var valRoll = valRoll - BonusArmure;
                     }
                     TourOld = ficheSac.Tour[4];
                     TourNew = TourOld - 1;
@@ -284,15 +284,16 @@ module.exports = {
                       { "Tour.4": TourNew }
                     );
                   }
-                  let ficheSacNew2 = await ficheBag.findOne({
+                  let ficheSacArmure = await ficheBag.findOne({
                     _id: user.id,
                   });
                   if (
-                    interaction.member.roles.cache.has(authId.RoleRP.Dague) &&
-                    ficheSacNew2.Tour[4] == 0 &&
-                    interaction.options.getString("competence") === "force"
+                    interaction.member.roles.cache.has(authId.RoleRP.Armure) &&
+                    ficheSacArmure.Tour[4] == 0 &&
+                    interaction.options.getString("competence") ===
+                      "constitution"
                   ) {
-                    await ficheBagPerso.updateMany(
+                    await ficheBag.updateMany(
                       { _id: user.id },
                       {
                         $pull: {
@@ -300,7 +301,7 @@ module.exports = {
                         },
                       }
                     );
-                    interaction.member.roles.remove(authId.RoleRP.Dague);
+                    interaction.member.roles.remove(authId.RoleRP.Armure);
                     client.channels.cache
                       .get(authId.Salon.Jet)
                       .send(
@@ -448,15 +449,15 @@ module.exports = {
                       { "Tour.2": TourNew }
                     );
                   }
-                  let ficheSacNewNew = await ficheBag.findOne({
+                  let ficheSacEpee = await ficheBag.findOne({
                     _id: user.id,
                   });
                   if (
                     interaction.member.roles.cache.has(authId.RoleRP.Epee) &&
-                    ficheSacNewNew.Tour[2] == 0 &&
+                    ficheSacEpee.Tour[2] == 0 &&
                     interaction.options.getString("competence") === "force"
                   ) {
-                    await ficheBagPerso.updateMany(
+                    await ficheBag.updateMany(
                       { _id: user.id },
                       {
                         $pull: {
@@ -491,15 +492,15 @@ module.exports = {
                       { "Tour.3": TourNew }
                     );
                   }
-                  let ficheSacNew = await ficheBag.findOne({
+                  let ficheSacDague = await ficheBag.findOne({
                     _id: user.id,
                   });
                   if (
                     interaction.member.roles.cache.has(authId.RoleRP.Dague) &&
-                    ficheSacNew.Tour[3] == 0 &&
+                    ficheSacDague.Tour[3] == 0 &&
                     interaction.options.getString("competence") === "dexterite"
                   ) {
-                    await ficheBagPerso.updateMany(
+                    await ficheBag.updateMany(
                       { _id: user.id },
                       {
                         $pull: {
@@ -523,7 +524,7 @@ module.exports = {
                   ) {
                     console.log("TU AS UNE ARMURE");
                     const BonusArmure = 3;
-                    if (valRoll < BonusDague) {
+                    if (valRoll < BonusArmure) {
                       valRoll = 0;
                     } else {
                       var valRoll = valRoll + BonusArmure;
@@ -535,16 +536,16 @@ module.exports = {
                       { "Tour.4": TourNew }
                     );
                   }
-                  let ficheSacNew2 = await ficheBag.findOne({
+                  let ficheSacArmure = await ficheBag.findOne({
                     _id: user.id,
                   });
                   if (
                     interaction.member.roles.cache.has(authId.RoleRP.Armure) &&
-                    ficheSacNew2.Tour[4] == 0 &&
+                    ficheSacArmure.Tour[4] == 0 &&
                     interaction.options.getString("competence") ===
                       "constitution"
                   ) {
-                    await ficheBagPerso.updateMany(
+                    await ficheBag.updateMany(
                       { _id: user.id },
                       {
                         $pull: {
