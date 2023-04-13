@@ -229,7 +229,7 @@ module.exports = {
             await interaction.editReply({
               content: newMessage,
             });
-          } else if (tourEquipement > 0) {
+          } else if (tourEquipement > 0 || ficheSac.Tour[3] > 0) {
             console.log("je suis full d'arme");
             const newMessage = `Voyons voyons, ton équipement est encore fonctionnel. Il en faut pour tout le monde !`;
             await interaction.editReply({
@@ -273,7 +273,7 @@ module.exports = {
             await interaction.editReply({
               content: newMessage,
             });
-          } else if (tourEquipement > 0) {
+          } else if (tourEquipement > 0 || ficheSac.Tour[2] > 0) {
             console.log("je suis full d'arme");
             const newMessage = `Voyons voyons, ton équipement est encore fonctionnel. Il en faut pour tout le monde !`;
             await interaction.editReply({
