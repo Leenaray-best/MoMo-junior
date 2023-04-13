@@ -179,7 +179,7 @@ module.exports = {
                   console.log("Après thé/poison", valRoll);
                   // TEST SI ILS ONT UNE EPEE
                   if (
-                    ficheSacNewNew.Tour[2] > 0 &&
+                    ficheSac.Tour[2] > 0 &&
                     interaction.member.roles.cache.has(authId.RoleRP.Epee) &&
                     interaction.options.getString("competence") === "force"
                   ) {
@@ -431,7 +431,7 @@ module.exports = {
                   console.log("Après thé/poison", valRoll);
                   // TEST SI ILS ONT UNE EPEE
                   if (
-                    ficheSacNewNew.Tour[2] > 0 &&
+                    ficheSac.Tour[2] > 0 &&
                     interaction.member.roles.cache.has(authId.RoleRP.Epee) &&
                     interaction.options.getString("competence") === "force"
                   ) {

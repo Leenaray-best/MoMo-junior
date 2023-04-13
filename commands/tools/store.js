@@ -155,7 +155,7 @@ module.exports = {
           console.log(boutique);
           nomArme = [`Epée`, `Dague`];
           const embed = new EmbedBuilder()
-            .setTitle(`Boutique d'armure'`)
+            .setTitle(`Boutique d'armes'`)
             .setDescription(`Boost sur les jets`)
             .setColor(0x18e1ee)
             .setThumbnail(
@@ -178,7 +178,7 @@ module.exports = {
           console.log(boutique);
           nomArmure = [`Armure`];
           const embed = new EmbedBuilder()
-            .setTitle(`Boutique d'arme`)
+            .setTitle(`Boutique d'armure`)
             .setDescription(`Boost sur les jets`)
             .setColor(0x18e1ee)
             .setThumbnail(
