@@ -14,7 +14,7 @@ module.exports = {
     .setDescription("Get info about a user or a server!")
     .addSubcommand((subcommand) =>
       subcommand
-        .setName("PotionPoison")
+        .setName("breuvage")
         .setDescription("Achat de potion(s) et de poison(s)")
         .addStringOption((option) =>
           option
@@ -42,7 +42,7 @@ module.exports = {
     )
     .addSubcommand((subcommand) =>
       subcommand
-        .setName("ArmeArmure")
+        .setName("equipement")
         .setDescription("Achat d'armes et d'armures")
         .addStringOption((option) =>
           option
@@ -82,7 +82,7 @@ module.exports = {
       channelMessage == authId.Salon.SalonBotAdmin
     ) {
       console.log("On est dans le bon salon");
-      if (interaction.options.getSubcommand() === "PotionPoison") {
+      if (interaction.options.getSubcommand() === "breuvage") {
         if (interaction.options.getString("categorie") === "potion") {
           for (i = 0; i < listNombre.length; i++) {
             if (interaction.options.getString("nombre") === listNombre[i]) {
