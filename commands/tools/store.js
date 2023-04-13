@@ -161,18 +161,13 @@ module.exports = {
             .setThumbnail(
               "https://static.wikia.nocookie.net/skies-of-arcadia/images/e/e4/Avatar_The_Last_Airbender_logo_%28alternate_version%29.png/revision/latest?cb=20180224144932"
             );
-          embed.addFields(
-            {
-              name: `${nomArme[0]}`,
-              value: `${boutique.Arme.Epee},`,
+          for (j = 0; j < nomArme.length; j++) {
+            embed.addFields({
+              name: `${nomArme[j]}`,
+              value: `${boutique.Arme[j]},`,
               inline: true,
-            },
-            {
-              name: `${nomArme[1]}`,
-              value: `${boutique.Arme.Dague},`,
-              inline: true,
-            }
-          );
+            });
+          }
 
           await interaction.reply({
             embeds: [embed],
