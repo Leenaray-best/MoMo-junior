@@ -155,11 +155,11 @@ module.exports = {
           console.log(boutique);
           nomArme = [`Epée`, `Dague`];
           const embed = new EmbedBuilder()
-            .setTitle(`Boutique d'armes'`)
+            .setTitle(`Boutique d'armes`)
             .setDescription(`Boost sur les jets`)
             .setColor(0x18e1ee)
             .setThumbnail(
-              "https://static.wikia.nocookie.net/skies-of-arcadia/images/e/e4/Avatar_The_Last_Airbender_logo_%28alternate_version%29.png/revision/latest?cb=20180224144932"
+              "https://media.discordapp.net/attachments/929133282937933866/1096114758048030861/Capture_decran_2023-04-13_a_18.48.37.png?width=1540&height=898"
             );
           for (j = 0; j < nomArme.length; j++) {
             embed.addFields({
@@ -183,7 +183,7 @@ module.exports = {
             .setDescription(`Boost sur les jets`)
             .setColor(0x18e1ee)
             .setThumbnail(
-              "https://static.wikia.nocookie.net/skies-of-arcadia/images/e/e4/Avatar_The_Last_Airbender_logo_%28alternate_version%29.png/revision/latest?cb=20180224144932"
+              "https://media.discordapp.net/attachments/929133282937933866/1096113932260884540/Capture_decran_2023-04-13_a_18.45.03.png?width=674&height=898"
             );
           for (j = 0; j < nomArmure.length; j++) {
             embed.addFields({
@@ -206,7 +206,7 @@ module.exports = {
             .setDescription(`Boost sur les jets`)
             .setColor(0x18e1ee)
             .setThumbnail(
-              "https://static.wikia.nocookie.net/skies-of-arcadia/images/e/e4/Avatar_The_Last_Airbender_logo_%28alternate_version%29.png/revision/latest?cb=20180224144932"
+              "https://media.discordapp.net/attachments/929133282937933866/1096114397509857321/Capture_decran_2023-04-13_a_18.47.11.png?width=824&height=898"
             );
           for (j = 0; j < nomPotion.length; j++) {
             embed.addFields({

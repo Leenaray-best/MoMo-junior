@@ -82,6 +82,22 @@ module.exports = {
       channelMessage == authId.Salon.SalonBotAdmin
     ) {
       console.log("On est dans le bon salon");
+      var listImag = [
+        "https://media.discordapp.net/attachments/641015662118174730/1096118708839125133/Capture_decran_2023-04-13_a_19.04.19.png?width=834&height=898",
+        "https://media.discordapp.net/attachments/641015662118174730/1096119329805836400/Capture_decran_2023-04-13_a_19.06.48.png?width=826&height=898",
+        "https://media.discordapp.net/attachments/641015662118174730/1096120178376462386/Capture_decran_2023-04-13_a_19.10.11.png?width=860&height=660",
+      ];
+      if (channelMessage == ficheQueteAchat.AchatRP[0]) {
+        var imageEmbed = listImag[2];
+      } else if (channelMessage == ficheQueteAchat.AchatRP[1]) {
+        var imageEmbed = listImag[0];
+      } else if (
+        channelMessage == ficheQueteAchat.AchatRP[2] ||
+        channelMessage == authId.Salon.SalonBotAdmin
+      ) {
+        var imageEmbed = listImag[1];
+      }
+
       if (interaction.options.getSubcommand() === "breuvage") {
         if (interaction.options.getString("categorie") === "potion") {
           for (i = 0; i < listNombre.length; i++) {
@@ -97,10 +113,23 @@ module.exports = {
               const nombrePotionOld = ficheSac.NbrePotion;
               if (fiche.NiveauXP < valuePotion) {
                 console.log("j'ai assez d'XP");
-                const newMessage = `Désolé tu n'as pas les fond pour ton achat et **L'Antiquaire** ne fait pas crédit !!`;
+
+                const embed = new EmbedBuilder()
+                  .setTitle(`Chez Am & Zon`)
+                  .setDescription(
+                    `Désolé tu n'as pas les fond pour ton achat et **Am & Zon** ne fait pas crédit !!`
+                  )
+                  .setColor(0x18e1ee)
+                  .setThumbnail(imageEmbed);
+
                 await interaction.editReply({
-                  content: newMessage,
+                  embeds: [embed],
                 });
+
+                //const newMessage = `Désolé tu n'as pas les fond pour ton achat et **L'Antiquaire** ne fait pas crédit !!`;
+                //await interaction.editReply({
+                //  content: newMessage,
+                //});
               } else if (ficheSac.NbrePotion + nombreAchatPotion > 5) {
                 console.log("je suis full de potion");
                 const newMessage = `Nous n'avons plus assez de potion en stock ! 5 Potions max à l'achat. Il en faut pour tout le monde !`;
@@ -225,16 +254,40 @@ module.exports = {
           const tourEquipement = ficheSac.Tour[2];
           if (fiche.NiveauXP < valueEquipement) {
             console.log("j'ai assez d'XP");
-            const newMessage = `Désolé tu n'as pas les fond pour ton achat et **Bric et Broc** ne fait pas crédit !!`;
+            const embed = new EmbedBuilder()
+              .setTitle(`Chez Am & Zon`)
+              .setDescription(
+                `Désolé tu n'as pas les fond pour ton achat et **Am & Zon** ne font pas crédit !!`
+              )
+              .setColor(0x18e1ee)
+              .setThumbnail(imageEmbed);
+
             await interaction.editReply({
-              content: newMessage,
+              embeds: [embed],
             });
+            //const newMessage = `Désolé tu n'as pas les fond pour ton achat et **Bric et Broc** ne fait pas crédit !!`;
+            //await interaction.editReply({
+            //  content: newMessage,
+            //});
           } else if (tourEquipement > 0 || ficheSac.Tour[3] > 0) {
             console.log("je suis full d'arme");
-            const newMessage = `Voyons voyons, ton équipement est encore fonctionnel. Il en faut pour tout le monde !`;
+
+            const embed = new EmbedBuilder()
+              .setTitle(`Chez Am & Zon`)
+              .setDescription(
+                `Voyons voyons, ton équipement est encore fonctionnel. Il en faut pour tout le monde !`
+              )
+              .setColor(0x18e1ee)
+              .setThumbnail(imageEmbed);
+
             await interaction.editReply({
-              content: newMessage,
+              embeds: [embed],
             });
+
+            //const newMessage = `Voyons voyons, ton équipement est encore fonctionnel. Il en faut pour tout le monde !`;
+            //await interaction.editReply({
+            //  content: newMessage,
+            //});
           } else {
             NewXp = fiche.NiveauXP - valueEquipement;
             await fichePerso.findOneAndUpdate(
@@ -250,10 +303,23 @@ module.exports = {
               { "Tour.2": 100 }
             );
             interaction.member.roles.add(authId.RoleRP.Epee);
-            const newMessage = `Merci pour l'achat de cette épée chez **Bric et Broc** ! Tu viens d'être débité(e) de ${valueEquipement} XP`;
+
+            const embed = new EmbedBuilder()
+              .setTitle(`Chez Am & Zon`)
+              .setDescription(
+                `Merci pour l'achat de cette épée chez **Am & Zon** ! Tu viens d'être débité(e) de ${valueEquipement} XP`
+              )
+              .setColor(0x18e1ee)
+              .setThumbnail(imageEmbed);
+
             await interaction.editReply({
-              content: newMessage,
+              embeds: [embed],
             });
+
+            //const newMessage = `Merci pour l'achat de cette épée chez **Bric et Broc** ! Tu viens d'être débité(e) de ${valueEquipement} XP`;
+            //await interaction.editReply({
+            //  content: newMessage,
+            //});
           }
         } else {
           console.log("On est pas bon");
