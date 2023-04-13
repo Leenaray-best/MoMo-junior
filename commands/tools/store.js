@@ -153,13 +153,21 @@ module.exports = {
             _id: authId.idDatabase.storeId,
           });
           console.log(boutique);
+          nomArme = [`Epée`, `Dague`];
           const embed = new EmbedBuilder()
-            .setTitle(`Boutique d'arme`)
-            .setDescription(`A venir, un peu de patiente`)
+            .setTitle(`Boutique d'armure'`)
+            .setDescription(`Boost sur les jets`)
             .setColor(0x18e1ee)
             .setThumbnail(
               "https://static.wikia.nocookie.net/skies-of-arcadia/images/e/e4/Avatar_The_Last_Airbender_logo_%28alternate_version%29.png/revision/latest?cb=20180224144932"
             );
+          for (j = 0; j < nomArme.length; j++) {
+            embed.addFields({
+              name: `${nomArme[j]}`,
+              value: `${boutique.Arme[j]},`,
+              inline: true,
+            });
+          }
           await interaction.reply({
             embeds: [embed],
           });
@@ -168,13 +176,21 @@ module.exports = {
             _id: authId.idDatabase.storeId,
           });
           console.log(boutique);
+          nomArmure = [`Armure`];
           const embed = new EmbedBuilder()
-            .setTitle(`Boutique d'armure'`)
-            .setDescription(`A venir, un peu de patiente`)
+            .setTitle(`Boutique d'arme`)
+            .setDescription(`Boost sur les jets`)
             .setColor(0x18e1ee)
             .setThumbnail(
               "https://static.wikia.nocookie.net/skies-of-arcadia/images/e/e4/Avatar_The_Last_Airbender_logo_%28alternate_version%29.png/revision/latest?cb=20180224144932"
             );
+          for (j = 0; j < nomArmure.length; j++) {
+            embed.addFields({
+              name: `${nomArmure[j]}`,
+              value: `${boutique.Armure[j]},`,
+              inline: true,
+            });
+          }
           await interaction.reply({
             embeds: [embed],
           });

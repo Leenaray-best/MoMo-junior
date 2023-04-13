@@ -385,10 +385,17 @@ function createBoutique() {
       Maitrise19: "19 000 XP",
       Maitrise20: "20 000 XP",
     },
-    Arme: {
-      Couteau: "1000 XP",
-    },
-    Potion: ["Bonus +5 à tout vos jeux pendant 5 tours: 1000 XP"],
+    Arme: [
+      "Bonus +3 à tous tes jets de force (500 utilisations) : 5000 XP",
+      "Bonus +3 à tous tes jets de dextérité (500 utilisations) : 5000 XP",
+    ],
+    Potion: [
+      "Bonus +5 à tous les jets de la cible pendant 5 tours : 1000 XP",
+      "Malus -5 à tous les jets de la cible pendant 5 tours : 1000 XP",
+    ],
+    Armure: [
+      "Bonus +3 à tous tes jets de constitution (500 utilisations) : 5000 XP",
+    ],
     time: Date(),
   });
   Boutique.save()

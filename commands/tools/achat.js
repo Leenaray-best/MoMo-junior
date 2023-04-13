@@ -11,30 +11,52 @@ const ficheSalonQuest = require("../../salonQuete");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("achat")
-    .setDescription("Info pour le joueur")
-    .addStringOption((option) =>
-      option
-        .setName("categorie")
-        .setRequired(true)
-        .setDescription("Choix")
-        .addChoices(
-          { name: "Potion", value: "potion" },
-          { name: "Poison", value: "poison" }
+    .setDescription("Get info about a user or a server!")
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("PotionPoison")
+        .setDescription("Achat de potion(s) et de poison(s)")
+        .addStringOption((option) =>
+          option
+            .setName("categorie")
+            .setRequired(true)
+            .setDescription("Prix : 1000 XP")
+            .addChoices(
+              { name: "Potion", value: "potion" },
+              { name: "Poison", value: "poison" }
+            )
+        )
+        .addStringOption((option) =>
+          option
+            .setName("nombre")
+            .setRequired(true)
+            .setDescription("Quantité d'achat")
+            .addChoices(
+              { name: "1", value: "un" },
+              { name: "2", value: "deux" },
+              { name: "3", value: "trois" },
+              { name: "4", value: "quatre" },
+              { name: "5", value: "cinq" }
+            )
         )
     )
-    .addStringOption((option) =>
-      option
-        .setName("nombre")
-        .setRequired(true)
-        .setDescription("Choix")
-        .addChoices(
-          { name: "1", value: "un" },
-          { name: "2", value: "deux" },
-          { name: "3", value: "trois" },
-          { name: "4", value: "quatre" },
-          { name: "5", value: "cinq" }
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("ArmeArmure")
+        .setDescription("Achat d'armes et d'armures")
+        .addStringOption((option) =>
+          option
+            .setName("categorie")
+            .setRequired(true)
+            .setDescription("Prix : 5000 XP")
+            .addChoices(
+              { name: "Epée", value: "epee" },
+              { name: "Dague", value: "dague" },
+              { name: "Armure", value: "armure" }
+            )
         )
     ),
+
   async execute(interaction, client) {
     const message = await interaction.deferReply({
       fetchReply: true,
@@ -60,7 +82,7 @@ module.exports = {
       channelMessage == authId.Salon.SalonBotAdmin
     ) {
       console.log("On est dans le bon salon");
-      if (interaction.commandName === "achat") {
+      if (interaction.options.getSubcommand() === "PotionPoison") {
         if (interaction.options.getString("categorie") === "potion") {
           for (i = 0; i < listNombre.length; i++) {
             if (interaction.options.getString("nombre") === listNombre[i]) {
@@ -75,19 +97,13 @@ module.exports = {
               const nombrePotionOld = ficheSac.NbrePotion;
               if (fiche.NiveauXP < valuePotion) {
                 console.log("j'ai assez d'XP");
-                const newMessage = `Désolé tu n'as pas les fond pour ton achat`;
+                const newMessage = `Désolé tu n'as pas les fond pour ton achat et **L'Antiquaire** ne fait pas crédit !!`;
                 await interaction.editReply({
                   content: newMessage,
                 });
               } else if (ficheSac.NbrePotion + nombreAchatPotion > 5) {
                 console.log("je suis full de potion");
-                const newMessage = `Tu as atteint le max d'achat`;
-                await interaction.editReply({
-                  content: newMessage,
-                });
-              } else if (ficheSac.Tour[0] > 0) {
-                console.log("Il reste encore des tour");
-                const newMessage = `Attention tu as encore des tours de potion! Fini les avant d'en acheter une autre`;
+                const newMessage = `Nous n'avons plus assez de potion en stock ! 5 Potions max à l'achat. Il en faut pour tout le monde !`;
                 await interaction.editReply({
                   content: newMessage,
                 });
@@ -122,7 +138,7 @@ module.exports = {
                 let ficheNew = await fichePerso.findOne({
                   _id: IdPerso,
                 });
-                const newMessage = `Merci pour ton achat ! Tu viens d'être débité(e) de ${valuePotion} XP\n Il te reste ${ficheNew.NiveauXP} XP`;
+                const newMessage = `Merci pour ton achat de ${nombreAchatPotion} Potion(s) chez **L'Antiquaire** ! Tu viens d'être débité(e) de ${valuePotion} XP`;
                 await interaction.editReply({
                   content: newMessage,
                 });
@@ -146,13 +162,13 @@ module.exports = {
               const nombrePoisonOld = ficheSac.NbrePoison;
               if (fiche.NiveauXP < valuePoison) {
                 console.log("j'ai assez d'XP");
-                const newMessage = `Désolé tu n'as pas les fond pour ton achat`;
+                const newMessage = `Désolé tu n'as pas les fond pour ton achat et **L'Antiquaire** ne fait pas crédit !!`;
                 await interaction.editReply({
                   content: newMessage,
                 });
               } else if (ficheSac.NbrePoison + nombreAchatPoison > 5) {
                 console.log("je suis full de poison");
-                const newMessage = `Tu as atteint le max d'achat`;
+                const newMessage = `Nous n'avons plus assez de poison en stock ! 5 Potions max à l'achat. Il en faut pour tout le monde !`;
                 await interaction.editReply({
                   content: newMessage,
                 });
@@ -187,7 +203,7 @@ module.exports = {
                 let ficheNew = await fichePerso.findOne({
                   _id: IdPerso,
                 });
-                const newMessage = `Merci pour ton achat ! Tu viens d'être débité(e) de ${valuePoison} XP\n Il te reste ${ficheNew.NiveauXP} XP`;
+                const newMessage = `Merci pour ton achat de ${nombreAchatPoison} Poisons(s) chez **L'Antiquaire** ! Tu viens d'être débité(e) de ${valuePotion} XP`;
                 await interaction.editReply({
                   content: newMessage,
                 });

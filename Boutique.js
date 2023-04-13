@@ -22,10 +22,9 @@ const Store = mongoose.Schema({
     Maitrise19: String,
     Maitrise20: String,
   },
-  Arme: {
-    Couteau: String,
-  },
+  Arme: [String],
   Potion: [String],
+  Armure: [String],
   time: Date,
 });
 
