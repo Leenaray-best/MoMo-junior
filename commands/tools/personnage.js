@@ -180,18 +180,33 @@ module.exports = {
                 inline: true,
               },
               {
-                name: `Tour Bonus Potion,Poison`,
-                value: `${(ficheSac.Tour[0], ficheSac.Tour[1])}`,
+                name: `Tour Bonus Potion`,
+                value: `${ficheSac.Tour[0]}`,
+                inline: true,
+              },
+              {
+                name: `Tour Bonus Poison`,
+                value: `${ficheSac.Tour[1]}`,
                 inline: true,
               }
             )
-            .addFields({
-              name: `Tour Bonus Epée, Dague, Armure`,
-              value: `${
-                (ficheSac.Tour[2], ficheSac.Tour[3], ficheSac.Tour[4])
-              }`,
-              inline: true,
-            });
+            .addFields(
+              {
+                name: `Tour Bonus Epée`,
+                value: `${ficheSac.Tour[2]}`,
+                inline: true,
+              },
+              {
+                name: `Tour Bonus Dague, Armure`,
+                value: `${ficheSac.Tour[3]}`,
+                inline: true,
+              },
+              {
+                name: `Tour Bonus Armure`,
+                value: `${ficheSac.Tour[4]}`,
+                inline: true,
+              }
+            );
 
           await interaction.editReply({
             embeds: [embed],
