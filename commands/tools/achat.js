@@ -247,7 +247,7 @@ module.exports = {
             );
             await ficheBagPerso.findOneAndUpdate(
               { _id: IdPerso },
-              { "Tour.2": 500 }
+              { "Tour.2": 100 }
             );
             interaction.member.roles.add(authId.RoleRP.Epee);
             const newMessage = `Merci pour l'achat de cette épée chez **Bric et Broc** ! Tu viens d'être débité(e) de ${valueEquipement} XP`;
@@ -291,7 +291,7 @@ module.exports = {
             );
             await ficheBagPerso.findOneAndUpdate(
               { _id: IdPerso },
-              { "Tour.3": 500 }
+              { "Tour.3": 100 }
             );
             interaction.member.roles.add(authId.RoleRP.Dague);
             const newMessage = `Merci pour l'achat de cette dague chez **Bric et Broc** ! Tu viens d'être débité(e) de ${valueEquipement} XP`;
@@ -335,7 +335,7 @@ module.exports = {
             );
             await ficheBagPerso.findOneAndUpdate(
               { _id: IdPerso },
-              { "Tour.4": 500 }
+              { "Tour.4": 100 }
             );
             interaction.member.roles.add(authId.RoleRP.Armure);
             const newMessage = `Merci pour l'achat de cette armure chez **Bric et Broc** ! Tu viens d'être débité(e) de ${valueEquipement} XP`;

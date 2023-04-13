@@ -224,7 +224,7 @@ module.exports = {
                   if (
                     interaction.member.roles.cache.has(authId.RoleRP.Dague) &&
                     ficheSac.Tour[3] > 0 &&
-                    interaction.options.getString("competence") === "dexterite"
+                    interaction.options.getString("competence") === "adresse"
                   ) {
                     console.log("TU AS UNE DAGUE");
                     const BonusDague = 3;
@@ -246,7 +246,7 @@ module.exports = {
                   if (
                     interaction.member.roles.cache.has(authId.RoleRP.Dague) &&
                     ficheSacDague.Tour[3] == 0 &&
-                    interaction.options.getString("competence") === "dexterite"
+                    interaction.options.getString("competence") === "adresse"
                   ) {
                     await ficheBag.updateMany(
                       { _id: user.id },
@@ -476,7 +476,7 @@ module.exports = {
                   if (
                     interaction.member.roles.cache.has(authId.RoleRP.Dague) &&
                     ficheSac.Tour[3] > 0 &&
-                    interaction.options.getString("competence") === "dexterite"
+                    interaction.options.getString("competence") === "adresse"
                   ) {
                     console.log("TU AS UNE DAGUE");
                     const BonusDague = 3;
@@ -498,7 +498,7 @@ module.exports = {
                   if (
                     interaction.member.roles.cache.has(authId.RoleRP.Dague) &&
                     ficheSacDague.Tour[3] == 0 &&
-                    interaction.options.getString("competence") === "dexterite"
+                    interaction.options.getString("competence") === "adresse"
                   ) {
                     await ficheBag.updateMany(
                       { _id: user.id },
