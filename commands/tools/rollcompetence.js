@@ -176,7 +176,138 @@ module.exports = {
                         .send(`Les effets du poison ont disparu`);
                     }
                   }
-                  console.log("Après thé", valRoll);
+                  console.log("Après thé/poison", valRoll);
+                  // TEST SI ILS ONT UNE EPEE
+                  if (
+                    ficheSacNewNew.Tour[2] > 0 &&
+                    interaction.member.roles.cache.has(authId.RoleRP.Epee) &&
+                    interaction.options.getString("competence") === "force"
+                  ) {
+                    console.log("TU AS UNE EPEE");
+                    const BonusEpee = 3;
+                    if (valRoll < BonusEpee) {
+                      valRoll = 0;
+                    } else {
+                      var valRoll = valRoll - BonusEpee;
+                    }
+                    TourOld = ficheSac.Tour[2];
+                    TourNew = TourOld - 1;
+                    await ficheBag.findOneAndUpdate(
+                      { _id: user.id },
+                      { "Tour.2": TourNew }
+                    );
+                  }
+                  let ficheSacNewNew = await ficheBag.findOne({
+                    _id: user.id,
+                  });
+                  if (
+                    interaction.member.roles.cache.has(authId.RoleRP.Epee) &&
+                    ficheSacNewNew.Tour[2] == 0 &&
+                    interaction.options.getString("competence") === "force"
+                  ) {
+                    await ficheBagPerso.updateMany(
+                      { _id: user.id },
+                      {
+                        $pull: {
+                          Sac: { $in: [`1 Epée`] },
+                        },
+                      }
+                    );
+                    interaction.member.roles.remove(authId.RoleRP.Epee);
+                    client.channels.cache
+                      .get(authId.Salon.Jet)
+                      .send(
+                        `OH NO !!! Ton épée se casse sur ce dernier coup ! Il va falloir aller en acheter une autre chez **Bric et Broc**`
+                      );
+                  }
+                  // TEST SI ILS ONT UNE DAGUE
+                  if (
+                    interaction.member.roles.cache.has(authId.RoleRP.Dague) &&
+                    ficheSac.Tour[3] > 0 &&
+                    interaction.options.getString("competence") === "dexterite"
+                  ) {
+                    console.log("TU AS UNE DAGUE");
+                    const BonusDague = 3;
+                    if (valRoll < BonusDague) {
+                      valRoll = 0;
+                    } else {
+                      var valRoll = valRoll - BonusDague;
+                    }
+                    TourOld = ficheSac.Tour[3];
+                    TourNew = TourOld - 1;
+                    await ficheBag.findOneAndUpdate(
+                      { _id: user.id },
+                      { "Tour.3": TourNew }
+                    );
+                  }
+                  let ficheSacNew = await ficheBag.findOne({
+                    _id: user.id,
+                  });
+                  if (
+                    interaction.member.roles.cache.has(authId.RoleRP.Dague) &&
+                    ficheSacNew.Tour[3] == 0 &&
+                    interaction.options.getString("competence") === "force"
+                  ) {
+                    await ficheBagPerso.updateMany(
+                      { _id: user.id },
+                      {
+                        $pull: {
+                          Sac: { $in: [`1 Dague`] },
+                        },
+                      }
+                    );
+                    interaction.member.roles.remove(authId.RoleRP.Dague);
+                    client.channels.cache
+                      .get(authId.Salon.Jet)
+                      .send(
+                        `OH NO !!! Ta dague se casse sur ce dernier coup ! Il va falloir aller en acheter une autre chez **Bric et Broc**`
+                      );
+                  }
+                  // TEST SI ILS ONT UNE ARMURE
+                  if (
+                    interaction.member.roles.cache.has(authId.RoleRP.Armure) &&
+                    ficheSac.Tour[4] > 0 &&
+                    interaction.options.getString("competence") ===
+                      "constitution"
+                  ) {
+                    console.log("TU AS UNE ARMURE");
+                    const BonusDague = 3;
+                    if (valRoll < BonusDague) {
+                      valRoll = 0;
+                    } else {
+                      var valRoll = valRoll - BonusDague;
+                    }
+                    TourOld = ficheSac.Tour[4];
+                    TourNew = TourOld - 1;
+                    await ficheBag.findOneAndUpdate(
+                      { _id: user.id },
+                      { "Tour.4": TourNew }
+                    );
+                  }
+                  let ficheSacNew2 = await ficheBag.findOne({
+                    _id: user.id,
+                  });
+                  if (
+                    interaction.member.roles.cache.has(authId.RoleRP.Dague) &&
+                    ficheSacNew2.Tour[4] == 0 &&
+                    interaction.options.getString("competence") === "force"
+                  ) {
+                    await ficheBagPerso.updateMany(
+                      { _id: user.id },
+                      {
+                        $pull: {
+                          Sac: { $in: [`1 Armure`] },
+                        },
+                      }
+                    );
+                    interaction.member.roles.remove(authId.RoleRP.Dague);
+                    client.channels.cache
+                      .get(authId.Salon.Jet)
+                      .send(
+                        `OH NO !!! Ton armure se brise sur ce dernier coup ! Il va falloir aller en acheter une autre chez **Bric et Broc**`
+                      );
+                  }
+                  console.log("Après Epee/Dague/Armure", valRoll);
                   if (valRoll <= NumberUp) {
                     client.channels.cache
                       .get(authId.Salon.Jet)
@@ -296,7 +427,140 @@ module.exports = {
                         .send(`Les effets du poison ont disparu`);
                     }
                   }
-                  console.log("Apres the", valRoll);
+                  console.log("Après thé/poison", valRoll);
+                  // TEST SI ILS ONT UNE EPEE
+                  if (
+                    ficheSacNewNew.Tour[2] > 0 &&
+                    interaction.member.roles.cache.has(authId.RoleRP.Epee) &&
+                    interaction.options.getString("competence") === "force"
+                  ) {
+                    console.log("TU AS UNE EPEE");
+                    const BonusEpee = 3;
+                    if (valRoll < BonusEpee) {
+                      valRoll = 0;
+                    } else {
+                      var valRoll = valRoll + BonusEpee;
+                    }
+                    TourOld = ficheSac.Tour[2];
+                    TourNew = TourOld - 1;
+                    await ficheBag.findOneAndUpdate(
+                      { _id: user.id },
+                      { "Tour.2": TourNew }
+                    );
+                  }
+                  let ficheSacNewNew = await ficheBag.findOne({
+                    _id: user.id,
+                  });
+                  if (
+                    interaction.member.roles.cache.has(authId.RoleRP.Epee) &&
+                    ficheSacNewNew.Tour[2] == 0 &&
+                    interaction.options.getString("competence") === "force"
+                  ) {
+                    await ficheBagPerso.updateMany(
+                      { _id: user.id },
+                      {
+                        $pull: {
+                          Sac: { $in: [`1 Epée`] },
+                        },
+                      }
+                    );
+                    interaction.member.roles.remove(authId.RoleRP.Epee);
+                    client.channels.cache
+                      .get(authId.Salon.Jet)
+                      .send(
+                        `OH NO !!! Ton épée se casse sur ce dernier coup ! Il va falloir aller en acheter une autre chez **Bric et Broc**`
+                      );
+                  }
+                  // TEST SI ILS ONT UNE DAGUE
+                  if (
+                    interaction.member.roles.cache.has(authId.RoleRP.Dague) &&
+                    ficheSac.Tour[3] > 0 &&
+                    interaction.options.getString("competence") === "dexterite"
+                  ) {
+                    console.log("TU AS UNE DAGUE");
+                    const BonusDague = 3;
+                    if (valRoll < BonusDague) {
+                      valRoll = 0;
+                    } else {
+                      var valRoll = valRoll + BonusDague;
+                    }
+                    TourOld = ficheSac.Tour[3];
+                    TourNew = TourOld - 1;
+                    await ficheBag.findOneAndUpdate(
+                      { _id: user.id },
+                      { "Tour.3": TourNew }
+                    );
+                  }
+                  let ficheSacNew = await ficheBag.findOne({
+                    _id: user.id,
+                  });
+                  if (
+                    interaction.member.roles.cache.has(authId.RoleRP.Dague) &&
+                    ficheSacNew.Tour[3] == 0 &&
+                    interaction.options.getString("competence") === "dexterite"
+                  ) {
+                    await ficheBagPerso.updateMany(
+                      { _id: user.id },
+                      {
+                        $pull: {
+                          Sac: { $in: [`1 Dague`] },
+                        },
+                      }
+                    );
+                    interaction.member.roles.remove(authId.RoleRP.Dague);
+                    client.channels.cache
+                      .get(authId.Salon.Jet)
+                      .send(
+                        `OH NO !!! Ta dague se casse sur ce dernier coup ! Il va falloir aller en acheter une autre chez **Bric et Broc**`
+                      );
+                  }
+                  // TEST SI ILS ONT UNE ARMURE
+                  if (
+                    interaction.member.roles.cache.has(authId.RoleRP.Armure) &&
+                    ficheSac.Tour[4] > 0 &&
+                    interaction.options.getString("competence") ===
+                      "constitution"
+                  ) {
+                    console.log("TU AS UNE ARMURE");
+                    const BonusArmure = 3;
+                    if (valRoll < BonusDague) {
+                      valRoll = 0;
+                    } else {
+                      var valRoll = valRoll + BonusArmure;
+                    }
+                    TourOld = ficheSac.Tour[4];
+                    TourNew = TourOld - 1;
+                    await ficheBag.findOneAndUpdate(
+                      { _id: user.id },
+                      { "Tour.4": TourNew }
+                    );
+                  }
+                  let ficheSacNew2 = await ficheBag.findOne({
+                    _id: user.id,
+                  });
+                  if (
+                    interaction.member.roles.cache.has(authId.RoleRP.Armure) &&
+                    ficheSacNew2.Tour[4] == 0 &&
+                    interaction.options.getString("competence") ===
+                      "constitution"
+                  ) {
+                    await ficheBagPerso.updateMany(
+                      { _id: user.id },
+                      {
+                        $pull: {
+                          Sac: { $in: [`1 Armure`] },
+                        },
+                      }
+                    );
+                    interaction.member.roles.remove(authId.RoleRP.Armure);
+                    client.channels.cache
+                      .get(authId.Salon.Jet)
+                      .send(
+                        `OH NO !!! Ton armure se brise sur ce dernier coup ! Il va falloir aller en acheter une autre chez **Bric et Broc**`
+                      );
+                  }
+                  console.log("Après Epee/Dague/Armure", valRoll);
+
                   var valTotal = valRoll + NumberUp;
                   console.log(valTotal);
                   client.channels.cache

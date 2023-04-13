@@ -213,6 +213,139 @@ module.exports = {
         } else {
           console.log("On est pas bon");
         }
+      } else if (interaction.options.getSubcommand() === "equipement") {
+        if (interaction.options.getString("categorie") === "epee") {
+          let fiche = await fichePerso.findOne({
+            _id: user.id,
+          });
+          let ficheSac = await ficheBagPerso.findOne({
+            _id: user.id,
+          });
+          const valueEquipement = 5000;
+          const tourEquipement = ficheSac.Tour[2];
+          if (fiche.NiveauXP < valueEquipement) {
+            console.log("j'ai assez d'XP");
+            const newMessage = `Désolé tu n'as pas les fond pour ton achat et **Bric et Broc** ne fait pas crédit !!`;
+            await interaction.editReply({
+              content: newMessage,
+            });
+          } else if (tourEquipement > 0) {
+            console.log("je suis full d'arme");
+            const newMessage = `Voyons voyons, ton équipement est encore fonctionnel. Il en faut pour tout le monde !`;
+            await interaction.editReply({
+              content: newMessage,
+            });
+          } else {
+            NewXp = fiche.NiveauXP - valueEquipement;
+            await fichePerso.findOneAndUpdate(
+              { _id: IdPerso },
+              { NiveauXP: NewXp }
+            );
+            await ficheBagPerso.findOneAndUpdate(
+              { _id: IdPerso },
+              { $push: { Sac: `1 Epée` } }
+            );
+            await ficheBagPerso.findOneAndUpdate(
+              { _id: IdPerso },
+              { "Tour.2": 500 }
+            );
+            interaction.member.roles.add(authId.RoleRP.Epee);
+            const newMessage = `Merci pour l'achat de cette épée chez **Bric et Broc** ! Tu viens d'être débité(e) de ${valueEquipement} XP`;
+            await interaction.editReply({
+              content: newMessage,
+            });
+          }
+        } else {
+          console.log("On est pas bon");
+        }
+        if (interaction.options.getString("categorie") === "dague") {
+          let fiche = await fichePerso.findOne({
+            _id: user.id,
+          });
+          let ficheSac = await ficheBagPerso.findOne({
+            _id: user.id,
+          });
+          const valueEquipement = 5000;
+          const tourEquipement = ficheSac.Tour[3];
+          if (fiche.NiveauXP < valueEquipement) {
+            console.log("j'ai assez d'XP");
+            const newMessage = `Désolé tu n'as pas les fond pour ton achat et **Bric et Broc** ne fait pas crédit !!`;
+            await interaction.editReply({
+              content: newMessage,
+            });
+          } else if (tourEquipement > 0) {
+            console.log("je suis full d'arme");
+            const newMessage = `Voyons voyons, ton équipement est encore fonctionnel. Il en faut pour tout le monde !`;
+            await interaction.editReply({
+              content: newMessage,
+            });
+          } else {
+            NewXp = fiche.NiveauXP - valueEquipement;
+            await fichePerso.findOneAndUpdate(
+              { _id: IdPerso },
+              { NiveauXP: NewXp }
+            );
+            await ficheBagPerso.findOneAndUpdate(
+              { _id: IdPerso },
+              { $push: { Sac: `1 Dague` } }
+            );
+            await ficheBagPerso.findOneAndUpdate(
+              { _id: IdPerso },
+              { "Tour.3": 500 }
+            );
+            interaction.member.roles.add(authId.RoleRP.Dague);
+            const newMessage = `Merci pour l'achat de cette dague chez **Bric et Broc** ! Tu viens d'être débité(e) de ${valueEquipement} XP`;
+            await interaction.editReply({
+              content: newMessage,
+            });
+          }
+        } else {
+          console.log("On est pas bon");
+        }
+        if (interaction.options.getString("categorie") === "armure") {
+          let fiche = await fichePerso.findOne({
+            _id: user.id,
+          });
+          let ficheSac = await ficheBagPerso.findOne({
+            _id: user.id,
+          });
+          const valueEquipement = 5000;
+          const tourEquipement = ficheSac.Tour[4];
+          if (fiche.NiveauXP < valueEquipement) {
+            console.log("j'ai assez d'XP");
+            const newMessage = `Désolé tu n'as pas les fond pour ton achat et **Bric et Broc** ne fait pas crédit !!`;
+            await interaction.editReply({
+              content: newMessage,
+            });
+          } else if (tourEquipement > 0) {
+            console.log("je suis full d'arme");
+            const newMessage = `Voyons voyons, ton équipement est encore fonctionnel. Il en faut pour tout le monde !`;
+            await interaction.editReply({
+              content: newMessage,
+            });
+          } else {
+            NewXp = fiche.NiveauXP - valueEquipement;
+            await fichePerso.findOneAndUpdate(
+              { _id: IdPerso },
+              { NiveauXP: NewXp }
+            );
+            await ficheBagPerso.findOneAndUpdate(
+              { _id: IdPerso },
+              { $push: { Sac: `1 Armure` } }
+            );
+            await ficheBagPerso.findOneAndUpdate(
+              { _id: IdPerso },
+              { "Tour.4": 500 }
+            );
+            interaction.member.roles.add(authId.RoleRP.Armure);
+            const newMessage = `Merci pour l'achat de cette armure chez **Bric et Broc** ! Tu viens d'être débité(e) de ${valueEquipement} XP`;
+            await interaction.editReply({
+              content: newMessage,
+            });
+          }
+        } else {
+          console.log("On est pas bon");
+        }
       }
     } else {
       const newMessage = `Tu n'es pas dans le bon salon\nTu dois faire cette commande dans un des salons de commerces`;
