@@ -197,7 +197,7 @@ module.exports = {
                 inline: true,
               },
               {
-                name: `Tour Bonus Dague, Armure`,
+                name: `Tour Bonus Dague`,
                 value: `${ficheSac.Tour[3]}`,
                 inline: true,
               },
