@@ -322,7 +322,7 @@ module.exports = {
                   console.log("Après Bonus/Malus MJ", valRoll);
 
                   // BONUS SALON POUR L'HERBORISTE
-                  let guildQuete = await FicheQuete.findOne({
+                  let guildQuete = await ficheSalonBonusLieu.findOne({
                     _id: authId.idDatabase.BonusId,
                   });
                   console.log(authId.idDatabase.BonusId);
@@ -606,7 +606,7 @@ module.exports = {
                   console.log("Après Bonus/Malus MJ", valRoll);
 
                   // BONUS SALON POUR L'HERBORISTE
-                  let guildQuete = await FicheQuete.findOne({
+                  let guildQuete = await ficheSalonBonusLieu.findOne({
                     _id: authId.idDatabase.BonusId,
                   });
                   const tailleTableau = guildQuete.Eau.length;
