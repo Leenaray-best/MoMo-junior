@@ -326,6 +326,7 @@ module.exports = {
                     _id: authId.idDatabase.BonusId,
                   });
                   console.log(authId.idDatabase.BonusId);
+                  console.log(guildQuete);
                   const tailleTableau = guildQuete.Eau.length;
                   for (i = 0; i < tailleTableau; i++) {
                     if (
