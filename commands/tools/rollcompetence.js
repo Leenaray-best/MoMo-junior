@@ -647,12 +647,12 @@ module.exports = {
           //// METTRE LA COMMANDE DANS LES LOG
           //let fichePer = await FichePerso.findOne({ _id: user.id });
           if (interaction.options.getString("bonusmj") == null) {
-            const MessageLog =
+            var MessageLog =
               `${interaction.commandName}` +
               ` ${interaction.options.getString("opposition")}` +
               ` ${interaction.options.getString("competence")}`;
           } else {
-            const MessageLog =
+            var MessageLog =
               `${interaction.commandName}` +
               ` ${interaction.options.getString("opposition")}` +
               ` ${interaction.options.getString("competence")}` +
