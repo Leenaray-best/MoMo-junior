@@ -352,7 +352,9 @@ module.exports = {
                       .send(
                         "<@" +
                           user.id +
-                          `> Ton roll de ${listeCompetence[i]} est de ` +
+                          `> Ton roll de ${interaction.options.getString(
+                            "competence"
+                          )} est de ` +
                           valRoll +
                           ", c'est une reussite" +
                           `\rTu peux repartir dans ${client.channels.cache.get(
@@ -365,7 +367,9 @@ module.exports = {
                       .send(
                         "<@" +
                           user.id +
-                          `> Ton roll de ${listeCompetence[i]} est de ` +
+                          `> Ton roll de ${interaction.options.getString(
+                            "competence"
+                          )} est de ` +
                           valRoll +
                           ", c'est un echec" +
                           `\rTu peux repartir dans ${client.channels.cache.get(
@@ -650,11 +654,13 @@ module.exports = {
             var MessageLog =
               `${interaction.commandName}` +
               ` ${interaction.options.getString("opposition")}` +
+              " opposition" +
               ` ${interaction.options.getString("competence")}`;
           } else {
             var MessageLog =
               `${interaction.commandName}` +
               ` ${interaction.options.getString("opposition")}` +
+              " opposition" +
               ` ${interaction.options.getString("competence")}` +
               ` ${interaction.options.getString("bonusmj")}`;
           }
