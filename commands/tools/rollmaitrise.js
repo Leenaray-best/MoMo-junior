@@ -496,18 +496,25 @@ module.exports = {
           }
 
           //// METTRE LA COMMANDE DANS LES LOG
-          var fichePer = await FichePerso.findOne({ _id: user.id });
-          let MessageLog =
-            interaction.commandName +
-            interaction.options.getString("categorie") +
-            interaction.options.getString("sousmaitrise");
-          const cont = `${fichePer.Identite.Prenom} ${
-            fichePer.Identite.Nom
+          //let fichePer = await FichePerso.findOne({ _id: user.id });
+          if (interaction.options.getString("bonusmj") > 0) {
+            var MessageLog =
+              `${interaction.commandName}` +
+              ` ${interaction.options.getString("categorie")}` +
+              ` ${interaction.options.getString("bonusmj")}`;
+          } else {
+            var MessageLog =
+              `${interaction.commandName}` +
+              ` ${interaction.options.getString("categorie")}` +
+              " sans bonus MJ";
+          }
+          const cont = `${guildPerso.Identite.Prenom} ${
+            guildPerso.Identite.Nom
           } - ${client.channels.cache.get(
             message.channel.id
           )}: ${MessageLog}\n`;
           console.log(cont);
-          client.channels.cache.get(auth.Salon.LogMessage).send(cont);
+          client.channels.cache.get(authId.Salon.LogMessage).send(`${cont}`);
 
           // INDICATION DU SALON JET
 

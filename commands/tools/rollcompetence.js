@@ -650,19 +650,20 @@ module.exports = {
 
           //// METTRE LA COMMANDE DANS LES LOG
           //let fichePer = await FichePerso.findOne({ _id: user.id });
-          if (interaction.options.getString("bonusmj") == null) {
-            var MessageLog =
-              `${interaction.commandName}` +
-              ` ${interaction.options.getString("opposition")}` +
-              " opposition" +
-              ` ${interaction.options.getString("competence")}`;
-          } else {
+          if (interaction.options.getString("bonusmj") > 0) {
             var MessageLog =
               `${interaction.commandName}` +
               ` ${interaction.options.getString("opposition")}` +
               " opposition" +
               ` ${interaction.options.getString("competence")}` +
               ` ${interaction.options.getString("bonusmj")}`;
+          } else {
+            var MessageLog =
+              `${interaction.commandName}` +
+              ` ${interaction.options.getString("opposition")}` +
+              " opposition" +
+              ` ${interaction.options.getString("competence")}`;
+            +" sans bonus MJ";
           }
           const cont = `${guildPerso.Identite.Prenom} ${
             guildPerso.Identite.Nom
