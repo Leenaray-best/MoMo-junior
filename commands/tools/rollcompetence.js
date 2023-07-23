@@ -653,7 +653,7 @@ module.exports = {
           //// METTRE LA COMMANDE DANS LES LOG
           //let fichePer = await FichePerso.findOne({ _id: user.id });
           if (
-            interaction.options.getString("bonusmj") > 0 &&
+            interaction.options.getNumber("bonusmj") > 0 &&
             interaction.member.roles.cache.has(authId.RoleRP.BonusMJ)
           ) {
             var MessageLog =
