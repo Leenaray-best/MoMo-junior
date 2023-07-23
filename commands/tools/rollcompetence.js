@@ -648,8 +648,9 @@ module.exports = {
           //let fichePer = await FichePerso.findOne({ _id: user.id });
           let MessageLog =
             interaction.commandName +
-            interaction.options.getString("categorie") +
-            interaction.options.getString("sousmaitrise");
+            interaction.options.getString("opposition") +
+            interaction.options.getString("competence") +
+            interaction.options.getString("bonusmj");
           const cont = `${guildPerso.Identite.Prenom} ${
             guildPerso.Identite.Nom
           } - ${client.channels.cache.get(
