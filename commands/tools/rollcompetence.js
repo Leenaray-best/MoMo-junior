@@ -46,6 +46,12 @@ module.exports = {
           { name: "Spiritualité", value: "spiritualite" },
           { name: "Discrétion", value: "discretion" }
         )
+    )
+    .addNumberOption((option) =>
+      option
+        .setName("bonusmj")
+        .setDescription("Valeur du bonus/malus attribué par la MJ")
+        .setRequired(false)
     ),
 
   async execute(interaction, client) {
@@ -126,11 +132,9 @@ module.exports = {
                     if (ficheSac.Tour[0] > 0) {
                       console.log("Mon tour bonus est > 0");
                       BonusPotion = Number(ficheSac.ValeurBonus);
-                      if (valRoll < 5) {
-                        valRoll = 0;
-                      } else {
-                        var valRoll = valRoll - BonusPotion;
-                      }
+
+                      var valRoll = valRoll - BonusPotion;
+
                       TourOld = ficheSac.Tour[0];
                       TourNew = TourOld - 1;
                       await ficheBag.findOneAndUpdate(
@@ -185,11 +189,9 @@ module.exports = {
                   ) {
                     console.log("TU AS UNE EPEE");
                     const BonusEpee = 3;
-                    if (valRoll < BonusEpee) {
-                      valRoll = 0;
-                    } else {
-                      var valRoll = valRoll - BonusEpee;
-                    }
+
+                    var valRoll = valRoll - BonusEpee;
+
                     TourOld = ficheSac.Tour[2];
                     TourNew = TourOld - 1;
                     await ficheBag.findOneAndUpdate(
@@ -228,11 +230,9 @@ module.exports = {
                   ) {
                     console.log("TU AS UNE DAGUE");
                     const BonusDague = 3;
-                    if (valRoll < BonusDague) {
-                      valRoll = 0;
-                    } else {
-                      var valRoll = valRoll - BonusDague;
-                    }
+
+                    var valRoll = valRoll - BonusDague;
+
                     TourOld = ficheSac.Tour[3];
                     TourNew = TourOld - 1;
                     await ficheBag.findOneAndUpdate(
@@ -272,11 +272,9 @@ module.exports = {
                   ) {
                     console.log("TU AS UNE ARMURE");
                     const BonusArmure = 3;
-                    if (valRoll < BonusArmure) {
-                      valRoll = 0;
-                    } else {
-                      var valRoll = valRoll - BonusArmure;
-                    }
+
+                    var valRoll = valRoll - BonusArmure;
+
                     TourOld = ficheSac.Tour[4];
                     TourNew = TourOld - 1;
                     await ficheBag.findOneAndUpdate(
@@ -309,6 +307,43 @@ module.exports = {
                       );
                   }
                   console.log("Après Epee/Dague/Armure", valRoll);
+                  // TEST SI ILS ONT LE ROLE BONUS MJ
+                  if (
+                    interaction.member.roles.cache.has(authId.RoleRP.BonusMJ)
+                  ) {
+                    var BonusMJ = interaction.options.getNumber("bonusmj");
+
+                    var valRoll = valRoll - BonusMJ;
+                  } else {
+                    var BonusMJ = 0;
+
+                    var valRoll = valRoll - BonusMJ;
+                  }
+                  console.log("Après Bonus/Malus MJ", valRoll);
+
+                  // BONUS SALON POUR L'HERBORISTE
+                  let guildQuete = await FicheQuete.findOne({
+                    _id: auth.idDatabase.BonusId,
+                  });
+                  const tailleTableau = guildQuete.Eau.length;
+                  for (i = 0; i < tailleTableau; i++) {
+                    if (
+                      channelMessage == guildQuete.Eau[i] &&
+                      interaction.member.roles.cache.has(
+                        authId.RoleRP.MaitrisePlante
+                      )
+                    ) {
+                      var BonusHerboriste = 6;
+                      var valRoll = valRoll - BonusHerboriste;
+                    } else {
+                      var BonusHerboriste = 0;
+                      var valRoll = valRoll - BonusHerboriste;
+                    }
+                  }
+
+                  if (valRoll < 0) {
+                    valRoll = 0;
+                  }
                   if (valRoll <= NumberUp) {
                     client.channels.cache
                       .get(authId.Salon.Jet)
@@ -437,11 +472,9 @@ module.exports = {
                   ) {
                     console.log("TU AS UNE EPEE");
                     const BonusEpee = 3;
-                    if (valRoll < BonusEpee) {
-                      valRoll = 0;
-                    } else {
-                      var valRoll = valRoll + BonusEpee;
-                    }
+
+                    var valRoll = valRoll + BonusEpee;
+
                     TourOld = ficheSac.Tour[2];
                     TourNew = TourOld - 1;
                     await ficheBag.findOneAndUpdate(
@@ -480,11 +513,9 @@ module.exports = {
                   ) {
                     console.log("TU AS UNE DAGUE");
                     const BonusDague = 3;
-                    if (valRoll < BonusDague) {
-                      valRoll = 0;
-                    } else {
-                      var valRoll = valRoll + BonusDague;
-                    }
+
+                    var valRoll = valRoll + BonusDague;
+
                     TourOld = ficheSac.Tour[3];
                     TourNew = TourOld - 1;
                     await ficheBag.findOneAndUpdate(
@@ -524,11 +555,9 @@ module.exports = {
                   ) {
                     console.log("TU AS UNE ARMURE");
                     const BonusArmure = 3;
-                    if (valRoll < BonusArmure) {
-                      valRoll = 0;
-                    } else {
-                      var valRoll = valRoll + BonusArmure;
-                    }
+
+                    var valRoll = valRoll + BonusArmure;
+
                     TourOld = ficheSac.Tour[4];
                     TourNew = TourOld - 1;
                     await ficheBag.findOneAndUpdate(
@@ -561,6 +590,38 @@ module.exports = {
                       );
                   }
                   console.log("Après Epee/Dague/Armure", valRoll);
+                  // TEST SI ILS ONT LE ROLE BONUS MJ
+                  if (
+                    interaction.member.roles.cache.has(authId.RoleRP.BonusMJ)
+                  ) {
+                    var BonusMJ = interaction.options.getNumber("bonusmj");
+                    var valRoll = valRoll + BonusMJ;
+                  } else {
+                    var BonusMJ = 0;
+
+                    var valRoll = valRoll + BonusMJ;
+                  }
+                  console.log("Après Bonus/Malus MJ", valRoll);
+
+                  // BONUS SALON POUR L'HERBORISTE
+                  let guildQuete = await FicheQuete.findOne({
+                    _id: auth.idDatabase.BonusId,
+                  });
+                  const tailleTableau = guildQuete.Eau.length;
+                  for (i = 0; i < tailleTableau; i++) {
+                    if (
+                      channelMessage == guildQuete.Eau[i] &&
+                      interaction.member.roles.cache.has(
+                        authId.RoleRP.MaitrisePlante
+                      )
+                    ) {
+                      var BonusHerboriste = 6;
+                      var valRoll = valRoll + BonusHerboriste;
+                    } else {
+                      var BonusHerboriste = 0;
+                      var valRoll = valRoll + BonusHerboriste;
+                    }
+                  }
 
                   var valTotal = valRoll + NumberUp;
                   console.log(valTotal);
@@ -580,6 +641,22 @@ module.exports = {
               }
             }
           }
+
+          //// METTRE LA COMMANDE DANS LES LOG
+          var fichePer = await FichePerso.findOne({ _id: user.id });
+          let MessageLog =
+            interaction.commandName +
+            interaction.options.getString("categorie") +
+            interaction.options.getString("sousmaitrise");
+          const cont = `${fichePer.Identite.Prenom} ${
+            fichePer.Identite.Nom
+          } - ${client.channels.cache.get(
+            message.channel.id
+          )}: ${MessageLog}\n`;
+          console.log(cont);
+          client.channels.cache.get(auth.Salon.LogMessage).send(cont);
+
+          // INDICATION DU SALON JET
           const ChannelNameIdJet = client.channels.cache.get(authId.Salon.Jet);
           const newMessage = `Va dans ${ChannelNameIdJet} pour voir ton resultat`;
           // client.channels.cache

@@ -30,6 +30,18 @@ module.exports = {
           { name: "Avec Opposition", value: "avecopposition" }
         )
     )
+    .addStringOption((option) =>
+      option
+        .setName("sousmaitrise")
+        .setRequired(false)
+        .setDescription("Choix de la sous-maitrise à utiliser")
+        .addChoices(
+          { name: "M3 : Le Glaçon", value: "glacon" },
+          { name: "M3 : Le healer", value: "hearler" },
+          { name: "M10 : Herboriste", value: "herbo" },
+          { name: "M16 : Puppet Master", value: "puppet" }
+        )
+    )
     .addNumberOption((option) =>
       option
         .setName("bonusmj")
@@ -128,111 +140,65 @@ module.exports = {
             guildMeteo.PoleSud,
           ];
           // For Water Bender Bonus meteo involved
-          if (interaction.member.roles.cache.has(authId.RoleRP.Eau)) {
-            var BonusSup = 0;
-            console.log(BonusSup);
-            var BonusCompetence = guildPerso.Competence.Survie;
-            console.log(BonusCompetence);
+          var BonusSup = 0;
+          console.log(BonusSup);
+          var BonusCompetence = guildPerso.Competence.Survie;
+          console.log(BonusCompetence);
+          for (salonName in listSalonRp) {
+            if (interaction.member.roles.cache.has(listSalonRp[salonName])) {
+              console.log("Ton perso est bien dans un salon RP");
+              tailleTableau = guildBonus.EauBonus1.length;
+              for (i = 0; i < tailleTableau; i++) {
+                if (catMeteo[salonName] == guildBonus.EauBonus1[i]) {
+                  var BonusSup = Number(1);
+                }
+              }
+            }
+          }
+
+          if (BonusSup == Number(0)) {
             for (salonName in listSalonRp) {
               if (interaction.member.roles.cache.has(listSalonRp[salonName])) {
                 console.log("Ton perso est bien dans un salon RP");
-                tailleTableau = guildBonus.EauBonus1.length;
+                tailleTableau = guildBonus.EauBonus2.length;
                 for (i = 0; i < tailleTableau; i++) {
-                  if (catMeteo[salonName] == guildBonus.EauBonus1[i]) {
-                    var BonusSup = Number(1);
+                  if (catMeteo[salonName] == guildBonus.EauBonus2[i]) {
+                    var BonusSup = Number(2);
                   }
                 }
               }
-            }
-
-            if (BonusSup == Number(0)) {
-              for (salonName in listSalonRp) {
-                if (
-                  interaction.member.roles.cache.has(listSalonRp[salonName])
-                ) {
-                  console.log("Ton perso est bien dans un salon RP");
-                  tailleTableau = guildBonus.EauBonus2.length;
-                  for (i = 0; i < tailleTableau; i++) {
-                    if (catMeteo[salonName] == guildBonus.EauBonus2[i]) {
-                      var BonusSup = Number(2);
-                    }
-                  }
-                }
-              }
-            }
-            if (
-              message.createdAt.getHours() >= 16 ||
-              message.createdAt.getHours() <= 3
-            ) {
-              console.log(
-                "Ton perso est bien dans un salon RP et il fait nuit. "
-              );
-              console.log(guildMeteo.Nuit);
-              console.log(guildBonus.EauBonusNuit[0]);
-              console.log(guildBonus.EauBonusNuit[1]);
-              console.log(guildBonus.EauBonusNuit[2]);
-              console.log(guildBonus.EauBonusNuit[3]);
-              if (guildMeteo.Nuit == guildBonus.EauBonusNuit[0]) {
-                var BonusSup = Number(2);
-              } else if (
-                guildMeteo.Nuit == guildBonus.EauBonusNuit[1] ||
-                guildMeteo.Nuit == guildBonus.EauBonusNuit[2]
-              ) {
-                var BonusSup = Number(1);
-              } else if (guildMeteo.Nuit == guildBonus.EauBonusNuit[3]) {
-                var BonusSup = Number(-2);
-              } else if (
-                guildMeteo.Nuit == guildBonus.EauBonusNuit[4] ||
-                guildMeteo.Nuit == guildBonus.EauBonusNuit[5]
-              ) {
-                var BonusSup = Number(-1);
-              }
-              console.log("Tu sors de la boucle des maitres de l'eau");
-            }
-          } else if (interaction.member.roles.cache.has(authId.RoleRP.Feu)) {
-            var BonusSup = Number(0);
-            var BonusCompetence = guildPerso.Competence.Intelligence;
-
-            for (salonName in listSalonRp) {
-              if (interaction.member.roles.cache.has(listSalonRp[salonName])) {
-                console.log(guildBonus);
-                console.log("Je suis feu");
-                tailleTableau = guildBonus.FeuBonus1.length;
-                for (i = 0; i < tailleTableau; i++) {
-                  if (catMeteo[salonName] == guildBonus.FeuBonus1[i]) {
-                    var BonusSup = Number(1);
-                  } else if (catMeteo[salonName] == guildBonus.EauBonus1[1]) {
-                    var BonusSup = Number(-2);
-                  } else if (
-                    catMeteo[salonName] == guildBonus.EauBonus1[0] ||
-                    catMeteo[salonName] == guildBonus.EauBonus2[0]
-                  ) {
-                    var BonusSup = Number(-1);
-                  }
-                }
-              }
-            }
-          } else if (interaction.member.roles.cache.has(authId.RoleRP.Air)) {
-            var BonusSup = Number(0);
-            var BonusCompetence = guildPerso.Competence.Adresse;
-            if (interaction.member.roles.cache.has(authId.RoleRP.Chauve)) {
-              var BonusSup = Number(1);
-            }
-            for (i = 0; i < ficheSac.Sac.length; i++) {
-              if (ficheSac.Sac[i] == "baton") {
-                BonusSup = BonusSup + 1;
-              }
-            }
-          } else if (interaction.member.roles.cache.has(authId.RoleRP.Terre)) {
-            console.log(guildBonusSalonLieu);
-            console.log(channelMessage);
-            var BonusSup = Number(0);
-            var BonusCompetence = guildPerso.Competence.Constitution;
-            for (i = 0; i < guildBonusSalonLieu.Terre.length; i++) {
-              if (channelMessage == guildBonusSalonLieu.Terre[i])
-                var BonusSup = Number(1);
             }
           }
+          if (
+            message.createdAt.getHours() >= 16 ||
+            message.createdAt.getHours() <= 3
+          ) {
+            console.log(
+              "Ton perso est bien dans un salon RP et il fait nuit. "
+            );
+            console.log(guildMeteo.Nuit);
+            console.log(guildBonus.EauBonusNuit[0]);
+            console.log(guildBonus.EauBonusNuit[1]);
+            console.log(guildBonus.EauBonusNuit[2]);
+            console.log(guildBonus.EauBonusNuit[3]);
+            if (guildMeteo.Nuit == guildBonus.EauBonusNuit[0]) {
+              var BonusSup = Number(2);
+            } else if (
+              guildMeteo.Nuit == guildBonus.EauBonusNuit[1] ||
+              guildMeteo.Nuit == guildBonus.EauBonusNuit[2]
+            ) {
+              var BonusSup = Number(1);
+            } else if (guildMeteo.Nuit == guildBonus.EauBonusNuit[3]) {
+              var BonusSup = Number(-2);
+            } else if (
+              guildMeteo.Nuit == guildBonus.EauBonusNuit[4] ||
+              guildMeteo.Nuit == guildBonus.EauBonusNuit[5]
+            ) {
+              var BonusSup = Number(-1);
+            }
+            console.log("Tu sors de la boucle des maitres de l'eau");
+          }
+
           if (interaction.options.getString("categorie") == "sansopposition") {
             console.log("Tu fais du sans opposition");
             console.log("BonusSup avant The", BonusSup);
@@ -287,9 +253,6 @@ module.exports = {
             if (interaction.member.roles.cache.has(authId.RoleRP.BonusMJ)) {
               var BonusMJ = interaction.options.getNumber("bonusmj");
 
-              var BonusSup = BonusSup + BonusMJ;
-            } else {
-              var BonusMJ = 0;
               var BonusSup = BonusSup + BonusMJ;
             }
             console.log("Après Bonus/Malus MJ", BonusSup);
@@ -452,46 +415,83 @@ module.exports = {
               var BonusMJ = interaction.options.getNumber("bonusmj");
 
               var BonnusAttaqueMix = BonnusAttaqueMix + BonusMJ;
-            } else {
-              var BonusMJ = 0;
-              var BonusSup = BonusSup + BonusMJ;
             }
             console.log("Après Bonus/Malus MJ", BonnusAttaqueMix);
             var ValRoll = valRandom + BonnusAttaqueMix;
             if (ValRoll < 15) {
+              var MessageFinish =
+                "<@" +
+                user.id +
+                "> Ton attaque est de " +
+                valRandom +
+                " (roll) + " +
+                BonnusAttaqueMix +
+                " (bonus maitrise) = " +
+                ValRoll +
+                " \rTu n'as pas su utiliser ta maitrise efficacement, meme si ton score est plus haut que ton adversaire, ton action ne fonctionne pas";
+              /// MESSAGE RESULTAT DANS JET
+
               client.channels.cache
                 .get(authId.Salon.Jet)
                 .send(
-                  "<@" +
-                    user.id +
-                    "> Ton attaque est de " +
-                    valRandom +
-                    " (roll) + " +
-                    BonnusAttaqueMix +
-                    " (bonus maitrise) = " +
-                    ValRoll +
-                    " \rTu n'as pas su utiliser ta maitrise efficacement, meme si ton score est plus haut que ton adversaire, tu ne lui feras pas de degat" +
+                  `${MessageFinish}` +
                     `\rTu peux repartir dans ${client.channels.cache.get(
                       channelMessage
                     )}`
                 );
             } else {
-              client.channels.cache
-                .get(authId.Salon.Jet)
-                .send(
-                  "<@" +
-                    user.id +
-                    "> Ton attaque est de " +
-                    valRandom +
-                    " (roll) + " +
-                    BonnusAttaqueMix +
-                    " (bonus maitrise) = " +
-                    ValRoll +
-                    " \rL'utilisation de ta maitrise est une reussite, si ton score est plus haut que ton adversaire tu l'emportes" +
-                    `\rTu peux repartir dans ${client.channels.cache.get(
-                      channelMessage
-                    )}`
-                );
+              // Si il utilise sa M3 Heal
+              var Valheal = Rand(5);
+              var MessageHeal =
+                "Tu peux te rajouter a toi ou a un de tes camarades " +
+                Valheal +
+                "PV";
+              // Si il utilise sa M3 GLACON
+              var MessageGlace =
+                "Tu immobilises ton adversaire qui perd un tour et prend 1 dégât sans contre et sans jet. (2 dégâts si maître du feu). \n Tu enchaînes avec un tour sans opposition pour attaquer, fuir, autre, lui et les membres de son équipe.";
+              var MessageFinish =
+                "<@" +
+                user.id +
+                "> Ton attaque est de " +
+                valRandom +
+                " (roll) + " +
+                BonnusAttaqueMix +
+                " (bonus maitrise) = " +
+                ValRoll +
+                " \rL'utilisation de ta maitrise est une reussite, si ton score est plus haut que ton adversaire tu l'emportes";
+              /// MESSAGE RESULTAT DANS JET
+              if (
+                interaction.member.roles.cache.has(
+                  authId.RoleRP.CapaciteSoin
+                ) &&
+                interaction.options.getString("sousmaitrise") == "healer"
+              ) {
+                client.channels.cache
+                  .get(authId.Salon.Jet)
+                  .send(
+                    `${MessageFinish}` +
+                      `${MessageHeal}` +
+                      `\rTu peux repartir dans ${client.channels.cache.get(
+                        channelMessage
+                      )}`
+                  );
+              } else if (
+                interaction.member.roles.cache.has(
+                  authId.RoleRP.MaitriseGlace
+                ) &&
+                interaction.options.getString("sousmaitrise") === "glacon"
+              ) {
+              } else {
+                client.channels.cache
+                  .get(authId.Salon.Jet)
+                  .send(
+                    `${MessageFinish}` +
+                      `${MessageGlace}` +
+                      `\rTu peux repartir dans ${client.channels.cache.get(
+                        channelMessage
+                      )}`
+                  );
+              }
             }
           }
 
@@ -510,7 +510,6 @@ module.exports = {
           client.channels.cache.get(auth.Salon.LogMessage).send(cont);
 
           // INDICATION DU SALON JET
-
           const ChannelNameIdJet = client.channels.cache.get(authId.Salon.Jet);
           const newMessage = `Go dans ${ChannelNameIdJet} pour voir ton resultat`;
           // client.channels.cache
