@@ -636,7 +636,9 @@ module.exports = {
                     .send(
                       "<@" +
                         user.id +
-                        `> Ton roll de ${listeCompetence[i]} est de ` +
+                        `> Ton roll de ${interaction.options.getString(
+                          "competence"
+                        )} est de ` +
                         valTotal +
                         ", si ton roll est plus haut que celui de ton adversaire tu l'emporte !" +
                         `\rTu peux repartir dans ${client.channels.cache.get(
