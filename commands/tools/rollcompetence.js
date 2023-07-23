@@ -325,6 +325,7 @@ module.exports = {
                   let guildQuete = await FicheQuete.findOne({
                     _id: authId.idDatabase.BonusId,
                   });
+                  console.log(authId.idDatabase.BonusId);
                   const tailleTableau = guildQuete.Eau.length;
                   for (i = 0; i < tailleTableau; i++) {
                     if (
