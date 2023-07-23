@@ -646,18 +646,25 @@ module.exports = {
 
           //// METTRE LA COMMANDE DANS LES LOG
           //let fichePer = await FichePerso.findOne({ _id: user.id });
-          let MessageLog =
-            interaction.commandName +
-            interaction.options.getString("opposition") +
-            interaction.options.getString("competence") +
-            interaction.options.getString("bonusmj");
+          if (interaction.options.getString("bonusmj") == null) {
+            const MessageLog =
+              `${interaction.commandName}` +
+              ` ${interaction.options.getString("opposition")}` +
+              ` ${interaction.options.getString("competence")}`;
+          } else {
+            const MessageLog =
+              `${interaction.commandName}` +
+              ` ${interaction.options.getString("opposition")}` +
+              ` ${interaction.options.getString("competence")}` +
+              ` ${interaction.options.getString("bonusmj")}`;
+          }
           const cont = `${guildPerso.Identite.Prenom} ${
             guildPerso.Identite.Nom
           } - ${client.channels.cache.get(
             message.channel.id
           )}: ${MessageLog}\n`;
           console.log(cont);
-          client.channels.cache.get(authId.Salon.LogMessage).send(cont);
+          client.channels.cache.get(authId.Salon.LogMessage).send(`${cont}`);
 
           // INDICATION DU SALON JET
           const ChannelNameIdJet = client.channels.cache.get(authId.Salon.Jet);
