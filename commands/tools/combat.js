@@ -6,24 +6,6 @@ const mongoose = require("mongoose");
 const ficheBonus = require("../../BonusRollMeteo");
 const ficheSalonBonusLieu = require("../../salonBonus");
 const fichePerso = require("../../FichePerso");
-const ficheMeteo = require("../../meteo");
-const ficheMeteotest = require("../../salonMeteo");
-
-const ficheBagPerso = require("../../fichePersoSac");
-const wait = require("node:timers/promises").setTimeout;
-
-function Rand(valeur) {
-  return Math.floor(Math.random() * valeur + 1);
-}
-
-const { channel } = require("diagnostics_channel");
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const fs = require("fs");
-var authId = JSON.parse(fs.readFileSync("./auth.json"));
-const mongoose = require("mongoose");
-const ficheBonus = require("../../BonusRollMeteo");
-const ficheSalonBonusLieu = require("../../salonBonus");
-const fichePerso = require("../../FichePerso");
 const ficheCombat = require("../../FicheCombat");
 const ficheMeteo = require("../../meteo");
 const ficheMeteotest = require("../../salonMeteo");
