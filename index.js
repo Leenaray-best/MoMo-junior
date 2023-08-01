@@ -66,7 +66,7 @@ const ficheSacPerso = require("./fichePersoSac.js");
 const ficheObjetRP = require("./ficheObjet.js");
 const testimage = "testimage";
 const ficheAnimauxRP = require("./ficheAnimaux.js");
-const ficheCombat = require("../../FicheCombat");
+const ficheCombat = require("./FicheCombat.js");
 client.handleEvents();
 client.handleCommands();
 
