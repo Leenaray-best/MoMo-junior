@@ -717,7 +717,7 @@ function createFicheCombat(
   Target4
 ) {
   const IdentityCombat = new ficheCombat({
-    _id: Numero,
+    _id: 1,
     TourGlobal: [0],
     IdJoueur: [Target0, Target1, Target2, Target3, Target4],
     TourJoueur: [0, 0, 0, 0, 0],
@@ -726,7 +726,7 @@ function createFicheCombat(
     M16ActivAbove10: [0, 0, 0, 0, 0],
     TM10: [0, 0, 0, 0, 0],
     TM3: [0, 0, 0, 0, 0],
-    time: Date,
+    time: Date(),
   });
 
   IdentityCombat.save()

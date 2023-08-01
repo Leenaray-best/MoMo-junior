@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const Combat = mongoose.Schema({
-  _id: String,
+  _id: Number,
   TourGlobal: [Number],
   IdJoueur: [String],
   TourJoueur: [Number],
