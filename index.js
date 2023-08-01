@@ -66,6 +66,7 @@ const ficheSacPerso = require("./fichePersoSac.js");
 const ficheObjetRP = require("./ficheObjet.js");
 const testimage = "testimage";
 const ficheAnimauxRP = require("./ficheAnimaux.js");
+const ficheCombat = require("../../FicheCombat");
 client.handleEvents();
 client.handleCommands();
 
@@ -81,6 +82,7 @@ client
     createBonusMeteoRoll();
     createFicheObjetRP();
     createFicheAnimaux();
+    createFicheCombat();
   })
   .catch((err) => console.log(err));
 var auth = require("./auth.json");
@@ -702,6 +704,32 @@ function createFicheAnimaux() {
     time: Date(),
   });
   FicheAnimaux.save()
+    .then((result) => console.log(result))
+    .catch((err) => console.log(err));
+}
+
+function createFicheCombat(
+  Numero,
+  Target0,
+  Target1,
+  Target2,
+  Target3,
+  Target4
+) {
+  const IdentityCombat = new ficheCombat({
+    _id: Numero,
+    TourGlobal: [0],
+    IdJoueur: [Target0, Target1, Target2, Target3, Target4],
+    TourJoueur: [0, 0, 0, 0, 0],
+    TM16: [0, 0, 0, 0, 0],
+    M16Activ: [0, 0, 0, 0, 0],
+    M16ActivAbove10: [0, 0, 0, 0, 0],
+    TM10: [0, 0, 0, 0, 0],
+    TM3: [0, 0, 0, 0, 0],
+    time: Date,
+  });
+
+  IdentityCombat.save()
     .then((result) => console.log(result))
     .catch((err) => console.log(err));
 }

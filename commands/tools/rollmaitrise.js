@@ -504,12 +504,13 @@ module.exports = {
             var MessageLog =
               `${interaction.commandName}` +
               ` ${interaction.options.getString("categorie")}` +
-              ` ${interaction.options.getString("bonusmj")}`;
+              "Bonus/Malus MJ de" +
+              ` ${interaction.options.getNumber("bonusmj")}`;
           } else {
             var MessageLog =
               `${interaction.commandName}` +
               ` ${interaction.options.getString("categorie")}` +
-              " sans bonus MJ";
+              " sans bonus/malus MJ";
           }
           const cont = `${guildPerso.Identite.Prenom} ${
             guildPerso.Identite.Nom

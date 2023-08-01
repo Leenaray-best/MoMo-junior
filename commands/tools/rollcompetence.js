@@ -661,14 +661,15 @@ module.exports = {
               ` ${interaction.options.getString("opposition")}` +
               " opposition" +
               ` ${interaction.options.getString("competence")}` +
-              ` ${interaction.options.getString("bonusmj")}`;
+              "Bonus/Malus MJ de" +
+              ` ${interaction.options.getNumber("bonusmj")}`;
           } else {
             var MessageLog =
               `${interaction.commandName}` +
               ` ${interaction.options.getString("opposition")}` +
               " opposition" +
               ` ${interaction.options.getString("competence")}`;
-            +" sans bonus MJ";
+            +" sans bonus/malus MJ";
           }
           const cont = `${guildPerso.Identite.Prenom} ${
             guildPerso.Identite.Nom
