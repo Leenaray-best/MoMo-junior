@@ -83,12 +83,12 @@ module.exports = {
         for (i = 0; i < 5; i++) {
           while (TableauJoueur[i].type != String) {
             var Nombrejoueur = i;
-            newTableauJoueur = newTableauJoueur.push(TableauJoueur[i].id);
+            newTableauJoueur = newTableauJoueur.concat(TableauJoueur[i].id);
           }
         }
 
         for (i = newTableauJoueur; i < 5; i++) {
-          newTableauJoueur = newTableauJoueur.push("X");
+          newTableauJoueur = newTableauJoueur.concat("X");
         }
 
         console.log(Nombrejoueur);
