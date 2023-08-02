@@ -88,7 +88,7 @@ module.exports = {
           console.log(serveur);
           const member = serveur.members.cache.get(TableauJoueur[i].id);
           console.log(member);
-          member.roles.add(auth.RoleRP.Combat);
+          member.roles.add(authId.RoleRP.Combat);
           var Nombrejoueur = i + 1;
           newTableauJoueur = newTableauJoueur.concat(TableauJoueur[i].id);
           i++;
