@@ -82,7 +82,7 @@ module.exports = {
         console.log(TableauJoueur);
         console.log(newTableauJoueur);
         for (i = 0; i < 5; i++) {
-          while (TableauJoueur[i].type != String) {
+          while (TableauJoueur[i].type != null) {
             var Nombrejoueur = i;
             newTableauJoueur = newTableauJoueur.concat(TableauJoueur[i].id);
           }
