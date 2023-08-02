@@ -104,7 +104,7 @@ module.exports = {
           FicheNumero = numberFiche + 1;
         }
         createFicheCombat(FicheNumero);
-        let ficheCombatOld = await ficheBagPerso.findOne({
+        let ficheCombatOld = await ficheCombat.findOne({
           _id: FicheNumero,
         });
         console.log(ficheCombatOld);
@@ -116,7 +116,7 @@ module.exports = {
             },
           }
         );
-        let ficheCombatNew = await ficheBagPerso.findOne({
+        let ficheCombatNew = await ficheCombat.findOne({
           _id: FicheNumero,
         });
         console.log(ficheCombatNew);
