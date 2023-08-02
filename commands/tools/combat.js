@@ -130,7 +130,7 @@ function createFicheCombat(
     M16ActivAbove10: [0, 0, 0, 0, 0],
     TM10: [0, 0, 0, 0, 0],
     TM3: [0, 0, 0, 0, 0],
-    time: Date,
+    time: Date(),
   });
 
   IdentityCombat.save()
