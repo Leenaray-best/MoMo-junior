@@ -77,6 +77,13 @@ module.exports = {
         var joueur4 = interaction.options.getUser("target3");
         var joueur5 = interaction.options.getUser("target4");
 
+        TableauJoueur = [
+          joueur1.id,
+          joueur2.id,
+          joueur3.id,
+          joueur4.id,
+          joueur5.id,
+        ];
         var fichesCollect = await ficheCombat.find({});
         var numberFiche = fichesCollect.length;
         var FicheNumero = interaction.options.getNumber("numerofiche");
@@ -87,11 +94,11 @@ module.exports = {
         }
         await createFicheCombat(
           FicheNumero,
-          joueur1,
-          joueur2,
-          joueur3,
-          joueur4,
-          joueur5
+          joueur1.id,
+          joueur2.id,
+          joueur3.id,
+          joueur4.id,
+          joueur5.id
         );
         const ChannelNameIdJet = client.channels.cache.get(authId.Salon.Jet);
         const newMessage = `La fiche combat numero ${FicheNumero} a bien été créée.\nLe fight peut commencer`;
