@@ -81,14 +81,15 @@ module.exports = {
         let newTableauJoueur = [];
         console.log(TableauJoueur);
         console.log(newTableauJoueur);
-        for (i = 0; i < 5; i++) {
-          while (TableauJoueur[i] != null) {
-            var Nombrejoueur = i;
-            newTableauJoueur = newTableauJoueur.concat(TableauJoueur[i].id);
-          }
+        var i = 0;
+        while (typeof TableauJoueur[i] != null) {
+          console.log();
+          var Nombrejoueur = i + 1;
+          newTableauJoueur = newTableauJoueur.concat(TableauJoueur[i].id);
+          i++;
         }
 
-        for (i = newTableauJoueur; i < 5; i++) {
+        for (j = i; j < 5; j++) {
           newTableauJoueur = newTableauJoueur.concat("X");
         }
 
