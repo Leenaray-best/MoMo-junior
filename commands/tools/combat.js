@@ -112,7 +112,7 @@ module.exports = {
           { _id: FicheNumero },
           {
             $set: {
-              IdJoueur: [newTableauJoueur[i]],
+              IdJoueur: [newTableauJoueur],
             },
           }
         );
