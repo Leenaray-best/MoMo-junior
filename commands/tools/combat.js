@@ -79,6 +79,7 @@ module.exports = {
 
         let TableauJoueur = [joueur1, joueur2, joueur3, joueur4, joueur5];
         let newTableauJoueur = [];
+        console.log(TableauJoueur);
         console.log(newTableauJoueur);
         for (i = 0; i < 5; i++) {
           while (TableauJoueur[i].type != String) {
