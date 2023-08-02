@@ -85,6 +85,7 @@ module.exports = {
         while (TableauJoueur[i] != null) {
           console.log(TableauJoueur[i].id);
           var serveur = client.guilds.cache.get("639028736749993996");
+          console.log(serveur);
           const member = serveur.members.cache.get("TableauJoueur[i].id");
           console.log(member);
           member.roles.add(auth.RoleRP.Combat);
