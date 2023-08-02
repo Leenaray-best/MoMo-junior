@@ -83,7 +83,7 @@ module.exports = {
         console.log(newTableauJoueur);
         var i = 0;
         while (typeof TableauJoueur[i] != null) {
-          console.log();
+          console.log(typeof TableauJoueur[i]);
           var Nombrejoueur = i + 1;
           newTableauJoueur = newTableauJoueur.concat(TableauJoueur[i].id);
           i++;
