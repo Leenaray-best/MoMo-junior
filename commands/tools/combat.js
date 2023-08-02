@@ -77,6 +77,21 @@ module.exports = {
         var joueur4 = interaction.options.getUser("target3");
         var joueur5 = interaction.options.getUser("target4");
 
+        let TableauJoueur = [joueur1, joueur2, joueur3, joueur4, joueur5];
+        let newTableauJoueur = [];
+        for (i = 0; i < 5; i++) {
+          while (TableauJoueur[i].type != String) {
+            var Nombrejoueur = i;
+            newTableauJoueur = newTableauJoueur.push(TableauJoueur[i].id);
+          }
+        }
+
+        for (i = newTableauJoueur; i < 5; i++) {
+          newTableauJoueur = newTableauJoueur.push("X");
+        }
+
+        console.log(Nombrejoueur);
+        console.log(newTableauJoueur);
         var fichesCollect = await ficheCombat.find({});
         var numberFiche = fichesCollect.length;
         var FicheNumero = interaction.options.getNumber("numerofiche");
@@ -85,14 +100,17 @@ module.exports = {
         } else {
           FicheNumero = numberFiche + 1;
         }
-        await createFicheCombat(
-          FicheNumero,
-          joueur1.id,
-          joueur2.id,
-          joueur3.id,
-          joueur4.id,
-          joueur5.id
-        );
+        await createFicheCombat(FicheNumero);
+        for (i = 0; i < newTableauJoueur.length; i++) {
+          await ficheCombat.updateMany(
+            { _id: FicheNumero },
+            {
+              $set: {
+                IdJoueur: [newTableauJoueur[i]],
+              },
+            }
+          );
+        }
         const ChannelNameIdJet = client.channels.cache.get(authId.Salon.Jet);
         const newMessage = `La fiche combat numero ${FicheNumero} a bien été créée.\nLe fight peut commencer`;
         // client.channels.cache
@@ -112,18 +130,11 @@ module.exports = {
   },
 };
 
-function createFicheCombat(
-  Numero,
-  Target0,
-  Target1,
-  Target2,
-  Target3,
-  Target4
-) {
+function createFicheCombat(Numero) {
   const IdentityCombat = new ficheCombat({
     _id: Numero,
     TourGlobal: [0],
-    IdJoueur: [Target0, Target1, Target2, Target3, Target4],
+    IdJoueur: ["Target0", "Target1", "Target2", "Target3", "Target4"],
     TourJoueur: [0, 0, 0, 0, 0],
     TM16: [0, 0, 0, 0, 0],
     M16Activ: [0, 0, 0, 0, 0],
