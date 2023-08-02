@@ -84,8 +84,11 @@ module.exports = {
         var i = 0;
         while (TableauJoueur[i] != null) {
           console.log(TableauJoueur[i].id);
-          var GMember = client.guilds.cache.get(TableauJoueur[i].id);
-          GMember.roles.add(auth.RoleRP.Combat);
+          var serveur = client.guilds.cache.get("639028736749993996");
+          await serveur.members.fetch(); //should cache users automatically
+          const member = serveur.members.cache.get("TableauJoueur[i].id");
+          console.log(member);
+          member.roles.add(auth.RoleRP.Combat);
           var Nombrejoueur = i + 1;
           newTableauJoueur = newTableauJoueur.concat(TableauJoueur[i].id);
           i++;
