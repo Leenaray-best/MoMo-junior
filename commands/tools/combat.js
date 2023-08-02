@@ -103,17 +103,24 @@ module.exports = {
         } else {
           FicheNumero = numberFiche + 1;
         }
-        await createFicheCombat(FicheNumero);
-        for (i = 0; i < newTableauJoueur.length; i++) {
-          await ficheCombat.updateMany(
-            { _id: FicheNumero },
-            {
-              $set: {
-                IdJoueur: [newTableauJoueur[i]],
-              },
-            }
-          );
-        }
+        createFicheCombat(FicheNumero);
+        let ficheCombatOld = await ficheBagPerso.findOne({
+          _id: FicheNumero,
+        });
+        console.log(ficheCombatOld);
+        await ficheCombat.updateMany(
+          { _id: FicheNumero },
+          {
+            $set: {
+              IdJoueur: [newTableauJoueur[i]],
+            },
+          }
+        );
+        let ficheCombatNew = await ficheBagPerso.findOne({
+          _id: FicheNumero,
+        });
+        console.log(ficheCombatNew);
+        console.log();
         const ChannelNameIdJet = client.channels.cache.get(authId.Salon.Jet);
         const newMessage = `La fiche combat numero ${FicheNumero} a bien été créée.\nLe fight peut commencer`;
         // client.channels.cache
