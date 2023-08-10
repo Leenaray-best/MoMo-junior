@@ -6,6 +6,7 @@ const ficheMeteo = require("../../meteo");
 const ficheMeteotest = require("../../salonMeteo");
 const fichePerso = require("../../FichePerso");
 const ficheBagPerso = require("../../fichePersoSac");
+const FicheQuete = require("../../salonQuete");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -41,7 +42,21 @@ module.exports = {
     console.log(PersoAppliqueObjet);
     console.log(channelMessage);
     console.log(authId.Salon.SalonBotAdmin);
-    if (channelMessage == authId.Salon.SalonBotAdmin) {
+    let guildQuete = await FicheQuete.findOne({
+      _id: authId.idDatabase.questId,
+    });
+    const tailleTableauCat = guildQuete.AllCategorie.length;
+    var InTheSalon = 0;
+
+    for (i = 0; i < tailleTableauCat; i++) {
+      if (interaction.channel.parent == guildQuete.AllCategorie[i]) {
+        InTheSalon++;
+      } else {
+        console.log("AUCUN SALON TROUVE");
+      }
+    }
+    //channelMessage == authId.Salon.SalonBotAdmin
+    if (InTheSalon == 1) {
       if (interaction.commandName === "use") {
         if (interaction.options.getString("categorie") === "potion") {
           let fiche = await fichePerso.findOne({
@@ -287,10 +302,7 @@ module.exports = {
         }
       }
     } else {
-      const ChannelNameId = client.channels.cache.get(
-        authId.Salon.SalonBotAdmin
-      );
-      const newMessage = `Tu n'es pas dans le bon salon\nTu dois faire cette commande dans le salon ${ChannelNameId}`;
+      const newMessage = `Tu n'es pas dans le bon salon\nTu dois faire cette commande dans un salon de RP`;
       await interaction.editReply({
         content: newMessage,
       });
