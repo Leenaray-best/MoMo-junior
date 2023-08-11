@@ -200,7 +200,10 @@ module.exports = {
             _id: authId.idDatabase.storeId,
           });
           console.log(boutique);
-          nomPotion = [`Thé Liang`, `Poudre Dù`];
+          nomPotion = [
+            `Thé Liang (à boire)`,
+            `Poudre Dù ( à faire boire / à faire respirer ) `,
+          ];
           const embed = new EmbedBuilder()
             .setTitle(`Boutique de potion/poison`)
             .setDescription(`Boost sur les jets`)
