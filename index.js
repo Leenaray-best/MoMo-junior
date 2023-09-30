@@ -332,14 +332,14 @@ client.on("messageCreate", async (message) => {
         var NewXP = 0;
         var taillemessage = petitMessage.trim().length; //counterMot.count(petitMessage, "-c");
         console.log(taillemessage);
-        if (taillemessage.chars < 100) {
+        if (taillemessage < 100) {
           var xPfiche = await FichePerso.findOne({ _id: message.author.id });
           await FichePerso.findOneAndUpdate(
             { _id: message.author.id },
             { time: Date.now() }
           );
         }
-        if (taillemessage.chars >= 150 && taillemessage.chars <= 200) {
+        if (taillemessage >= 150 && taillemessage.chars <= 200) {
           var xPfiche = await FichePerso.findOne({ _id: message.author.id });
           var NewXP = xPfiche.NiveauXP + Rand(30) + 10;
           await FichePerso.findOneAndUpdate(
@@ -347,7 +347,7 @@ client.on("messageCreate", async (message) => {
             { NiveauXP: NewXP, time: Date.now() }
           );
         }
-        if (taillemessage.chars > 200 && taillemessage.chars <= 250) {
+        if (taillemessage > 200 && taillemessage.chars <= 250) {
           var xPfiche = await FichePerso.findOne({ _id: message.author.id });
           var NewXP = xPfiche.NiveauXP + Rand(70) + 30;
           await FichePerso.findOneAndUpdate(
@@ -355,7 +355,7 @@ client.on("messageCreate", async (message) => {
             { NiveauXP: NewXP, time: Date.now() }
           );
         }
-        if (taillemessage.chars > 250) {
+        if (taillemessage > 250) {
           var xPfiche = await FichePerso.findOne({ _id: message.author.id });
           var NewXP = xPfiche.NiveauXP + Rand(90) + 70;
           await FichePerso.findOneAndUpdate(
