@@ -34,7 +34,8 @@ for (const folder of functionFolders) {
   for (const file of functionFiles)
     require(`./functions/${folder}/${file}`)(client);
 }
-
+const prefixNewFil = "newfil";
+const prefixNewCategory = "newcat";
 // Gather our available slash commands (interactions)
 // client.slashCommands = new Discord.Collection();
 // const slashCommandsFiles = fs
@@ -296,11 +297,16 @@ client.on("messageCreate", async (message) => {
   //     createFichePerso(message, Niveau);
   //   }
   // }
+
+  // POUR METTRE DE L'XP DANS LES FILS
   let guildQuete = await salonQuete.findOne({ _id: auth.idDatabase.questId });
   const tailleTableau2 = guildQuete.FilDiscussion.length;
   for (i = 0; i < tailleTableau2; i++) {
     console.log(guildQuete.FilDiscussion[i]);
-    if (message.channel.threads.id == guildQuete.FilDiscussion[i]) {
+    if (
+      message.channel.id == guildQuete.FilDiscussion[i] &&
+      message.channel.isThread()
+    ) {
       console.log("message RP");
       // if (
       //   message.channel.parent == auth.Salon.CategorieRPAzathys ||
