@@ -330,7 +330,9 @@ client.on("messageCreate", async (message) => {
           var NewXP = 0;
           var taillemessage = petitMessage.trim().length; //counterMot.count(petitMessage, "-c");
           console.log(taillemessage);
-          if (0 < taillemessage < 100) {
+          if (taillemessage == 0) {
+            console.log("C'est une slash command");
+          } else if (1 <= taillemessage < 100) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
             await FichePerso.findOneAndUpdate(
               { _id: message.author.id },
@@ -344,8 +346,7 @@ client.on("messageCreate", async (message) => {
             console.log(cont);
             client.channels.cache.get(auth.Salon.LogMessage).send(cont);
             console.log(NewXP);
-          }
-          if (150 <= taillemessage <= 200) {
+          } else if (150 <= taillemessage <= 200) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
             var NewXP = xPfiche.NiveauXP + Rand(30) + 10;
             await FichePerso.findOneAndUpdate(
@@ -360,8 +361,7 @@ client.on("messageCreate", async (message) => {
             console.log(cont);
             client.channels.cache.get(auth.Salon.LogMessage).send(cont);
             console.log(NewXP);
-          }
-          if (200 < taillemessage <= 250) {
+          } else if (200 < taillemessage <= 250) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
             var NewXP = xPfiche.NiveauXP + Rand(70) + 30;
             await FichePerso.findOneAndUpdate(
@@ -376,8 +376,7 @@ client.on("messageCreate", async (message) => {
             console.log(cont);
             client.channels.cache.get(auth.Salon.LogMessage).send(cont);
             console.log(NewXP);
-          }
-          if (taillemessage > 250) {
+          } else if (taillemessage > 250) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
             var NewXP = xPfiche.NiveauXP + Rand(90) + 70;
             await FichePerso.findOneAndUpdate(
