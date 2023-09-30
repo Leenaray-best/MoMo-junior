@@ -392,7 +392,7 @@ client.on("messageCreate", async (message) => {
     const tailleTableau = guildQuete.FilDiscussion.length;
     console.log(tailleTableau);
 
-    let embed = new EmbedBuilder()
+    let exampleEmbed = new EmbedBuilder()
       .setTitle(`Liste des fils de discussion  actifs`)
       .setColor(0x18e1ee);
     for (i = 0; i < guildQuete.FilDiscussion.length; i++) {
@@ -404,7 +404,9 @@ client.on("messageCreate", async (message) => {
         inline: true,
       });
     }
-    client.channels.cache.get(auth.Salon.SalonBotAdmin).send(embed);
+    client.channels.cache
+      .get(auth.Salon.SalonBotAdmin)
+      .send({ embeds: [exampleEmbed] });
   } else if (petitMessage == prefixNewCategory) {
     const newMessage = `Tu n'as pas les autorisations pour faire ça`;
     message.channel.send(newMessage);
@@ -426,7 +428,7 @@ client.on("messageCreate", async (message) => {
     const tailleTableau = guildQuete.AllCategorie.length;
     console.log(tailleTableau);
 
-    let embed = new EmbedBuilder()
+    let exampleEmbed = new EmbedBuilder()
       .setTitle(`Liste des catégories actives`)
       .setColor(0x18e1ee);
     for (i = 0; i < guildQuete.AllCategorie.length; i++) {
@@ -438,7 +440,9 @@ client.on("messageCreate", async (message) => {
         inline: true,
       });
     }
-    client.channels.cache.get(auth.Salon.SalonBotAdmin).send(embed);
+    client.channels.cache
+      .get(auth.Salon.SalonBotAdmin)
+      .send({ embeds: [exampleEmbed] });
   } else if (petitMessage == prefixNewCategory) {
     const newMessage = `Tu n'as pas les autorisations pour faire ça`;
     message.channel.send(newMessage);
