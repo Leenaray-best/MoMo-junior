@@ -11,6 +11,7 @@ const {
   GatewayIntentBits,
   Collection,
   Partials,
+  EmbedBuilder,
 } = require("discord.js");
 const fs = require("fs");
 const client = new Client({
@@ -415,7 +416,7 @@ client.on("messageCreate", async (message) => {
     (message.author.id == auth.staff.emi ||
       message.author.id == auth.staff.leena)
   ) {
-    const channelID = message.channel.id;
+    const channelID = message.channel.parent.id;
     await salonQuete.findOneAndUpdate(
       { _id: auth.idDatabase.questId },
       { $push: { AllCategorie: channelID } }
