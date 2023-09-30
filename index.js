@@ -376,7 +376,10 @@ client.on("messageCreate", async (message) => {
   }
 
   //  Add SALON TO LIST FIL DISCUSSION
-  if (petitMessage == prefixNewFil && user.id == auth.staff.emi) {
+  if (
+    petitMessage == prefixNewFil &&
+    (user.id == auth.staff.emi || user.id == auth.staff.leena)
+  ) {
     const channelID = message.channel.id;
     await salonQuete.findOneAndUpdate(
       { _id: auth.idDatabase.questId },
@@ -400,13 +403,16 @@ client.on("messageCreate", async (message) => {
       });
     }
     client.channels.cache.get(auth.Salon.SalonBotAdmin).send(embed);
-  } else {
+  } else if (petitMessage == prefixNewCategory) {
     const newMessage = `Tu n'as pas les autorisations pour faire ça`;
     message.channel.send(newMessage);
   }
 
   //  Add SALON TO LIST CATEGORIE
-  if (petitMessage == prefixNewCategory && user.id == auth.staff.emi) {
+  if (
+    petitMessage == prefixNewCategory &&
+    (user.id == auth.staff.emi || user.id == auth.staff.leena)
+  ) {
     const channelID = message.channel.id;
     await salonQuete.findOneAndUpdate(
       { _id: auth.idDatabase.questId },
@@ -430,7 +436,7 @@ client.on("messageCreate", async (message) => {
       });
     }
     client.channels.cache.get(auth.Salon.SalonBotAdmin).send(embed);
-  } else {
+  } else if (petitMessage == prefixNewCategory) {
     const newMessage = `Tu n'as pas les autorisations pour faire ça`;
     message.channel.send(newMessage);
   }
