@@ -330,7 +330,7 @@ client.on("messageCreate", async (message) => {
         console.log("ne fait rien");
       } else {
         var NewXP = 0;
-        var taillemessage = counterMot.count(petitMessage, "-c");
+        var taillemessage = petitMessage.trim().length; //counterMot.count(petitMessage, "-c");
         console.log(taillemessage);
         if (taillemessage.chars < 100) {
           var xPfiche = await FichePerso.findOne({ _id: message.author.id });
@@ -373,6 +373,66 @@ client.on("messageCreate", async (message) => {
         console.log(NewXP);
       }
     }
+  }
+
+  //  Add SALON TO LIST FIL DISCUSSION
+  if (petitMessage == prefixNewFil && user.id == auth.staff.emi) {
+    const channelID = message.channel.id;
+    await salonQuete.findOneAndUpdate(
+      { _id: auth.idDatabase.questId },
+      { $push: { FilDiscussion: channelID } }
+    );
+    let guildQuete = await salonQuete.findOne({ _id: auth.idDatabase.questId });
+
+    const tailleTableau = guildQuete.FilDiscussion.length;
+    console.log(tailleTableau);
+
+    let embed = new EmbedBuilder()
+      .setTitle(`Liste des fils de discussion  actifs`)
+      .setColor(0x18e1ee);
+    for (i = 0; i < guildQuete.FilDiscussion.length; i++) {
+      const channelIds = guildQuete.FilDiscussion[i];
+      const ChannelNameId = client.channels.cache.get(channelIds);
+      embed.addFields({
+        name: "Salon:",
+        value: `${ChannelNameId},`,
+        inline: true,
+      });
+    }
+    client.channels.cache.get(auth.Salon.SalonBotAdmin).send(embed);
+  } else {
+    const newMessage = `Tu n'as pas les autorisations pour faire ça`;
+    message.channel.send(newMessage);
+  }
+
+  //  Add SALON TO LIST CATEGORIE
+  if (petitMessage == prefixNewCategory && user.id == auth.staff.emi) {
+    const channelID = message.channel.id;
+    await salonQuete.findOneAndUpdate(
+      { _id: auth.idDatabase.questId },
+      { $push: { AllCategorie: channelID } }
+    );
+    let guildQuete = await salonQuete.findOne({ _id: auth.idDatabase.questId });
+
+    const tailleTableau = guildQuete.AllCategorie.length;
+    console.log(tailleTableau);
+
+    let embed = new EmbedBuilder()
+      .setTitle(`Liste des catégories actives`)
+      .setColor(0x18e1ee);
+    for (i = 0; i < guildQuete.AllCategorie.length; i++) {
+      const channelIds = guildQuete.AllCategorie[i];
+      const ChannelNameId = client.channels.cache.get(channelIds);
+      embed.addFields({
+        name: "Catégories:",
+        value: `${ChannelNameId},`,
+        inline: true,
+      });
+    }
+    client.channels.cache.get(auth.Salon.SalonBotAdmin).send(embed);
+  } else {
+    const newMessage = `Tu n'as pas les autorisations pour faire ça`;
+    message.channel.send(newMessage);
   }
 });
 
