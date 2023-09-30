@@ -407,7 +407,13 @@ client.on("messageCreate", async (message) => {
     client.channels.cache
       .get(auth.Salon.SalonBotAdmin)
       .send({ embeds: [exampleEmbed] });
-  } else if (petitMessage == prefixNewCategory) {
+  } else if (
+    petitMessage == prefixNewCategory &&
+    !(
+      message.author.id == auth.staff.emi ||
+      message.author.id == auth.staff.leena
+    )
+  ) {
     const newMessage = `Tu n'as pas les autorisations pour faire ça`;
     message.channel.send(newMessage);
   }
@@ -443,7 +449,13 @@ client.on("messageCreate", async (message) => {
     client.channels.cache
       .get(auth.Salon.SalonBotAdmin)
       .send({ embeds: [exampleEmbed] });
-  } else if (petitMessage == prefixNewCategory) {
+  } else if (
+    petitMessage == prefixNewCategory &&
+    !(
+      message.author.id == auth.staff.emi ||
+      message.author.id == auth.staff.leena
+    )
+  ) {
     const newMessage = `Tu n'as pas les autorisations pour faire ça`;
     message.channel.send(newMessage);
   }
