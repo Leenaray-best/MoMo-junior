@@ -378,7 +378,8 @@ client.on("messageCreate", async (message) => {
   //  Add SALON TO LIST FIL DISCUSSION
   if (
     petitMessage == prefixNewFil &&
-    (user.id == auth.staff.emi || user.id == auth.staff.leena)
+    (message.author.id == auth.staff.emi ||
+      message.author.id == auth.staff.leena)
   ) {
     const channelID = message.channel.id;
     await salonQuete.findOneAndUpdate(
@@ -411,7 +412,8 @@ client.on("messageCreate", async (message) => {
   //  Add SALON TO LIST CATEGORIE
   if (
     petitMessage == prefixNewCategory &&
-    (user.id == auth.staff.emi || user.id == auth.staff.leena)
+    (message.author.id == auth.staff.emi ||
+      message.author.id == auth.staff.leena)
   ) {
     const channelID = message.channel.id;
     await salonQuete.findOneAndUpdate(
