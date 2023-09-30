@@ -296,7 +296,7 @@ client.on("messageCreate", async (message) => {
   //     createFichePerso(message, Niveau);
   //   }
   // }
-
+  let guildQuete = await salonQuete.findOne({ _id: auth.idDatabase.questId });
   const tailleTableau2 = guildQuete.FilDiscussion.length;
   for (i = 0; i < tailleTableau2; i++) {
     console.log(guildQuete.FilDiscussion[i]);
