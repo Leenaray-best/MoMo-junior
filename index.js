@@ -340,6 +340,14 @@ client.on("messageCreate", async (message) => {
               { _id: message.author.id },
               { time: Date.now() }
             );
+            var fichePer = await FichePerso.findOne({ _id: message.author.id });
+            let con = message.content;
+            const cont = `${fichePer.Identite.Prenom} ${
+              fichePer.Identite.Nom
+            } - ${client.channels.cache.get(message.channel.id)}: ${con}\n`;
+            console.log(cont);
+            client.channels.cache.get(auth.Salon.LogMessage).send(cont);
+            console.log(NewXP);
           }
           if (taillemessage >= 150 && taillemessage.chars <= 200) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
@@ -348,6 +356,14 @@ client.on("messageCreate", async (message) => {
               { _id: message.author.id },
               { NiveauXP: NewXP, time: Date.now() }
             );
+            var fichePer = await FichePerso.findOne({ _id: message.author.id });
+            let con = message.content;
+            const cont = `${fichePer.Identite.Prenom} ${
+              fichePer.Identite.Nom
+            } - ${client.channels.cache.get(message.channel.id)}: ${con}\n`;
+            console.log(cont);
+            client.channels.cache.get(auth.Salon.LogMessage).send(cont);
+            console.log(NewXP);
           }
           if (taillemessage > 200 && taillemessage.chars <= 250) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
@@ -356,6 +372,14 @@ client.on("messageCreate", async (message) => {
               { _id: message.author.id },
               { NiveauXP: NewXP, time: Date.now() }
             );
+            var fichePer = await FichePerso.findOne({ _id: message.author.id });
+            let con = message.content;
+            const cont = `${fichePer.Identite.Prenom} ${
+              fichePer.Identite.Nom
+            } - ${client.channels.cache.get(message.channel.id)}: ${con}\n`;
+            console.log(cont);
+            client.channels.cache.get(auth.Salon.LogMessage).send(cont);
+            console.log(NewXP);
           }
           if (taillemessage > 250) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
@@ -364,15 +388,15 @@ client.on("messageCreate", async (message) => {
               { _id: message.author.id },
               { NiveauXP: NewXP, time: Date.now() }
             );
+            var fichePer = await FichePerso.findOne({ _id: message.author.id });
+            let con = message.content;
+            const cont = `${fichePer.Identite.Prenom} ${
+              fichePer.Identite.Nom
+            } - ${client.channels.cache.get(message.channel.id)}: ${con}\n`;
+            console.log(cont);
+            client.channels.cache.get(auth.Salon.LogMessage).send(cont);
+            console.log(NewXP);
           }
-          var fichePer = await FichePerso.findOne({ _id: message.author.id });
-          let con = message.content;
-          const cont = `${fichePer.Identite.Prenom} ${
-            fichePer.Identite.Nom
-          } - ${client.channels.cache.get(message.channel.id)}: ${con}\n`;
-          console.log(cont);
-          client.channels.cache.get(auth.Salon.LogMessage).send(cont);
-          console.log(NewXP);
         }
       }
     }
