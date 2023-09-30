@@ -300,7 +300,7 @@ client.on("messageCreate", async (message) => {
   // }
 
   // POUR METTRE DE L'XP DANS LES FILS
-  /*let guildQuete = await salonQuete.findOne({ _id: auth.idDatabase.questId });
+  let guildQuete = await salonQuete.findOne({ _id: auth.idDatabase.questId });
   const tailleTableau2 = guildQuete.FilDiscussion.length;
   if (!petitMessage.startsWith("/")) {
     for (i = 0; i < tailleTableau2; i++) {
@@ -334,7 +334,7 @@ client.on("messageCreate", async (message) => {
           var NewXP = 0;
           var taillemessage = petitMessage.trim().length; //counterMot.count(petitMessage, "-c");
           console.log(taillemessage);
-          if (taillemessage < 100) {
+          if (0 < taillemessage < 100) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
             await FichePerso.findOneAndUpdate(
               { _id: message.author.id },
@@ -376,7 +376,7 @@ client.on("messageCreate", async (message) => {
         }
       }
     }
-  }*/
+  }
 
   //  Add SALON TO LIST FIL DISCUSSION
   if (
