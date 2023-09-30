@@ -304,11 +304,7 @@ client.on("messageCreate", async (message) => {
   const tailleTableau2 = guildQuete.FilDiscussion.length;
   if (!petitMessage.startsWith("/")) {
     for (i = 0; i < tailleTableau2; i++) {
-      console.log(guildQuete.FilDiscussion[i]);
-      if (
-        message.channel.id == guildQuete.FilDiscussion[i] &&
-        message.channel.isThread()
-      ) {
+      if (message.channel.id == guildQuete.FilDiscussion[i]) {
         console.log("message RP");
         // if (
         //   message.channel.parent == auth.Salon.CategorieRPAzathys ||
