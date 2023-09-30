@@ -398,7 +398,7 @@ client.on("messageCreate", async (message) => {
     for (i = 0; i < guildQuete.FilDiscussion.length; i++) {
       const channelIds = guildQuete.FilDiscussion[i];
       const ChannelNameId = client.channels.cache.get(channelIds);
-      embed.addFields({
+      exampleEmbed.addFields({
         name: "Salon:",
         value: `${ChannelNameId},`,
         inline: true,
@@ -434,7 +434,7 @@ client.on("messageCreate", async (message) => {
     for (i = 0; i < guildQuete.AllCategorie.length; i++) {
       const channelIds = guildQuete.AllCategorie[i];
       const ChannelNameId = client.channels.cache.get(channelIds);
-      embed.addFields({
+      exampleEmbed.addFields({
         name: "Catégories:",
         value: `${ChannelNameId},`,
         inline: true,
