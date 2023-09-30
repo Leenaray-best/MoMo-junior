@@ -16,6 +16,7 @@ const salonQuete = mongoose.Schema({
   Pardon: [String],
   Putois: [String],
   AchatRP: [String],
+  FilDiscussion: [String],
   time: Date,
 });
 

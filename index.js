@@ -575,6 +575,7 @@ function createSalonQuest() {
       "",
     ],
     AchatRp: ["799951016782987294", "800679213388267520", "800681958745178132"],
+    FilDiscussion: ["1157702938580488313"],
     time: Date(),
   });
   salonQuest
