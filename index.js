@@ -25,7 +25,7 @@ const client = new Client({
 });
 client.commands = new Collection();
 client.commandArray = [];
-
+const counterMot = require("letter-count");
 const functionFolders = fs.readdirSync(`./functions`);
 for (const folder of functionFolders) {
   const functionFiles = fs
