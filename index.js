@@ -412,6 +412,7 @@ client.on("messageCreate", async (message) => {
       }
     }
     if (testFilHere == 0) {
+      console.log("Condition Salon nouveau dans la liste");
       await salonQuete.findOneAndUpdate(
         { _id: auth.idDatabase.questId },
         { $push: { FilDiscussion: channelID } }
@@ -439,10 +440,10 @@ client.on("messageCreate", async (message) => {
         .get(auth.Salon.SalonBotAdmin)
         .send({ embeds: [exampleEmbed] });
     } else {
-      var wrongMessage = await client.channels.cache
+      console.log("Condition Salon deja dans la liste");
+      client.channels.cache
         .get(channelID)
         .send("Ce salon est déjà dans la liste des salons actifs");
-      wrongMessage.delete({ timeout: 5000 });
     }
   } else if (
     petitMessage == prefixNewFil &&
