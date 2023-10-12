@@ -483,6 +483,9 @@ client.on("messageCreate", async (message) => {
           .send("Ce salon a été supprimé de la liste des salons actifs");
       }
     }
+    console.log(
+      "Le salon est-il dans la liste ( 0 non - 1 oui) ? :  " + salonFind
+    );
     if (salonFind == 0) {
       console.log("boucle le salon est pas deja actif");
       client.channels.cache
