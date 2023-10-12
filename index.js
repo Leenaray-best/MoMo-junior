@@ -38,6 +38,7 @@ for (const folder of functionFolders) {
 const prefixNewFil = "newfil";
 const prefixNewCategory = "newcat";
 const prefixSupprFil = "supprfil";
+const prefixListActif = "filactif";
 // Gather our available slash commands (interactions)
 // client.slashCommands = new Discord.Collection();
 // const slashCommandsFiles = fs
@@ -518,6 +519,45 @@ client.on("messageCreate", async (message) => {
     }
   } else if (
     petitMessage == prefixSupprFil &&
+    !(
+      message.author.id == auth.staff.emi ||
+      message.author.id == auth.staff.leena
+    )
+  ) {
+    console.log("Pas autorisation commande supprfil");
+    const newMessage = `Tu n'as pas les autorisations pour faire ça`;
+    message.channel.send(newMessage);
+  }
+
+  // LISTE DES FILS ACTIFS prefixListActif
+  if (
+    petitMessage == prefixListActif &&
+    (message.author.id == auth.staff.emi ||
+      message.author.id == auth.staff.leena)
+  ) {
+    let guildQuete = await salonQuete.findOne({
+      _id: auth.idDatabase.questId,
+    });
+    const tailleTableau = guildQuete.FilDiscussion.length;
+    console.log(tailleTableau);
+
+    let exampleEmbed = new EmbedBuilder()
+      .setTitle(`Liste des fils de discussion  actifs`)
+      .setColor(0x18e1ee);
+    for (i = 0; i < guildQuete.FilDiscussion.length; i++) {
+      const channelIds = guildQuete.FilDiscussion[i];
+      const ChannelNameId = client.channels.cache.get(channelIds);
+      exampleEmbed.addFields({
+        name: "Salon:",
+        value: `${ChannelNameId},`,
+        inline: true,
+      });
+    }
+    client.channels.cache
+      .get(auth.Salon.SalonBotAdmin)
+      .send({ embeds: [exampleEmbed] });
+  } else if (
+    petitMessage == prefixListActif &&
     !(
       message.author.id == auth.staff.emi ||
       message.author.id == auth.staff.leena
