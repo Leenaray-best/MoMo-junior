@@ -476,22 +476,20 @@ client.on("messageCreate", async (message) => {
         console.log("boucle le salon peut etre supprime");
         await salonQuete.updateMany(
           { _id: auth.idDatabase.questId },
-          { $pull: { FilDiscussion: { channelID } } }
+          { $pull: { FilDiscussion: { $in: [channelID] } } }
         );
-        var messageSupprTrue = client.channels.cache
+        client.channels.cache
           .get(channelID)
           .send("Ce salon a été supprimé de la liste des salons actifs");
-        messageSupprTrue.delete({ timeout: 5000 });
       }
     }
     if (salonFind == 0) {
       console.log("boucle le salon est pas deja actif");
-      var messageFilNotList = client.channels.cache
+      client.channels.cache
         .get(channelID)
         .send(
           "Ce salon n'est pas dans la liste des salons actifs. Il ne peut pas etre supprimé"
         );
-      messageFilNotList.delete({ timeout: 5000 });
     }
   } else if (
     petitMessage == prefixSupprFil &&
