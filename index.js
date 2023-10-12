@@ -469,8 +469,9 @@ client.on("messageCreate", async (message) => {
       message.author.id == auth.staff.leena)
   ) {
     var salonFind = 0;
+
+    const channelID = message.channel.id;
     for (i = 0; i < tailleTableau2; i++) {
-      const channelID = message.channel.id;
       if (channelID == guildQuete.FilDiscussion[i]) {
         console.log("boucle le salon peut etre supprime");
         salonFind = salonFind + 1;
