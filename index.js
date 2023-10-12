@@ -406,7 +406,7 @@ client.on("messageCreate", async (message) => {
     console.log("Debut boucle newfil");
     const channelID = message.channel.id;
     const tailleTableau2 = guildQuete.FilDiscussion.length;
-    const testFilHere = 0;
+    var testFilHere = 0;
     for (i = 0; i < tailleTableau2; i++) {
       if (channelID == guildQuete.FilDiscussion[i]) {
         testFilHere = testFilHere + 1;
