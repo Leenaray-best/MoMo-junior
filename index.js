@@ -448,13 +448,13 @@ client.on("messageCreate", async (message) => {
         .send("Ce salon est déjà dans la liste des salons actifs");
     }
   } else if (
-    console.log("Pas autorisation commande newfil");
     petitMessage == prefixNewFil &&
     !(
       message.author.id == auth.staff.emi ||
       message.author.id == auth.staff.leena
     )
   ) {
+    console.log("Pas autorisation commande newfil");
     const newMessage = `Tu n'as pas les autorisations pour faire ça`;
     message.channel.send(newMessage);
   }
