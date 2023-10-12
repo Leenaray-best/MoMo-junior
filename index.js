@@ -403,6 +403,7 @@ client.on("messageCreate", async (message) => {
     (message.author.id == auth.staff.emi ||
       message.author.id == auth.staff.leena)
   ) {
+    console.log("Debut boucle newfil");
     const channelID = message.channel.id;
     const tailleTableau2 = guildQuete.FilDiscussion.length;
     const testFilHere = 0;
@@ -411,6 +412,7 @@ client.on("messageCreate", async (message) => {
         testFilHere = testFilHere + 1;
       }
     }
+    console.log("Il y a" + testFilHere + "nouveau fil de discussion");
     if (testFilHere == 0) {
       console.log("Condition Salon nouveau dans la liste");
       await salonQuete.findOneAndUpdate(
@@ -446,6 +448,7 @@ client.on("messageCreate", async (message) => {
         .send("Ce salon est déjà dans la liste des salons actifs");
     }
   } else if (
+    console.log("Pas autorisation commande newfil");
     petitMessage == prefixNewFil &&
     !(
       message.author.id == auth.staff.emi ||
