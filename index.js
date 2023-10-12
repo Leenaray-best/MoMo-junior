@@ -37,6 +37,7 @@ for (const folder of functionFolders) {
 }
 const prefixNewFil = "newfil";
 const prefixNewCategory = "newcat";
+const prefixSupprFil = "supprfil";
 // Gather our available slash commands (interactions)
 // client.slashCommands = new Discord.Collection();
 // const slashCommandsFiles = fs
@@ -299,7 +300,7 @@ client.on("messageCreate", async (message) => {
   //   }
   // }
 
-  // POUR METTRE DE L'XP DANS LES FILS
+  // POUR LE GAIN DE L'XP DANS LES FILS
   let guildQuete = await salonQuete.findOne({ _id: auth.idDatabase.questId });
   const tailleTableau2 = guildQuete.FilDiscussion.length;
   if (message.author.bot) return;
@@ -398,6 +399,7 @@ client.on("messageCreate", async (message) => {
     }
   }
   console.log("Sortie de la boucle de gain d'XP");
+
   //  Add SALON TO LIST FIL DISCUSSION
   if (
     petitMessage == prefixNewFil &&
@@ -456,6 +458,49 @@ client.on("messageCreate", async (message) => {
     )
   ) {
     console.log("Pas autorisation commande newfil");
+    const newMessage = `Tu n'as pas les autorisations pour faire ça`;
+    message.channel.send(newMessage);
+  }
+
+  //  SUPPRIMER SALON TO LIST FIL DISCUSSION
+  if (
+    petitMessage == prefixSupprFil &&
+    (message.author.id == auth.staff.emi ||
+      message.author.id == auth.staff.leena)
+  ) {
+    var salonFind = 0;
+    for (i = 0; i < tailleTableau2; i++) {
+      const channelID = message.channel.id;
+      salonFind = salonFind + 1;
+      if (channelID == guildQuete.FilDiscussion[i]) {
+        console.log("boucle le salon peut etre supprime");
+        await salonQuete.updateMany(
+          { _id: auth.idDatabase.questId },
+          { $pull: { FilDiscussion: { channelID } } }
+        );
+        var messageSupprTrue = client.channels.cache
+          .get(channelID)
+          .send("Ce salon a été supprimé de la liste des salons actifs");
+        messageSupprTrue.delete({ timeout: 5000 });
+      }
+    }
+    if (salonFind == 0) {
+      console.log("boucle le salon est pas deja actif");
+      var messageFilNotList = client.channels.cache
+        .get(channelID)
+        .send(
+          "Ce salon n'est pas dans la liste des salons actifs. Il ne peut pas etre supprimé"
+        );
+      messageFilNotList.delete({ timeout: 5000 });
+    }
+  } else if (
+    petitMessage == prefixSupprFil &&
+    !(
+      message.author.id == auth.staff.emi ||
+      message.author.id == auth.staff.leena
+    )
+  ) {
+    console.log("Pas autorisation commande supprfil");
     const newMessage = `Tu n'as pas les autorisations pour faire ça`;
     message.channel.send(newMessage);
   }
