@@ -392,6 +392,7 @@ client.on("messageCreate", async (message) => {
             client.channels.cache.get(auth.Salon.LogMessage).send(cont);
             console.log(NewXP);
           }
+          console.log("Sortie de la boucle de gain d'XP");
         }
       }
     }
