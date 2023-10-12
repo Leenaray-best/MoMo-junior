@@ -471,13 +471,34 @@ client.on("messageCreate", async (message) => {
     var salonFind = 0;
     for (i = 0; i < tailleTableau2; i++) {
       const channelID = message.channel.id;
-      salonFind = salonFind + 1;
       if (channelID == guildQuete.FilDiscussion[i]) {
         console.log("boucle le salon peut etre supprime");
+        salonFind = salonFind + 1;
         await salonQuete.updateMany(
           { _id: auth.idDatabase.questId },
           { $pull: { FilDiscussion: { $in: [channelID] } } }
         );
+        let guildQuete = await salonQuete.findOne({
+          _id: auth.idDatabase.questId,
+        });
+        const tailleTableau = guildQuete.FilDiscussion.length;
+        console.log(tailleTableau);
+
+        let exampleEmbed = new EmbedBuilder()
+          .setTitle(`Liste des fils de discussion  actifs`)
+          .setColor(0x18e1ee);
+        for (i = 0; i < guildQuete.FilDiscussion.length; i++) {
+          const channelIds = guildQuete.FilDiscussion[i];
+          const ChannelNameId = client.channels.cache.get(channelIds);
+          exampleEmbed.addFields({
+            name: "Salon:",
+            value: `${ChannelNameId},`,
+            inline: true,
+          });
+        }
+        client.channels.cache
+          .get(auth.Salon.SalonBotAdmin)
+          .send({ embeds: [exampleEmbed] });
         client.channels.cache
           .get(channelID)
           .send("Ce salon a été supprimé de la liste des salons actifs");
