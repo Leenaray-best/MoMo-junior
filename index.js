@@ -330,9 +330,9 @@ client.on("messageCreate", async (message) => {
           var NewXP = 0;
           var taillemessage = petitMessage.trim().length; //counterMot.count(petitMessage, "-c");
           console.log(taillemessage);
-          if (taillemessage == 0) {
+          if (taillemessage < 10) {
             console.log("C'est une slash command");
-          } else if (1 <= taillemessage < 100) {
+          } else if (10 <= taillemessage < 100) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
             await FichePerso.findOneAndUpdate(
               { _id: message.author.id },
