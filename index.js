@@ -302,6 +302,7 @@ client.on("messageCreate", async (message) => {
   // POUR METTRE DE L'XP DANS LES FILS
   let guildQuete = await salonQuete.findOne({ _id: auth.idDatabase.questId });
   const tailleTableau2 = guildQuete.FilDiscussion.length;
+  if (message.author.bot) return;
   if (!petitMessage.startsWith("/")) {
     for (i = 0; i < tailleTableau2; i++) {
       if (message.channel.id == guildQuete.FilDiscussion[i]) {
