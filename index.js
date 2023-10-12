@@ -404,32 +404,48 @@ client.on("messageCreate", async (message) => {
       message.author.id == auth.staff.leena)
   ) {
     const channelID = message.channel.id;
-    await salonQuete.findOneAndUpdate(
-      { _id: auth.idDatabase.questId },
-      { $push: { FilDiscussion: channelID } }
-    );
-    let guildQuete = await salonQuete.findOne({ _id: auth.idDatabase.questId });
-
-    const tailleTableau = guildQuete.FilDiscussion.length;
-    console.log(tailleTableau);
-
-    let exampleEmbed = new EmbedBuilder()
-      .setTitle(`Liste des fils de discussion  actifs`)
-      .setColor(0x18e1ee);
-    for (i = 0; i < guildQuete.FilDiscussion.length; i++) {
-      const channelIds = guildQuete.FilDiscussion[i];
-      const ChannelNameId = client.channels.cache.get(channelIds);
-      exampleEmbed.addFields({
-        name: "Salon:",
-        value: `${ChannelNameId},`,
-        inline: true,
-      });
+    const tailleTableau2 = guildQuete.FilDiscussion.length;
+    const testFilHere = 0;
+    for (i = 0; i < tailleTableau2; i++) {
+      if (channelID == guildQuete.FilDiscussion[i]) {
+        testFilHere = testFilHere + 1;
+      }
     }
-    client.channels.cache
-      .get(auth.Salon.SalonBotAdmin)
-      .send({ embeds: [exampleEmbed] });
+    if (testFilHere == 0) {
+      await salonQuete.findOneAndUpdate(
+        { _id: auth.idDatabase.questId },
+        { $push: { FilDiscussion: channelID } }
+      );
+      let guildQuete = await salonQuete.findOne({
+        _id: auth.idDatabase.questId,
+      });
+
+      const tailleTableau = guildQuete.FilDiscussion.length;
+      console.log(tailleTableau);
+
+      let exampleEmbed = new EmbedBuilder()
+        .setTitle(`Liste des fils de discussion  actifs`)
+        .setColor(0x18e1ee);
+      for (i = 0; i < guildQuete.FilDiscussion.length; i++) {
+        const channelIds = guildQuete.FilDiscussion[i];
+        const ChannelNameId = client.channels.cache.get(channelIds);
+        exampleEmbed.addFields({
+          name: "Salon:",
+          value: `${ChannelNameId},`,
+          inline: true,
+        });
+      }
+      client.channels.cache
+        .get(auth.Salon.SalonBotAdmin)
+        .send({ embeds: [exampleEmbed] });
+    } else {
+      var wrongMessage = await client.channels.cache
+        .get(channelID)
+        .send("Ce salon est déjà dans la liste des salons actifs");
+      wrongMessage.delete({ timeout: 5000 });
+    }
   } else if (
-    petitMessage == prefixNewCategory &&
+    petitMessage == prefixNewFil &&
     !(
       message.author.id == auth.staff.emi ||
       message.author.id == auth.staff.leena
