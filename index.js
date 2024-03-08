@@ -467,10 +467,10 @@ client.on("messageCreate", async (message) => {
 
   //  SUPPRIMER SALON TO LIST FIL DISCUSSION
   if (
-    (petitMessage == prefixSupprFil &&
-      (message.author.id == auth.staff.emi ||
-        message.author.id == auth.staff.leena)) ||
-    message.member.roles.cache.has(auth.RoleRP.RoleStaff)
+    petitMessage == prefixSupprFil &&
+    (message.author.id == auth.staff.emi ||
+      message.author.id == auth.staff.leena ||
+      message.member.roles.cache.has(auth.RoleRP.RoleStaff))
   ) {
     var salonFind = 0;
 
