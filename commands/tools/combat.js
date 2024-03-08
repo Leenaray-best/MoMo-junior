@@ -70,7 +70,7 @@ module.exports = {
       if (
         user.id == authId.staff.emi ||
         interaction.member.roles.cache.has(authId.RoleRP.RolePlay) ||
-        member.roles.cache.has(auth.RoleRP.RoleStaff)
+        member.roles.cache.has(authId.RoleRP.RoleStaff)
       ) {
         var joueur1 = interaction.options.getUser("target0");
         var joueur2 = interaction.options.getUser("target1");

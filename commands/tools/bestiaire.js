@@ -50,7 +50,7 @@ module.exports = {
       (user.id == authId.staff.emi ||
         user.id == authId.staff.leena ||
         user.id == authId.staff.meri ||
-        member.roles.cache.has(auth.RoleRP.RoleStaff)) /*||
+        member.roles.cache.has(authId.RoleRP.RoleStaff)) /*||
         user.id == authId.RoleRP.RolePlay*/ &&
       interaction.channelId == authId.Salon.JetDeDes
     ) {
