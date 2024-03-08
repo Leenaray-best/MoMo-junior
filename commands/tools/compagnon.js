@@ -103,6 +103,7 @@ module.exports = {
     });
     const user = interaction.user;
     const channelMessage = interaction.channelId;
+    const member = await interaction.guild.members.fetch(interaction.user.id);
     let guildQuete = await FicheQuete.findOne({
       _id: authId.idDatabase.questId,
     });
@@ -111,7 +112,8 @@ module.exports = {
       if (
         (user.id == authId.staff.emi ||
           user.id == authId.staff.leena ||
-          user.id == authId.staff.meri) &&
+          user.id == authId.staff.meri ||
+          member.roles.cache.has(auth.RoleRP.RoleStaff)) &&
         interaction.channel.parent == guildQuete.AllCategorie[i] &&
         interaction.member.roles.cache.has(authId.RoleRP.RolePlay)
       ) {

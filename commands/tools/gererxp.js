@@ -44,10 +44,12 @@ module.exports = {
     // if (!interaction.isChatInputCommand()) return;
     const user = interaction.user;
     const channelMessage = interaction.channelId;
+    const member = await interaction.guild.members.fetch(interaction.user.id);
     if (
       (user.id == authId.staff.emi ||
         user.id == authId.staff.leena ||
-        user.id == authId.staff.meri) &&
+        user.id == authId.staff.meri ||
+        member.roles.cache.has(auth.RoleRP.RoleStaff)) &&
       channelMessage == authId.Salon.SalonBotAdmin
     ) {
       if (interaction.commandName === "gererxp") {

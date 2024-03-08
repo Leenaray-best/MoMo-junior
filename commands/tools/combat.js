@@ -65,11 +65,12 @@ module.exports = {
     const user = interaction.user;
     const channelMessage = interaction.channelId;
     console.log(user.id);
-
+    const member = await interaction.guild.members.fetch(interaction.user.id);
     if (interaction.commandName === "combat") {
       if (
         user.id == authId.staff.emi ||
-        interaction.member.roles.cache.has(authId.RoleRP.RolePlay)
+        interaction.member.roles.cache.has(authId.RoleRP.RolePlay) ||
+        member.roles.cache.has(auth.RoleRP.RoleStaff)
       ) {
         var joueur1 = interaction.options.getUser("target0");
         var joueur2 = interaction.options.getUser("target1");

@@ -405,7 +405,8 @@ client.on("messageCreate", async (message) => {
   if (
     petitMessage == prefixNewFil &&
     (message.author.id == auth.staff.emi ||
-      message.author.id == auth.staff.leena)
+      message.author.id == auth.staff.leena ||
+      message.member.roles.cache.has(auth.RoleRP.RoleStaff))
   ) {
     console.log("Debut boucle newfil");
     const channelID = message.channel.id;
@@ -455,7 +456,8 @@ client.on("messageCreate", async (message) => {
     petitMessage == prefixNewFil &&
     !(
       message.author.id == auth.staff.emi ||
-      message.author.id == auth.staff.leena
+      message.author.id == auth.staff.leena ||
+      message.member.roles.cache.has(auth.RoleRP.RoleStaff)
     )
   ) {
     console.log("Pas autorisation commande newfil");
@@ -465,9 +467,10 @@ client.on("messageCreate", async (message) => {
 
   //  SUPPRIMER SALON TO LIST FIL DISCUSSION
   if (
-    petitMessage == prefixSupprFil &&
-    (message.author.id == auth.staff.emi ||
-      message.author.id == auth.staff.leena)
+    (petitMessage == prefixSupprFil &&
+      (message.author.id == auth.staff.emi ||
+        message.author.id == auth.staff.leena)) ||
+    message.member.roles.cache.has(auth.RoleRP.RoleStaff)
   ) {
     var salonFind = 0;
 
@@ -521,7 +524,8 @@ client.on("messageCreate", async (message) => {
     petitMessage == prefixSupprFil &&
     !(
       message.author.id == auth.staff.emi ||
-      message.author.id == auth.staff.leena
+      message.author.id == auth.staff.leena ||
+      message.member.roles.cache.has(auth.RoleRP.RoleStaff)
     )
   ) {
     console.log("Pas autorisation commande supprfil");
@@ -533,7 +537,8 @@ client.on("messageCreate", async (message) => {
   if (
     petitMessage == prefixListActif &&
     (message.author.id == auth.staff.emi ||
-      message.author.id == auth.staff.leena)
+      message.author.id == auth.staff.leena ||
+      message.member.roles.cache.has(auth.RoleRP.RoleStaff))
   ) {
     let guildQuete = await salonQuete.findOne({
       _id: auth.idDatabase.questId,
@@ -560,7 +565,8 @@ client.on("messageCreate", async (message) => {
     petitMessage == prefixListActif &&
     !(
       message.author.id == auth.staff.emi ||
-      message.author.id == auth.staff.leena
+      message.author.id == auth.staff.leena ||
+      message.member.roles.cache.has(auth.RoleRP.RoleStaff)
     )
   ) {
     console.log("Pas autorisation commande supprfil");
@@ -572,7 +578,8 @@ client.on("messageCreate", async (message) => {
   if (
     petitMessage == prefixNewCategory &&
     (message.author.id == auth.staff.emi ||
-      message.author.id == auth.staff.leena)
+      message.author.id == auth.staff.leena ||
+      message.member.roles.cache.has(auth.RoleRP.RoleStaff))
   ) {
     const channelID = message.channel.parent.id;
     await salonQuete.findOneAndUpdate(
@@ -603,7 +610,8 @@ client.on("messageCreate", async (message) => {
     petitMessage == prefixNewCategory &&
     !(
       message.author.id == auth.staff.emi ||
-      message.author.id == auth.staff.leena
+      message.author.id == auth.staff.leena ||
+      message.member.roles.cache.has(auth.RoleRP.RoleStaff)
     )
   ) {
     const newMessage = `Tu n'as pas les autorisations pour faire ça`;
