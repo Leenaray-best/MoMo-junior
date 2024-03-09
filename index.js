@@ -232,7 +232,8 @@ var auth = require("./auth.json");
 client.on("messageCreate", async (message) => {
   // console.log("TA MERE LA PUTE");
   petitMessage = message.content.toLowerCase();
-
+  const firstChar = message.content.charAt(0);
+  const isLetter = /^[a-zA-Z]/.test(firstChar);
   // Ajouter des salons
   // if (
   //   message.channel.id == auth.Salon.JetDeDes &&
@@ -305,7 +306,11 @@ client.on("messageCreate", async (message) => {
   let guildQuete = await salonQuete.findOne({ _id: auth.idDatabase.questId });
   const tailleTableau2 = guildQuete.FilDiscussion.length;
   if (message.author.bot) return;
-  if (!petitMessage.startsWith("/")) {
+  if (
+    !petitMessage.startsWith("/") ||
+    petitMessage.startsWith("*") ||
+    isLetter
+  ) {
     for (i = 0; i < tailleTableau2; i++) {
       if (message.channel.id == guildQuete.FilDiscussion[i]) {
         console.log("message RP");
