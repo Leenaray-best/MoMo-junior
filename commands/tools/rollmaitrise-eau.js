@@ -20,28 +20,39 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("rollmaitrise")
     .setDescription("Roll de maitrise")
-    .addStringOption((option) =>
-      option
-        .setName("categorie")
-        .setRequired(true)
-        .setDescription("Choix")
-        .addChoices(
-          { name: "Sans Opposition", value: "sansopposition" },
-          { name: "Avec Opposition", value: "avecopposition" }
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("sansopposition")
+        .setDescription("roll maitrise sans opposition")
+    )
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("avecopposition")
+        .setDescription("roll maitrise avec opposition")
+        .addStringOption((option) =>
+          option
+            .setName("sousmaitrise")
+            .setRequired(false)
+            .setDescription("Choix de la sous-maitrise à utiliser")
+            .addChoices(
+              { name: "M3 : Le Glaçon", value: "glacon" },
+              { name: "M3 : Le healer", value: "healer" },
+              { name: "M16 : Puppet Master", value: "puppet" }
+            )
         )
     )
-    .addStringOption((option) =>
-      option
-        .setName("sousmaitrise")
-        .setRequired(false)
-        .setDescription("Choix de la sous-maitrise à utiliser")
-        .addChoices(
-          { name: "M3 : Le Glaçon", value: "glacon" },
-          { name: "M3 : Le healer", value: "hearler" },
-          { name: "M10 : Herboriste", value: "herbo" },
-          { name: "M16 : Puppet Master", value: "puppet" }
-        )
-    )
+
+    // .addStringOption((option) =>
+    //   option
+    //     .setName("categorie")
+    //     .setRequired(true)
+    //     .setDescription("Choix")
+    //     .addChoices(
+    //       { name: "Sans Opposition", value: "sansopposition" },
+    //       { name: "Avec Opposition", value: "avecopposition" }
+    //     )
+    // )
+
     .addNumberOption((option) =>
       option
         .setName("bonusmj")
@@ -56,12 +67,9 @@ module.exports = {
     const user = interaction.user;
     const channelMessage = interaction.channelId;
     console.log(user.id);
-
-    if (interaction.commandName === "rollmaitrise") {
-      if (
-        user.id == authId.staff.emi ||
-        interaction.member.roles.cache.has(authId.RoleRP.RolePlay)
-      ) {
+    //||interaction.member.roles.cache.has(authId.RoleRP.RolePlay)
+    if (interaction.member.roles.cache.has(authId.RoleRP.Eau)) {
+      if (user.id == authId.RoleRP.RoleStaff) {
         console.log(channelMessage);
         if (interaction.member.roles.cache.has(authId.RoleRP.Escargot)) {
           if (
@@ -81,7 +89,7 @@ module.exports = {
             const ChannelNameIdJet = client.channels.cache.get(
               authId.Salon.Jet
             );
-            newMessage = `Go dans ${ChannelNameIdJet} pour voir ton resultat`;
+            var newMessage = `Go dans ${ChannelNameIdJet} pour voir ton resultat`;
             await interaction.editReply({
               content: newMessage,
             });
@@ -199,7 +207,7 @@ module.exports = {
             console.log("Tu sors de la boucle des maitres de l'eau");
           }
 
-          if (interaction.options.getString("categorie") == "sansopposition") {
+          if (interaction.options.getSubcommand() == "sansopposition") {
             console.log("Tu fais du sans opposition");
             console.log("BonusSup avant The", BonusSup);
             if (interaction.member.roles.cache.has(authId.RoleRP.TheLiang)) {
@@ -355,9 +363,7 @@ module.exports = {
                     )}`
                 );
             }
-          } else if (
-            interaction.options.getString("categorie") == "avecopposition"
-          ) {
+          } else if (interaction.options.getSubcommand() == "avecopposition") {
             var BonnusAttaqueMix =
               Number(BonusNiveauMaitrise) +
               Number(BonusCompetence) +
@@ -459,34 +465,87 @@ module.exports = {
                 " (bonus maitrise) = " +
                 ValRoll +
                 " \rL'utilisation de ta maitrise est une reussite, si ton score est plus haut que ton adversaire tu l'emportes";
+              // Si il utilise sa M16 Puppet
+              var MessagePuppet =
+                "Tu peux controler jusqu'à 3 personnages (joueur ou PNJ) pendant 10 actions.\n Toutes les 3 actions le joueur/PNJ doit faire un jet de constitution sans opposition. Il sera réussi si inférieur à 10.";
+              var MessageFinish =
+                "<@" +
+                user.id +
+                "> Ton attaque est de " +
+                valRandom +
+                " (roll) + " +
+                BonnusAttaqueMix +
+                " (bonus maitrise) = " +
+                ValRoll +
+                " \rL'utilisation de ta maitrise est une reussite, si ton score est plus haut que ton adversaire tu l'emportes";
+
               /// MESSAGE RESULTAT DANS JET
-              if (
-                interaction.member.roles.cache.has(
-                  authId.RoleRP.CapaciteSoin
-                ) &&
-                interaction.options.getString("sousmaitrise") == "healer"
-              ) {
-                client.channels.cache
-                  .get(authId.Salon.Jet)
-                  .send(
-                    `${MessageFinish}` +
-                      `${MessageHeal}` +
-                      `\rTu peux repartir dans ${client.channels.cache.get(
-                        channelMessage
-                      )}`
-                  );
+              if (interaction.options.getString("sousmaitrise") == "healer") {
+                if (
+                  interaction.member.roles.cache.has(authId.RoleRP.CapaciteSoin)
+                ) {
+                  client.channels.cache
+                    .get(authId.Salon.Jet)
+                    .send(
+                      `${MessageFinish}` +
+                        `${MessageHeal}` +
+                        `\rTu peux repartir dans ${client.channels.cache.get(
+                          channelMessage
+                        )}`
+                    );
+                } else {
+                  client.channels.cache
+                    .get(authId.Salon.Jet)
+                    .send(`Tu n'as pas la bonne capacité`);
+                }
               } else if (
-                interaction.member.roles.cache.has(
-                  authId.RoleRP.MaitriseGlace
-                ) &&
                 interaction.options.getString("sousmaitrise") === "glacon"
               ) {
+                if (
+                  interaction.member.roles.cache.has(
+                    authId.RoleRP.MaitriseGlace
+                  )
+                ) {
+                  client.channels.cache
+                    .get(authId.Salon.Jet)
+                    .send(
+                      `${MessageFinish}` +
+                        `${MessageGlace}` +
+                        `\rTu peux repartir dans ${client.channels.cache.get(
+                          channelMessage
+                        )}`
+                    );
+                } else {
+                  client.channels.cache
+                    .get(authId.Salon.Jet)
+                    .send(`Tu n'as pas la bonne capacité`);
+                }
+              } else if (
+                interaction.options.getString("sousmaitrise") === "puppet"
+              ) {
+                if (
+                  interaction.member.roles.cache.has(authId.RoleRP.MaitriseSang)
+                ) {
+                  client.channels.cache
+                    .get(authId.Salon.Jet)
+                    .send(
+                      `${MessageFinish}` +
+                        `${MessageGlace}` +
+                        `\rTu peux repartir dans ${client.channels.cache.get(
+                          channelMessage
+                        )}`
+                    );
+                } else {
+                  client.channels.cache
+                    .get(authId.Salon.Jet)
+                    .send(`Tu n'as pas la bonne capacité`);
+                }
               } else {
                 client.channels.cache
                   .get(authId.Salon.Jet)
                   .send(
                     `${MessageFinish}` +
-                      `${MessageGlace}` +
+                      `${MessagePuppet}` +
                       `\rTu peux repartir dans ${client.channels.cache.get(
                         channelMessage
                       )}`
@@ -499,7 +558,7 @@ module.exports = {
           var fichePer = await FichePerso.findOne({ _id: user.id });
           let MessageLog =
             interaction.commandName +
-            interaction.options.getString("categorie") +
+            interaction.options.getSubcommand() +
             interaction.options.getString("sousmaitrise");
           const cont = `${fichePer.Identite.Prenom} ${
             fichePer.Identite.Nom
@@ -532,6 +591,13 @@ module.exports = {
           content: newMessage,
         });
       }
+    } else {
+      var newMessage = `M'enfin tu n'es pas un maître de l'eau !`;
+      await interaction.editReply({
+        content: newMessage,
+      });
+      await wait(5000);
+      await interaction.deleteReply();
     }
   },
 };
