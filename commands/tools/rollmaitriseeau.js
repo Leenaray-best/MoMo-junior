@@ -480,7 +480,10 @@ module.exports = {
                 " \rL'utilisation de ta maitrise est une reussite, si ton score est plus haut que ton adversaire tu l'emportes";
 
               /// MESSAGE RESULTAT DANS JET
-              if (interaction.options.getString("sousmaitrise") == "healer") {
+              if (
+                interaction.options.getSubcommand() == "avecopposition" &&
+                interaction.options.getString("sousmaitrise") == "healer"
+              ) {
                 if (
                   interaction.member.roles.cache.has(authId.RoleRP.CapaciteSoin)
                 ) {
@@ -499,6 +502,7 @@ module.exports = {
                     .send(`Tu n'as pas la bonne capacité`);
                 }
               } else if (
+                interaction.options.getSubcommand() == "avecopposition" &&
                 interaction.options.getString("sousmaitrise") === "glacon"
               ) {
                 if (
@@ -521,6 +525,7 @@ module.exports = {
                     .send(`Tu n'as pas la bonne capacité`);
                 }
               } else if (
+                interaction.options.getSubcommand() == "avecopposition" &&
                 interaction.options.getString("sousmaitrise") === "puppet"
               ) {
                 if (
