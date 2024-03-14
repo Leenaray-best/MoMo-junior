@@ -18,12 +18,18 @@ function Rand(valeur) {
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("rollmaitriseeau")
+    .setName("rolleau")
     .setDescription("Roll de maitrise")
     .addSubcommand((subcommand) =>
       subcommand
         .setName("sansopposition")
         .setDescription("roll maitrise sans opposition")
+        .addNumberOption((option) =>
+          option
+            .setName("bonusmj")
+            .setDescription("Valeur du bonus/malus attribué par la MJ")
+            .setRequired(false)
+        )
     )
     .addSubcommand((subcommand) =>
       subcommand
@@ -32,7 +38,7 @@ module.exports = {
         .addStringOption((option) =>
           option
             .setName("sousmaitrise")
-            .setRequired(false)
+            .setRequired(true)
             .setDescription("Choix de la sous-maitrise à utiliser")
             .addChoices(
               { name: "M3 : Le Glaçon", value: "glacon" },
@@ -40,25 +46,31 @@ module.exports = {
               { name: "M16 : Puppet Master", value: "puppet" }
             )
         )
-    )
-
-    // .addStringOption((option) =>
-    //   option
-    //     .setName("categorie")
-    //     .setRequired(true)
-    //     .setDescription("Choix")
-    //     .addChoices(
-    //       { name: "Sans Opposition", value: "sansopposition" },
-    //       { name: "Avec Opposition", value: "avecopposition" }
-    //     )
-    // )
-
-    .addNumberOption((option) =>
-      option
-        .setName("bonusmj")
-        .setDescription("Valeur du bonus/malus attribué par la MJ")
-        .setRequired(false)
+        .addNumberOption((option) =>
+          option
+            .setName("bonusmj")
+            .setDescription("Valeur du bonus/malus attribué par la MJ")
+            .setRequired(false)
+        )
     ),
+
+  // .addStringOption((option) =>
+  //   option
+  //     .setName("categorie")
+  //     .setRequired(true)
+  //     .setDescription("Choix")
+  //     .addChoices(
+  //       { name: "Sans Opposition", value: "sansopposition" },
+  //       { name: "Avec Opposition", value: "avecopposition" }
+  //     )
+  // )
+
+  // .addNumberOption((option) =>
+  //   option
+  //     .setName("bonusmj")
+  //     .setDescription("Valeur du bonus/malus attribué par la MJ")
+  //     .setRequired(false)
+  // ),
   async execute(interaction, client) {
     const message = await interaction.deferReply({
       fetchReply: true,
