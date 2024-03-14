@@ -480,16 +480,6 @@ module.exports = {
               // Si il utilise sa M16 Puppet
               var MessagePuppet =
                 "Tu peux controler jusqu'à 3 personnages (joueur ou PNJ) pendant 10 actions.\n Toutes les 3 actions le joueur/PNJ doit faire un jet de constitution sans opposition. Il sera réussi si inférieur à 10.";
-              var MessageFinish =
-                "<@" +
-                user.id +
-                "> Ton attaque est de " +
-                valRandom +
-                " (roll) + " +
-                BonnusAttaqueMix +
-                " (bonus maitrise) = " +
-                ValRoll +
-                " \rL'utilisation de ta maitrise est une reussite, si ton score est plus haut que ton adversaire tu l'emportes";
 
               /// MESSAGE RESULTAT DANS JET
               if (
@@ -555,7 +545,7 @@ module.exports = {
                     .get(authId.Salon.Jet)
                     .send(
                       `${MessageFinish}` +
-                        ` ${MessageGlace}` +
+                        ` ${MessagePuppet}` +
                         `\rTu peux repartir dans ${client.channels.cache.get(
                           channelMessage
                         )}`
