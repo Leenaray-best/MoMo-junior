@@ -583,7 +583,7 @@ module.exports = {
             message.channel.id
           )}: ${MessageLog}\n`;
           console.log(cont);
-          client.channels.cache.get(auth.Salon.LogMessage).send(cont);
+          client.channels.cache.get(authId.Salon.LogMessage).send(cont);
 
           // INDICATION DU SALON JET
           const ChannelNameIdJet = client.channels.cache.get(authId.Salon.Jet);
