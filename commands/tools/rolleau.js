@@ -572,7 +572,7 @@ module.exports = {
           }
 
           //// METTRE LA COMMANDE DANS LES LOG
-          var fichePer = await FichePerso.findOne({ _id: user.id });
+          var fichePer = await fichePerso.findOne({ _id: user.id });
           let MessageLog =
             interaction.commandName +
             interaction.options.getSubcommand() +
