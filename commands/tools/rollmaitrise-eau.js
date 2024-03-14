@@ -18,7 +18,7 @@ function Rand(valeur) {
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("rollmaitrise")
+    .setName("rollmaitrise-eau")
     .setDescription("Roll de maitrise")
     .addSubcommand((subcommand) =>
       subcommand
