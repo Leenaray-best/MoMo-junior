@@ -81,7 +81,7 @@ module.exports = {
     console.log(user.id);
     //||interaction.member.roles.cache.has(authId.RoleRP.RolePlay)
     if (interaction.member.roles.cache.has(authId.RoleRP.Eau)) {
-      if (user.id == authId.RoleRP.RoleStaff) {
+      if (interaction.member.roles.cache.has(authId.RoleRP.RoleStaff)) {
         console.log(channelMessage);
         if (interaction.member.roles.cache.has(authId.RoleRP.Escargot)) {
           if (
@@ -607,6 +607,8 @@ module.exports = {
         await interaction.editReply({
           content: newMessage,
         });
+        await wait(5000);
+        await interaction.deleteReply();
       }
     } else {
       var newMessage = `M'enfin tu n'es pas un maître de l'eau !`;
