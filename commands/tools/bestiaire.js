@@ -120,7 +120,7 @@ module.exports = {
           });
           embed.addFields({
             name: `Histoire`,
-            value: `${guildAnimal.Histoire},`,
+            value: `${guildAnimal.Histoire}`,
             inline: true,
           });
           await interaction.editReply({
