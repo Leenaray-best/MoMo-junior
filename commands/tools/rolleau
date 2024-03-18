@@ -37,6 +37,16 @@ module.exports = {
         .setDescription("roll maitrise avec opposition")
         .addStringOption((option) =>
           option
+            .setName("adversaire")
+            .setRequired(true)
+            .setDescription("Choix de la sous-maitrise à utiliser")
+            .addChoices(
+              { name: "Joueur", value: "joueur" },
+              { name: "PNJ", value: "pnj" }
+            )
+        )
+        .addStringOption((option) =>
+          option
             .setName("sousmaitrise")
             .setRequired(true)
             .setDescription("Choix de la sous-maitrise à utiliser")
@@ -375,233 +385,272 @@ module.exports = {
                     )}`
                 );
             }
+            //// METTRE LA COMMANDE DANS LES LOG
+            var fichePer = await fichePerso.findOne({ _id: user.id });
+            let MessageLog =
+              interaction.commandName +
+              interaction.options.getSubcommand() +
+              interaction.options.getString("sousmaitrise");
+            const cont = `${fichePer.Identite.Prenom} ${
+              fichePer.Identite.Nom
+            } - ${client.channels.cache.get(
+              message.channel.id
+            )}: ${MessageLog}\n`;
+            console.log(cont);
+            client.channels.cache.get(authId.Salon.LogMessage).send(cont);
+
+            // INDICATION DU SALON JET
+            const ChannelNameIdJet = client.channels.cache.get(
+              authId.Salon.Jet
+            );
+            const newMessage = `Go dans ${ChannelNameIdJet} pour voir ton resultat`;
+            // client.channels.cache
+            //   .get(channelMessage)
+            //   .send(newMessage)
+            //  .then((msg) => setTimeout(() => msg.delete(), 4000));
+            await interaction.editReply({
+              content: newMessage,
+            });
+            //await interaction.editReply({});
+            //  content: newMessage,
+            //});
+            await wait(5000);
+            await interaction.deleteReply();
           } else if (interaction.options.getSubcommand() == "avecopposition") {
-            var BonnusAttaqueMix =
-              Number(BonusNiveauMaitrise) +
-              Number(BonusCompetence) +
-              Number(BonusSup);
-            console.log("Avant thé", BonnusAttaqueMix);
-            if (interaction.member.roles.cache.has(authId.RoleRP.TheLiang)) {
-              if (ficheSac.Tour[0] > 0) {
-                console.log("Mon tour bonus est > 0");
-                BonusPotion = Number(ficheSac.ValeurBonus);
-                var BonnusAttaqueMix = BonnusAttaqueMix + BonusPotion;
-                TourOld = ficheSac.Tour[0];
-                TourNew = TourOld - 1;
-                await ficheBagPerso.findOneAndUpdate(
-                  { _id: user.id },
-                  { "Tour.0": TourNew }
-                );
-              }
-              let ficheSacNew = await ficheBagPerso.findOne({
-                _id: user.id,
-              });
-              if (ficheSacNew.Tour[0] == 0) {
-                interaction.member.roles.remove(authId.RoleRP.TheLiang);
-
-                client.channels.cache
-                  .get(authId.Salon.Jet)
-                  .send(`Les effets de potion ont disparu`);
-              }
-            }
-            if (interaction.member.roles.cache.has(authId.RoleRP.Poison)) {
-              if (ficheSac.Tour[1] > 0) {
-                console.log("Mon tour bonus est > 0");
-                MalusPoison = Number(ficheSac.ValeurBonus);
-                var BonnusAttaqueMix = BonnusAttaqueMix - MalusPoison;
-                TourOld = ficheSac.Tour[1];
-                TourNew = TourOld - 1;
-                await ficheBagPerso.findOneAndUpdate(
-                  { _id: user.id },
-                  { "Tour.1": TourNew }
-                );
-              }
-              let ficheSacNew = await ficheBagPerso.findOne({
-                _id: user.id,
-              });
-              if (ficheSacNew.Tour[1] == 0) {
-                interaction.member.roles.remove(authId.RoleRP.Poison);
-
-                client.channels.cache
-                  .get(authId.Salon.Jet)
-                  .send(`Les effets du poison ont disparu`);
-              }
-            }
-            console.log("Apres thé", BonnusAttaqueMix);
-            // TEST SI BONUS/MALUS MJ
-            if (interaction.member.roles.cache.has(authId.RoleRP.BonusMJ)) {
-              var BonusMJ = interaction.options.getNumber("bonusmj");
-
-              var BonnusAttaqueMix = BonnusAttaqueMix + BonusMJ;
-            }
-            console.log("Après Bonus/Malus MJ", BonnusAttaqueMix);
-            var ValRoll = valRandom + BonnusAttaqueMix;
-            if (ValRoll < 15) {
-              var MessageFinish =
-                "<@" +
-                user.id +
-                "> Ton attaque est de " +
-                valRandom +
-                " (roll) + " +
-                BonnusAttaqueMix +
-                " (bonus maitrise) = " +
-                ValRoll +
-                " \rTu n'as pas su utiliser ta maitrise efficacement, meme si ton score est plus haut que ton adversaire, ton action ne fonctionne pas";
-              /// MESSAGE RESULTAT DANS JET
-
-              client.channels.cache
-                .get(authId.Salon.Jet)
-                .send(
-                  `${MessageFinish}` +
-                    `\rTu peux repartir dans ${client.channels.cache.get(
-                      channelMessage
-                    )}`
-                );
-            } else {
-              // Si il utilise sa M3 Heal
-              var Valheal = Rand(5);
-              var MessageHeal =
-                "Tu peux te rajouter a toi ou a un de tes camarades " +
-                Valheal +
-                "PV";
-              // Si il utilise sa M3 GLACON
-              var MessageGlace =
-                "Tu immobilises ton adversaire qui perd un tour et prend 1 dégât sans contre et sans jet. (2 dégâts si maître du feu). \n Tu enchaînes avec un tour sans opposition pour attaquer, fuir, autre, lui et les membres de son équipe.";
-              var MessageFinish =
-                "<@" +
-                user.id +
-                "> Ton attaque est de " +
-                valRandom +
-                " (roll) + " +
-                BonnusAttaqueMix +
-                " (bonus maitrise) = " +
-                ValRoll +
-                " \rL'utilisation de ta maitrise est une reussite, si ton score est plus haut que ton adversaire tu l'emportes.";
-              // Si il utilise sa M16 Puppet
-              var MessagePuppet =
-                "Tu peux controler jusqu'à 3 personnages (joueur ou PNJ) pendant 10 actions.\n Toutes les 3 actions le joueur/PNJ doit faire un jet de constitution sans opposition. Il sera réussi si inférieur à 10.";
-
-              /// MESSAGE RESULTAT DANS JET
-              if (
-                interaction.options.getSubcommand() == "avecopposition" &&
-                interaction.options.getString("sousmaitrise") == "healer"
-              ) {
-                if (
-                  interaction.member.roles.cache.has(authId.RoleRP.CapaciteSoin)
-                ) {
-                  client.channels.cache
-                    .get(authId.Salon.Jet)
-                    .send(
-                      `${MessageFinish}` +
-                        ` ${MessageHeal}` +
-                        `\rTu peux repartir dans ${client.channels.cache.get(
-                          channelMessage
-                        )}`
-                    );
-                } else {
-                  client.channels.cache
-                    .get(authId.Salon.Jet)
-                    .send(
-                      `Tu n'as pas la bonne capacité. \rTu peux repartir dans ${client.channels.cache.get(
-                        channelMessage
-                      )} et faire un jet correspondant à ta capacité.`
-                    );
+            if (interaction.options.getString("adversaire") === "joueur") {
+              var BonnusAttaqueMix =
+                Number(BonusNiveauMaitrise) +
+                Number(BonusCompetence) +
+                Number(BonusSup);
+              console.log("Avant thé", BonnusAttaqueMix);
+              if (interaction.member.roles.cache.has(authId.RoleRP.TheLiang)) {
+                if (ficheSac.Tour[0] > 0) {
+                  console.log("Mon tour bonus est > 0");
+                  BonusPotion = Number(ficheSac.ValeurBonus);
+                  var BonnusAttaqueMix = BonnusAttaqueMix + BonusPotion;
+                  TourOld = ficheSac.Tour[0];
+                  TourNew = TourOld - 1;
+                  await ficheBagPerso.findOneAndUpdate(
+                    { _id: user.id },
+                    { "Tour.0": TourNew }
+                  );
                 }
-              } else if (
-                interaction.options.getSubcommand() == "avecopposition" &&
-                interaction.options.getString("sousmaitrise") === "glacon"
-              ) {
-                if (
-                  interaction.member.roles.cache.has(
-                    authId.RoleRP.MaitriseGlace
-                  )
-                ) {
+                let ficheSacNew = await ficheBagPerso.findOne({
+                  _id: user.id,
+                });
+                if (ficheSacNew.Tour[0] == 0) {
+                  interaction.member.roles.remove(authId.RoleRP.TheLiang);
+
                   client.channels.cache
                     .get(authId.Salon.Jet)
-                    .send(
-                      `${MessageFinish}` +
-                        ` ${MessageGlace}` +
-                        `\rTu peux repartir dans ${client.channels.cache.get(
-                          channelMessage
-                        )}`
-                    );
-                } else {
-                  client.channels.cache
-                    .get(authId.Salon.Jet)
-                    .send(
-                      `Tu n'as pas la bonne capacité. \rTu peux repartir dans ${client.channels.cache.get(
-                        channelMessage
-                      )} et faire un jet correspondant à ta capacité.`
-                    );
+                    .send(`Les effets de potion ont disparu`);
                 }
-              } else if (
-                interaction.options.getSubcommand() == "avecopposition" &&
-                interaction.options.getString("sousmaitrise") === "puppet"
-              ) {
-                if (
-                  interaction.member.roles.cache.has(authId.RoleRP.MaitriseSang)
-                ) {
-                  client.channels.cache
-                    .get(authId.Salon.Jet)
-                    .send(
-                      `${MessageFinish}` +
-                        ` ${MessagePuppet}` +
-                        `\rTu peux repartir dans ${client.channels.cache.get(
-                          channelMessage
-                        )}`
-                    );
-                } else {
-                  client.channels.cache
-                    .get(authId.Salon.Jet)
-                    .send(
-                      `Tu n'as pas la bonne capacité. \rTu peux repartir dans ${client.channels.cache.get(
-                        channelMessage
-                      )} et faire un jet correspondant à ta capacité.`
-                    );
+              }
+              if (interaction.member.roles.cache.has(authId.RoleRP.Poison)) {
+                if (ficheSac.Tour[1] > 0) {
+                  console.log("Mon tour bonus est > 0");
+                  MalusPoison = Number(ficheSac.ValeurBonus);
+                  var BonnusAttaqueMix = BonnusAttaqueMix - MalusPoison;
+                  TourOld = ficheSac.Tour[1];
+                  TourNew = TourOld - 1;
+                  await ficheBagPerso.findOneAndUpdate(
+                    { _id: user.id },
+                    { "Tour.1": TourNew }
+                  );
                 }
-              } else {
+                let ficheSacNew = await ficheBagPerso.findOne({
+                  _id: user.id,
+                });
+                if (ficheSacNew.Tour[1] == 0) {
+                  interaction.member.roles.remove(authId.RoleRP.Poison);
+
+                  client.channels.cache
+                    .get(authId.Salon.Jet)
+                    .send(`Les effets du poison ont disparu`);
+                }
+              }
+              console.log("Apres thé", BonnusAttaqueMix);
+              // TEST SI BONUS/MALUS MJ
+              if (interaction.member.roles.cache.has(authId.RoleRP.BonusMJ)) {
+                var BonusMJ = interaction.options.getNumber("bonusmj");
+
+                var BonnusAttaqueMix = BonnusAttaqueMix + BonusMJ;
+              }
+              console.log("Après Bonus/Malus MJ", BonnusAttaqueMix);
+              var ValRoll = valRandom + BonnusAttaqueMix;
+              if (ValRoll < 15) {
+                var MessageFinish =
+                  "<@" +
+                  user.id +
+                  "> Ton attaque est de " +
+                  valRandom +
+                  " (roll) + " +
+                  BonnusAttaqueMix +
+                  " (bonus maitrise) = " +
+                  ValRoll +
+                  " \rTu n'as pas su utiliser ta maitrise efficacement, meme si ton score est plus haut que ton adversaire, ton action ne fonctionne pas";
+                /// MESSAGE RESULTAT DANS JET
+
                 client.channels.cache
                   .get(authId.Salon.Jet)
                   .send(
                     `${MessageFinish}` +
-                      `${MessagePuppet}` +
                       `\rTu peux repartir dans ${client.channels.cache.get(
                         channelMessage
                       )}`
                   );
+              } else {
+                // Si il utilise sa M3 Heal
+                var Valheal = Rand(5);
+                var MessageHeal =
+                  "Tu peux te rajouter a toi ou a un de tes camarades " +
+                  Valheal +
+                  "PV";
+                // Si il utilise sa M3 GLACON
+                var MessageGlace =
+                  "Tu immobilises ton adversaire qui perd un tour et prend 1 dégât sans contre et sans jet. (2 dégâts si maître du feu). \n Tu enchaînes avec un tour sans opposition pour attaquer, fuir, autre, lui et les membres de son équipe.";
+                var MessageFinish =
+                  "<@" +
+                  user.id +
+                  "> Ton attaque est de " +
+                  valRandom +
+                  " (roll) + " +
+                  BonnusAttaqueMix +
+                  " (bonus maitrise) = " +
+                  ValRoll +
+                  " \rL'utilisation de ta maitrise est une reussite, si ton score est plus haut que ton adversaire tu l'emportes.";
+                // Si il utilise sa M16 Puppet
+                var MessagePuppet =
+                  "Tu peux controler jusqu'à 3 personnages (joueur ou PNJ) pendant 10 actions.\n Toutes les 3 actions le joueur/PNJ doit faire un jet de constitution sans opposition. Il sera réussi si inférieur à 10.";
+
+                /// MESSAGE RESULTAT DANS JET
+                if (
+                  interaction.options.getSubcommand() == "avecopposition" &&
+                  interaction.options.getString("sousmaitrise") == "healer"
+                ) {
+                  if (
+                    interaction.member.roles.cache.has(
+                      authId.RoleRP.CapaciteSoin
+                    )
+                  ) {
+                    client.channels.cache
+                      .get(authId.Salon.Jet)
+                      .send(
+                        `${MessageFinish}` +
+                          ` ${MessageHeal}` +
+                          `\rTu peux repartir dans ${client.channels.cache.get(
+                            channelMessage
+                          )}`
+                      );
+                  } else {
+                    client.channels.cache
+                      .get(authId.Salon.Jet)
+                      .send(
+                        `Tu n'as pas la bonne capacité. \rTu peux repartir dans ${client.channels.cache.get(
+                          channelMessage
+                        )} et faire un jet correspondant à ta capacité.`
+                      );
+                  }
+                } else if (
+                  interaction.options.getSubcommand() == "avecopposition" &&
+                  interaction.options.getString("sousmaitrise") === "glacon"
+                ) {
+                  if (
+                    interaction.member.roles.cache.has(
+                      authId.RoleRP.MaitriseGlace
+                    )
+                  ) {
+                    client.channels.cache
+                      .get(authId.Salon.Jet)
+                      .send(
+                        `${MessageFinish}` +
+                          ` ${MessageGlace}` +
+                          `\rTu peux repartir dans ${client.channels.cache.get(
+                            channelMessage
+                          )}`
+                      );
+                  } else {
+                    client.channels.cache
+                      .get(authId.Salon.Jet)
+                      .send(
+                        `Tu n'as pas la bonne capacité. \rTu peux repartir dans ${client.channels.cache.get(
+                          channelMessage
+                        )} et faire un jet correspondant à ta capacité.`
+                      );
+                  }
+                } else if (
+                  interaction.options.getSubcommand() == "avecopposition" &&
+                  interaction.options.getString("sousmaitrise") === "puppet"
+                ) {
+                  if (
+                    interaction.member.roles.cache.has(
+                      authId.RoleRP.MaitriseSang
+                    )
+                  ) {
+                    client.channels.cache
+                      .get(authId.Salon.Jet)
+                      .send(
+                        `${MessageFinish}` +
+                          ` ${MessagePuppet}` +
+                          `\rTu peux repartir dans ${client.channels.cache.get(
+                            channelMessage
+                          )}`
+                      );
+                  } else {
+                    client.channels.cache
+                      .get(authId.Salon.Jet)
+                      .send(
+                        `Tu n'as pas la bonne capacité. \rTu peux repartir dans ${client.channels.cache.get(
+                          channelMessage
+                        )} et faire un jet correspondant à ta capacité.`
+                      );
+                  }
+                } else {
+                  client.channels.cache
+                    .get(authId.Salon.Jet)
+                    .send(
+                      `${MessageFinish}` +
+                        `${MessagePuppet}` +
+                        `\rTu peux repartir dans ${client.channels.cache.get(
+                          channelMessage
+                        )}`
+                    );
+                }
               }
+              //// METTRE LA COMMANDE DANS LES LOG
+              var fichePer = await fichePerso.findOne({ _id: user.id });
+              let MessageLog =
+                interaction.commandName +
+                interaction.options.getSubcommand() +
+                interaction.options.getString("sousmaitrise");
+              const cont = `${fichePer.Identite.Prenom} ${
+                fichePer.Identite.Nom
+              } - ${client.channels.cache.get(
+                message.channel.id
+              )}: ${MessageLog}\n`;
+              console.log(cont);
+              client.channels.cache.get(authId.Salon.LogMessage).send(cont);
+
+              // INDICATION DU SALON JET
+              const ChannelNameIdJet = client.channels.cache.get(
+                authId.Salon.Jet
+              );
+              const newMessage = `Go dans ${ChannelNameIdJet} pour voir ton resultat`;
+              // client.channels.cache
+              //   .get(channelMessage)
+              //   .send(newMessage)
+              //  .then((msg) => setTimeout(() => msg.delete(), 4000));
+              await interaction.editReply({
+                content: newMessage,
+              });
+              //await interaction.editReply({});
+              //  content: newMessage,
+              //});
+              await wait(5000);
+              await interaction.deleteReply();
+            } else if (interaction.options.getString("adversaire") === "pnj") {
             }
           }
-
-          //// METTRE LA COMMANDE DANS LES LOG
-          var fichePer = await fichePerso.findOne({ _id: user.id });
-          let MessageLog =
-            interaction.commandName +
-            interaction.options.getSubcommand() +
-            interaction.options.getString("sousmaitrise");
-          const cont = `${fichePer.Identite.Prenom} ${
-            fichePer.Identite.Nom
-          } - ${client.channels.cache.get(
-            message.channel.id
-          )}: ${MessageLog}\n`;
-          console.log(cont);
-          client.channels.cache.get(authId.Salon.LogMessage).send(cont);
-
-          // INDICATION DU SALON JET
-          const ChannelNameIdJet = client.channels.cache.get(authId.Salon.Jet);
-          const newMessage = `Go dans ${ChannelNameIdJet} pour voir ton resultat`;
-          // client.channels.cache
-          //   .get(channelMessage)
-          //   .send(newMessage)
-          //  .then((msg) => setTimeout(() => msg.delete(), 4000));
-          await interaction.editReply({
-            content: newMessage,
-          });
-          //await interaction.editReply({});
-          //  content: newMessage,
-          //});
-          await wait(5000);
-          await interaction.deleteReply();
         }
       } else {
         console.log("Pas dans le bon salon");
