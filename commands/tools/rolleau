@@ -37,20 +37,11 @@ module.exports = {
         .setDescription("roll maitrise avec opposition")
         .addStringOption((option) =>
           option
-            .setName("adversaire")
-            .setRequired(true)
-            .setDescription("Choix de la sous-maitrise à utiliser")
-            .addChoices(
-              { name: "Joueur", value: "joueur" },
-              { name: "PNJ", value: "pnj" }
-            )
-        )
-        .addStringOption((option) =>
-          option
             .setName("sousmaitrise")
             .setRequired(true)
             .setDescription("Choix de la sous-maitrise à utiliser")
             .addChoices(
+              { name: "Attaque Basique", value: "base" },
               { name: "M3 : Le Glaçon", value: "glacon" },
               { name: "M3 : Le healer", value: "healer" },
               { name: "M16 : Puppet Master", value: "puppet" }

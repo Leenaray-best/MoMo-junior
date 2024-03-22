@@ -110,12 +110,12 @@ module.exports = {
     const tailleTableauCat = guildQuete.AllCategorie.length;
     for (i = 0; i < tailleTableauCat; i++) {
       if (
-        (user.id == authId.staff.emi ||
-          user.id == authId.staff.leena ||
-          user.id == authId.staff.meri ||
-          member.roles.cache.has(authId.RoleRP.RoleStaff)) &&
-        interaction.channel.parent == guildQuete.AllCategorie[i] &&
-        interaction.member.roles.cache.has(authId.RoleRP.RolePlay)
+        user.id == authId.staff.emi ||
+        user.id == authId.staff.leena ||
+        user.id == authId.staff.meri ||
+        interaction.member.roles.cache.has(authId.RoleRP.RoleStaff) ||
+        (interaction.channel.parent == guildQuete.AllCategorie[i] &&
+          interaction.member.roles.cache.has(authId.RoleRP.RolePlay))
       ) {
         valRand = Rand(20);
 
