@@ -46,7 +46,8 @@ module.exports = {
         (user.id == authId.staff.emi ||
           interaction.member.roles.cache.has(authId.RoleRP.RoleStaff)) &&
         (interaction.channelId == authId.Salon.JetDeDes ||
-          interaction.channelId == authId.Salon.SalonBotAdmin)
+          interaction.channelId == authId.Salon.SalonBotAdmin ||
+          interaction.channelId == authId.Salon.JetSik)
       ) {
         var valRandom = Rand(20);
         console.log(valRandom);
@@ -63,7 +64,7 @@ module.exports = {
         }
         var valTotal = valRandom + valueCarac + BonusMJ;
         console.log(valTotal);
-        const newMessage = `Ton PNJ a fait un roll de ${valTotal}.`;
+        const newMessage = `Ton PNJ a fait un roll de ${valTotal}. Compare cette valeur à celle du roll en opposition du joueur qu'il combat`;
         await interaction.editReply({
           content: newMessage,
         });
