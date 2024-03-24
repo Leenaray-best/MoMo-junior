@@ -10,6 +10,7 @@ const Perso = mongoose.Schema({
     Sexe: String,
     Metier: String,
     Categorie: String,
+    PV: Number,
   },
   GainCompetence: Number,
   NiveauDeMaitrise: Number,

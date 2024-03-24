@@ -945,6 +945,7 @@ function createFichePerso(message, Niveau) {
       Sexe: "Sexe",
       Metier: "Metier",
       Categorie: "Categorie",
+      PV: 10,
     },
     GainCompetence: 0,
     NiveauDeMaitrise: Niveau,
