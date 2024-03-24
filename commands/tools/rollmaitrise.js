@@ -297,7 +297,7 @@ module.exports = {
             var ValRoll =
               valRandom + Number(BonusNiveauMaitrise) + Number(BonusSup);
             console.log(ValRoll);
-            if (ValRoll <= 1) {
+            if (ValRoll <= 5) {
               client.channels.cache
                 .get(authId.Salon.Jet)
                 .send(
@@ -316,7 +316,7 @@ module.exports = {
                       channelMessage
                     )}`
                 );
-            } else if (ValRoll <= 12) {
+            } else if (ValRoll <= 10) {
               client.channels.cache
                 .get(authId.Salon.Jet)
                 .send(
@@ -335,7 +335,7 @@ module.exports = {
                       channelMessage
                     )}`
                 );
-            } else if (ValRoll <= 19) {
+            } else if (ValRoll <= 17) {
               client.channels.cache
                 .get(authId.Salon.Jet)
                 .send(

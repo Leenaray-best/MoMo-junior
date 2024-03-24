@@ -11,6 +11,7 @@ const Perso = mongoose.Schema({
     Metier: String,
     Categorie: String,
     PV: Number,
+    PVMax: Number,
   },
   GainCompetence: Number,
   NiveauDeMaitrise: Number,
