@@ -233,6 +233,7 @@ module.exports = {
                 var BonusSup = Number(1);
             }
           }
+          var BonusCompetence = 0;
           if (interaction.options.getString("categorie") == "sansopposition") {
             console.log("Tu fais du sans opposition");
             console.log("BonusSup avant The", BonusSup);
