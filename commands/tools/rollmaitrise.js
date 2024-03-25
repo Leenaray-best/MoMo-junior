@@ -516,7 +516,7 @@ module.exports = {
                     " (roll) + " +
                     Number(BonusNiveauMaitrise + BonusCompetence) +
                     " (bonus maitrise) + " +
-                    Number(BonusSup - BonusMJ) +
+                    Number(BonusSup) +
                     " (bonus meteo/terrain/physique) + " +
                     Number(BonusPotion - MalusPoison) +
                     " (bonus poison/potion) +" +
@@ -539,7 +539,7 @@ module.exports = {
                     " (roll) + " +
                     Number(BonusNiveauMaitrise + BonusCompetence) +
                     " (bonus maitrise) + " +
-                    Number(BonusSup - BonusMJ) +
+                    Number(BonusSup) +
                     " (bonus meteo/terrain/physique) + " +
                     Number(BonusPotion - MalusPoison) +
                     " (bonus poison/potion) +" +
