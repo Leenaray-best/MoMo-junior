@@ -20,7 +20,8 @@ module.exports = {
           { name: "Carte", value: "carte" },
           { name: "Météo", value: "meteo" },
           { name: "Fiche Perso", value: "fichejoueur" },
-          { name: "XP", value: "xp" }
+          { name: "XP", value: "xp" },
+          { name: "PV", value: "pv" }
         )
     ),
   async execute(interaction, client) {
@@ -32,7 +33,10 @@ module.exports = {
     const channelMessage = interaction.channelId;
     console.log(channelMessage);
     console.log(authId.Salon.JetDeDes);
-    if (channelMessage == authId.Salon.JetDeDes) {
+    if (
+      channelMessage == authId.Salon.JetDeDes ||
+      channelMessage == authId.Salon.SalonBotAdmin
+    ) {
       if (interaction.commandName === "personnage") {
         if (interaction.options.getString("categorie") === "carte") {
           var gifCarte =
@@ -114,7 +118,7 @@ module.exports = {
             .setTitle(`Fiche Personnage`)
             .setColor(0x18e1ee)
             .setDescription(
-              `Nom : ${fiche.Identite.Nom}\nPrenom : ${fiche.Identite.Prenom}\nAge: ${fiche.Identite.Age}\nSexe: ${fiche.Identite.Sexe}\nMetier : ${fiche.Identite.Metier}\nNiveau de Maitrise : ${fiche.NiveauDeMaitrise}\nNiveau XP : ${fiche.NiveauXP}\nPoint de Competence : ${fiche.GainCompetence}\nFaiblesse : ${listeFaiblesse[0]}, ${listeFaiblesse[1]}`
+              `Nom : ${fiche.Identite.Nom}\nPrenom : ${fiche.Identite.Prenom}\nAge: ${fiche.Identite.Age}\nSexe: ${fiche.Identite.Sexe}\nMetier : ${fiche.Identite.Metier}\nNiveau de Maitrise : ${fiche.NiveauDeMaitrise}\nNiveau XP : ${fiche.NiveauXP}\nPV : ${fiche.Identite.PV}\nPoint de Competence : ${fiche.GainCompetence}\nFaiblesse : ${listeFaiblesse[0]}, ${listeFaiblesse[1]}`
             )
             .setThumbnail(user.avatarURL())
             .addFields(
@@ -218,7 +222,18 @@ module.exports = {
           let fiche = await fichePerso.findOne({
             _id: IdPerso,
           });
-          newMessage = `Tu as ${fiche.NiveauXP} XP`;
+          var newMessage = `Tu as ${fiche.NiveauXP} XP`;
+          await interaction.editReply({
+            content: newMessage,
+          });
+        } else if (interaction.options.getString("categorie") === "pv") {
+          const user = interaction.user;
+          IdPerso = user.id;
+          console.log(IdPerso);
+          let fiche = await fichePerso.findOne({
+            _id: IdPerso,
+          });
+          var newMessage = `Tu as ${fiche.Identite.PV} PV`;
           await interaction.editReply({
             content: newMessage,
           });

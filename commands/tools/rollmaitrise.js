@@ -233,7 +233,45 @@ module.exports = {
                 var BonusSup = Number(1);
             }
           }
-          var BonusCompetence = 0;
+          var pallierMaitrise = guildPerso.NiveauDeMaitrise;
+          if (
+            pallierMaitrise == 1 ||
+            pallierMaitrise == 2 ||
+            pallierMaitrise == 3
+          ) {
+            var ratioPallier = 0.7;
+          } else if (
+            pallierMaitrise == 4 ||
+            pallierMaitrise == 5 ||
+            pallierMaitrise == 6 ||
+            pallierMaitrise == 7
+          ) {
+            var ratioPallier = 0.6;
+          } else if (
+            pallierMaitrise == 8 ||
+            pallierMaitrise == 9 ||
+            pallierMaitrise == 10 ||
+            pallierMaitrise == 11
+          ) {
+            var ratioPallier = 0.5;
+          } else if (
+            pallierMaitrise == 12 ||
+            pallierMaitrise == 13 ||
+            pallierMaitrise == 14 ||
+            pallierMaitrise == 15
+          ) {
+            var ratioPallier = 0.5;
+          } else if (
+            pallierMaitrise == 16 ||
+            pallierMaitrise == 17 ||
+            pallierMaitrise == 18
+          ) {
+            var ratioPallier = 0.5;
+          } else if (pallierMaitrise == 19 || pallierMaitrise == 20) {
+            var ratioPallier = 0.5;
+          }
+
+          var BonusCompetence = Math.round(ratioPallier * BonusCompetence);
           if (interaction.options.getString("categorie") == "sansopposition") {
             console.log("Tu fais du sans opposition");
             console.log("BonusSup avant The", BonusSup);
