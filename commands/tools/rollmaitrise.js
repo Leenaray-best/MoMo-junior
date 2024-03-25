@@ -491,7 +491,7 @@ module.exports = {
                   .send(`Les effets du poison ont disparu`);
               }
             } else {
-              var BonusPotion = 0;
+              var MalusPoison = 0;
             }
             console.log("Apres thé", BonnusAttaqueMix);
             // TEST SI BONUS/MALUS MJ
