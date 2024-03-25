@@ -39,6 +39,7 @@ const prefixNewFil = "newfil";
 const prefixNewCategory = "newcat";
 const prefixSupprFil = "supprfil";
 const prefixListActif = "filactif";
+const prefixSoin = "soignezmoi";
 // Gather our available slash commands (interactions)
 // client.slashCommands = new Discord.Collection();
 // const slashCommandsFiles = fs
@@ -621,6 +622,30 @@ client.on("messageCreate", async (message) => {
   ) {
     const newMessage = `Tu n'as pas les autorisations pour faire ça`;
     message.channel.send(newMessage);
+  }
+
+  // retrouvez les PV Max
+  if (
+    petitMessage == prefixSoin &&
+    (message.member.roles.cache.has(auth.RoleRP.RolePlay) ||
+      (message.member.roles.cache.has(auth.RoleRP.RoleStaff) &&
+        (message.channel.id == auth.Salon.InfirmerieBSS ||
+          message.channel.id == auth.Salon.InfirmerieOmashu)))
+  ) {
+    var xPfiche = await FichePerso.findOne({ _id: message.author.id });
+    var PVMaxValue = xPfiche.Identite.PVMax;
+    await FichePerso.findOneAndUpdate(
+      { _id: message.author.id },
+      { "Identite.PV": PVMaxValue, time: Date.now() }
+    );
+    var fichePer = await FichePerso.findOne({ _id: message.author.id });
+    if (fichePer.Identite.PV == fichePer.Identite.PVMax) {
+      const newMessage = `Tu as retrouvé ton max de PV`;
+      message.channel.send(newMessage);
+    } else {
+      const newMessage = `Tu n'as pas été soigné(e), demande de l'aide a Karma`;
+      message.channel.send(newMessage);
+    }
   }
 });
 

@@ -519,7 +519,9 @@ module.exports = {
                     BonusSup +
                     " (bonus meteo/terrain/physique) + " +
                     Number(BonusPotion - MalusPoison) +
-                    " (bonus poison/potion) =" +
+                    " (bonus poison/potion) +" +
+                    BonusMJ +
+                    " (bonus MJ) = " +
                     ValRoll +
                     " \rTu n'as pas su utiliser ta maitrise efficacement, meme si ton score est plus haut que ton adversaire, tu ne lui feras pas de degat" +
                     `\rTu peux repartir dans ${client.channels.cache.get(
@@ -540,7 +542,9 @@ module.exports = {
                     BonusSup +
                     " (bonus meteo/terrain/physique) + " +
                     Number(BonusPotion - MalusPoison) +
-                    " (bonus poison/potion) =" +
+                    " (bonus poison/potion) +" +
+                    BonusMJ +
+                    " (bonus MJ) = " +
                     ValRoll +
                     " \rL'utilisation de ta maitrise est une reussite, si ton score est plus haut que ton adversaire tu l'emportes" +
                     `\rTu peux repartir dans ${client.channels.cache.get(
