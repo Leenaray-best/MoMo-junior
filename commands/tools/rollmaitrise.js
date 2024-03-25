@@ -233,6 +233,7 @@ module.exports = {
                 var BonusSup = Number(1);
             }
           }
+
           var pallierMaitrise = guildPerso.NiveauDeMaitrise;
           if (
             pallierMaitrise == 1 ||
@@ -271,7 +272,9 @@ module.exports = {
             var ratioPallier = 0.5;
           }
           console.log(ratioPallier);
+          var BonusMeteo = BonusSup;
           var BonusCompetence = Math.round(ratioPallier * BonusCompetence);
+          console.log(BonusMeteo);
           console.log(BonusCompetence);
           if (interaction.options.getString("categorie") == "sansopposition") {
             console.log("Tu fais du sans opposition");
@@ -507,8 +510,14 @@ module.exports = {
                     "> Ton attaque est de " +
                     valRandom +
                     " (roll) + " +
-                    BonnusAttaqueMix +
-                    " (bonus maitrise) = " +
+                    Number(BonusNiveauMaitrise) +
+                    Number(BonusCompetence) +
+                    " (bonus maitrise) " +
+                    BonusSup +
+                    " (bonus meteo/terrain/physique) " +
+                    BonusPotion -
+                    MalusPoison +
+                    " (bonus poison/potion) =" +
                     ValRoll +
                     " \rTu n'as pas su utiliser ta maitrise efficacement, meme si ton score est plus haut que ton adversaire, tu ne lui feras pas de degat" +
                     `\rTu peux repartir dans ${client.channels.cache.get(
@@ -524,8 +533,14 @@ module.exports = {
                     "> Ton attaque est de " +
                     valRandom +
                     " (roll) + " +
-                    BonnusAttaqueMix +
-                    " (bonus maitrise) = " +
+                    Number(BonusNiveauMaitrise) +
+                    Number(BonusCompetence) +
+                    " (bonus maitrise) " +
+                    BonusSup +
+                    " (bonus meteo/terrain/physique) " +
+                    BonusPotion -
+                    MalusPoison +
+                    " (bonus poison/potion) =" +
                     ValRoll +
                     " \rL'utilisation de ta maitrise est une reussite, si ton score est plus haut que ton adversaire tu l'emportes" +
                     `\rTu peux repartir dans ${client.channels.cache.get(
