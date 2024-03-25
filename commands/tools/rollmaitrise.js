@@ -465,6 +465,8 @@ module.exports = {
                   .get(authId.Salon.Jet)
                   .send(`Les effets de potion ont disparu`);
               }
+            } else {
+              var BonusPotion = 0;
             }
             if (interaction.member.roles.cache.has(authId.RoleRP.Poison)) {
               if (ficheSac.Tour[1] > 0) {
@@ -488,6 +490,8 @@ module.exports = {
                   .get(authId.Salon.Jet)
                   .send(`Les effets du poison ont disparu`);
               }
+            } else {
+              var BonusPotion = 0;
             }
             console.log("Apres thé", BonnusAttaqueMix);
             // TEST SI BONUS/MALUS MJ
