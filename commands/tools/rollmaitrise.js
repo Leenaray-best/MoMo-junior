@@ -270,8 +270,9 @@ module.exports = {
           } else if (pallierMaitrise == 19 || pallierMaitrise == 20) {
             var ratioPallier = 0.5;
           }
-
+          console.log(ratioPallier);
           var BonusCompetence = Math.round(ratioPallier * BonusCompetence);
+          console.log(BonnusCompetence);
           if (interaction.options.getString("categorie") == "sansopposition") {
             console.log("Tu fais du sans opposition");
             console.log("BonusSup avant The", BonusSup);
