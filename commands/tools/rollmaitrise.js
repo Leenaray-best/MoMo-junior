@@ -514,13 +514,11 @@ module.exports = {
                     "> Ton attaque est de " +
                     valRandom +
                     " (roll) + " +
-                    Number(BonusNiveauMaitrise) +
-                    Number(BonusCompetence) +
-                    " (bonus maitrise) " +
+                    Number(BonusNiveauMaitrise + BonusCompetence) +
+                    " (bonus maitrise) + " +
                     BonusSup +
-                    " (bonus meteo/terrain/physique) " +
-                    BonusPotion +
-                    Number(-MalusPoison) +
+                    " (bonus meteo/terrain/physique) + " +
+                    Number(BonusPotion - MalusPoison) +
                     " (bonus poison/potion) =" +
                     ValRoll +
                     " \rTu n'as pas su utiliser ta maitrise efficacement, meme si ton score est plus haut que ton adversaire, tu ne lui feras pas de degat" +
@@ -537,13 +535,11 @@ module.exports = {
                     "> Ton attaque est de " +
                     valRandom +
                     " (roll) + " +
-                    Number(BonusNiveauMaitrise) +
-                    Number(BonusCompetence) +
-                    " (bonus maitrise) " +
+                    Number(BonusNiveauMaitrise + BonusCompetence) +
+                    " (bonus maitrise) + " +
                     BonusSup +
-                    " (bonus meteo/terrain/physique) " +
-                    BonusPotion +
-                    Number(-MalusPoison) +
+                    " (bonus meteo/terrain/physique) + " +
+                    Number(BonusPotion - MalusPoison) +
                     " (bonus poison/potion) =" +
                     ValRoll +
                     " \rL'utilisation de ta maitrise est une reussite, si ton score est plus haut que ton adversaire tu l'emportes" +
