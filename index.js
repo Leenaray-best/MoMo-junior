@@ -355,7 +355,7 @@ client.on("messageCreate", async (message) => {
             console.log(cont);
             client.channels.cache.get(auth.Salon.LogMessage).send(cont);
             console.log(NewXP);
-          } else if (150 <= taillemessage <= 200) {
+          } else if (100 <= taillemessage <= 200) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
             var NewXP = xPfiche.NiveauXP + Rand(30) + 10;
             await FichePerso.findOneAndUpdate(

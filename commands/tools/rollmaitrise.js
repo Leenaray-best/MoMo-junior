@@ -282,13 +282,13 @@ module.exports = {
             if (interaction.member.roles.cache.has(authId.RoleRP.TheLiang)) {
               if (ficheSac.Tour[0] > 0) {
                 console.log("Mon tour bonus est > 0");
-                BonusPotion = Number(ficheSac.ValeurBonus);
+                BonusPotion = 5; //Number(ficheSac.ValeurBonus);
                 var BonusSup = BonusSup + BonusPotion;
                 TourOld = ficheSac.Tour[0];
                 TourNew = TourOld - 1;
-                await ficheBagPerso.findOneAndUpdate(
+                await ficheBagPerso.updateOne(
                   { _id: user.id },
-                  { "Tour.0": TourNew }
+                  { $set: { "Tour.0": TourNew } } // Using $set operator to update the field
                 );
               }
               let ficheSacNew = await ficheBagPerso.findOne({
@@ -305,13 +305,13 @@ module.exports = {
             if (interaction.member.roles.cache.has(authId.RoleRP.Poison)) {
               if (ficheSac.Tour[1] > 0) {
                 console.log("Mon tour malus est > 0");
-                MalusPoison = Number(ficheSac.ValeurBonus);
+                MalusPoison = 5; //Number(ficheSac.ValeurBonus);
                 var BonusSup = BonusSup - MalusPoison;
                 TourOld = ficheSac.Tour[1];
                 TourNew = TourOld - 1;
-                await ficheBagPerso.findOneAndUpdate(
+                await ficheBagPerso.updateOne(
                   { _id: user.id },
-                  { "Tour.1": TourNew }
+                  { $set: { "Tour.1": TourNew } } // Using $set operator to update the field
                 );
               }
               let ficheSacNew = await ficheBagPerso.findOne({
@@ -446,13 +446,13 @@ module.exports = {
             if (interaction.member.roles.cache.has(authId.RoleRP.TheLiang)) {
               if (ficheSac.Tour[0] > 0) {
                 console.log("Mon tour bonus est > 0");
-                BonusPotion = Number(ficheSac.ValeurBonus);
+                BonusPotion = 5; //Number(ficheSac.ValeurBonus);
                 var BonnusAttaqueMix = BonnusAttaqueMix + BonusPotion;
                 TourOld = ficheSac.Tour[0];
                 TourNew = TourOld - 1;
-                await ficheBagPerso.findOneAndUpdate(
+                await ficheBagPerso.updateOne(
                   { _id: user.id },
-                  { "Tour.0": TourNew }
+                  { $set: { "Tour.0": TourNew } } // Using $set operator to update the field
                 );
               }
               let ficheSacNew = await ficheBagPerso.findOne({
@@ -471,13 +471,13 @@ module.exports = {
             if (interaction.member.roles.cache.has(authId.RoleRP.Poison)) {
               if (ficheSac.Tour[1] > 0) {
                 console.log("Mon tour bonus est > 0");
-                MalusPoison = Number(ficheSac.ValeurBonus);
+                MalusPoison = 5; //Number(ficheSac.ValeurBonus);
                 var BonnusAttaqueMix = BonnusAttaqueMix - MalusPoison;
                 TourOld = ficheSac.Tour[1];
                 TourNew = TourOld - 1;
-                await ficheBagPerso.findOneAndUpdate(
+                await ficheBagPerso.updateOne(
                   { _id: user.id },
-                  { "Tour.1": TourNew }
+                  { $set: { "Tour.1": TourNew } } // Using $set operator to update the field
                 );
               }
               let ficheSacNew = await ficheBagPerso.findOne({
