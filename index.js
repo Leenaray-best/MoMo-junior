@@ -444,6 +444,7 @@ client.on("messageCreate", async (message) => {
           console.log(taillemessage);
           if (taillemessage.chars < 100) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
+            console.log(xPfiche.NiveauXP);
             await FichePerso.findOneAndUpdate(
               { _id: message.author.id },
               { time: Date.now() }
@@ -451,6 +452,7 @@ client.on("messageCreate", async (message) => {
           }
           if (taillemessage.chars >= 100 && taillemessage.chars <= 200) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
+            console.log(xPfiche.NiveauXP);
             var NewXP = xPfiche.NiveauXP + Rand(30) + 10;
             await FichePerso.findOneAndUpdate(
               { _id: message.author.id },
@@ -460,6 +462,7 @@ client.on("messageCreate", async (message) => {
           if (taillemessage.chars > 200 && taillemessage.chars <= 250) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
             var NewXP = xPfiche.NiveauXP + Rand(70) + 30;
+            console.log(xPfiche.NiveauXP);
             await FichePerso.findOneAndUpdate(
               { _id: message.author.id },
               { NiveauXP: NewXP, time: Date.now() }
@@ -468,6 +471,7 @@ client.on("messageCreate", async (message) => {
           if (taillemessage.chars > 250) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
             var NewXP = xPfiche.NiveauXP + Rand(90) + 70;
+            console.log(xPfiche.NiveauXP);
             await FichePerso.findOneAndUpdate(
               { _id: message.author.id },
               { NiveauXP: NewXP, time: Date.now() }
@@ -478,7 +482,7 @@ client.on("messageCreate", async (message) => {
           const cont = `${fichePer.Identite.Prenom} ${
             fichePer.Identite.Nom
           } - ${client.channels.cache.get(message.channel.id)}: ${con}\n`;
-          console.log(xPfiche.NiveauXP);
+
           client.channels.cache.get(auth.Salon.LogMessage).send(cont);
           console.log(NewXP);
         }
