@@ -14,6 +14,7 @@ const {
   EmbedBuilder,
 } = require("discord.js");
 const fs = require("fs");
+const { MongoClient } = require("mongodb");
 const client = new Client({
   intents: [
     GatewayIntentBits.DirectMessages,
@@ -91,7 +92,7 @@ client
   })
   .catch((err) => console.log(err));
 var auth = require("./auth.json");
-//var cron = require("node-cron");
+var cron = require("node-cron");
 
 // var job = new CronJob(
 //   "* 58 15 * * *",
@@ -229,6 +230,69 @@ var auth = require("./auth.json");
 //     { CounterLune: CountLune }
 //   );
 // });
+
+cron.schedule("31 01 * * *", async () => {
+  try {
+    const mongoClient = new MongoClient(process.env["MONGODB_URI"], {});
+    await mongoClient.connect();
+    console.log("Connected to the database");
+    const guild = await client.guilds.fetch(authId.guildRP);
+    var guildName = guild.name;
+    var guildName = guildName.split(" ").join("");
+    var guildName = "test";
+    console.log(`Connected to the database ${guildName}`);
+    const database = mongoClient.db(guildName);
+    const collection = database.collection("fichepersos");
+    const collectionbag = database.collection("fichepersobags");
+    const newCollection = database.collection("fichepersosactiv");
+
+    const fichesCollect = await collection.find({}).toArray();
+
+    const deleteResult = await newCollection.deleteMany({});
+    console.log(`Nombre de documents supprimés : ${deleteResult.deletedCount}`);
+
+    var numberFiche = fichesCollect.length;
+    console.log(numberFiche);
+
+    // Récupérer les fiches avec une date d'activité dans les 7 derniers jours
+    // Insérer les fiches récentes dans une nouvelle collection
+    for (var zz = 0; zz < numberFiche; zz++) {
+      var ficheCollectZ = await collection.findOne({
+        _id: fichesCollect[zz]._id,
+      });
+      var date_fiche = ficheCollectZ.time;
+      console.log(date_fiche);
+      var timeStamp = Math.round(new Date().getTime() / 1000);
+      var timeStampYesterday = timeStamp - 7 * 24 * 3600;
+      var is24 = date_fiche >= new Date(timeStampYesterday * 1000).getTime();
+      console.log(timeStampYesterday);
+      console.log(is24);
+      if (is24 == true) {
+        console.log("Perso Actif");
+        newCollection.insertOne(ficheCollectZ);
+      } else {
+        console.log("Perso Inactif");
+      }
+    }
+
+    const newCollectionBag = database.collection("fichepersobagsactiv");
+    const fichesCollectBag = await newCollection.find({}).toArray();
+    const deleteResultBag = await newCollectionBag.deleteMany({});
+
+    var numberFicheBag = fichesCollectBag.length;
+    console.log(numberFicheBag);
+
+    for (var zz = 0; zz < numberFicheBag; zz++) {
+      var fichesCollectBagZ = await collectionbag.findOne({
+        _id: fichesCollect[zz]._id,
+      });
+
+      newCollectionBag.insertOne(fichesCollectBagZ);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+});
 
 client.on("messageCreate", async (message) => {
   // console.log("TA MERE LA PUTE");
