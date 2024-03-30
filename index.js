@@ -405,8 +405,9 @@ client.on("messageCreate", async (message) => {
       }
     }
   }
-  console.log("Sortie de la boucle de gain d'XP");
+  //console.log("Sortie de la boucle de gain d'XP");
 
+  // POUR LES CAT
   console.log(message.channel.id);
   const tailleTableau = guildQuete.AllCategorie.length;
   if (
@@ -439,7 +440,7 @@ client.on("messageCreate", async (message) => {
           console.log("ne fait rien");
         } else {
           var NewXP = 0;
-          var taillemessage = counterMot.count(petitMessage, "-c");
+          var taillemessage = petitMessage.trim().length; //counterMot.count(petitMessage, "-c");
           console.log(taillemessage);
           if (taillemessage.chars < 100) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
@@ -477,7 +478,7 @@ client.on("messageCreate", async (message) => {
           const cont = `${fichePer.Identite.Prenom} ${
             fichePer.Identite.Nom
           } - ${client.channels.cache.get(message.channel.id)}: ${con}\n`;
-          console.log(cont);
+          console.log(xPfiche.NiveauXP);
           client.channels.cache.get(auth.Salon.LogMessage).send(cont);
           console.log(NewXP);
         }
