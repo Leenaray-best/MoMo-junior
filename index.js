@@ -304,14 +304,13 @@ client.on("messageCreate", async (message) => {
   //   }
   // }
 
-  // POUR LE GAIN DE L'XP DANS LES FILS
+  // POUR LE GAIN DE L'XP DANS LES FILS ET DANS LES CATEGORIE
   let guildQuete = await salonQuete.findOne({ _id: auth.idDatabase.questId });
   const tailleTableau2 = guildQuete.FilDiscussion.length;
   if (message.author.bot) return;
   if (
-    !petitMessage.startsWith("/") ||
-    petitMessage.startsWith("*") ||
-    isLetter
+    !petitMessage.startsWith("/") &&
+    (petitMessage.startsWith("*") || isLetter)
   ) {
     for (i = 0; i < tailleTableau2; i++) {
       if (message.channel.id == guildQuete.FilDiscussion[i]) {
@@ -407,6 +406,84 @@ client.on("messageCreate", async (message) => {
     }
   }
   console.log("Sortie de la boucle de gain d'XP");
+
+  console.log(message.channel.id);
+  const tailleTableau = guildQuete.AllCategorie.length;
+  if (
+    !petitMessage.startsWith("/") &&
+    (petitMessage.startsWith("*") || isLetter)
+  ) {
+    for (i = 0; i < tailleTableau; i++) {
+      //console.log(guildQuete.AllCategorie[i]);
+      if (message.channel.parent == guildQuete.AllCategorie[i]) {
+        console.log("message RP");
+        // if (
+        //   message.channel.parent == auth.Salon.CategorieRPAzathys ||
+        //   message.channel.parent == auth.Salon.CategorieRPTempleAustral ||
+        //   message.channel.parent == auth.Salon.CategorieRPMasun ||
+        //   message.channel.parent == auth.Salon.CategorieRPCroissant ||
+        //   message.channel.parent == auth.Salon.CategorieRPTempOcci ||
+        //   message.channel.parent == auth.Salon.CategorieRPBraise ||
+        //   message.channel.parent == auth.Salon.CategorieRPBahSingSe ||
+        //   message.channel.parent == auth.Salon.CategorieRPOmashu ||
+        //   message.channel.parent == auth.Salon.CategorieRPMaraisBrumeux ||
+        //   message.channel.parent == auth.Salon.CategorieRPDesertSiWang ||
+        //   message.channel.parent == auth.Salon.CategorieRPTempOrient ||
+        //   message.channel.parent == auth.Salon.CategorieRPIleKyoshi ||
+        //   message.channel.parent == auth.Salon.CategorieRPTempBoreal ||
+        //   message.channel.parent == auth.Salon.CategorieRPTribuSud ||
+        //   message.channel.parent == auth.Salon.CategorieTempleTerre ||
+        //   message.channel.parent == auth.Salon.CategorieSaloncache
+        // ) {
+        if (message.member.roles.cache.has(auth.RoleRP.progreAFaire)) {
+          console.log("ne fait rien");
+        } else {
+          var NewXP = 0;
+          var taillemessage = counterMot.count(petitMessage, "-c");
+          console.log(taillemessage);
+          if (taillemessage.chars < 100) {
+            var xPfiche = await FichePerso.findOne({ _id: message.author.id });
+            await FichePerso.findOneAndUpdate(
+              { _id: message.author.id },
+              { time: Date.now() }
+            );
+          }
+          if (taillemessage.chars >= 100 && taillemessage.chars <= 200) {
+            var xPfiche = await FichePerso.findOne({ _id: message.author.id });
+            var NewXP = xPfiche.NiveauXP + Rand(30) + 10;
+            await FichePerso.findOneAndUpdate(
+              { _id: message.author.id },
+              { NiveauXP: NewXP, time: Date.now() }
+            );
+          }
+          if (taillemessage.chars > 200 && taillemessage.chars <= 250) {
+            var xPfiche = await FichePerso.findOne({ _id: message.author.id });
+            var NewXP = xPfiche.NiveauXP + Rand(70) + 30;
+            await FichePerso.findOneAndUpdate(
+              { _id: message.author.id },
+              { NiveauXP: NewXP, time: Date.now() }
+            );
+          }
+          if (taillemessage.chars > 250) {
+            var xPfiche = await FichePerso.findOne({ _id: message.author.id });
+            var NewXP = xPfiche.NiveauXP + Rand(90) + 70;
+            await FichePerso.findOneAndUpdate(
+              { _id: message.author.id },
+              { NiveauXP: NewXP, time: Date.now() }
+            );
+          }
+          var fichePer = await FichePerso.findOne({ _id: message.author.id });
+          let con = message.content;
+          const cont = `${fichePer.Identite.Prenom} ${
+            fichePer.Identite.Nom
+          } - ${client.channels.cache.get(message.channel.id)}: ${con}\n`;
+          console.log(cont);
+          client.channels.cache.get(auth.Salon.LogMessage).send(cont);
+          console.log(NewXP);
+        }
+      }
+    }
+  }
 
   //  Add SALON TO LIST FIL DISCUSSION
   if (
