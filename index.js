@@ -444,8 +444,8 @@ client.on("messageCreate", async (message) => {
           console.log(taillemessage);
           if (taillemessage < 100) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
-            console.log(fichePer.Identite.Nom, fichePer.Identite.Prenom);
-            console.log(xPfiche.NiveauXP);
+            console.log(xPfiche.Identite.Nom, xPfiche.Identite.Prenom);
+            console.log("old XP:", xPfiche.NiveauXP);
             await FichePerso.findOneAndUpdate(
               { _id: message.author.id },
               { time: Date.now() }
@@ -453,8 +453,8 @@ client.on("messageCreate", async (message) => {
           }
           if (taillemessage >= 100 && taillemessage <= 200) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
-            console.log(fichePer.Identite.Nom, fichePer.Identite.Prenom);
-            console.log(xPfiche.NiveauXP);
+            console.log(xPfiche.Identite.Nom, xPfiche.Identite.Prenom);
+            console.log("old XP:", xPfiche.NiveauXP);
             var NewXP = xPfiche.NiveauXP + Rand(30) + 10;
             await FichePerso.findOneAndUpdate(
               { _id: message.author.id },
@@ -464,8 +464,8 @@ client.on("messageCreate", async (message) => {
           if (taillemessage > 200 && taillemessage <= 250) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
             var NewXP = xPfiche.NiveauXP + Rand(70) + 30;
-            console.log(fichePer.Identite.Nom, fichePer.Identite.Prenom);
-            console.log(xPfiche.NiveauXP);
+            console.log(xPfiche.Identite.Nom, xPfiche.Identite.Prenom);
+            console.log("old XP:", xPfiche.NiveauXP);
             await FichePerso.findOneAndUpdate(
               { _id: message.author.id },
               { NiveauXP: NewXP, time: Date.now() }
@@ -474,8 +474,8 @@ client.on("messageCreate", async (message) => {
           if (taillemessage > 250) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
             var NewXP = xPfiche.NiveauXP + Rand(90) + 70;
-            console.log(fichePer.Identite.Nom, fichePer.Identite.Prenom);
-            console.log(xPfiche.NiveauXP);
+            console.log(xPfiche.Identite.Nom, xPfiche.Identite.Prenom);
+            console.log("old XP:", xPfiche.NiveauXP);
             await FichePerso.findOneAndUpdate(
               { _id: message.author.id },
               { NiveauXP: NewXP, time: Date.now() }
