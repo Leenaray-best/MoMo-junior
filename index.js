@@ -357,6 +357,8 @@ client.on("messageCreate", async (message) => {
             console.log(NewXP);
           } else if (100 <= taillemessage <= 200) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
+            console.log(xPfiche.Identite.Nom, xPfiche.Identite.Prenom);
+            console.log("old XP:", xPfiche.NiveauXP);
             var NewXP = xPfiche.NiveauXP + Rand(30) + 10;
             await FichePerso.findOneAndUpdate(
               { _id: message.author.id },
@@ -367,11 +369,13 @@ client.on("messageCreate", async (message) => {
             const cont = `${fichePer.Identite.Prenom} ${
               fichePer.Identite.Nom
             } - ${client.channels.cache.get(message.channel.id)}: ${con}\n`;
-            console.log(cont);
+            //console.log(cont);
             client.channels.cache.get(auth.Salon.LogMessage).send(cont);
             console.log(NewXP);
           } else if (200 < taillemessage <= 250) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
+            console.log(xPfiche.Identite.Nom, xPfiche.Identite.Prenom);
+            console.log("old XP:", xPfiche.NiveauXP);
             var NewXP = xPfiche.NiveauXP + Rand(70) + 30;
             await FichePerso.findOneAndUpdate(
               { _id: message.author.id },
@@ -382,11 +386,13 @@ client.on("messageCreate", async (message) => {
             const cont = `${fichePer.Identite.Prenom} ${
               fichePer.Identite.Nom
             } - ${client.channels.cache.get(message.channel.id)}: ${con}\n`;
-            console.log(cont);
+            //console.log(cont);
             client.channels.cache.get(auth.Salon.LogMessage).send(cont);
             console.log(NewXP);
           } else if (taillemessage > 250) {
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
+            console.log(xPfiche.Identite.Nom, xPfiche.Identite.Prenom);
+            console.log("old XP:", xPfiche.NiveauXP);
             var NewXP = xPfiche.NiveauXP + Rand(90) + 70;
             await FichePerso.findOneAndUpdate(
               { _id: message.author.id },
@@ -397,7 +403,7 @@ client.on("messageCreate", async (message) => {
             const cont = `${fichePer.Identite.Prenom} ${
               fichePer.Identite.Nom
             } - ${client.channels.cache.get(message.channel.id)}: ${con}\n`;
-            console.log(cont);
+            //console.log(cont);
             client.channels.cache.get(auth.Salon.LogMessage).send(cont);
             console.log(NewXP);
           }
