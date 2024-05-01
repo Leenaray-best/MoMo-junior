@@ -352,7 +352,7 @@ client.on("messageCreate", async (message) => {
             const cont = `${fichePer.Identite.Prenom} ${
               fichePer.Identite.Nom
             } - ${client.channels.cache.get(message.channel.id)}: ${con}\n`;
-            console.log(cont);
+            //console.log(cont);
             client.channels.cache.get(auth.Salon.LogMessage).send(cont);
             console.log(NewXP);
           } else if (100 <= taillemessage <= 200) {
