@@ -341,7 +341,7 @@ client.on("messageCreate", async (message) => {
           console.log(taillemessage);
           if (taillemessage < 10) {
             console.log("C'est une slash command");
-          } else if (10 <= taillemessage < 100) {
+          } else if (taillemessage >= 10 && taillemessage < 100) {
             console.log("taille message inf a 100");
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
             await FichePerso.findOneAndUpdate(
@@ -356,7 +356,7 @@ client.on("messageCreate", async (message) => {
             //console.log(cont);
             client.channels.cache.get(auth.Salon.LogMessage).send(cont);
             console.log(NewXP);
-          } else if (100 <= taillemessage <= 200) {
+          } else if (taillemessage >= 100 && taillemessage < 200) {
             console.log("taille message inf a 200");
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
             console.log(xPfiche.Identite.Nom, xPfiche.Identite.Prenom);
@@ -374,7 +374,7 @@ client.on("messageCreate", async (message) => {
             //console.log(cont);
             client.channels.cache.get(auth.Salon.LogMessage).send(cont);
             console.log(NewXP);
-          } else if (200 < taillemessage <= 250) {
+          } else if (taillemessage >= 200 && taillemessage <= 250) {
             console.log("taille message inf a 250");
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
             console.log(xPfiche.Identite.Nom, xPfiche.Identite.Prenom);
