@@ -342,6 +342,7 @@ client.on("messageCreate", async (message) => {
           if (taillemessage < 10) {
             console.log("C'est une slash command");
           } else if (10 <= taillemessage < 100) {
+            console.log("taille message inf a 100");
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
             await FichePerso.findOneAndUpdate(
               { _id: message.author.id },
@@ -356,6 +357,7 @@ client.on("messageCreate", async (message) => {
             client.channels.cache.get(auth.Salon.LogMessage).send(cont);
             console.log(NewXP);
           } else if (100 <= taillemessage <= 200) {
+            console.log("taille message inf a 200");
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
             console.log(xPfiche.Identite.Nom, xPfiche.Identite.Prenom);
             console.log("old XP:", xPfiche.NiveauXP);
@@ -373,6 +375,7 @@ client.on("messageCreate", async (message) => {
             client.channels.cache.get(auth.Salon.LogMessage).send(cont);
             console.log(NewXP);
           } else if (200 < taillemessage <= 250) {
+            console.log("taille message inf a 250");
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
             console.log(xPfiche.Identite.Nom, xPfiche.Identite.Prenom);
             console.log("old XP:", xPfiche.NiveauXP);
@@ -390,6 +393,7 @@ client.on("messageCreate", async (message) => {
             client.channels.cache.get(auth.Salon.LogMessage).send(cont);
             console.log(NewXP);
           } else if (taillemessage > 250) {
+            console.log("taille message sup a 250");
             var xPfiche = await FichePerso.findOne({ _id: message.author.id });
             console.log(xPfiche.Identite.Nom, xPfiche.Identite.Prenom);
             console.log("old XP:", xPfiche.NiveauXP);
