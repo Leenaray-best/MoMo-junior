@@ -118,7 +118,7 @@ module.exports = {
             .setTitle(`Fiche Personnage`)
             .setColor(0x18e1ee)
             .setDescription(
-              `Nom : ${fiche.Identite.Nom}\nPrenom : ${fiche.Identite.Prenom}\nAge: ${fiche.Identite.Age}\nSexe: ${fiche.Identite.Sexe}\nMetier : ${fiche.Identite.Metier}\nNiveau de Maitrise : ${fiche.NiveauDeMaitrise}\nNiveau XP : ${fiche.NiveauXP}\nPV : ${fiche.Identite.PV}\nPoint de Competence : ${fiche.GainCompetence}\nFaiblesse : ${listeFaiblesse[0]}, ${listeFaiblesse[1]}`
+              `Nom : ${fiche.Identite.Nom}\nPrenom : ${fiche.Identite.Prenom}\nAge: ${fiche.Identite.Age}\nSexe: ${fiche.Identite.Sexe}\nMetier : ${fiche.Identite.Metier}\nNiveau de Maitrise : ${fiche.NiveauDeMaitrise}\nNiveau XP : ${fiche.NiveauXP}\nPV : ${fiche.Identite.PV}\nPoint de Competence : ${fiche.GainCompetence}\nPoint de Resistance : ${fiche.PointDeResistance}\nResistance Physique : ${fiche.ResistancePhy}\nResistance Spiritualite : ${fiche.ResistanceSpi}\nFaiblesse : ${listeFaiblesse[0]}, ${listeFaiblesse[1]}`
             )
             .setThumbnail(user.avatarURL())
             .addFields(

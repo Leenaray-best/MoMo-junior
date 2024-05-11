@@ -727,16 +727,17 @@ client.on("messageCreate", async (message) => {
     (message.member.roles.cache.has(auth.RoleRP.RolePlay) ||
       (message.member.roles.cache.has(auth.RoleRP.RoleStaff) &&
         (message.channel.id == auth.Salon.InfirmerieBSS ||
-          message.channel.id == auth.Salon.InfirmerieOmashu)))
+          message.channel.id == auth.Salon.InfirmerieOmashu ||
+          message.channel.id == auth.Salon.Jet)))
   ) {
     var xPfiche = await FichePerso.findOne({ _id: message.author.id });
-    var PVMaxValue = xPfiche.Identite.PVMax;
+    var PVMaxValue = math.round(15 + 0.2 * xPfiche.Competence.Constitution);
     await FichePerso.findOneAndUpdate(
       { _id: message.author.id },
       { "Identite.PV": PVMaxValue, time: Date.now() }
     );
     var fichePer = await FichePerso.findOne({ _id: message.author.id });
-    if (fichePer.Identite.PV == fichePer.Identite.PVMax) {
+    if (fichePer.Identite.PV == PVMaxValue) {
       const newMessage = `Tu as retrouvé ton max de PV`;
       message.channel.send(newMessage);
     } else {
