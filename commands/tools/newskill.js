@@ -159,6 +159,7 @@ module.exports = {
             }
           } else if (interaction.options.getString("type") === "constitution") {
             var OldConstitution = joueurFiche.Competence.Constitution;
+            var OldResistance = joueurFiche.PointDeResistance;
             if (OldConstitution == 20) {
               var newMessage = "Tu es au max sur cette competence";
             } else if (OldConstitution == 19 && Number(ValueToAdd) == 2) {
@@ -171,6 +172,37 @@ module.exports = {
               } else {
                 var NewConstitution =
                   joueurFiche.Competence.Constitution + Number(ValueToAdd);
+                if (ValueToAdd == 1) {
+                  if (
+                    OldConstitution == 9 ||
+                    OldConstitution == 14 ||
+                    OldConstitution == 17
+                  ) {
+                    await collection.findOneAndUpdate(
+                      { _id: user.id },
+                      {
+                        $set: {
+                          PointDeResistance: OldResistance + Number(1),
+                        },
+                      }
+                    );
+                  }
+                } else if (ValueToAdd == 2) {
+                  if (
+                    OldConstitution == 8 ||
+                    OldConstitution == 13 ||
+                    OldConstitution == 16
+                  ) {
+                    await collection.findOneAndUpdate(
+                      { _id: user.id },
+                      {
+                        $set: {
+                          PointDeResistance: OldResistance + Number(1),
+                        },
+                      }
+                    );
+                  }
+                }
                 await collection.findOneAndUpdate(
                   { _id: user.id },
                   {
@@ -188,11 +220,16 @@ module.exports = {
                 var joueurFiche = await collection.findOne({
                   _id: user.id,
                 });
+                var NewResistance = joueurFiche.PointDeResistance;
                 if (
                   Number(NewConstitution) ==
                   Number(OldConstitution) + Number(ValueToAdd)
                 ) {
-                  var newMessage = `Ta constitution est maintenant de ${joueurFiche.Competence.Constitution}`;
+                  if (Number(NewResistance) != Number(OldResistance)) {
+                    var newMessage = `Ta constitution est maintenant de ${joueurFiche.Competence.Constitution}. Tu as gagné un point de résistance à distribuer.`;
+                  } else {
+                    var newMessage = `Ta constitution est maintenant de ${joueurFiche.Competence.Constitution}`;
+                  }
                 } else {
                   var newMessage = `Un problème s'est produit ! Demande à Karma`;
                 }

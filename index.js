@@ -231,7 +231,7 @@ var cron = require("node-cron");
 //   );
 // });
 
-cron.schedule("46 18 * * *", async () => {
+cron.schedule("* 6 * * *", async () => {
   try {
     const mongoClient = new MongoClient(process.env["MONGODB_URI"], {});
     await mongoClient.connect();
