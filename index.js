@@ -231,7 +231,7 @@ var cron = require("node-cron");
 //   );
 // });
 
-cron.schedule("04 18 * * *", async () => {
+cron.schedule("13 18 * * *", async () => {
   try {
     const mongoClient = new MongoClient(process.env["MONGODB_URI"], {});
     await mongoClient.connect();
@@ -307,12 +307,15 @@ cron.schedule("04 18 * * *", async () => {
     // Vérifier si le dossier de sauvegarde existe, sinon le créer
     if (!fs.existsSync(saveFolderPath)) {
       fs.mkdirSync(saveFolderPath);
+    } else {
+      console.log("il existe");
     }
 
     // Nom du fichier avec la date et l'extension
     const fileName = `${dateString}_fichePerso.txt`;
     const fileNameBag = `${dateString}_fichePersoBag.txt`;
-
+    console.log("nom du fichier " + fileName);
+    console.log("nom du fichier " + fileNameBag);
     // Chemin complet du fichier avec le nom de la date
     const filePath = path.join(saveFolderPath, fileName);
     const filePathBag = path.join(saveFolderPath, fileNameBag);
