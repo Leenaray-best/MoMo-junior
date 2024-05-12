@@ -231,7 +231,7 @@ var cron = require("node-cron");
 //   );
 // });
 
-cron.schedule("41 18 * * *", async () => {
+cron.schedule("43 18 * * *", async () => {
   try {
     const mongoClient = new MongoClient(process.env["MONGODB_URI"], {});
     await mongoClient.connect();
@@ -307,8 +307,10 @@ cron.schedule("41 18 * * *", async () => {
     // Vérifier si le dossier de sauvegarde existe, sinon le créer
     if (!fs.existsSync(saveFolderPath)) {
       fs.mkdirSync(saveFolderPath);
+      console.log(saveFolderPath);
       console.log("Le dossier a ete cree");
     } else {
+      console.log(saveFolderPath);
       console.log("il existe");
     }
 
