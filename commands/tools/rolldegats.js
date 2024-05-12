@@ -53,9 +53,10 @@ module.exports = {
     // Obtenez le nom du serveur
     var guildName = guild.name;
     var guildName = guildName.split(" ").join("");
+    var guildName = "test";
     // Utilisez guildName comme nécessaire
     console.log(`Le message a été posté dans le serveur : ${guildName}`);
-    var guildName = "test";
+
     const mongoClient = new MongoClient(process.env["MONGODB_URI"], {});
     mongoClient.connect();
     console.log("Connecté à la base de données MongoDB");
@@ -83,6 +84,10 @@ module.exports = {
           console.log("valeurDegatsTotal :" + valeurDegatsTotal);
           var newPv = niveauPv - valeurDegatsTotal;
           console.log("newPv :" + newPv);
+          if (newPv < 0) {
+            console.log("Pv neg");
+            newPv = 0;
+          }
           //let joueurUpdateFiche = await collection.findOneAndUpdate(
           //  { _id: user.id },
           //  { "Identite.PV": newPv },
@@ -112,6 +117,10 @@ module.exports = {
           console.log("valeurDegatsTotal :" + valeurDegatsTotal);
           var newPv = niveauPv - valeurDegatsTotal;
           console.log("newPv :" + newPv);
+          if (newPv < 0) {
+            console.log("Pv neg");
+            newPv = 0;
+          }
           collection.updateOne(
             { _id: joueur.id },
             {
@@ -137,6 +146,10 @@ module.exports = {
           console.log("valeurDegatsTotal :" + valeurDegatsTotal);
           var newPv = niveauPv - valeurDegatsTotal;
           console.log("newPv :" + newPv);
+          if (newPv < 0) {
+            console.log("Pv neg");
+            newPv = 0;
+          }
           collection.updateOne(
             { _id: joueur.id },
             {
@@ -166,6 +179,10 @@ module.exports = {
           console.log("valeurDegatsTotal :" + valeurDegatsTotal);
           var newPv = Number(niveauPv - valeurDegatsTotal);
           console.log("newPv :" + newPv);
+          if (newPv < 0) {
+            console.log("Pv neg");
+            newPv = 0;
+          }
           collection.updateOne(
             { _id: joueur.id },
             {
@@ -180,24 +197,33 @@ module.exports = {
           var newValuePV = joueurUpdateFiche.Identite.PV;
         }
       }
-    }
-    if (newPv < 0) {
-      newPv = 0;
-    }
-    if (newPv < 5) {
-      if (newPv > 0) {
-        var newMessage =
-          "Tu fais " +
-          valeurDegats +
-          " (roll) dégats - " +
-          niveauResistance +
-          " (resistance) = " +
-          valeurDegatsTotal +
-          " (dégats totaux)\n <@" +
-          joueur.id +
-          ">, il te reste " +
-          newValuePV +
-          " PV\nATTENTION tu as moins de 5 PV";
+
+      if (newPv < 5) {
+        if (newPv > 0) {
+          var newMessage =
+            "Tu fais " +
+            valeurDegats +
+            " (roll) dégats - " +
+            niveauResistance +
+            " (resistance) = " +
+            valeurDegatsTotal +
+            " (dégats totaux)\n <@" +
+            joueur.id +
+            ">, il te reste " +
+            newValuePV +
+            " PV\nATTENTION tu as moins de 5 PV";
+        } else {
+          var newMessage =
+            "Tu fais " +
+            valeurDegats +
+            " (roll) dégats - " +
+            niveauResistance +
+            " (resistance) = " +
+            valeurDegatsTotal +
+            " (dégats totaux)\n <@" +
+            joueur.id +
+            ">, est KO ";
+        }
       } else {
         var newMessage =
           "Tu fais " +
@@ -206,27 +232,22 @@ module.exports = {
           niveauResistance +
           " (resistance) = " +
           valeurDegatsTotal +
-          " (dégats totaux)\n <@" +
+          " (dégats totaux).\n <@" +
           joueur.id +
-          ">, est KO ";
+          ">, il te reste " +
+          newValuePV +
+          " PV.";
       }
+      await interaction.editReply({
+        content: newMessage,
+      });
     } else {
-      var newMessage =
-        "Tu fais " +
-        valeurDegats +
-        " (roll) dégats - " +
-        niveauResistance +
-        " (resistance) = " +
-        valeurDegatsTotal +
-        " (dégats totaux).\n <@" +
-        joueur.id +
-        ">, il te reste " +
-        newValuePV +
-        " PV.";
+      var newMessage = `Tu n'as pas les autorisations pour faire ça ! Demande à Karma`;
+      await interaction.editReply({
+        content: newMessage,
+      });
     }
-    await interaction.editReply({
-      content: newMessage,
-    });
+
     //await wait(5000);
     //await interaction.deleteReply();
   },
