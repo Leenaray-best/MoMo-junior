@@ -231,7 +231,7 @@ var cron = require("node-cron");
 //   );
 // });
 
-cron.schedule("27 17 * * *", async () => {
+cron.schedule("39 17 * * *", async () => {
   try {
     const mongoClient = new MongoClient(process.env["MONGODB_URI"], {});
     await mongoClient.connect();
@@ -286,7 +286,7 @@ cron.schedule("27 17 * * *", async () => {
       var fichesCollectBagZ = await collectionbag.findOne({
         _id: fichesCollect[zz]._id,
       });
-
+      console.log(ficheCollectZ.time);
       newCollectionBag.insertOne(fichesCollectBagZ);
     }
 
