@@ -231,7 +231,7 @@ var cron = require("node-cron");
 //   );
 // });
 
-cron.schedule("35 18 * * *", async () => {
+cron.schedule("41 18 * * *", async () => {
   try {
     const mongoClient = new MongoClient(process.env["MONGODB_URI"], {});
     await mongoClient.connect();
@@ -303,7 +303,7 @@ cron.schedule("35 18 * * *", async () => {
     const dateString = currentDate.toISOString().slice(0, 10); // Format AAAA-MM-JJ
 
     // Chemin du dossier de sauvegarde
-    const saveFolderPath = path.join(`./commands`, "save");
+    const saveFolderPath = path.join(`./`, "save");
     // Vérifier si le dossier de sauvegarde existe, sinon le créer
     if (!fs.existsSync(saveFolderPath)) {
       fs.mkdirSync(saveFolderPath);
