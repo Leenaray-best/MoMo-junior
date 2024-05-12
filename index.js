@@ -231,7 +231,7 @@ var cron = require("node-cron");
 //   );
 // });
 
-cron.schedule("39 17 * * *", async () => {
+cron.schedule("55 17 * * *", async () => {
   try {
     const mongoClient = new MongoClient(process.env["MONGODB_URI"], {});
     await mongoClient.connect();
@@ -274,20 +274,28 @@ cron.schedule("39 17 * * *", async () => {
         console.log("Perso Inactif");
       }
     }
-
+    const newFicheCollect = await newCollection.find({}).toArray();
     const newCollectionBag = database.collection("fichepersobagsactiv");
-    const fichesCollectBag = await newCollection.find({}).toArray();
+    const fichesCollectBag = await newCollectionBag.find({}).toArray();
     const deleteResultBag = await newCollectionBag.deleteMany({});
 
     var numberFicheBag = fichesCollectBag.length;
+    var numberNewFiche = newFicheCollect.length;
     console.log(numberFicheBag);
 
     for (var zz = 0; zz < numberFicheBag; zz++) {
       var fichesCollectBagZ = await collectionbag.findOne({
-        _id: fichesCollect[zz]._id,
+        _id: fichesCollectBag[zz]._id,
       });
-      console.log(ficheCollectZ.time);
-      newCollectionBag.insertOne(fichesCollectBagZ);
+      for (var zzz = 0; zzz < numberNewFiche; zzz++) {
+        var newfichesCollectZ = await newCollection.findOne({
+          _id: newFicheCollect[zzz]._id,
+        });
+        if (fichesCollectBagZ._id == newfichesCollectZ_id) {
+          console.log(ficheCollectZ.time);
+          newCollectionBag.insertOne(fichesCollectBagZ);
+        }
+      }
     }
 
     const currentDate = new Date();
