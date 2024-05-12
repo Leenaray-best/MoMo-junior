@@ -231,12 +231,12 @@ var cron = require("node-cron");
 //   );
 // });
 
-cron.schedule("25 17 * * *", async () => {
+cron.schedule("27 17 * * *", async () => {
   try {
     const mongoClient = new MongoClient(process.env["MONGODB_URI"], {});
     await mongoClient.connect();
     console.log("Connected to the database");
-    const guild = await client.guilds.fetch(authId.guildRP);
+    const guild = await client.guilds.fetch(auth.guildRP);
     var guildName = guild.name;
     var guildName = guildName.split(" ").join("");
     var guildName = "test";
