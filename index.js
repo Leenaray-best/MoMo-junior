@@ -231,7 +231,7 @@ var cron = require("node-cron");
 //   );
 // });
 
-cron.schedule("59 17 * * *", async () => {
+cron.schedule("04 18 * * *", async () => {
   try {
     const mongoClient = new MongoClient(process.env["MONGODB_URI"], {});
     await mongoClient.connect();
@@ -282,6 +282,7 @@ cron.schedule("59 17 * * *", async () => {
     var numberFicheBag = fichesCollectBag.length;
     var numberNewFiche = newFicheCollect.length;
     console.log(numberFicheBag);
+    console.log(numberNewFiche);
 
     for (var zz = 0; zz < numberFicheBag; zz++) {
       var fichesCollectBagZ = await collectionbag.findOne({
@@ -291,7 +292,7 @@ cron.schedule("59 17 * * *", async () => {
         var newfichesCollectZ = await newCollection.findOne({
           _id: newFicheCollect[zzz]._id,
         });
-        if (fichesCollectBagZ._id == newfichesCollectZ_id) {
+        if (fichesCollectBagZ._id == newfichesCollectZ._id) {
           console.log(ficheCollectZ.time);
           newCollectionBag.insertOne(fichesCollectBagZ);
         }
