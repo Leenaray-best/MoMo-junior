@@ -231,6 +231,97 @@ var cron = require("node-cron");
 //   );
 // });
 
+cron.schedule("* 18 17 * *", async () => {
+  try {
+    const mongoClient = new MongoClient(process.env["MONGODB_URI"], {});
+    await mongoClient.connect();
+    console.log("Connected to the database");
+    const guild = await client.guilds.fetch(authId.guildRP);
+    var guildName = guild.name;
+    var guildName = guildName.split(" ").join("");
+    var guildName = "test";
+    console.log(`Connected to the database ${guildName}`);
+    const database = mongoClient.db(guildName);
+    const collection = database.collection("fichepersos");
+    const collectionbag = database.collection("fichepersobags");
+    const newCollection = database.collection("fichepersosactiv");
+
+    const fichesCollect = await collection.find({}).toArray();
+
+    const deleteResult = await newCollection.deleteMany({});
+    console.log(`Nombre de documents supprimés : ${deleteResult.deletedCount}`);
+
+    var numberFiche = fichesCollect.length;
+    console.log(numberFiche);
+
+    // Récupérer les fiches avec une date d'activité dans les 7 derniers jours
+    // Insérer les fiches récentes dans une nouvelle collection
+    for (var zz = 0; zz < numberFiche; zz++) {
+      var ficheCollectZ = await collection.findOne({
+        _id: fichesCollect[zz]._id,
+      });
+      var date_fiche = ficheCollectZ.time;
+      console.log(date_fiche);
+      var timeStamp = Math.round(new Date().getTime() / 1000);
+      var timeStampYesterday = timeStamp - 7 * 24 * 3600;
+      var is24 = date_fiche >= new Date(timeStampYesterday * 1000).getTime();
+      console.log(timeStampYesterday);
+      console.log(is24);
+      if (is24 == true) {
+        console.log("Perso Actif");
+        newCollection.insertOne(ficheCollectZ);
+      } else {
+        console.log("Perso Inactif");
+      }
+    }
+
+    const newCollectionBag = database.collection("fichepersobagsactiv");
+    const fichesCollectBag = await newCollection.find({}).toArray();
+    const deleteResultBag = await newCollectionBag.deleteMany({});
+
+    var numberFicheBag = fichesCollectBag.length;
+    console.log(numberFicheBag);
+
+    for (var zz = 0; zz < numberFicheBag; zz++) {
+      var fichesCollectBagZ = await collectionbag.findOne({
+        _id: fichesCollect[zz]._id,
+      });
+
+      newCollectionBag.insertOne(fichesCollectBagZ);
+    }
+
+    const currentDate = new Date();
+    const dateString = currentDate.toISOString().slice(0, 10); // Format AAAA-MM-JJ
+
+    // Chemin du dossier de sauvegarde
+    const saveFolderPath = path.join(`./`, "save");
+    // Vérifier si le dossier de sauvegarde existe, sinon le créer
+    if (!fs.existsSync(saveFolderPath)) {
+      fs.mkdirSync(saveFolderPath);
+    }
+
+    // Nom du fichier avec la date et l'extension
+    const fileName = `${dateString}_fichePerso.txt`;
+    const fileNameBag = `${dateString}_fichePersoBag.txt`;
+
+    // Chemin complet du fichier avec le nom de la date
+    const filePath = path.join(saveFolderPath, fileName);
+    const filePathBag = path.join(saveFolderPath, fileNameBag);
+    // Récupérer la liste des fiches des joueurs actifs
+    const playerSheets = await newCollection.find({}).toArray();
+    const playerSheetsBag = await newCollectionBag.find({}).toArray();
+
+    // Convertir la liste en chaîne de caractères
+    const playerSheetsString = JSON.stringify(playerSheets, null, 2);
+    const playerSheetsBagString = JSON.stringify(playerSheetsBag, null, 2);
+    // Écrire la liste dans le fichier
+    fs.writeFileSync(filePath, playerSheetsString);
+    fs.writeFileSync(filePathBag, playerSheetsBagString);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+});
+
 client.on("messageCreate", async (message) => {
   // console.log("TA MERE LA PUTE");
   petitMessage = message.content.toLowerCase();
