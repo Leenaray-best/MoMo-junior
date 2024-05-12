@@ -231,7 +231,7 @@ var cron = require("node-cron");
 //   );
 // });
 
-cron.schedule("39 21 * * *", async () => {
+cron.schedule("52 21 * * *", async () => {
   try {
     const mongoClient = new MongoClient(process.env["MONGODB_URI"], {});
     await mongoClient.connect();
@@ -304,28 +304,15 @@ cron.schedule("39 21 * * *", async () => {
 
     // Chemin du dossier de sauvegarde
     // const saveFolderPath = path.join(`./`, "save");
-    const saveFolderPath = path.join(
-      `/home/user/Dropbox/BotSave/Javascript/MoMoEvol/`,
-      "save"
-    );
-    // Vérifier si le dossier de sauvegarde existe, sinon le créer
-    if (!fs.existsSync(saveFolderPath)) {
-      fs.mkdirSync(saveFolderPath);
-      console.log(saveFolderPath);
-      console.log("Le dossier a ete cree");
-    } else {
-      console.log(saveFolderPath);
-      console.log("il existe");
-    }
+
+    const dossier = `/home/user/Dropbox/BotSave/Javascript/MoMoEvol/save`;
 
     // Nom du fichier avec la date et l'extension
     const fileName = `${dateString}_fichePerso.txt`;
     const fileNameBag = `${dateString}_fichePersoBag.txt`;
     console.log("nom du fichier " + fileName);
     console.log("nom du fichier " + fileNameBag);
-    // Chemin complet du fichier avec le nom de la date
-    const filePath = path.join(saveFolderPath, fileName);
-    const filePathBag = path.join(saveFolderPath, fileNameBag);
+
     // Récupérer la liste des fiches des joueurs actifs
     const playerSheets = await newCollection.find({}).toArray();
     const playerSheetsBag = await newCollectionBag.find({}).toArray();
@@ -334,8 +321,8 @@ cron.schedule("39 21 * * *", async () => {
     const playerSheetsString = JSON.stringify(playerSheets, null, 2);
     const playerSheetsBagString = JSON.stringify(playerSheetsBag, null, 2);
     // Écrire la liste dans le fichier
-    fs.writeFileSync(filePath, playerSheetsString);
-    fs.writeFileSync(filePathBag, playerSheetsBagString);
+    fs.writeFileSync(`${dossier}/${fileName}`, playerSheetsString);
+    fs.writeFileSync(`${dossier}/${fileNameBag}`, playerSheetsBagString);
   } catch (error) {
     console.error("Error:", error);
   }
