@@ -24,7 +24,7 @@ module.exports = {
     });
     if (
       interaction.member.roles.cache.has(authId.staff.StaffBot) &&
-      interaction.channelId == authId.Salon.SalonBotAdmin
+      interaction.channelId == authId.Salon.Depotfiche
     ) {
       const guildId = message.guildId;
       const guild = client.guilds.cache.get(guildId);
