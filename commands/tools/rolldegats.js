@@ -69,7 +69,11 @@ module.exports = {
     let joueurFiche = await collection.findOne({
       _id: joueur.id,
     });
-    if (interaction.member.roles.cache.has(authId.RoleRP.RolePlay)) {
+    if (
+      interaction.member.roles.cache.has(
+        authId.RoleRP.RolePlay && interaction.channelId == authId.Salon.JetDeDes
+      )
+    ) {
       if (interaction.commandName === "rolldegat") {
         if (interaction.options.getString("attaque") === "force") {
           var niveauForce = joueurFiche.Competence.Force;

@@ -102,7 +102,10 @@ module.exports = {
       "discretion",
     ];
 
-    if (interaction.member.roles.cache.has(authId.RoleRP.RolePlay)) {
+    if (
+      interaction.member.roles.cache.has(authId.RoleRP.RolePlay) &&
+      interaction.channelId == authId.Salon.JetDeDes
+    ) {
       if (interaction.commandName === "newskill") {
         // Le joueur qui fait la commande
         const user = interaction.user;
