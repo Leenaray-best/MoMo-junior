@@ -70,9 +70,8 @@ module.exports = {
       _id: joueur.id,
     });
     if (
-      interaction.member.roles.cache.has(
-        authId.RoleRP.RolePlay && interaction.channelId == authId.Salon.JetDeDes
-      )
+      interaction.member.roles.cache.has(authId.RoleRP.RolePlay) &&
+      interaction.channelId == authId.Salon.JetDeDes
     ) {
       if (interaction.commandName === "rolldegat") {
         if (interaction.options.getString("attaque") === "force") {
