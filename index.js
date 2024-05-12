@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const path = require("path");
 //var CronJob = require("cron").CronJob;
 
 ///git add .
@@ -231,7 +231,7 @@ var cron = require("node-cron");
 //   );
 // });
 
-cron.schedule("55 17 * * *", async () => {
+cron.schedule("59 17 * * *", async () => {
   try {
     const mongoClient = new MongoClient(process.env["MONGODB_URI"], {});
     await mongoClient.connect();
@@ -276,7 +276,7 @@ cron.schedule("55 17 * * *", async () => {
     }
     const newFicheCollect = await newCollection.find({}).toArray();
     const newCollectionBag = database.collection("fichepersobagsactiv");
-    const fichesCollectBag = await newCollectionBag.find({}).toArray();
+    const fichesCollectBag = await collectionbag.find({}).toArray();
     const deleteResultBag = await newCollectionBag.deleteMany({});
 
     var numberFicheBag = fichesCollectBag.length;
