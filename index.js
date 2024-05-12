@@ -231,7 +231,7 @@ var cron = require("node-cron");
 //   );
 // });
 
-cron.schedule("52 21 * * *", async () => {
+cron.schedule("58 21 * * *", async () => {
   try {
     const mongoClient = new MongoClient(process.env["MONGODB_URI"], {});
     await mongoClient.connect();
@@ -321,8 +321,8 @@ cron.schedule("52 21 * * *", async () => {
     const playerSheetsString = JSON.stringify(playerSheets, null, 2);
     const playerSheetsBagString = JSON.stringify(playerSheetsBag, null, 2);
     // Écrire la liste dans le fichier
-    fs.writeFileSync(`${dossier}/${fileName}`, playerSheetsString);
-    fs.writeFileSync(`${dossier}/${fileNameBag}`, playerSheetsBagString);
+    fs.writeFile(`${dossier}/${fileName}`, playerSheetsString);
+    fs.writeFile(`${dossier}/${fileNameBag}`, playerSheetsBagString);
   } catch (error) {
     console.error("Error:", error);
   }
