@@ -46,9 +46,7 @@ module.exports = {
     const guildId = message.guildId;
     const guild = client.guilds.cache.get(guildId);
     // Vérifiez si l'objet Guild existe (par exemple, si le message a été envoyé dans un DM, guild sera undefined)
-
-    // Le joueur qui fait la commande
-    const user = interaction.user;
+    console.log(`Le message a été posté dans le serveur : ${guild.name}`);
 
     // Obtenez le nom du serveur
     var guildName = guild.name;
@@ -63,6 +61,12 @@ module.exports = {
     const database = mongoClient.db(guildName);
     const collection = database.collection("fichepersos");
 
+    // Le joueur qui fait la commande et donc qui attaque
+    const user = interaction.user;
+    let joueurFicheAttak = await collection.findOne({
+      _id: user.id,
+    });
+
     // le joueur qui subit les degats
     const joueur = interaction.options.getUser("target");
     // Insérez des données initiales
@@ -71,179 +75,210 @@ module.exports = {
     });
     if (
       interaction.member.roles.cache.has(authId.RoleRP.RolePlay) &&
-      interaction.channelId == authId.Salon.JetDeDes
+      interaction.channelId == authId.Salon.Jet
     ) {
       if (interaction.commandName === "rolldegat") {
         if (interaction.options.getString("attaque") === "force") {
-          var niveauForce = joueurFiche.Competence.Force;
+          var niveauForce = joueurFicheAttak.Competence.Force;
           console.log("niveauForce : " + niveauForce);
-          var niveauResistance = joueurFiche.ResistancePhy;
-          console.log("niveauResistance : " + niveauResistance);
-          var niveauPv = joueurFiche.Identite.PV;
-          console.log("niveauPv :" + niveauPv);
-          var valeurDegats = Math.round(Rand(3) + 0.1 * niveauForce);
-          console.log("valeurDegats :" + valeurDegats);
-          var valeurDegatsTotal = valeurDegats - niveauResistance;
-          console.log("valeurDegatsTotal :" + valeurDegatsTotal);
-          var newPv = niveauPv - valeurDegatsTotal;
-          console.log("newPv :" + newPv);
-          if (newPv < 0) {
-            console.log("Pv neg");
-            newPv = 0;
+          var valeurDegats = Rand(3);
+          console.log("valeurDegats : " + valeurDegats);
+          var valeurDegats = Math.round(valeurDegats + 0.1 * niveauForce);
+          console.log("valeurDegats + Force :" + valeurDegats);
+          if (joueur.id != authId.staff.MoMoJr) {
+            var niveauResistance = joueurFiche.ResistancePhy;
+            console.log("niveauResistance : " + niveauResistance);
+            var niveauPv = joueurFiche.Identite.PV;
+            console.log("niveauPv :" + niveauPv);
+            var valeurDegatsTotal = valeurDegats - niveauResistance;
+            console.log("valeurDegatsTotal :" + valeurDegatsTotal);
+            var newPv = niveauPv - valeurDegatsTotal;
+            console.log("newPv :" + newPv);
+            if (newPv < 0) {
+              console.log("Pv neg");
+              newPv = 0;
+            }
+            collection.updateOne(
+              { _id: joueur.id },
+              {
+                $set: {
+                  "Identite.PV": newPv,
+                },
+              }
+            );
+            let joueurUpdateFiche = await collection.findOne({
+              _id: joueur.id,
+            });
+            var newValuePV = joueurUpdateFiche.Identite.PV;
+          } else {
+            var valeurDegatsTotal = valeurDegats;
           }
           //let joueurUpdateFiche = await collection.findOneAndUpdate(
           //  { _id: user.id },
           //  { "Identite.PV": newPv },
           //);
-          collection.updateOne(
-            { _id: joueur.id },
-            {
-              $set: {
-                "Identite.PV": newPv,
-              },
-            }
-          );
-          let joueurUpdateFiche = await collection.findOne({
-            _id: joueur.id,
-          });
-          var newValuePV = joueurUpdateFiche.Identite.PV;
         } else if (interaction.options.getString("attaque") === "adresse") {
-          var niveauAdresse = joueurFiche.Competence.Adresse;
+          var niveauAdresse = joueurFicheAttak.Competence.Adresse;
           console.log("niveauAdresse : " + niveauAdresse);
-          var niveauResistance = joueurFiche.ResistancePhy;
-          console.log("niveauResistance : " + niveauResistance);
-          var niveauPv = joueurFiche.Identite.PV;
-          console.log("niveauPv :" + niveauPv);
-          var valeurDegats = Math.round(Rand(3) + 0.1 * niveauAdresse);
+          var valeurDegats = Rand(3);
           console.log("valeurDegats :" + valeurDegats);
-          var valeurDegatsTotal = valeurDegats - niveauResistance;
-          console.log("valeurDegatsTotal :" + valeurDegatsTotal);
-          var newPv = niveauPv - valeurDegatsTotal;
-          console.log("newPv :" + newPv);
-          if (newPv < 0) {
-            console.log("Pv neg");
-            newPv = 0;
-          }
-          collection.updateOne(
-            { _id: joueur.id },
-            {
-              $set: {
-                "Identite.PV": newPv,
-              },
+          var valeurDegats = Math.round(valeurDegats + 0.1 * niveauAdresse);
+          console.log("valeurDegats + Adresse :" + valeurDegats);
+          if (joueur.id == authId.staff.MoMoJr) {
+            var valeurDegatsTotal = valeurDegats;
+          } else {
+            var niveauResistance = joueurFiche.ResistancePhy;
+            console.log("niveauResistance : " + niveauResistance);
+            var niveauPv = joueurFiche.Identite.PV;
+            console.log("niveauPv :" + niveauPv);
+            var valeurDegatsTotal = valeurDegats - niveauResistance;
+            console.log("valeurDegatsTotal :" + valeurDegatsTotal);
+            var newPv = niveauPv - valeurDegatsTotal;
+            console.log("newPv :" + newPv);
+            if (newPv < 0) {
+              console.log("Pv neg");
+              newPv = 0;
             }
-          );
-          let joueurUpdateFiche = await collection.findOne({
-            _id: joueur.id,
-          });
-          var newValuePV = joueurUpdateFiche.Identite.PV;
+            collection.updateOne(
+              { _id: joueur.id },
+              {
+                $set: {
+                  "Identite.PV": newPv,
+                },
+              }
+            );
+            let joueurUpdateFiche = await collection.findOne({
+              _id: joueur.id,
+            });
+            var newValuePV = joueurUpdateFiche.Identite.PV;
+          }
         } else if (interaction.options.getString("attaque") === "maitrise") {
-          var niveauMaitrise = joueurFiche.NiveauDeMaitrise;
+          var niveauMaitrise = joueurFicheAttak.NiveauDeMaitrise;
           console.log("NiveauDeMaitrise : " + niveauMaitrise);
-          var niveauResistance = joueurFiche.ResistanceSpi;
-          console.log("niveauResistance : " + niveauResistance);
-          var niveauPv = joueurFiche.Identite.PV;
-          console.log("niveauPv :" + niveauPv);
-          var valeurDegats = Math.round(Rand(4) + 0.1 * niveauMaitrise);
+          var valeurDegats = Rand(4);
           console.log("valeurDegats :" + valeurDegats);
-          var valeurDegatsTotal = valeurDegats - niveauResistance;
-          console.log("valeurDegatsTotal :" + valeurDegatsTotal);
-          var newPv = niveauPv - valeurDegatsTotal;
-          console.log("newPv :" + newPv);
-          if (newPv < 0) {
-            console.log("Pv neg");
-            newPv = 0;
-          }
-          collection.updateOne(
-            { _id: joueur.id },
-            {
-              $set: {
-                "Identite.PV": newPv,
-              },
+          var valeurDegats = Math.round(valeurDegats + 0.1 * niveauMaitrise);
+          console.log("valeurDegats + Maitrise :" + valeurDegats);
+          if (joueur.id == authId.staff.MoMoJr) {
+            var valeurDegatsTotal = valeurDegats;
+          } else {
+            var niveauResistance = joueurFiche.ResistanceSpi;
+            console.log("niveauResistance : " + niveauResistance);
+            var niveauPv = joueurFiche.Identite.PV;
+            console.log("niveauPv :" + niveauPv);
+            var valeurDegatsTotal = valeurDegats - niveauResistance;
+            console.log("valeurDegatsTotal :" + valeurDegatsTotal);
+            var newPv = niveauPv - valeurDegatsTotal;
+            console.log("newPv :" + newPv);
+            if (newPv < 0) {
+              console.log("Pv neg");
+              newPv = 0;
             }
-          );
-          let joueurUpdateFiche = await collection.findOne({
-            _id: joueur.id,
-          });
-          var newValuePV = joueurUpdateFiche.Identite.PV;
+            collection.updateOne(
+              { _id: joueur.id },
+              {
+                $set: {
+                  "Identite.PV": newPv,
+                },
+              }
+            );
+            let joueurUpdateFiche = await collection.findOne({
+              _id: joueur.id,
+            });
+            var newValuePV = joueurUpdateFiche.Identite.PV;
+          }
         } else if (
           interaction.options.getString("attaque") === "spiritualite"
         ) {
-          var niveauSpiritualite = joueurFiche.Competence.Spiritualite;
+          var niveauSpiritualite = joueurFicheAttak.Competence.Spiritualite;
           console.log("niveauSpiritualite : " + niveauSpiritualite);
-          var niveauResistance = joueurFiche.ResistanceSpi;
-          console.log("niveauResistance : " + niveauResistance);
-          var niveauPv = joueurFiche.Identite.PV;
-          console.log("niveauPv :" + niveauPv);
-          var valeurDegats = Number(
-            Math.round(Rand(4) + 0.1 * niveauSpiritualite)
-          );
+          var valeurDegats = Rand(4);
           console.log("valeurDegats :" + valeurDegats);
-          var valeurDegatsTotal = Number(valeurDegats - niveauResistance);
-          console.log("valeurDegatsTotal :" + valeurDegatsTotal);
-          var newPv = Number(niveauPv - valeurDegatsTotal);
-          console.log("newPv :" + newPv);
-          if (newPv < 0) {
-            console.log("Pv neg");
-            newPv = 0;
-          }
-          collection.updateOne(
-            { _id: joueur.id },
-            {
-              $set: {
-                "Identite.PV": newPv,
-              },
-            }
+          var valeurDegats = Math.round(
+            valeurDegats + 0.1 * niveauSpiritualite
           );
-          let joueurUpdateFiche = await collection.findOne({
-            _id: joueur.id,
-          });
-          var newValuePV = joueurUpdateFiche.Identite.PV;
-        }
-      }
+          console.log("valeurDegats + Spiritualité :" + valeurDegats);
+          if (joueur.id == authId.staff.MoMoJr) {
+            console.log("Le joueur se bat contre un PNJ");
+            var valeurDegatsTotal = valeurDegats;
+          } else {
+            var niveauResistance = joueurFiche.ResistanceSpi;
+            console.log("niveauResistance : " + niveauResistance);
+            var niveauPv = joueurFiche.Identite.PV;
+            console.log("niveauPv :" + niveauPv);
 
-      if (newPv < 5) {
-        if (newPv > 0) {
-          var newMessage =
-            "Tu fais " +
-            valeurDegats +
-            " (roll) dégats - " +
-            niveauResistance +
-            " (resistance) = " +
-            valeurDegatsTotal +
-            " (dégats totaux)\n <@" +
-            joueur.id +
-            ">, il te reste " +
-            newValuePV +
-            " PV\nATTENTION tu as moins de 5 PV";
-        } else {
-          var newMessage =
-            "Tu fais " +
-            valeurDegats +
-            " (roll) dégats - " +
-            niveauResistance +
-            " (resistance) = " +
-            valeurDegatsTotal +
-            " (dégats totaux)\n <@" +
-            joueur.id +
-            ">, est KO ";
+            var valeurDegatsTotal = Number(valeurDegats - niveauResistance);
+            console.log("valeurDegatsTotal :" + valeurDegatsTotal);
+            var newPv = Number(niveauPv - valeurDegatsTotal);
+            console.log("newPv :" + newPv);
+            if (newPv < 0) {
+              console.log("Pv neg");
+              newPv = 0;
+            }
+            collection.updateOne(
+              { _id: joueur.id },
+              {
+                $set: {
+                  "Identite.PV": newPv,
+                },
+              }
+            );
+            let joueurUpdateFiche = await collection.findOne({
+              _id: joueur.id,
+            });
+            var newValuePV = joueurUpdateFiche.Identite.PV;
+          }
         }
-      } else {
-        var newMessage =
-          "Tu fais " +
-          valeurDegats +
-          " (roll) dégats - " +
-          niveauResistance +
-          " (resistance) = " +
-          valeurDegatsTotal +
-          " (dégats totaux).\n <@" +
-          joueur.id +
-          ">, il te reste " +
-          newValuePV +
-          " PV.";
+        if (joueur.id == authId.staff.MoMoJr) {
+          var newMessage =
+            "Tu fais " + valeurDegats + " dégats au PNJ que tu combats";
+        } else {
+          if (newPv < 5) {
+            if (newPv > 0) {
+              var newMessage =
+                "Tu fais " +
+                valeurDegats +
+                " (roll) dégats - " +
+                niveauResistance +
+                " (resistance) = " +
+                valeurDegatsTotal +
+                " (dégats totaux)\n <@" +
+                joueur.id +
+                ">, il te reste " +
+                newValuePV +
+                " PV\nATTENTION tu as moins de 5 PV";
+            } else {
+              var newMessage =
+                "Tu fais " +
+                valeurDegats +
+                " (roll) dégats - " +
+                niveauResistance +
+                " (resistance) = " +
+                valeurDegatsTotal +
+                " (dégats totaux)\n <@" +
+                joueur.id +
+                ">, est KO ";
+            }
+          } else {
+            var newMessage =
+              "Tu fais " +
+              valeurDegats +
+              " (roll) dégats - " +
+              niveauResistance +
+              " (resistance) = " +
+              valeurDegatsTotal +
+              " (dégats totaux).\n <@" +
+              joueur.id +
+              ">, il te reste " +
+              newValuePV +
+              " PV.";
+          }
+        }
+
+        await interaction.editReply({
+          content: newMessage,
+        });
       }
-      await interaction.editReply({
-        content: newMessage,
-      });
     } else {
       var newMessage = `Tu n'as pas les autorisations pour faire ça ! Demande à Karma`;
       await interaction.editReply({
