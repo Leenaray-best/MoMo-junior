@@ -159,6 +159,8 @@ module.exports = {
           console.log("valeurDegats :" + valeurDegats);
           var valeurDegats = Math.round(valeurDegats + 0.1 * niveauMaitrise);
           console.log("valeurDegats + Maitrise :" + valeurDegats);
+          console.log(joueur.id);
+          console.log(authId.staff.MoMoJr);
           if (joueur.id == authId.staff.MoMoJr) {
             var valeurDegatsTotal = valeurDegats;
           } else {
